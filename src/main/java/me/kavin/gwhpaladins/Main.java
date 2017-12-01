@@ -6,7 +6,6 @@ import javax.security.auth.login.LoginException;
 
 import me.kavin.gwhpaladins.command.CommandManager;
 import me.kavin.gwhpaladins.listener.DiscordListener;
-import me.kavin.gwhpaladins.utils.HttpServer;
 import me.kavin.gwhpaladins.utils.Timer;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
@@ -28,8 +27,8 @@ public class Main extends ListenerAdapter{
 			DiscordListener.init();
 			uptime.reset();
 			new CommandManager();
-	} catch (LoginException | IllegalArgumentException | RateLimitedException e) {
-		e.printStackTrace();
-	}
+		} catch (LoginException | IllegalArgumentException | RateLimitedException e) {
+			e.printStackTrace();
+		}
 	}
 }
