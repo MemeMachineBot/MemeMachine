@@ -12,14 +12,17 @@ public class Help extends Command{
 	public void onCommand(String message , MessageReceivedEvent event) {
 	if (message.equalsIgnoreCase(this.getPrefix())){
 		event.getChannel().deleteMessageById(event.getMessageId()).queue();
-		String send = null;
+		String send = "";
+		boolean start = true;
 		for(Command cmd : CommandManager.commands){
-		if(send == null){
-			send = cmd.getPrefix();
-		} else {
-			send += '\n' + cmd.getPrefix();
+			if(start){
+				send = cmd.getPrefix();
+				start = false;
+			} else {
+				send = send + "\n" + cmd.getPrefix();
+			}
 		}
+		event.getChannel().sendMessage(send).queue();
 		}
-	}
 	}
 }
