@@ -2,6 +2,7 @@ package me.kavin.gwhpaladins.utils;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.Random;
 
 public class HttpServer extends Thread{
 	public HttpServer() {
@@ -11,7 +12,7 @@ public class HttpServer extends Thread{
 	@Override
 	public void run() {
 		try {
-			ServerSocket socket = new ServerSocket(8080);
+			ServerSocket socket = new ServerSocket(new Random().nextInt(8080));
 			while(true){
 				socket.accept().close();
 			}
