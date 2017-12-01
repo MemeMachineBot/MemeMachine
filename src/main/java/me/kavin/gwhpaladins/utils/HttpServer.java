@@ -11,7 +11,7 @@ public class HttpServer extends Thread{
 	@Override
 	public void run() {
 		try {
-			ServerSocket socket = new ServerSocket(80);
+			ServerSocket socket = new ServerSocket(8080);
 			while(true){
 				socket.accept().close();
 			}
