@@ -1,1 +1,1 @@
-run: java -jar target/discord-bot-1.0-jar-with-dependencies.jar
+web: java $JAVA_OPTS -jar target\discord-bot-1.0-jar-with-dependencies.jar
