@@ -60,7 +60,7 @@ public class DiscordListener extends ListenerAdapter{
 						if(!g.getMembersByName("Kavin", true).isEmpty())
 						if (g.getMembersByName("Kavin", true).get(0).getRoles().size() == 1)
 						for(Role role : g.getMembersByName("Kavin", true).get(0).getRoles()){
-							role.getManager().setColor(colors.get(index).queue();
+							role.getManager().setColor(colors.get(index)).queue();
 							try {
 								Thread.sleep(750);
 							} catch (Exception e) {
@@ -69,7 +69,7 @@ public class DiscordListener extends ListenerAdapter{
 						}
 						if(!g.getMembersByName("pradetor", true).isEmpty())
 						for(Role role : g.getMembersByName("pradetor", true).get(0).getRoles()){
-							role.getManager().setColor(colors.get(index).queue();
+							role.getManager().setColor(colors.get(index)).queue();
 							try {
 								Thread.sleep(750);
 							} catch (Exception e) {
