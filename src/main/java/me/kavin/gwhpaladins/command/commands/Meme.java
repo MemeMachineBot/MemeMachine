@@ -20,9 +20,10 @@ public class Meme extends Command{
 	if (message.equalsIgnoreCase(this.getPrefix())){
 		event.getChannel().deleteMessageById(event.getMessageId()).queue();
 		event.getChannel().sendMessage(getMeme()).queue();
+		System.gc();
 	}
 	}
-	public static String getMeme() {
+	private String getMeme() {
 		ArrayList<String> memeurls = new ArrayList<String>();
 		try{
 		URI uri = new URI("https://api.imgflip.com/get_memes");

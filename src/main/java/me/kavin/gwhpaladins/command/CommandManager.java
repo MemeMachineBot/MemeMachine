@@ -9,9 +9,10 @@ public class CommandManager {
 	public static ArrayList<Command> commands = new ArrayList<Command>();
 	
 	public CommandManager(){
-	commands.add(new Help());
-	commands.add(new UpTime());
-	commands.add(new Meme());
+		commands.add(new Help());
+		commands.add(new UpTime());
+		commands.add(new Meme());
+		commands.add(new MemeSong());
 	}
 	
 }
