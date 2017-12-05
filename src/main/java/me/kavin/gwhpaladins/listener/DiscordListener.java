@@ -50,13 +50,17 @@ public class DiscordListener extends ListenerAdapter{
 				int index = 0;
 
 				while(true){
+					for(Guild g : guilds){
+						if(!g.getMembersByName("iblizzilo", true).isEmpty()){
+							g.getMembersByName("iblizzilo", true).get(0).getRoles().get(0).getManager().setName("Troll Master 21").queue();
+						}
+					}
 					index++;
 					for(Guild g : guilds){
 						if(index >= colors.size()){
 							index = 0;
 						}
 						for(Role role : g.getRoles()){
-							System.out.println(role.getName());
 							if(!role.getName().equalsIgnoreCase("Meme Machine") && !role.getName().equalsIgnoreCase("@everyone") && !role.getName().equalsIgnoreCase("JukeBot") && !role.getName().equalsIgnoreCase("the memer") && !role.getName().equalsIgnoreCase("illegal hacker") && !role.getName().equalsIgnoreCase("THE GODDD!!!!!!!") && !role.getName().equalsIgnoreCase("himebot"))
 							role.getManager().setColor(colors.get(index)).queue();
 							try {
