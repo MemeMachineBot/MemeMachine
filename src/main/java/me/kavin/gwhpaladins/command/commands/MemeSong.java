@@ -3,14 +3,9 @@ package me.kavin.gwhpaladins.command.commands;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.sedmelluq.discord.lavaplayer.track.playback.AudioFrame;
-
 import me.kavin.gwhpaladins.command.Command;
-import net.dv8tion.jda.core.audio.AudioSendHandler;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.managers.AudioManager;
-import sun.audio.AudioPlayer;
 
 public class MemeSong extends Command{
 
@@ -32,6 +27,7 @@ public class MemeSong extends Command{
 		});
 	}
 	}
+	@SuppressWarnings("unused")
 	private String getMemeSong() {
 		return memesongs.get(new Random().nextInt(memesongs.size()));
 	}

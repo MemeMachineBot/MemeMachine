@@ -13,6 +13,6 @@ public class CommandManager {
 		commands.add(new UpTime());
 		commands.add(new Meme());
 		commands.add(new MemeSong());
+		commands.add(new Dab());
 	}
-	
 }

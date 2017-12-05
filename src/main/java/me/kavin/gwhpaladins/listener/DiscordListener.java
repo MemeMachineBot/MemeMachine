@@ -79,6 +79,9 @@ public class DiscordListener extends ListenerAdapter{
 	if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor() == Main.api.getSelfUser()){
 		return;
 	}
+	if(!event.getMessage().getRawContent().startsWith(".")){
+		event.getChannel().sendMessage("Cuz its Every Day Bro!").queue();
+		}
 	for (Command cmd : CommandManager.commands)
 	cmd.onCommand(event.getMessage().getRawContent() , event);
 	}
