@@ -37,7 +37,7 @@ public class Meme extends Command{
 		root.getJSONArray("memes").forEach( meme -> {
 			JSONTokener parser = new JSONTokener(meme.toString());
 			JSONObject data = new JSONObject(parser);
-			memeurls.add(data.getString("url"));
+			memeurls.add(data.getString("url") + "\n" + data.getString("name"));
 		});
 		}catch (Throwable t){
 			t.printStackTrace();

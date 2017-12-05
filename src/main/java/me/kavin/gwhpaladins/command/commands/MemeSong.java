@@ -21,10 +21,7 @@ public class MemeSong extends Command{
 	if (message.equalsIgnoreCase(this.getPrefix())){
 		event.getChannel().deleteMessageById(event.getMessageId()).queue();
 		
-		event.getGuild().getVoiceChannels().forEach(voice -> {
-			if(voice.getMembers().contains(event.getAuthor()))
-				channel = voice;
-		});
+		event.getChannel().sendMessage("").queue();
 	}
 	}
 	@SuppressWarnings("unused")
