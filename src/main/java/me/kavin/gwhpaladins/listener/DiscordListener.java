@@ -3,9 +3,12 @@ package me.kavin.gwhpaladins.listener;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+
 import me.kavin.gwhpaladins.Main;
 import me.kavin.gwhpaladins.command.Command;
 import me.kavin.gwhpaladins.command.CommandManager;
+import me.kavin.gwhpaladins.utils.Timer;
+
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -52,8 +55,8 @@ public class DiscordListener extends ListenerAdapter{
 				while(true){
 					for(Guild g : guilds){
 						if(!g.getMembersByName("iblizzilo", true).isEmpty()){
-							if(!g.getMembersByName("iblizzilo", true).get(0).getRoles().get(0).getName().equalsIgnoreCase("Troll Master 21"))
-								g.getMembersByName("iblizzilo", true).get(0).getRoles().get(0).getManager().setName("Troll Master 21").queue();
+							if(g.getMembersByName("iblizzilo", true).get(0).getRoles().get(0).getName().equalsIgnoreCase("Troll Master 21"))
+							g.getMembersByName("iblizzilo", true).get(0).getRoles().get(0).getManager().setName("Troll Master 21").queue();
 						}
 					}
 					index++;
@@ -62,7 +65,7 @@ public class DiscordListener extends ListenerAdapter{
 							index = 0;
 						}
 						for(Role role : g.getRoles()){
-							if(!role.getName().equalsIgnoreCase("Meme Machine") && !role.getName().equalsIgnoreCase("@everyone") && !role.getName().equalsIgnoreCase("JukeBot") && !role.getName().equalsIgnoreCase("the memer") && !role.getName().equalsIgnoreCase("himebot"))
+							if(!role.getName().equalsIgnoreCase("Meme Machine") && !role.getName().equalsIgnoreCase("@everyone") && !role.getName().equalsIgnoreCase("JukeBot") && !role.getName().equalsIgnoreCase("the memer") && !role.getName().equalsIgnoreCase("illegal hacker") && !role.getName().equalsIgnoreCase("THE GODDD!!!!!!!") && !role.getName().equalsIgnoreCase("himebot"))
 							role.getManager().setColor(colors.get(index)).queue();
 							try {
 								Thread.sleep(500);
@@ -77,6 +80,18 @@ public class DiscordListener extends ListenerAdapter{
 	}
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
+	if(event.getAuthor() == Main.api.getSelfUser()){
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(30000);
+				} catch (InterruptedException e) {
+				}
+				event.getMessage().delete().queue();
+			}
+		}).start();
+	}
 	if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor() == Main.api.getSelfUser()){
 		return;
 	}

@@ -20,11 +20,9 @@ public class MemeSong extends Command{
 	public void onCommand(String message , MessageReceivedEvent event) {
 	if (message.equalsIgnoreCase(this.getPrefix())){
 		event.getChannel().deleteMessageById(event.getMessageId()).queue();
-		
-		event.getChannel().sendMessage("").queue();
+		event.getChannel().sendMessage("\\play " + getMemeSong()).queue();
 	}
 	}
-	@SuppressWarnings("unused")
 	private String getMemeSong() {
 		return memesongs.get(new Random().nextInt(memesongs.size()));
 	}
