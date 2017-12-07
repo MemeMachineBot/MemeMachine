@@ -7,7 +7,6 @@ import java.util.List;
 import me.kavin.gwhpaladins.Main;
 import me.kavin.gwhpaladins.command.Command;
 import me.kavin.gwhpaladins.command.CommandManager;
-import me.kavin.gwhpaladins.utils.Timer;
 
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Game;
@@ -65,7 +64,7 @@ public class DiscordListener extends ListenerAdapter{
 							index = 0;
 						}
 						for(Role role : g.getRoles()){
-							if(!role.getName().equalsIgnoreCase("Meme Machine") && !role.getName().equalsIgnoreCase("@everyone") && !role.getName().equalsIgnoreCase("JukeBot") && !role.getName().equalsIgnoreCase("the memer") && !role.getName().equalsIgnoreCase("illegal hacker") && !role.getName().equalsIgnoreCase("THE GODDD!!!!!!!") && !role.getName().equalsIgnoreCase("himebot"))
+							if(!role.getName().equalsIgnoreCase("Meme Machine") && !role.getName().equalsIgnoreCase("@everyone") && !role.getName().equalsIgnoreCase("JukeBot") && !role.getName().equalsIgnoreCase("the memer") && !role.getName().equalsIgnoreCase("himebot"))
 							role.getManager().setColor(colors.get(index)).queue();
 							try {
 								Thread.sleep(500);
