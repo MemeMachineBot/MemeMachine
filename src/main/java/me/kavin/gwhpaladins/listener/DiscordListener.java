@@ -30,9 +30,9 @@ public class DiscordListener extends ListenerAdapter{
 	public void onReady(ReadyEvent event) {
 		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help", "Hax.kill"));
 		Main.channels = new ArrayList<TextChannel>(Main.api.getTextChannels());
-		/*Main.channels.forEach( channel -> {
-			channel.sendMessage("Bot by @Kavin#3412 Message For Bug Fixes").queue();
-		});*/
+		Main.channels.forEach( channel -> {
+			channel.sendTyping().queue();
+		});
 		
 		colors.add(Color.RED);
 		colors.add(Color.ORANGE);
