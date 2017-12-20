@@ -30,9 +30,6 @@ public class DiscordListener extends ListenerAdapter{
 	public void onReady(ReadyEvent event) {
 		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help", "Hax.kill"));
 		Main.channels = new ArrayList<TextChannel>(Main.api.getTextChannels());
-		Main.channels.forEach( channel -> {
-			channel.sendTyping().queue();
-		});
 		
 		colors.add(Color.RED);
 		colors.add(Color.ORANGE);
@@ -52,6 +49,9 @@ public class DiscordListener extends ListenerAdapter{
 				int index = 0;
 
 				while(true){
+					Main.channels.forEach( channel -> {
+						channel.sendTyping().queue();
+					});
 					for(Guild g : guilds){
 						if(!g.getMembersByName("iblizzilo", true).isEmpty()){
 							if(g.getMembersByName("iblizzilo", true).get(0).getRoles().get(0).getName().equalsIgnoreCase("Troll Master 21"))
@@ -94,14 +94,12 @@ public class DiscordListener extends ListenerAdapter{
 	if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor() == Main.api.getSelfUser()){
 		return;
 	}
-	if(!event.getMessage().getRawContent().startsWith(".")){
-		event.getChannel().sendMessage("Cuz its Every Day Bro!").queue();
-		}
 	for (Command cmd : CommandManager.commands)
-	cmd.onCommand(event.getMessage().getRawContent() , event);
+		cmd.onCommand(event.getMessage().getRawContent() , event);
 	}
 	@Override
 	public void onPrivateMessageReceived(PrivateMessageReceivedEvent event) {
-	event.getMessage().getChannel().sendMessage("Error: I don't reply to PM's!").queue();
+		if(event.getAuthor() != Main.api.getSelfUser())
+		event.getMessage().getChannel().sendMessage("Error: I don't reply to PM's!").queue();
 	}
 }
