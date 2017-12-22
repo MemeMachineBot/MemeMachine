@@ -2,6 +2,7 @@ package me.kavin.gwhpaladins.listener;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import me.kavin.gwhpaladins.Main;
@@ -22,6 +23,7 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 public class DiscordListener extends ListenerAdapter{
 	
 	ArrayList<Color> colors = new ArrayList<Color>();
+	HashMap<String, String> lastMsg = new HashMap<String, String>();
 	
 	public static void init(){
 	Main.api.addEventListener(new DiscordListener());
@@ -90,6 +92,14 @@ public class DiscordListener extends ListenerAdapter{
 				event.getMessage().delete().queue();
 			}
 		}).start();
+	} else {
+		if(lastMsg.containsKey(event.getAuthor().getName())) {
+			if(lastMsg.get(event.getAuthor().getName()).startsWith(event.getMessage().getRawContent())) {
+				event.getChannel().sendMessage("You may not spam!").queue();
+				event.getMessage().delete().queue();
+			}
+		}
+		lastMsg.put(event.getAuthor().getName(), event.getMessage().getRawContent());
 	}
 	if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor() == Main.api.getSelfUser()){
 		return;
