@@ -12,6 +12,10 @@ import me.kavin.gwhpaladins.command.Command;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Meme extends Command{
+	
+	Random rnd = new Random();
+	String url = null;
+	
 	public Meme(){
 	super(".meme");
 	}
@@ -24,9 +28,8 @@ public class Meme extends Command{
 	}
 	}
 	private String getMeme() {
-		ArrayList<String> memeurls = new ArrayList<String>();
 		try{
-		URI uri = new URI("https://api.imgflip.com/get_memes");
+		URI uri = new URI("https://9gag.com/v1/group-posts/group/default/type/hot?after=aeevYMO%2CaDzE3o9%2CagYPr7q&c=" + ( rnd.nextInt(50) * 10));
 		URLConnection conn = uri.toURL().openConnection();
 		conn.setRequestProperty("User-Agent",
 		        "Meme Machine");
@@ -34,14 +37,23 @@ public class Meme extends Command{
 		JSONObject root = new JSONObject(tokener);
 		tokener = new JSONTokener(root.get("data").toString());
 		root = new JSONObject(tokener);
-		root.getJSONArray("memes").forEach( meme -> {
+		root.getJSONArray("posts").forEach( meme -> {
 			JSONTokener parser = new JSONTokener(meme.toString());
 			JSONObject data = new JSONObject(parser);
-			memeurls.add(data.getString("url") + "\n" + data.getString("name"));
+			parser = new JSONTokener(data.get("images").toString());
+			data = new JSONObject(parser);
+			ArrayList<String> names = new ArrayList<String>();
+			data.names().forEach( name -> {
+				if (!names.contains(name.toString()))
+					names.add(name.toString());
+			});
+			parser = new JSONTokener(data.get(names.get(new Random().nextInt(names.size()))).toString());
+			data = new JSONObject(parser);
+			url = data.getString("url");
 		});
 		}catch (Throwable t){
 			t.printStackTrace();
 		}
-		return memeurls.get(new Random().nextInt(memeurls.size()));
+		return url;
 	}
 }
