@@ -93,7 +93,7 @@ public class DiscordListener extends ListenerAdapter{
 			}
 		}).start();
 	} else {
-		if(lastMsg.containsKey(event.getAuthor().getName())) {
+		if(!event.getAuthor().isBot() && lastMsg.containsKey(event.getAuthor().getName())) {
 			if(lastMsg.get(event.getAuthor().getName()).startsWith(event.getMessage().getRawContent())) {
 				event.getChannel().sendMessage("You may not spam!").queue();
 				event.getMessage().delete().queue();
