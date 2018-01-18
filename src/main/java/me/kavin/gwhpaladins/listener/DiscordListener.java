@@ -77,11 +77,11 @@ public class DiscordListener extends ListenerAdapter{
 				}
 				
 			}
-		}).start();
+		});
 	}
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
-	if(event.getAuthor() == Main.api.getSelfUser()){
+	/*if(event.getAuthor() == Main.api.getSelfUser()){
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -100,7 +100,7 @@ public class DiscordListener extends ListenerAdapter{
 			}
 		}
 		lastMsg.put(event.getAuthor().getName(), event.getMessage().getRawContent());
-	}
+	}*/
 	if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor() == Main.api.getSelfUser()){
 		return;
 	}
