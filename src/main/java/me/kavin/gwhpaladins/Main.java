@@ -21,7 +21,7 @@ public class Main extends ListenerAdapter{
 
 	public static void main(String[] args) {
 		try {
-			JDABuilder builder = new JDABuilder(AccountType.CLIENT).setToken("NDAzNTIzOTAyOTMzODI3NTk1.DUIkIQ.bqVIlhPzXAMo6SLo5PRYLyedp24");
+			JDABuilder builder = new JDABuilder(AccountType.CLIENT).setToken("MzY5ODE4NTk2MjQ0NzE3NTY5.DUIiCA.XmnJyu6oHtyK82xRiDuzLbDslMA");
 			api = builder.buildAsync();
 			api.setAutoReconnect(true);
 			DiscordListener.init();
