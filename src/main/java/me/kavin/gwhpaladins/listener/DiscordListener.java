@@ -109,7 +109,7 @@ public class DiscordListener extends ListenerAdapter{
 	}
 	@Override
 	public void onPrivateMessageReceived(PrivateMessageReceivedEvent event) {
-		if(event.getAuthor() != Main.api.getSelfUser())
+		if(event.getAuthor() != Main.api.getSelfUser() && event.getMessage().getRawContent().startsWith("."))
 		event.getMessage().getChannel().sendMessage("Error: I don't reply to PM's!").queue();
 	}
 }
