@@ -1,9 +1,12 @@
 package me.kavin.gwhpaladins.command.commands;
 
+import java.net.HttpURLConnection;
 import java.net.URI;
+import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -29,31 +32,31 @@ public class Meme extends Command{
 	}
 	private String getMeme() {
 		try{
-		URI uri = new URI("https://9gag.com/v1/group-posts/group/default/type/hot?after=aeevYMO%2CaDzE3o9%2CagYPr7q&c=" + ( rnd.nextInt(50) * 10));
-		URLConnection conn = uri.toURL().openConnection();
-		conn.setRequestProperty("User-Agent",
-		        "Meme Machine");
+			String clientID = "5dcea4b044bd1cc";
+			URL url = new URL("https://api.imgur.com/3/g/memes/time/1");
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+	        conn.setDoOutput(true);
+	        conn.setRequestMethod("GET");
+	        conn.setRequestProperty("Authorization", "Client-ID " + clientID);
+	        conn.setRequestProperty("Content-Type",
+	                "application/x-www-form-urlencoded");
 		JSONTokener tokener = new JSONTokener(conn.getInputStream());
 		JSONObject root = new JSONObject(tokener);
-		tokener = new JSONTokener(root.get("data").toString());
-		root = new JSONObject(tokener);
-		root.getJSONArray("posts").forEach( meme -> {
-			JSONTokener parser = new JSONTokener(meme.toString());
-			JSONObject data = new JSONObject(parser);
-			parser = new JSONTokener(data.get("images").toString());
-			data = new JSONObject(parser);
-			ArrayList<String> names = new ArrayList<String>();
-			data.names().forEach( name -> {
-				if (!names.contains(name.toString()))
-					names.add(name.toString());
-			});
-			parser = new JSONTokener(data.get(names.get(new Random().nextInt(names.size()))).toString());
-			data = new JSONObject(parser);
-			url = data.getString("url");
-		});
+		boolean found = false;
+		while (!found) {
+			String data = root.getJSONArray("data").get(ThreadLocalRandom.current().nextInt(root.getJSONArray("data").length())).toString();
+			JSONTokener tokener1 = new JSONTokener(data);
+			JSONObject root1 = new JSONObject(tokener1);
+			if(!root1.get("privacy").equals("hidden")) {
+				found = true;
+				root = root1;
+			}
+		}
+		return root.get("link").toString();
 		}catch (Throwable t){
 			t.printStackTrace();
 		}
-		return url;
+		return null;
 	}
 }
