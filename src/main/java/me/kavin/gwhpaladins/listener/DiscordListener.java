@@ -42,12 +42,11 @@ public class DiscordListener extends ListenerAdapter{
 
 				while(true){
 					for(Guild g : guilds){
-						if(g.getName().startsWith("Project"))
 						for(Role role : g.getRoles()){
-							if(!role.getName().equalsIgnoreCase("Meme Machine") && !role.getName().equalsIgnoreCase("@everyone") && !role.getName().equalsIgnoreCase("JukeBot") && !role.getName().equalsIgnoreCase("the memer") && !role.getName().equalsIgnoreCase("himebot"))
+							if(role.getName().equalsIgnoreCase("rainbow"))
 							role.getManager().setColor(getRainbowColor(60000, 0)).queue();
 							try {
-								Thread.sleep(500);
+								Thread.sleep(200);
 							} catch (InterruptedException e) {
 							}
 						}
