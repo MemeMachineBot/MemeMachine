@@ -67,7 +67,7 @@ public class DiscordListener extends ListenerAdapter{
 			@Override
 			public void run() {
 				try {
-					Thread.sleep(30000);
+					Thread.sleep(120000);
 					event.getMessage().delete().queue();
 				} catch (InterruptedException e) {
 				}
