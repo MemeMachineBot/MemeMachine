@@ -16,6 +16,7 @@ import net.dv8tion.jda.core.entities.Game.GameType;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.events.ReadyEvent;
+import net.dv8tion.jda.core.events.guild.update.GuildUpdateOwnerEvent;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.events.message.priv.PrivateMessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
@@ -35,16 +36,13 @@ public class DiscordListener extends ListenerAdapter{
 		List<Guild> guilds = Main.api.getGuilds();
 		
 		new Thread(new Runnable() {
-
 			@Override
 			public void run() {
-
-
 				while(true){
 					for(Guild g : guilds){
 						for(Role role : g.getRoles()){
 							if(role.getName().equalsIgnoreCase("rainbow"))
-							role.getManager().setColor(getRainbowColor(60000, 0)).queue();
+							role.getManager().setColor(getRainbowColor(60000)).queue();
 							try {
 								Thread.sleep(200);
 							} catch (InterruptedException e) {
@@ -55,6 +53,12 @@ public class DiscordListener extends ListenerAdapter{
 				
 			}
 		}).start();
+	}
+	@Override
+	public void onGuildUpdateOwner(GuildUpdateOwnerEvent event) {
+		event.getGuild().getTextChannels().forEach( tc -> {
+			
+		});
 	}
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
@@ -71,7 +75,7 @@ public class DiscordListener extends ListenerAdapter{
 		}).start();
 	} else {
 		if(!event.getAuthor().isBot() && lastMsg.containsKey(event.getAuthor().getName())) {
-			if(lastMsg.get(event.getAuthor().getName()).startsWith(event.getMessage().getRawContent())) {
+			if(lastMsg.get(event.getAuthor().getName()).startsWith(event.getMessage().getRawContent()) && event.getMessage().getAttachments().isEmpty()) {
 				event.getChannel().sendMessage("You may not spam!").queue();
 				event.getMessage().delete().queue();
 			}
@@ -89,13 +93,8 @@ public class DiscordListener extends ListenerAdapter{
 		if(event.getAuthor() != Main.api.getSelfUser() && event.getMessage().getRawContent().startsWith("."))
 		event.getMessage().getChannel().sendMessage("Error: I don't reply to PM's!").queue();
 	}
-	/**
-     * @param speed is the time in milliseconds the color needs for a whole loop.
-     * @param offset is the value the time gets displaced to create different loops.
-     * @return a int color based on System.currentTimeMillis().
-     */
-    public static Color getRainbowColor(int speed, int offset) {
-        float hue = (System.currentTimeMillis() + offset) % speed;
+    public static Color getRainbowColor(int speed) {
+        float hue = (System.currentTimeMillis()) % speed;
         hue /= speed;
         return Color.getHSBColor(hue, 1f, 1f);
     }
