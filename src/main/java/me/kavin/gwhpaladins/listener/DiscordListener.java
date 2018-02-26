@@ -22,7 +22,6 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class DiscordListener extends ListenerAdapter{
 	
-	ArrayList<Color> colors = new ArrayList<Color>();
 	HashMap<String, String> lastMsg = new HashMap<String, String>();
 	
 	public static void init(){
@@ -33,14 +32,6 @@ public class DiscordListener extends ListenerAdapter{
 		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help", "Hax.kill"));
 		Main.channels = new ArrayList<TextChannel>(Main.api.getTextChannels());
 		
-		colors.add(Color.RED);
-		colors.add(Color.ORANGE);
-		colors.add(Color.BLUE.darker().darker().darker());
-		colors.add(Color.GREEN);
-		colors.add(Color.YELLOW);
-		colors.add(Color.BLUE);
-		colors.add(Color.GREEN);
-
 		List<Guild> guilds = Main.api.getGuilds();
 		
 		new Thread(new Runnable() {
@@ -48,26 +39,13 @@ public class DiscordListener extends ListenerAdapter{
 			@Override
 			public void run() {
 
-				int index = 0;
 
 				while(true){
-					Main.channels.forEach( channel -> {
-						channel.sendTyping().queue();
-					});
 					for(Guild g : guilds){
-						if(!g.getMembersByName("iblizzilo", true).isEmpty()){
-							if(g.getMembersByName("iblizzilo", true).get(0).getRoles().get(0).getName().equalsIgnoreCase("Troll Master 21"))
-							g.getMembersByName("iblizzilo", true).get(0).getRoles().get(0).getManager().setName("Troll Master 21").queue();
-						}
-					}
-					index++;
-					for(Guild g : guilds){
-						if(index >= colors.size()){
-							index = 0;
-						}
+						if(g.getName().startsWith("Project"))
 						for(Role role : g.getRoles()){
 							if(!role.getName().equalsIgnoreCase("Meme Machine") && !role.getName().equalsIgnoreCase("@everyone") && !role.getName().equalsIgnoreCase("JukeBot") && !role.getName().equalsIgnoreCase("the memer") && !role.getName().equalsIgnoreCase("himebot"))
-							role.getManager().setColor(colors.get(index)).queue();
+							role.getManager().setColor(getRainbowColor(60000, 0)).queue();
 							try {
 								Thread.sleep(500);
 							} catch (InterruptedException e) {
@@ -77,11 +55,11 @@ public class DiscordListener extends ListenerAdapter{
 				}
 				
 			}
-		});
+		}).start();
 	}
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
-	/*if(event.getAuthor() == Main.api.getSelfUser()){
+	if(event.getAuthor() == Main.api.getSelfUser()){
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -100,7 +78,7 @@ public class DiscordListener extends ListenerAdapter{
 			}
 		}
 		lastMsg.put(event.getAuthor().getName(), event.getMessage().getRawContent());
-	}*/
+	}
 	if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor() == Main.api.getSelfUser()){
 		return;
 	}
@@ -112,4 +90,14 @@ public class DiscordListener extends ListenerAdapter{
 		if(event.getAuthor() != Main.api.getSelfUser() && event.getMessage().getRawContent().startsWith("."))
 		event.getMessage().getChannel().sendMessage("Error: I don't reply to PM's!").queue();
 	}
+	/**
+     * @param speed is the time in milliseconds the color needs for a whole loop.
+     * @param offset is the value the time gets displaced to create different loops.
+     * @return a int color based on System.currentTimeMillis().
+     */
+    public static Color getRainbowColor(int speed, int offset) {
+        float hue = (System.currentTimeMillis() + offset) % speed;
+        hue /= speed;
+        return Color.getHSBColor(hue, 1f, 1f);
+    }
 }
