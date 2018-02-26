@@ -62,7 +62,7 @@ public class DiscordListener extends ListenerAdapter{
 	}
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
-	if(event.getAuthor().isBot()){
+	if(event.getAuthor().isBot() || event.getMessage().getRawContent().startsWith(".") || event.getMessage().getRawContent().startsWith("t!") || event.getMessage().getRawContent().startsWith("`")){
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
