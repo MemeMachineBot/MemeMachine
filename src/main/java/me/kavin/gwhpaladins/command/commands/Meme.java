@@ -26,7 +26,12 @@ public class Meme extends Command{
 	public void onCommand(String message , MessageReceivedEvent event) {
 	if (message.equalsIgnoreCase(this.getPrefix())){
 		event.getChannel().deleteMessageById(event.getMessageId()).queue();
-		event.getChannel().sendMessage(getMeme()).queue();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				event.getChannel().sendMessage(getMeme()).queue();
+			}
+		}).start();
 		System.gc();
 	}
 	}
