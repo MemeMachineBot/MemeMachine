@@ -62,12 +62,13 @@ public class DiscordListener extends ListenerAdapter{
 	}
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
-	if(event.getAuthor() == Main.api.getSelfUser()){
+	if(event.getAuthor().isBot()){
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {
 					Thread.sleep(30000);
+					event.getMessage().delete().queue();
 				} catch (InterruptedException e) {
 				}
 				event.getMessage().delete().queue();
