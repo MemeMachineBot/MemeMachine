@@ -8,7 +8,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Dab extends Command{
 	public Dab(){
-	super(".dab");
+	super(".dab `Shows a person dabbing`");
 	memeurls.add("https://ibb.co/kjGceb");
 	memeurls.add("https://ibb.co/cPbokG");
 	memeurls.add("https://ibb.co/gX8qzb");
@@ -23,7 +23,7 @@ public class Dab extends Command{
 	ArrayList<String> memeurls = new ArrayList<String>();
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-	if (message.equalsIgnoreCase(this.getPrefix())){
+	if (message.equalsIgnoreCase(".dab")){
 		event.getChannel().deleteMessageById(event.getMessageId()).queue();
 		event.getChannel().sendMessage(getMeme()).queue();
 		System.gc();

@@ -13,7 +13,7 @@ public class MemeSong extends Command{
 	VoiceChannel channel = null;
 
 	public MemeSong(){
-		super(".memesong");
+		super(".memesong `Plays an annoying song (broken)`");
 		memesongs.add("Jake Paul - It's Everyday Bro (Song) feat. Team 10 (Official Music Video)");
 	}
 	@Override

@@ -7,14 +7,14 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class UpTime extends Command{
 	public UpTime(){
-	super(".uptime");
+	super(".uptime `Shows how long the bot has been running for`");
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
 	if (event.isFromType(ChannelType.PRIVATE)){
 	return;
 	}
-	if (message.equalsIgnoreCase(this.getPrefix())){
+	if (message.equalsIgnoreCase(".uptime")){
 		event.getChannel().deleteMessageById(event.getMessageId()).queue();
 		long millis = Main.uptime.getDifference();
 		long second = (millis / 1000) % 60;

@@ -19,7 +19,7 @@ public class Game1 extends Command{
 	int pass = 0;
 
 	public Game1(){
-		super(".game 1");
+		super(".game 1 `Smash or Pass game`");
 		pics.add("http://ibb.co/cznwTH");
 		pics.add("http://ibb.co/imVx2c");
 		pics.add("http://ibb.co/mZ7MTH");
@@ -75,7 +75,7 @@ public class Game1 extends Command{
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-	if (message.equalsIgnoreCase(this.getPrefix())){
+	if (message.equalsIgnoreCase(".game 1")){
 		event.getChannel().deleteMessageById(event.getMessageId()).queue();
 		if(id == null) {
 			event.getChannel().sendMessage("Game 1: \nSmash Or Pass?\n" + getPic()).queue();

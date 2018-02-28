@@ -6,11 +6,11 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Help extends Command{
 	public Help(){
-	super(".help");
+	super(".help `Shows this message`");
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-	if (message.equalsIgnoreCase(this.getPrefix())){
+	if (message.equalsIgnoreCase(".help")){
 		event.getChannel().deleteMessageById(event.getMessageId()).queue();
 		String send = "";
 		boolean start = true;

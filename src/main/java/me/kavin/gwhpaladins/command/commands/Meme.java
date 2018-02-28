@@ -17,11 +17,11 @@ public class Meme extends Command{
 	String url = null;
 	
 	public Meme(){
-	super(".meme");
+	super(".meme `Shows a random meme from imgur`");
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-	if (message.equalsIgnoreCase(this.getPrefix())){
+	if (message.equalsIgnoreCase(".meme")){
 		event.getChannel().deleteMessageById(event.getMessageId()).queue();
 		new Thread(new Runnable() {
 			@Override
