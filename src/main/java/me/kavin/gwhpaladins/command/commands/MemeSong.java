@@ -18,7 +18,7 @@ public class MemeSong extends Command{
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-	if (message.equalsIgnoreCase(this.getPrefix())){
+	if (message.equalsIgnoreCase(".memesong")){
 		event.getChannel().deleteMessageById(event.getMessageId()).queue();
 		event.getChannel().sendMessage("\\play " + getMemeSong()).queue();
 	}

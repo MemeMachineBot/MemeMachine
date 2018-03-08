@@ -15,5 +15,6 @@ public class CommandManager {
 		commands.add(new MemeSong());
 		commands.add(new Dab());
 		commands.add(new Game1());
+		commands.add(new Yt());
 	}
 }

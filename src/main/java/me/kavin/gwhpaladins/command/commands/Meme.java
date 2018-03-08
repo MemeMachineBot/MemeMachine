@@ -50,7 +50,7 @@ public class Meme extends Command{
 			String data = root.getJSONArray("data").get(ThreadLocalRandom.current().nextInt(root.getJSONArray("data").length())).toString();
 			JSONTokener tokener1 = new JSONTokener(data);
 			JSONObject root1 = new JSONObject(tokener1);
-			if(!root1.get("privacy").equals("hidden")) {
+			if(root1.isNull("privacy") || !root1.get("privacy").equals("hidden")) {
 				found = true;
 				root = root1;
 			}
