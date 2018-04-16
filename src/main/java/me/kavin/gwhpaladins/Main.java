@@ -23,8 +23,8 @@ public class Main extends ListenerAdapter{
 		try {
 			// iblizzilo MzY5ODE4NTk2MjQ0NzE3NTY5.DUIiCA.XmnJyu6oHtyK82xRiDuzLbDslMA
 			// Meme Machine Mzg1ODE0MjgzMzM1NzYxOTIy.DXWNSw.CB8x30egsCFd1hKcikZb0j0j-Mc
-			// Kavin mfa.uobx1-A857NZb5f-gAAAIjPEHcZoNercIAyyrYBUSQdj5EkcmI1k13oanKbDgpsNYnYJ0NaWHXZ-GiMLYr-K
-			JDABuilder builder = new JDABuilder(AccountType.BOT).setToken("Mzg1ODE0MjgzMzM1NzYxOTIy.DXWNSw.CB8x30egsCFd1hKcikZb0j0j-Mc");
+			// Meme Machine v2 eWksybdIy9gGCc-MZuS_p6Cr1CfzhVXb
+			JDABuilder builder = new JDABuilder(AccountType.BOT).setToken("NDM1Mzk4NjM4MjczOTUzODAy.DbYY4w.eK_6YUbzX0tatTIhv6mQI6LVmLg");
 			api = builder.buildAsync();
 			api.setAutoReconnect(true);
 			DiscordListener.init();
