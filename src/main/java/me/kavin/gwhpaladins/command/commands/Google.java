@@ -50,13 +50,14 @@ public class Google extends Command{
 				JSONTokener itemTokener = new JSONTokener(item.toString());
 				JSONObject body = new JSONObject(itemTokener);
 				if(result != null)
-					result += "\n`" + body.getString("title") + "'\n" + body.getString("link");
+					result += "\n`" + body.getString("title") + "`\n" + body.getString("link");
 				else
-					result = "`" + body.getString("title") + "'\n" + body.getString("link");
+					result = "`" + body.getString("title") + "`\n" + body.getString("link");
 			});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println(result);
 		return result == null ? "Error" : result;
 	}
 }
