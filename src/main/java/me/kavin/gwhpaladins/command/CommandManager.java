@@ -16,5 +16,6 @@ public class CommandManager {
 		commands.add(new Dab());
 		commands.add(new Game1());
 		commands.add(new Yt());
+		commands.add(new Google());
 	}
 }

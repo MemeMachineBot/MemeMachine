@@ -44,6 +44,8 @@ public class Yt extends Command{
 			String url = "https://www.googleapis.com/youtube/v3/search/?" + "q=" + q.replace(" ", "%20") + "&type=video,channel&part=snippet&key=AIzaSyAMkHWnLNAvpKte-XA9nh3RheX7lFn_dNM";
 			JSONTokener tokener = new JSONTokener(Unirest.get(url).header("referer", "https://google-developers.appspot.com").asString().getBody());
 			JSONObject root = new JSONObject(tokener);
+			if (!root.has("items"))
+				return "`No results found for " + q + "`";
 			root.getJSONArray("items").forEach( item -> {
 				JSONTokener itemTokener = new JSONTokener(item.toString());
 				JSONObject body = new JSONObject(itemTokener);
