@@ -22,9 +22,9 @@ public class Google extends Command{
 		
 		q = null;
 		
-		if(message.length() > 4) {
+		if(message.length() > 7) {
 			q = "";
-			for (int i = 4;i < message.length();i++)
+			for (int i = 7;i < message.length();i++)
 				q += message.charAt(i);
 		}
 		
@@ -57,7 +57,6 @@ public class Google extends Command{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(result);
 		return result == null ? "Error" : result;
 	}
 }
