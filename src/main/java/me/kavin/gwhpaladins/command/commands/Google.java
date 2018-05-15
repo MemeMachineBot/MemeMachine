@@ -28,7 +28,6 @@ public class Google extends Command{
 				q += message.charAt(i);
 		}
 		
-		event.getChannel().deleteMessageById(event.getMessageId()).queue();
 		new Thread(new Runnable() {
 			@Override
 			public void run() {

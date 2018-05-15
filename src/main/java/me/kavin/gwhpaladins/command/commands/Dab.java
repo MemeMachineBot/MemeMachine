@@ -24,7 +24,6 @@ public class Dab extends Command{
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
 	if (message.equalsIgnoreCase(".dab")){
-		event.getChannel().deleteMessageById(event.getMessageId()).queue();
 		event.getChannel().sendMessage(getMeme()).queue();
 		System.gc();
 	}

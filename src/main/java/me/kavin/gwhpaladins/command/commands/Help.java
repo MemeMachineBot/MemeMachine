@@ -11,7 +11,6 @@ public class Help extends Command{
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
 	if (message.equalsIgnoreCase(".help")){
-		event.getChannel().deleteMessageById(event.getMessageId()).queue();
 		String send = "";
 		boolean start = true;
 		for(Command cmd : CommandManager.commands){
