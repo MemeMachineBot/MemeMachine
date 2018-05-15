@@ -27,7 +27,7 @@ public class DiscordListener extends ListenerAdapter {
 	}
 	@Override
 	public void onReady(ReadyEvent event) {
-		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help", "Hax.kill"));
+		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help | " + Main.api.getUsers().size() + " Users!", "Hax.kill"));
 		
 		new Thread(new Runnable() {
 			@Override
