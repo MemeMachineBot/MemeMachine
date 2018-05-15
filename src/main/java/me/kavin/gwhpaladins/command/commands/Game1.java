@@ -63,7 +63,7 @@ public class Game1 extends Command{
 			}
 			@Override
 			public void onMessageReceived(MessageReceivedEvent event) {
-				if(event.getMessage().getRawContent().startsWith("Game 1")) {
+				if(event.getMessage().getContentRaw().startsWith("Game 1")) {
 					id = event.getMessageId();
 					event.getMessage().addReaction(event.getGuild().getEmoteById(418363481142722560L)).queue();
 					event.getMessage().addReaction(event.getGuild().getEmoteById(418363700538507265L)).queue();

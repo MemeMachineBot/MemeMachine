@@ -64,21 +64,21 @@ public class DiscordListener extends ListenerAdapter {
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
 		if(!event.getAuthor().isBot() && lastMsg.containsKey(event.getAuthor().getName())) {
-			if(lastMsg.get(event.getAuthor().getName()).startsWith(event.getMessage().getRawContent()) && event.getMessage().getAttachments().isEmpty()) {
+			if(lastMsg.get(event.getAuthor().getName()).startsWith(event.getMessage().getContentRaw()) && event.getMessage().getAttachments().isEmpty()) {
 				event.getChannel().sendMessage("You may not spam!").queue();
 				event.getMessage().delete().queue();
 			}
 		}
-		lastMsg.put(event.getAuthor().getName(), event.getMessage().getRawContent());
+		lastMsg.put(event.getAuthor().getName(), event.getMessage().getContentRaw());
 	if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor() == Main.api.getSelfUser()){
 		return;
 	}
 	for (Command cmd : CommandManager.commands)
-		cmd.onCommand(event.getMessage().getRawContent() , event);
+		cmd.onCommand(event.getMessage().getContentRaw() , event);
 	}
 	@Override
 	public void onPrivateMessageReceived(PrivateMessageReceivedEvent event) {
-		if(event.getAuthor() != Main.api.getSelfUser() && event.getMessage().getRawContent().startsWith("."))
+		if(event.getAuthor() != Main.api.getSelfUser() && event.getMessage().getContentRaw().startsWith("."))
 		event.getMessage().getChannel().sendMessage("Error: I don't reply to PM's!").queue();
 	}
     public static Color getRainbowColor(int speed) {
