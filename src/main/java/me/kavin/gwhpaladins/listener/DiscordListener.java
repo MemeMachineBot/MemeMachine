@@ -51,6 +51,10 @@ public class DiscordListener extends ListenerAdapter {
 	
 	@Override
 	public void onGuildJoin(GuildJoinEvent event) {
+		
+		if (event.getGuild().getName().toLowerCase().contains("bot"))
+			return;
+		
 		if (!event.getGuild().getMember(Main.api.getSelfUser()).hasPermission(Permission.ADMINISTRATOR)) {
 			event.getGuild().getDefaultChannel().sendMessage("Please ask a server admistrator to invite me!").queue();
 			event.getGuild().leave().queue();
