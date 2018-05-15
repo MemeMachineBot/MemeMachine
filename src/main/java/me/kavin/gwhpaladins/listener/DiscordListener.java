@@ -5,6 +5,7 @@ import java.util.HashMap;
 import me.kavin.gwhpaladins.Main;
 import me.kavin.gwhpaladins.command.Command;
 import me.kavin.gwhpaladins.command.CommandManager;
+import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Game;
@@ -27,6 +28,7 @@ public class DiscordListener extends ListenerAdapter {
 	}
 	@Override
 	public void onReady(ReadyEvent event) {
+		Main.api.getPresence().setStatus(OnlineStatus.IDLE);
 		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help | " + Main.api.getUsers().size() + " Users!", "Hax.kill"));
 		
 		new Thread(new Runnable() {
@@ -53,6 +55,7 @@ public class DiscordListener extends ListenerAdapter {
 	public void onGuildJoin(GuildJoinEvent event) {
 		if (!event.getGuild().getMember(Main.api.getSelfUser()).hasPermission(Permission.ADMINISTRATOR)) {
 			event.getGuild().getDefaultChannel().sendMessage("Please ask a server admistrator to invite me!").queue();
+			Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help | " + Main.api.getUsers().size() + " Users!", "Hax.kill"));
 		}
 	}
 	
