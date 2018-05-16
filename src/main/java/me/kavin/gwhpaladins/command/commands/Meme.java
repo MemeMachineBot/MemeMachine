@@ -1,24 +1,34 @@
 package me.kavin.gwhpaladins.command.commands;
 
+import java.awt.Color;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.mashape.unirest.http.Unirest;
+
 import me.kavin.gwhpaladins.command.Command;
+import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Meme extends Command{
 	
 	Random rnd = new Random();
 	String url = null;
+	WebClient wc = new WebClient();
 	
 	public Meme(){
-	super(".meme `Shows a random meme from imgur`");
+		super(".meme `Shows a random meme from imgur`");
 	}
+	
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
 	if (message.equalsIgnoreCase(".meme")){
@@ -31,33 +41,38 @@ public class Meme extends Command{
 		System.gc();
 	}
 	}
-	private String getMeme() {
+	private MessageEmbed getMeme() {
 		try{
-			String clientID = "5dcea4b044bd1cc";
-			URL url = new URL("https://api.imgur.com/3/g/memes/time/1");
-	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-	        conn.setDoOutput(true);
-	        conn.setRequestMethod("GET");
-	        conn.setRequestProperty("Authorization", "Client-ID " + clientID);
-	        conn.setRequestProperty("Content-Type",
-	                "application/x-www-form-urlencoded");
-		JSONTokener tokener = new JSONTokener(conn.getInputStream());
-		JSONObject root = new JSONObject(tokener);
-		boolean found = false;
-		while (!found) {
-			String data = root.getJSONArray("data").get(ThreadLocalRandom.current().nextInt(root.getJSONArray("data").length())).toString();
-			JSONTokener tokener1 = new JSONTokener(data);
-			JSONObject root1 = new JSONObject(tokener1);
-			if(root1.isNull("privacy") || !root1.get("privacy").equals("hidden")) {
+			EmbedBuilder meb = new EmbedBuilder();
+			String data = wc.getPage("https://gateway.reddit.com/desktopapi/v1/subreddits/memes?sort=hot").getWebResponse().getContentAsString();
+			JSONTokener tokener = new JSONTokener(data);
+			JSONObject root = new JSONObject(tokener);
+			boolean found = false;
+			JSONObject posts = root.getJSONObject("posts");
+			String[] keys = Arrays.copyOf(posts.keySet().toArray(), posts.keySet().size(), String[].class);
+			while (!found) {
+				JSONObject post = posts.getJSONObject(keys[ThreadLocalRandom.current().nextInt(keys.length)]);
+				if (post.getBoolean("isLocked"))
+					continue;
 				found = true;
-				root = root1;
+				meb.setTitle(post.getString("title"));
+				meb.setColor(getRainbowColor(2000));
+				meb.setImage(post.getJSONObject("media").getString("content"));
+				meb.setAuthor(post.getString("author"));
+				String s = "👍" + post.getInt("score") + " | " + "💬" + post.getInt("numComments");
+				meb.setDescription(s);
 			}
-		}
-		return root.get("link").toString();
-		}catch (Throwable t){
+			return meb.build();
+		} catch (Throwable t){
 			t.printStackTrace();
 		}
 		return null;
 	}
+	
+	public static Color getRainbowColor(int speed) {
+        float hue = (System.currentTimeMillis()) % speed;
+        hue /= speed;
+        return Color.getHSBColor(hue, 1f, 1f);
+    }
+	
 }
