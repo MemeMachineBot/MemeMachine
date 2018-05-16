@@ -1,7 +1,6 @@
 package me.kavin.gwhpaladins.listener;
 
 import java.awt.Color;
-import java.util.HashMap;
 import me.kavin.gwhpaladins.Main;
 import me.kavin.gwhpaladins.command.Command;
 import me.kavin.gwhpaladins.command.CommandManager;

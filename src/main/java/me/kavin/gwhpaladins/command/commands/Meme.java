@@ -1,19 +1,14 @@
 package me.kavin.gwhpaladins.command.commands;
 
 import java.awt.Color;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.mashape.unirest.http.Unirest;
-
 import me.kavin.gwhpaladins.command.Command;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;

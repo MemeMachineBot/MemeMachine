@@ -15,5 +15,6 @@ public class CommandManager {
 		commands.add(new Dab());
 		commands.add(new Yt());
 		commands.add(new Google());
+		commands.add(new Profile());
 	}
 }
