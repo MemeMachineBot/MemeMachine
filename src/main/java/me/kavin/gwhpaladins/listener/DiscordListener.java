@@ -21,8 +21,6 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class DiscordListener extends ListenerAdapter {
 	
-	HashMap<String, String> lastMsg = new HashMap<String, String>();
-	
 	public static void init(){
 	Main.api.addEventListener(new DiscordListener());
 	}
@@ -65,13 +63,6 @@ public class DiscordListener extends ListenerAdapter {
 	}
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
-		if(!event.getAuthor().isBot() && lastMsg.containsKey(event.getAuthor().getName())) {
-			if(lastMsg.get(event.getAuthor().getName()).startsWith(event.getMessage().getContentRaw()) && event.getMessage().getAttachments().isEmpty()) {
-				event.getChannel().sendMessage("You may not spam!").queue();
-				event.getMessage().delete().queue();
-			}
-		}
-		lastMsg.put(event.getAuthor().getName(), event.getMessage().getContentRaw());
 	if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor() == Main.api.getSelfUser()){
 		return;
 	}
