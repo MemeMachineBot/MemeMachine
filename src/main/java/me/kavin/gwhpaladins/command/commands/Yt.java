@@ -40,7 +40,7 @@ public class Yt extends Command{
 	private String getSearch(String q) {
 		try {
 			result = null;
-			String url = "https://www.googleapis.com/youtube/v3/search/?" + "q=" + q.replace(" ", "%20") + "&type=video,channel&part=snippet&key=AIzaSyAMkHWnLNAvpKte-XA9nh3RheX7lFn_dNM";
+			String url = "https://www.googleapis.com/youtube/v3/search/?" + "safeSearch=moderate&" + "q=" + q.replace(" ", "%20") + "&type=video,channel&part=snippet&key=AIzaSyAMkHWnLNAvpKte-XA9nh3RheX7lFn_dNM";
 			JSONTokener tokener = new JSONTokener(Unirest.get(url).header("referer", "https://google-developers.appspot.com").asString().getBody());
 			JSONObject root = new JSONObject(tokener);
 			if (!root.has("items"))

@@ -40,7 +40,7 @@ public class Google extends Command{
 	private String getSearch(String q) {
 		try {
 			result = null;
-			String url = "https://www.googleapis.com/customsearch/v1?" + "q=" + q.replace(" ", "%20") + "&cx=008677437472124065250%3Ajljeb59kuse&imgSize=small&lr=lang_en&num=5&safe=off&key=AIzaSyBjdQtArYb2oOdPIgPy5NQVW7CgBTZsi5E";
+			String url = "https://www.googleapis.com/customsearch/v1?" + "safe=medium&" + "q=" + q.replace(" ", "%20") + "&cx=008677437472124065250%3Ajljeb59kuse&imgSize=small&lr=lang_en&num=5&safe=off&key=AIzaSyBjdQtArYb2oOdPIgPy5NQVW7CgBTZsi5E";
 			JSONTokener tokener = new JSONTokener(Unirest.get(url).asString().getBody());
 			JSONObject root = new JSONObject(tokener);
 			if (!root.has("items"))
