@@ -1,9 +1,13 @@
 package me.kavin.gwhpaladins.listener;
 
 import java.awt.Color;
+
+import com.sun.javafx.scene.traversal.Hueristic2D;
+
 import me.kavin.gwhpaladins.Main;
 import me.kavin.gwhpaladins.command.Command;
 import me.kavin.gwhpaladins.command.CommandManager;
+import me.kavin.gwhpaladins.lists.Api;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.ChannelType;
@@ -13,6 +17,7 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
+import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.core.events.guild.update.GuildUpdateOwnerEvent;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.events.message.priv.PrivateMessageReceivedEvent;
@@ -25,6 +30,7 @@ public class DiscordListener extends ListenerAdapter {
 	}
 	@Override
 	public void onReady(ReadyEvent event) {
+		Api.dbl();
 		Main.api.getPresence().setStatus(OnlineStatus.IDLE);
 		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help | " + Main.api.getUsers().size() + " Users!", "Hax.kill"));
 		
@@ -52,14 +58,20 @@ public class DiscordListener extends ListenerAdapter {
 	public void onGuildJoin(GuildJoinEvent event) {
 		if (!event.getGuild().getMember(Main.api.getSelfUser()).hasPermission(Permission.ADMINISTRATOR)) {
 			event.getGuild().getDefaultChannel().sendMessage("Please ask a server admistrator to invite me!").queue();
-			Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help | " + Main.api.getUsers().size() + " Users!", "Hax.kill"));
 		}
+		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help | " + Main.api.getUsers().size() + " Users!", "Hax.kill"));
 	}
 	
 	@Override
 	public void onGuildUpdateOwner(GuildUpdateOwnerEvent event) {
 		event.getGuild().getOwner().getUser().openPrivateChannel().complete().sendMessage("Congrats on becoming the new owner of " + event.getGuild().getName()).queue();
 	}
+	
+	@Override
+	public void onGuildLeave(GuildLeaveEvent event) {
+		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help | " + Main.api.getUsers().size() + " Users!", "Hax.kill"));
+	}
+	
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
 	if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor() == Main.api.getSelfUser()){
