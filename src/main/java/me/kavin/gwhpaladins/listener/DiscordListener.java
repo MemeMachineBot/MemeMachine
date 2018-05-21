@@ -2,8 +2,6 @@ package me.kavin.gwhpaladins.listener;
 
 import java.awt.Color;
 
-import com.sun.javafx.scene.traversal.Hueristic2D;
-
 import me.kavin.gwhpaladins.Main;
 import me.kavin.gwhpaladins.command.Command;
 import me.kavin.gwhpaladins.command.CommandManager;
