@@ -72,7 +72,7 @@ public class DiscordListener extends ListenerAdapter {
 	
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
-	if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor() == Main.api.getSelfUser()){
+	if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor() == Main.api.getSelfUser() || event.getAuthor().isBot()){
 		return;
 	}
 	for (Command cmd : CommandManager.commands)
