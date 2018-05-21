@@ -30,7 +30,7 @@ public class DiscordListener extends ListenerAdapter {
 	}
 	@Override
 	public void onReady(ReadyEvent event) {
-		Api.dbl();
+		Api.loop();
 		Main.api.getPresence().setStatus(OnlineStatus.IDLE);
 		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help | " + Main.api.getUsers().size() + " Users!", "Hax.kill"));
 		
