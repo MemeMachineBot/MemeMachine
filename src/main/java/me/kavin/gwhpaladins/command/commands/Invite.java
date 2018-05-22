@@ -15,7 +15,7 @@ public class Invite extends Command{
 	return;
 	}
 	if (message.equalsIgnoreCase(".invite")){
-		event.getChannel().sendMessage("https://discordapp.com/oauth2/authorize?client_id=" + Main.api.getSelfUser().getId() + "&permissions=8&scope=bot").queue();
+		event.getAuthor().openPrivateChannel().complete().sendMessage("`You can invite me here:`\nhttps://discordapp.com/oauth2/authorize?client_id=" + Main.api.getSelfUser().getId() + "&permissions=8&scope=bot").queue();
 	}
 	}
 }
