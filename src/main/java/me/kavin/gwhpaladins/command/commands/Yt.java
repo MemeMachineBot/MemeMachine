@@ -51,12 +51,12 @@ public class Yt extends Command{
 				boolean video = body.getJSONObject("id").getString("kind").equals("youtube#video");
 				if(video) {
 					if(result != null)
-						result += "\n`" + body.getJSONObject("snippet").getString("title") +"` https://www.youtube.com/watch?v=" + body.getJSONObject("id").getString("videoId");
+						result += "\n`" + body.getJSONObject("snippet").getString("title") +" https://www.youtube.com/watch?v=" + body.getJSONObject("id").getString("videoId") + "`";
 					else
 						result = "`" + body.getJSONObject("snippet").getString("title") +"` https://www.youtube.com/watch?v=" + body.getJSONObject("id").getString("videoId");
 				} else {
 					if(result != null)
-						result += "\n`" + body.getJSONObject("snippet").getString("title") +"` https://www.youtube.com/channel/" + body.getJSONObject("id").getString("channelId");
+						result += "\n`" + body.getJSONObject("snippet").getString("title") +" https://www.youtube.com/channel/" + body.getJSONObject("id").getString("channelId") + "`";
 					else
 						result = "`" + body.getJSONObject("snippet").getString("title") +"` https://www.youtube.com/channel/" + body.getJSONObject("id").getString("channelId");
 				}
