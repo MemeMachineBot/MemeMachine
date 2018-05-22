@@ -15,7 +15,6 @@ public class UpTime extends Command{
 	return;
 	}
 	if (message.equalsIgnoreCase(".uptime")){
-		event.getChannel().deleteMessageById(event.getMessageId()).queue();
 		long millis = Main.uptime.getDifference();
 		long second = (millis / 1000) % 60;
 		long minute = (millis / (1000 * 60)) % 60;
