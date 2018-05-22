@@ -30,7 +30,7 @@ public class DiscordListener extends ListenerAdapter {
 	public void onReady(ReadyEvent event) {
 		Api.loop();
 		Main.api.getPresence().setStatus(OnlineStatus.IDLE);
-		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help | " + Main.api.getUsers().size() + " Users!", "Hax.kill"));
+		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help | " + Main.api.getGuilds().size() + " Servers!", "Hax.kill"));
 		
 		new Thread(new Runnable() {
 			@Override
@@ -57,7 +57,7 @@ public class DiscordListener extends ListenerAdapter {
 		if (!event.getGuild().getMember(Main.api.getSelfUser()).hasPermission(Permission.ADMINISTRATOR)) {
 			event.getGuild().getDefaultChannel().sendMessage("Please ask a server admistrator to invite me!").queue();
 		}
-		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help | " + Main.api.getUsers().size() + " Users!", "Hax.kill"));
+		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help | " + Main.api.getGuilds().size() + " Servers!", "Hax.kill"));
 	}
 	
 	@Override
@@ -67,7 +67,7 @@ public class DiscordListener extends ListenerAdapter {
 	
 	@Override
 	public void onGuildLeave(GuildLeaveEvent event) {
-		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help | " + Main.api.getUsers().size() + " Users!", "Hax.kill"));
+		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help | " + Main.api.getGuilds().size() + " Servers!", "Hax.kill"));
 	}
 	
 	@Override
