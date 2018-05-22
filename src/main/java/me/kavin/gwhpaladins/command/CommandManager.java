@@ -16,5 +16,6 @@ public class CommandManager {
 		commands.add(new Yt());
 		commands.add(new Google());
 		commands.add(new Profile());
+		commands.add(new Reddit());
 	}
 }
