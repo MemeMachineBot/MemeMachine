@@ -37,7 +37,6 @@ public class Google extends Command{
 				event.getChannel().sendMessage(getSearch(q)).queue();
 			}
 		}).start();
-		System.gc();
 	}
 	}
 	private MessageEmbed getSearch(String q) {
@@ -49,7 +48,7 @@ public class Google extends Command{
 			meb.setTitle("Google Search: " + q);
 			meb.setColor(getRainbowColor(2000));
 			if (!root.has("items")) {
-				meb.addField("No Results", "Unfottunately I couldn't find any results for `" + q + "`", true);
+				meb.addField("No Results", "Unfortunately I couldn't find any results for `" + q + "`", true);
 				return meb.build();
 			}
 			root.getJSONArray("items").forEach( item -> {

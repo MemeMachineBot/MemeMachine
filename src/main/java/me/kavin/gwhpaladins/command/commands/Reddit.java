@@ -37,7 +37,6 @@ public class Reddit extends Command{
 					event.getChannel().sendMessage("`Please provide a subreddit as your argument like` \n.reddit <subreddit>").queue();
 			}
 		}).start();
-		System.gc();
 	}
 	}
 	private MessageEmbed getPost(String reddit) {

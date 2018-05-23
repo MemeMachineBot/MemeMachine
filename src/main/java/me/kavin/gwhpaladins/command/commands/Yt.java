@@ -37,7 +37,6 @@ public class Yt extends Command{
 				event.getChannel().sendMessage(getSearch(q)).queue();
 			}
 		}).start();
-		System.gc();
 	}
 	}
 	private MessageEmbed getSearch(String q) {
