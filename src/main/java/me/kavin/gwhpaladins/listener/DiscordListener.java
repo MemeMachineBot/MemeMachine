@@ -34,7 +34,7 @@ public class DiscordListener extends ListenerAdapter {
 	public void onReady(ReadyEvent event) {
 		Api.loop();
 		Main.api.getPresence().setStatus(OnlineStatus.IDLE);
-		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help | " + Main.api.getGuilds().size() + " Servers!", "Hax.kill"));
+		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | >help | " + Main.api.getGuilds().size() + " Servers!", "Hax.kill"));
 		
 		new Thread(new Runnable() {
 			@Override
@@ -93,7 +93,7 @@ public class DiscordListener extends ListenerAdapter {
 			g.getOwner().getUser().openPrivateChannel().complete().sendMessage("Unfortunately your discord server has a high user/bot ratio. \nTry inviting more people on your server or delete some bots.\n feel free to invite me back from\n https://discordapp.com/oauth2/authorize?client_id=" + Main.api.getSelfUser().getId() + "&permissions=8&scope=bot").queue();
 			g.leave().queue();
 		}
-		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help | " + Main.api.getGuilds().size() + " Servers!", "Hax.kill"));
+		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | >help | " + Main.api.getGuilds().size() + " Servers!", "Hax.kill"));
 	}
 	
 	@Override
@@ -103,7 +103,7 @@ public class DiscordListener extends ListenerAdapter {
 	
 	@Override
 	public void onGuildLeave(GuildLeaveEvent event) {
-		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | .help | " + Main.api.getGuilds().size() + " Servers!", "Hax.kill"));
+		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | >help | " + Main.api.getGuilds().size() + " Servers!", "Hax.kill"));
 	}
 	
 	@Override
