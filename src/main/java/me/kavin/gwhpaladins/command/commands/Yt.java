@@ -1,24 +1,27 @@
 package me.kavin.gwhpaladins.command.commands;
 
+import java.awt.Color;
+
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import com.mashape.unirest.http.Unirest;
 
 import me.kavin.gwhpaladins.command.Command;
+import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Yt extends Command{
 	
-	private String result = null;
 	private String q = null;
 	
 	public Yt(){
-	super(".yt `Allows you to search youtube`");
+	super(">yt `Allows you to search youtube`");
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-	if (message.toUpperCase().startsWith(".yt".toUpperCase())){
+	if (message.toLowerCase().startsWith(">yt")){
 		
 		q = null;
 		
@@ -37,33 +40,39 @@ public class Yt extends Command{
 		System.gc();
 	}
 	}
-	private String getSearch(String q) {
+	private MessageEmbed getSearch(String q) {
 		try {
-			result = null;
-			String url = "https://www.googleapis.com/youtube/v3/search/?" + "safeSearch=moderate&" + "q=" + q.replace(" ", "%20") + "&type=video,channel&part=snippet&key=AIzaSyAMkHWnLNAvpKte-XA9nh3RheX7lFn_dNM";
-			JSONTokener tokener = new JSONTokener(Unirest.get(url).header("referer", "https://google-developers.appspot.com").asString().getBody());
+			EmbedBuilder meb = new EmbedBuilder();
+			String url = "https://www.googleapis.com/youtube/v3/search/?" + "safeSearch=moderate" + "&regionCode=US" + "&q=" + q.replace(" ", "%20") + "&type=video,channel&part=snippet&key=AIzaSyBjdQtArYb2oOdPIgPy5NQVW7CgBTZsi5E";
+			JSONTokener tokener = new JSONTokener(Unirest.get(url).asString().getBody());
 			JSONObject root = new JSONObject(tokener);
-			if (!root.has("items"))
-				return "`No results found for " + q + "`";
+			meb.setTitle("Youtube Search: " + q);
+			meb.setColor(getRainbowColor(2000));
+			if (!root.has("items")) {
+				meb.addField("No Results", "Unfottunately I couldn't find any results for `" + q + "`", true);
+				return meb.build();
+			}
 			root.getJSONArray("items").forEach( item -> {
 				JSONTokener itemTokener = new JSONTokener(item.toString());
 				JSONObject body = new JSONObject(itemTokener);
 				boolean video = body.getJSONObject("id").getString("kind").equals("youtube#video");
 				if(video) {
-					if(result != null)
-						result += "\n`" + body.getJSONObject("snippet").getString("title") +" https://www.youtube.com/watch?v=" + body.getJSONObject("id").getString("videoId") + "`";
-					else
-						result = "`" + body.getJSONObject("snippet").getString("title") +"` https://www.youtube.com/watch?v=" + body.getJSONObject("id").getString("videoId");
+					meb.addField('`' + body.getJSONObject("snippet").getString("title") + '`', "https://www.youtube.com/watch?v=" + body.getJSONObject("id").getString("videoId"), true);
 				} else {
-					if(result != null)
-						result += "\n`" + body.getJSONObject("snippet").getString("title") +" https://www.youtube.com/channel/" + body.getJSONObject("id").getString("channelId") + "`";
-					else
-						result = "`" + body.getJSONObject("snippet").getString("title") +"` https://www.youtube.com/channel/" + body.getJSONObject("id").getString("channelId");
+					meb.addField('`' + body.getJSONObject("snippet").getString("title") + '`', "https://www.youtube.com/channel/" + body.getJSONObject("id").getString("channelId"), true);
 				}
 			});
+			return meb.build();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result == null ? "Error" : result;
+		return null;
 	}
+	
+	public static Color getRainbowColor(int speed) {
+        float hue = (System.currentTimeMillis()) % speed;
+        hue /= speed;
+        return Color.getHSBColor(hue, 1f, 1f);
+    }
+	
 }

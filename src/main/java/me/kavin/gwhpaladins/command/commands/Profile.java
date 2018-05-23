@@ -7,14 +7,14 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Profile extends Command{
 	public Profile(){
-	super(".profile `Shows the person you tag's profile picture`");
+	super(">profile `Shows the person you tag's profile picture`");
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
 	if (event.isFromType(ChannelType.PRIVATE)){
 	return;
 	}
-	if (message.toLowerCase().startsWith(".profile")){
+	if (message.toLowerCase().startsWith(">profile")){
 		
 		String[] split = message.split(" ");
 		

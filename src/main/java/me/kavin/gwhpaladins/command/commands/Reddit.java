@@ -21,12 +21,12 @@ public class Reddit extends Command{
 	WebClient wc = new WebClient();
 	
 	public Reddit(){
-		super(".reddit `Shows a post from the given reddit`");
+		super(">reddit `Shows a post from the given reddit`");
 	}
 	
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-	if (message.toLowerCase().startsWith(".reddit")){
+	if (message.toLowerCase().startsWith(">reddit")){
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -47,9 +47,11 @@ public class Reddit extends Command{
 			JSONTokener tokener = new JSONTokener(data);
 			JSONObject root = new JSONObject(tokener);
 			boolean found = false;
+			int tries = 0;
 			JSONObject posts = root.getJSONObject("posts");
 			String[] keys = Arrays.copyOf(posts.keySet().toArray(), posts.keySet().size(), String[].class);
-			while (!found) {
+			while (!found && tries <= 5) {
+				tries++;
 				JSONObject post = posts.getJSONObject(keys[ThreadLocalRandom.current().nextInt(keys.length)]);
 				if (post.getBoolean("isLocked"))
 					continue;

@@ -6,11 +6,11 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Help extends Command{
 	public Help(){
-	super(".help `Shows this message`");
+	super(">help `Shows this message`");
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-	if (message.equalsIgnoreCase(".help")){
+	if (message.equalsIgnoreCase(">help")){
 		String send = "";
 		boolean start = true;
 		for(Command cmd : CommandManager.commands){
