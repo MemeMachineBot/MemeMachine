@@ -18,5 +18,6 @@ public class CommandManager {
 		commands.add(new Profile());
 		commands.add(new Reddit());
 		commands.add(new Invite());
+		commands.add(new Define());
 	}
 }

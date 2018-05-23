@@ -2,6 +2,7 @@ package me.kavin.gwhpaladins.command.commands;
 
 import java.awt.Color;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -12,22 +13,22 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class Yt extends Command{
+public class Define extends Command{
 	
 	private String q = null;
 	
-	public Yt(){
-	super(">yt `Allows you to search youtube`");
+	public Define(){
+	super(">define `Gets the definition of a term from urbandictionary.com`");
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-	if (message.toLowerCase().startsWith(">yt")){
+	if (message.toLowerCase().startsWith(">define")){
 		
 		q = null;
 		
-		if(message.length() > 4) {
+		if(message.length() > 7) {
 			q = "";
-			for (int i = 4;i < message.length();i++)
+			for (int i = 7;i < message.length();i++)
 				q += message.charAt(i);
 		}
 		
@@ -42,24 +43,19 @@ public class Yt extends Command{
 	private MessageEmbed getSearch(String q) {
 		try {
 			EmbedBuilder meb = new EmbedBuilder();
-			String url = "https://www.googleapis.com/youtube/v3/search/?" + "safeSearch=moderate" + "&regionCode=US" + "&q=" + q.replace(" ", "%20") + "&type=video,channel&part=snippet&key=AIzaSyBjdQtArYb2oOdPIgPy5NQVW7CgBTZsi5E";
+			String url = "https://api.urbandictionary.com/v0/autocomplete-extra?&term=" + q.replace(" ", "%20");
 			JSONTokener tokener = new JSONTokener(Unirest.get(url).asString().getBody());
 			JSONObject root = new JSONObject(tokener);
-			meb.setTitle("Youtube Search: " + q);
+			meb.setTitle("Urban Dictionary Search: " + q);
 			meb.setColor(getRainbowColor(2000));
-			if (!root.has("items")) {
+			JSONArray jArray = root.getJSONArray("results");
+			if (jArray.length() == 0) {
 				meb.addField("No Results", "Unfortunately I couldn't find any results for `" + q + "`", true);
 				return meb.build();
 			}
-			root.getJSONArray("items").forEach( item -> {
-				JSONTokener itemTokener = new JSONTokener(item.toString());
-				JSONObject body = new JSONObject(itemTokener);
-				boolean video = body.getJSONObject("id").getString("kind").equals("youtube#video");
-				if(video) {
-					meb.addField('`' + body.getJSONObject("snippet").getString("title") + '`', "https://www.youtube.com/watch?v=" + body.getJSONObject("id").getString("videoId"), true);
-				} else {
-					meb.addField('`' + body.getJSONObject("snippet").getString("title") + '`', "https://www.youtube.com/channel/" + body.getJSONObject("id").getString("channelId"), true);
-				}
+			jArray.forEach( item -> {
+				JSONObject body = new JSONObject(item.toString());
+				meb.addField('`' + body.getString("term") + '`', body.getString("preview"), true);
 			});
 			return meb.build();
 		} catch (Exception e) {

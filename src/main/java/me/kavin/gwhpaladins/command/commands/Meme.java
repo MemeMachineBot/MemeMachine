@@ -33,7 +33,6 @@ public class Meme extends Command{
 				event.getChannel().sendMessage(getMeme()).queue();
 			}
 		}).start();
-		System.gc();
 	}
 	}
 	private MessageEmbed getMeme() {
