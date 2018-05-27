@@ -18,7 +18,7 @@ public class Help extends Command{
 		meb.setColor(getRainbowColor(2000));
 		meb.setTitle("Meme Machine's Commands:");
 		for(Command cmd : CommandManager.commands){
-				meb.addField(cmd.getPrefix(), cmd.getHelp(), true);
+				meb.addField(cmd.getPrefix(), cmd.getHelp() + '\n', false);
 		}
 		event.getChannel().sendMessage(meb.build()).queue();
 		}
