@@ -14,7 +14,7 @@ public class UpTime extends Command{
 	if (event.isFromType(ChannelType.PRIVATE)){
 	return;
 	}
-	if (message.equalsIgnoreCase(">uptime")){
+	if (message.equalsIgnoreCase(getPrefix())){
 		long millis = Main.uptime.getDifference();
 		long second = (millis / 1000) % 60;
 		long minute = (millis / (1000 * 60)) % 60;

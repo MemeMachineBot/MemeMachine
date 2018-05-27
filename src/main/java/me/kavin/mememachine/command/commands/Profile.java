@@ -14,7 +14,7 @@ public class Profile extends Command{
 	if (event.isFromType(ChannelType.PRIVATE)){
 	return;
 	}
-	if (message.toLowerCase().startsWith(">profile")){
+	if (message.toLowerCase().startsWith(getPrefix())){
 		
 		String[] split = message.split(" ");
 		

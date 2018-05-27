@@ -27,7 +27,7 @@ public class Meme extends Command{
 	
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-	if (message.equalsIgnoreCase(">meme")){
+	if (message.equalsIgnoreCase(getPrefix())){
 		new Thread(new Runnable() {
 			@Override
 			public void run() {

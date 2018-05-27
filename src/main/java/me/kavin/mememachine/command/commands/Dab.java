@@ -23,7 +23,7 @@ public class Dab extends Command{
 	ArrayList<String> memeurls = new ArrayList<String>();
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-	if (message.equalsIgnoreCase(">dab")){
+	if (message.equalsIgnoreCase(getPrefix())){
 		event.getChannel().sendMessage(getMeme()).queue();
 	}
 	}

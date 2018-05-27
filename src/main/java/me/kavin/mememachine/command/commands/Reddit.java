@@ -27,7 +27,7 @@ public class Reddit extends Command{
 	
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-	if (message.toLowerCase().startsWith(">reddit")){
+	if (message.toLowerCase().startsWith(getPrefix())){
 		new Thread(new Runnable() {
 			@Override
 			public void run() {

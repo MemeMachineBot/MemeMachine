@@ -21,7 +21,7 @@ public class Google extends Command{
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-	if (message.toLowerCase().startsWith(">google")){
+	if (message.toLowerCase().startsWith(getPrefix())){
 		
 		q = null;
 		

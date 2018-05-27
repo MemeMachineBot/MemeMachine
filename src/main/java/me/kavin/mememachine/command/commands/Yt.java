@@ -21,7 +21,7 @@ public class Yt extends Command{
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-	if (message.toLowerCase().startsWith(">yt")){
+	if (message.toLowerCase().startsWith(getPrefix())){
 		
 		q = null;
 		

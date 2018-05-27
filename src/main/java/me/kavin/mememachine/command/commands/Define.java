@@ -22,7 +22,7 @@ public class Define extends Command{
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-	if (message.toLowerCase().startsWith(">define")){
+	if (message.toLowerCase().startsWith(getPrefix())){
 		
 		q = null;
 		
