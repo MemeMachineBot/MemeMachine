@@ -22,7 +22,7 @@ public class Meme extends Command{
 	WebClient wc = new WebClient();
 	
 	public Meme(){
-		super(">meme `Shows a random meme from imgur`");
+		super(">meme", "`Shows a random meme from imgur`");
 	}
 	
 	@Override
@@ -56,7 +56,7 @@ public class Meme extends Command{
 				meb.setColor(getRainbowColor(2000));
 				meb.setImage(post.getJSONObject("media").getString("content"));
 				meb.setAuthor(post.getString("author"));
-				meb.setDescription("�?" + post.getInt("score") + " | " + "💬" + post.getInt("numComments"));
+				meb.setDescription("�?" + post.getInt("score") + " | " + "💬" + post.getInt("numComments"));
 			}
 			return meb.build();
 		} catch (Throwable t){

@@ -17,7 +17,7 @@ public class Yt extends Command{
 	private String q = null;
 	
 	public Yt(){
-	super(">yt `Allows you to search youtube`");
+	super(">yt", "`Allows you to search youtube`");
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {

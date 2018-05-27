@@ -8,7 +8,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Dab extends Command{
 	public Dab(){
-	super(">dab `Shows a person dabbing`");
+	super(">dab", "`Shows a person dabbing`");
 		memeurls.add("https://ibb.co/kjGceb");
 		memeurls.add("https://ibb.co/cPbokG");
 		memeurls.add("https://ibb.co/gX8qzb");

@@ -18,7 +18,7 @@ public class Define extends Command{
 	private String q = null;
 	
 	public Define(){
-	super(">define `Gets the definition of a term from urbandictionary.com`");
+	super(">define", "`Gets the definition of a term from urbandictionary.com`");
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {

@@ -22,7 +22,7 @@ public class Reddit extends Command{
 	WebClient wc = new WebClient();
 	
 	public Reddit(){
-		super(">reddit `Shows a post from the given reddit`");
+		super(">reddit", "`Shows a post from the given reddit`");
 	}
 	
 	@Override
@@ -60,7 +60,7 @@ public class Reddit extends Command{
 				meb.setColor(getRainbowColor(2000));
 				meb.setImage(post.getJSONObject("media").getString("content"));
 				meb.setAuthor(post.getString("author"));
-				String s = "�?" + post.getInt("score") + " | " + "💬" + post.getInt("numComments");
+				String s = "�?" + post.getInt("score") + " | " + "💬" + post.getInt("numComments");
 				meb.setDescription(s);
 			}
 			return meb.build();

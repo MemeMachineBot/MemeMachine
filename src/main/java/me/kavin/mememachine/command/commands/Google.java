@@ -17,7 +17,7 @@ public class Google extends Command{
 	private String q = null;
 	
 	public Google(){
-	super(">google `Allows you to search google`");
+	super(">google", "`Allows you to search google`");
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {

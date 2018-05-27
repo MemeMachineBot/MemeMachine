@@ -7,7 +7,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Invite extends Command{
 	public Invite(){
-	super(">invite `Gives you a bot invite link`");
+	super(">invite", "`Gives you a link to invite me`");
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
