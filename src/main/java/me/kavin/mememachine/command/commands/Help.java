@@ -13,7 +13,7 @@ public class Help extends Command{
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-	if (message.equalsIgnoreCase(">help")){
+	if (message.equalsIgnoreCase(this.getPrefix())){
 		EmbedBuilder meb = new EmbedBuilder();
 		meb.setColor(getRainbowColor(2000));
 		meb.setTitle("Meme Machine's Commands:");
