@@ -2,7 +2,6 @@ package me.kavin.mememachine.command.commands;
 
 import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
-import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Invite extends Command{
