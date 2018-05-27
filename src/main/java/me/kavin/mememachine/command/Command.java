@@ -1,4 +1,4 @@
-package me.kavin.gwhpaladins.command;
+package me.kavin.mememachine.command;
 
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 

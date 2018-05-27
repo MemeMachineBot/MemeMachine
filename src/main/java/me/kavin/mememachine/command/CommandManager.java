@@ -1,8 +1,8 @@
-package me.kavin.gwhpaladins.command;
+package me.kavin.mememachine.command;
 
 import java.util.ArrayList;
 
-import me.kavin.gwhpaladins.command.commands.*;
+import me.kavin.mememachine.command.commands.*;
 
 public class CommandManager {
 	

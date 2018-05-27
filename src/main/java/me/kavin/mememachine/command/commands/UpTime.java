@@ -1,7 +1,7 @@
-package me.kavin.gwhpaladins.command.commands;
+package me.kavin.mememachine.command.commands;
 
-import me.kavin.gwhpaladins.Main;
-import me.kavin.gwhpaladins.command.Command;
+import me.kavin.mememachine.Main;
+import me.kavin.mememachine.command.Command;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 

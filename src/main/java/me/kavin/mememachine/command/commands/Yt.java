@@ -1,4 +1,4 @@
-package me.kavin.gwhpaladins.command.commands;
+package me.kavin.mememachine.command.commands;
 
 import java.awt.Color;
 
@@ -7,7 +7,7 @@ import org.json.JSONTokener;
 
 import com.mashape.unirest.http.Unirest;
 
-import me.kavin.gwhpaladins.command.Command;
+import me.kavin.mememachine.command.Command;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;

@@ -1,4 +1,4 @@
-package me.kavin.gwhpaladins.utils;
+package me.kavin.mememachine.utils;
 
 public class Timer {
     private long prevMS = 0;

@@ -1,7 +1,7 @@
-package me.kavin.gwhpaladins.command.commands;
+package me.kavin.mememachine.command.commands;
 
-import me.kavin.gwhpaladins.Main;
-import me.kavin.gwhpaladins.command.Command;
+import me.kavin.mememachine.Main;
+import me.kavin.mememachine.command.Command;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -19,7 +19,7 @@ public class Profile extends Command{
 		String[] split = message.split(" ");
 		
 		if (split.length < 2) {
-			event.getChannel().sendMessage("`Please tag a person as your argument like` \n.profile " + Main.api.getSelfUser().getAsMention()).queue();
+			event.getChannel().sendMessage("`Please tag a person as your argument like` \n>profile " + Main.api.getSelfUser().getAsMention()).queue();
 			return;
 		}
 
@@ -28,7 +28,7 @@ public class Profile extends Command{
 		try {
 			memberId = getLong(split[1]);
 		} catch (NumberFormatException e) {
-			event.getChannel().sendMessage("`Please tag a person as your argument like` \n.profile " + Main.api.getSelfUser().getAsMention()).queue();
+			event.getChannel().sendMessage("`Please tag a person as your argument like` \n>profile " + Main.api.getSelfUser().getAsMention()).queue();
 			return;
 		}
 

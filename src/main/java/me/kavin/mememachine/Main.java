@@ -1,10 +1,10 @@
-package me.kavin.gwhpaladins;
+package me.kavin.mememachine;
 
 import javax.security.auth.login.LoginException;
 
-import me.kavin.gwhpaladins.command.CommandManager;
-import me.kavin.gwhpaladins.listener.DiscordListener;
-import me.kavin.gwhpaladins.utils.Timer;
+import me.kavin.mememachine.command.CommandManager;
+import me.kavin.mememachine.listener.DiscordListener;
+import me.kavin.mememachine.utils.Timer;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;

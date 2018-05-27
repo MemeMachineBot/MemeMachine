@@ -1,4 +1,4 @@
-package me.kavin.gwhpaladins.command.commands;
+package me.kavin.mememachine.command.commands;
 
 import java.awt.Color;
 import java.util.Arrays;
@@ -9,58 +9,54 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import com.gargoylesoftware.htmlunit.WebClient;
-import me.kavin.gwhpaladins.command.Command;
+
+import me.kavin.mememachine.command.Command;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class Reddit extends Command{
+public class Meme extends Command{
 	
 	Random rnd = new Random();
 	String url = null;
 	WebClient wc = new WebClient();
 	
-	public Reddit(){
-		super(">reddit `Shows a post from the given reddit`");
+	public Meme(){
+		super(">meme `Shows a random meme from imgur`");
 	}
 	
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-	if (message.toLowerCase().startsWith(">reddit")){
+	if (message.equalsIgnoreCase(">meme")){
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				String[] split = message.split(" ");
-				if(split.length != 1)
-					event.getChannel().sendMessage(getPost(split[1])).queue();
-				else
-					event.getChannel().sendMessage("`Please provide a subreddit as your argument like` \n.reddit <subreddit>").queue();
+				event.getChannel().sendMessage(getMeme()).queue();
 			}
 		}).start();
 	}
 	}
-	private MessageEmbed getPost(String reddit) {
+	private MessageEmbed getMeme() {
 		try{
 			EmbedBuilder meb = new EmbedBuilder();
-			String data = wc.getPage("https://gateway.reddit.com/desktopapi/v1/subreddits/" + reddit + "?sort=hot").getWebResponse().getContentAsString();
+			String data = wc.getPage("https://gateway.reddit.com/desktopapi/v1/subreddits/memes?sort=hot").getWebResponse().getContentAsString();
+			int tries = 0;
 			JSONTokener tokener = new JSONTokener(data);
 			JSONObject root = new JSONObject(tokener);
 			boolean found = false;
-			int tries = 0;
 			JSONObject posts = root.getJSONObject("posts");
 			String[] keys = Arrays.copyOf(posts.keySet().toArray(), posts.keySet().size(), String[].class);
 			while (!found && tries <= 5) {
-				tries++;
 				JSONObject post = posts.getJSONObject(keys[ThreadLocalRandom.current().nextInt(keys.length)]);
 				if (post.getBoolean("isLocked"))
 					continue;
+				tries++;
 				found = true;
 				meb.setTitle(post.getString("title"));
 				meb.setColor(getRainbowColor(2000));
 				meb.setImage(post.getJSONObject("media").getString("content"));
 				meb.setAuthor(post.getString("author"));
-				String s = "👍" + post.getInt("score") + " | " + "💬" + post.getInt("numComments");
-				meb.setDescription(s);
+				meb.setDescription("�?" + post.getInt("score") + " | " + "💬" + post.getInt("numComments"));
 			}
 			return meb.build();
 		} catch (Throwable t){

@@ -1,12 +1,12 @@
-package me.kavin.gwhpaladins.listener;
+package me.kavin.mememachine.listener;
 
 import java.awt.Color;
 import java.util.ArrayList;
 
-import me.kavin.gwhpaladins.Main;
-import me.kavin.gwhpaladins.command.Command;
-import me.kavin.gwhpaladins.command.CommandManager;
-import me.kavin.gwhpaladins.lists.Api;
+import me.kavin.mememachine.Main;
+import me.kavin.mememachine.command.Command;
+import me.kavin.mememachine.command.CommandManager;
+import me.kavin.mememachine.lists.Api;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.ChannelType;

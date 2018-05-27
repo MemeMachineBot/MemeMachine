@@ -1,11 +1,11 @@
-package me.kavin.gwhpaladins.lists;
+package me.kavin.mememachine.lists;
 
 import org.json.JSONObject;
 
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-import me.kavin.gwhpaladins.Main;
+import me.kavin.mememachine.Main;
 
 public class Api {
 	

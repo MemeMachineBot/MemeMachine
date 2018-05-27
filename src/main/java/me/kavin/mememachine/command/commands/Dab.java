@@ -1,9 +1,9 @@
-package me.kavin.gwhpaladins.command.commands;
+package me.kavin.mememachine.command.commands;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import me.kavin.gwhpaladins.command.Command;
+import me.kavin.mememachine.command.Command;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Dab extends Command{

@@ -1,7 +1,7 @@
-package me.kavin.gwhpaladins.command.commands;
+package me.kavin.mememachine.command.commands;
 
-import me.kavin.gwhpaladins.command.Command;
-import me.kavin.gwhpaladins.command.CommandManager;
+import me.kavin.mememachine.command.Command;
+import me.kavin.mememachine.command.CommandManager;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Help extends Command{

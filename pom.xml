@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>me.kavin.gwhpaladins</groupId>
+    <groupId>me.kavin.mememachine</groupId>
     <artifactId>discord-bot</artifactId>
     <version>1.0</version>
 
@@ -20,7 +20,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>me.kavin.gwhpaladins.Main</mainClass>
+                            <mainClass>me.kavin.mememachine.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
