@@ -23,7 +23,7 @@ public class Roll extends Command{
 					meb.setTitle("Dice");
 					meb.setColor(getRainbowColor(2000));
 					
-					meb.addField("It was ", "`" + (ThreadLocalRandom.current().nextInt(6) + 1) + "`", false);
+					meb.addField("It was ", "`" + (ThreadLocalRandom.current().nextInt(6) + 1) + "`", true);
 					
 					event.getChannel().sendMessage(meb.build()).queue();
 				}
