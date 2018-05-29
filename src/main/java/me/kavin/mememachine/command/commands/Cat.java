@@ -9,7 +9,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 public class Cat extends Command{
 	
 	public Cat(){
-		super(">cat", "`Shows a random meme from imgur`");
+		super(">cat", "`Shows a cat image`");
 	}
 	
 	@Override

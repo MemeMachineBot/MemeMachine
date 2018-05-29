@@ -19,7 +19,7 @@ public class Meme extends Command{
 	WebClient wc = new WebClient();
 	
 	public Meme(){
-		super(">meme", "`Shows a random meme from imgur`");
+		super(">meme", "`Shows a random meme from /r/Memes`");
 	}
 	
 	@Override
