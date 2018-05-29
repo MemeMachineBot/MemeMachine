@@ -19,7 +19,7 @@ public class Help extends Command{
 			for(Command cmd : CommandManager.commands){
 					meb.addField(cmd.getPrefix(), cmd.getHelp() + '\n', false);
 			}
-			event.getChannel().sendMessage(meb.build()).queue();
+			event.getChannel().sendMessage(meb.build()).complete();
 		}
 	}
 }

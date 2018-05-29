@@ -21,7 +21,7 @@ public class Roll extends Command{
 					
 			meb.addField("", "It was `" + (ThreadLocalRandom.current().nextInt(6) + 1) + "`", true);
 					
-			event.getChannel().sendMessage(meb.build()).queue();
+			event.getChannel().sendMessage(meb.build()).complete();
 		}
 	}
 }

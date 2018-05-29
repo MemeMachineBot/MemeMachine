@@ -15,7 +15,7 @@ public class Profile extends Command{
 		String[] split = message.split(" ");
 		
 		if (split.length < 2) {
-			event.getChannel().sendMessage("`Please tag a person as your argument like` \n>profile " + Main.api.getSelfUser().getAsMention()).queue();
+			event.getChannel().sendMessage("`Please tag a person as your argument like` \n>profile " + Main.api.getSelfUser().getAsMention()).complete();
 			return;
 		}
 
@@ -24,12 +24,12 @@ public class Profile extends Command{
 		try {
 			memberId = getLong(split[1]);
 		} catch (NumberFormatException e) {
-			event.getChannel().sendMessage("`Please tag a person as your argument like` \n>profile " + Main.api.getSelfUser().getAsMention()).queue();
+			event.getChannel().sendMessage("`Please tag a person as your argument like` \n>profile " + Main.api.getSelfUser().getAsMention()).complete();
 			return;
 		}
 
 		if (event.getGuild().getMemberById(memberId) != null)
-			event.getChannel().sendMessage(event.getGuild().getMemberById(memberId).getUser().getAvatarUrl()).queue();
+			event.getChannel().sendMessage(event.getGuild().getMemberById(memberId).getUser().getAvatarUrl()).complete();
 	}
 	}
 	

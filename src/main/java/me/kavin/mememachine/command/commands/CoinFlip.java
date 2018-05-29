@@ -21,7 +21,7 @@ public class CoinFlip extends Command{
 				
 			meb.addField("", "It was " + (ThreadLocalRandom.current().nextBoolean() ? "`Heads`" : "`Tails`"), true);
 			
-			event.getChannel().sendMessage(meb.build()).queue();
+			event.getChannel().sendMessage(meb.build()).complete();
 		}
 	}
 }

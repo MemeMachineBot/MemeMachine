@@ -49,12 +49,12 @@ public class DiscordListener extends ListenerAdapter {
 							users++;
 					}); 
 					if((double)bots / (double)users > 2) {
-						g.getOwner().getUser().openPrivateChannel().complete().sendMessage("Unfortunately your discord server has a high user/bot ratio. \nTry inviting more people on your server or delete some bots.\n feel free to invite me back from\n https://discordapp.com/oauth2/authorize?client_id=" + Main.api.getSelfUser().getId() + "&permissions=8&scope=bot").queue();
+						g.getOwner().getUser().openPrivateChannel().complete().sendMessage("Unfortunately your discord server has a high user/bot ratio. \nTry inviting more people on your server or delete some bots.\n feel free to invite me back from\n https://discordapp.com/oauth2/authorize?client_id=" + Main.api.getSelfUser().getId() + "&permissions=8&scope=bot").complete();
 						toRemove.add(g);
 					}
 				}
 				for(Guild g : toRemove)
-					g.leave().queue();
+					g.leave().complete();
 			}
 		}).start();
 		
@@ -65,7 +65,7 @@ public class DiscordListener extends ListenerAdapter {
 					for(Guild g : Main.api.getGuilds()){
 						for(Role role : g.getRoles()){
 							if(role.getName().equalsIgnoreCase("rainbow")) {
-								role.getManager().setColor(ColorUtils.getRainbowColor(120000)).queue();
+								role.getManager().setColor(ColorUtils.getRainbowColor(120000)).complete();
 								try {
 									Thread.sleep(200);
 								} catch (InterruptedException e) { }
@@ -81,7 +81,7 @@ public class DiscordListener extends ListenerAdapter {
 	@Override
 	public void onGuildJoin(GuildJoinEvent event) {
 		if (!event.getGuild().getMember(Main.api.getSelfUser()).hasPermission(Permission.ADMINISTRATOR)) {
-			event.getGuild().getDefaultChannel().sendMessage("Please ask a server admistrator to invite me!").queue();
+			event.getGuild().getDefaultChannel().sendMessage("Please ask a server admistrator to invite me!").complete();
 		}
 		Guild g = event.getGuild();
 		g.getMembers().forEach( member -> {
@@ -91,15 +91,15 @@ public class DiscordListener extends ListenerAdapter {
 				users++;
 		}); 
 		if((double)bots / (double)users > 2) {
-			g.getOwner().getUser().openPrivateChannel().complete().sendMessage("Unfortunately your discord server has a high user/bot ratio. \nTry inviting more people on your server or delete some bots.\n feel free to invite me back from\n https://discordapp.com/oauth2/authorize?client_id=" + Main.api.getSelfUser().getId() + "&permissions=8&scope=bot").queue();
-			g.leave().queue();
+			g.getOwner().getUser().openPrivateChannel().complete().sendMessage("Unfortunately your discord server has a high user/bot ratio. \nTry inviting more people on your server or delete some bots.\n feel free to invite me back from\n https://discordapp.com/oauth2/authorize?client_id=" + Main.api.getSelfUser().getId() + "&permissions=8&scope=bot").complete();
+			g.leave().complete();
 		}
 		Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | >help | " + Main.api.getGuilds().size() + " Servers!", "Hax.kill"));
 	}
 	
 	@Override
 	public void onGuildUpdateOwner(GuildUpdateOwnerEvent event) {
-		event.getGuild().getOwner().getUser().openPrivateChannel().complete().sendMessage("Congrats on becoming the new owner of " + event.getGuild().getName()).queue();
+		event.getGuild().getOwner().getUser().openPrivateChannel().complete().sendMessage("Congrats on becoming the new owner of " + event.getGuild().getName()).complete();
 	}
 	
 	@Override
@@ -122,6 +122,6 @@ public class DiscordListener extends ListenerAdapter {
 	@Override
 	public void onPrivateMessageReceived(PrivateMessageReceivedEvent event) {
 		if(event.getAuthor() != Main.api.getSelfUser() && event.getMessage().getContentRaw().startsWith(">"))
-		event.getMessage().getChannel().sendMessage("Error: I don't reply to PM's!").queue();
+		event.getMessage().getChannel().sendMessage("Error: I don't reply to PM's!").complete();
 	}
 }

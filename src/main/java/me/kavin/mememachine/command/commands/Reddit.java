@@ -30,9 +30,9 @@ public class Reddit extends Command{
 	if (message.toLowerCase().startsWith(getPrefix())){
 		String[] split = message.split(" ");
 		if(split.length != 1)
-			event.getChannel().sendMessage(getPost(split[1])).queue();
+			event.getChannel().sendMessage(getPost(split[1])).complete();
 		else
-			event.getChannel().sendMessage("`Please provide a subreddit as your argument like` \n.reddit <subreddit>").queue();
+			event.getChannel().sendMessage("`Please provide a subreddit as your argument like` \n.reddit <subreddit>").complete();
 	}
 	}
 	private MessageEmbed getPost(String reddit) {

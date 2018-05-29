@@ -25,7 +25,7 @@ public class Meme extends Command{
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
 		if (message.equalsIgnoreCase(getPrefix())){
-			event.getChannel().sendMessage(getMeme()).queue();
+			event.getChannel().sendMessage(getMeme()).complete();
 		}
 	}
 	private MessageEmbed getMeme() {

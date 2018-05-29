@@ -17,7 +17,7 @@ public class UpTime extends Command{
 		long hour = (millis / (1000 * 60 * 60)) % 24;
 		long milliseconds = millis % 1000;
 		String time = "Uptime: " + hour + " hour(s) " + minute + " minute(s) " + second + " second(s) " + milliseconds + " milisecond(s)" ;
-		event.getChannel().sendMessage(time).queue();
+		event.getChannel().sendMessage(time).complete();
 	}
 	}
 }

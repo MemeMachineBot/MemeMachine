@@ -30,7 +30,7 @@ public class Google extends Command{
 					q += message.charAt(i);
 			}
 				
-			event.getChannel().sendMessage(getSearch(q)).queue();
+			event.getChannel().sendMessage(getSearch(q)).complete();
 		}
 	}
 	private MessageEmbed getSearch(String q) {

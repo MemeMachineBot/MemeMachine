@@ -15,7 +15,7 @@ public class Cat extends Command{
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
 		if (message.equalsIgnoreCase(getPrefix())){
-			event.getChannel().sendMessage(getCat()).queue();
+			event.getChannel().sendMessage(getCat()).complete();
 		}
 		
 	}

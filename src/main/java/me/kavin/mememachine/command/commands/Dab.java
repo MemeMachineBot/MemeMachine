@@ -32,7 +32,7 @@ public class Dab extends Command{
 			meb.setImage(getDab());
 			meb.setColor(ColorUtils.getRainbowColor(2000));
 					
-			event.getChannel().sendMessage(getDab()).queue();
+			event.getChannel().sendMessage(getDab()).complete();
 		}
 	}
 	private String getDab() {
