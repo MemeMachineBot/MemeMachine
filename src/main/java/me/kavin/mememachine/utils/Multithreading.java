@@ -34,7 +34,7 @@ public class Multithreading {
     }
 
     public static void runAsync(Runnable runnable) {
-        POOL.execute(runnable);
+        new Thread(runnable).start();
     }
 
     public static int getTotal() {
