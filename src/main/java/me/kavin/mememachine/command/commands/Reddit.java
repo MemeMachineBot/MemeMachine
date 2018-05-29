@@ -1,6 +1,5 @@
 package me.kavin.mememachine.command.commands;
 
-import java.awt.Color;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -11,6 +10,7 @@ import org.json.JSONTokener;
 import com.gargoylesoftware.htmlunit.WebClient;
 
 import me.kavin.mememachine.command.Command;
+import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -57,11 +57,10 @@ public class Reddit extends Command{
 					continue;
 				found = true;
 				meb.setTitle(post.getString("title"));
-				meb.setColor(getRainbowColor(2000));
+				meb.setColor(ColorUtils.getRainbowColor(2000));
 				meb.setImage(post.getJSONObject("media").getString("content"));
 				meb.setAuthor(post.getString("author"));
-				String s = "�?" + post.getInt("score") + " | " + "💬" + post.getInt("numComments");
-				meb.setDescription(s);
+				meb.setDescription("\uD83D\uDC4D" + post.getInt("score") + " | " + "\uD83D\uDCAC" + post.getInt("numComments"));
 			}
 			return meb.build();
 		} catch (Throwable t){
@@ -69,11 +68,4 @@ public class Reddit extends Command{
 		}
 		return null;
 	}
-	
-	public static Color getRainbowColor(int speed) {
-        float hue = (System.currentTimeMillis()) % speed;
-        hue /= speed;
-        return Color.getHSBColor(hue, 1f, 1f);
-    }
-	
 }

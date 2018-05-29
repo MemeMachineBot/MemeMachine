@@ -4,30 +4,46 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import me.kavin.mememachine.command.Command;
+import me.kavin.mememachine.utils.ColorUtils;
+import me.kavin.mememachine.utils.Multithreading;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Dab extends Command{
 	public Dab(){
 	super(">dab", "`Shows a person dabbing`");
-		memeurls.add("https://ibb.co/kjGceb");
-		memeurls.add("https://ibb.co/cPbokG");
-		memeurls.add("https://ibb.co/gX8qzb");
-		memeurls.add("https://ibb.co/cRzKsw");
-		memeurls.add("https://ibb.co/ejvEQG");
-		memeurls.add("https://ibb.co/n6E8kG");
-		memeurls.add("https://ibb.co/dJgAzb");
-		memeurls.add("https://ibb.co/gSV3Kb");
-		memeurls.add("https://ibb.co/cN8qzb");
-		memeurls.add("https://ibb.co/ndSTkG");
+		daburls.add("https://ibb.co/kjGceb");
+		daburls.add("https://ibb.co/cPbokG");
+		daburls.add("https://ibb.co/gX8qzb");
+		daburls.add("https://ibb.co/cRzKsw");
+		daburls.add("https://ibb.co/ejvEQG");
+		daburls.add("https://ibb.co/n6E8kG");
+		daburls.add("https://ibb.co/dJgAzb");
+		daburls.add("https://ibb.co/gSV3Kb");
+		daburls.add("https://ibb.co/cN8qzb");
+		daburls.add("https://ibb.co/ndSTkG");
 	}
-	ArrayList<String> memeurls = new ArrayList<String>();
+	ArrayList<String> daburls = new ArrayList<String>();
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-	if (message.equalsIgnoreCase(getPrefix())){
-		event.getChannel().sendMessage(getMeme()).queue();
+		Multithreading.runAsync(new Runnable() {
+			@Override
+			public void run() {
+				if (message.equalsIgnoreCase(getPrefix())){
+					EmbedBuilder meb = new EmbedBuilder();
+					
+					meb.setTitle("Dab");
+					
+					meb.setImage(getDab());
+					
+					meb.setColor(ColorUtils.getRainbowColor(2000));
+					
+					event.getChannel().sendMessage(getDab()).queue();
+				}
+			}
+		});
 	}
-	}
-	private String getMeme() {
-		return memeurls.get(new Random().nextInt(memeurls.size()));
+	private String getDab() {
+		return daburls.get(new Random().nextInt(daburls.size()));
 	}
 }

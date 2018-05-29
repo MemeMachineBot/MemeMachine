@@ -21,5 +21,6 @@ public class CommandManager {
 		commands.add(new Define());
 		commands.add(new CoinFlip());
 		commands.add(new Roll());
+		commands.add(new Cat());
 	}
 }

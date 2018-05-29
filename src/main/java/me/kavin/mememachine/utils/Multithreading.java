@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Multithreading {
 
-    public static final ExecutorService POOL = Executors.newFixedThreadPool(100, new ThreadFactory() {
+    public static final ExecutorService POOL = Executors.newFixedThreadPool(250, new ThreadFactory() {
         final AtomicInteger counter = new AtomicInteger(0);
 
         @Override

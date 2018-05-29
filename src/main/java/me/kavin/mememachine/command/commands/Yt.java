@@ -1,13 +1,12 @@
 package me.kavin.mememachine.command.commands;
 
-import java.awt.Color;
-
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import com.mashape.unirest.http.Unirest;
 
 import me.kavin.mememachine.command.Command;
+import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -46,7 +45,7 @@ public class Yt extends Command{
 			JSONTokener tokener = new JSONTokener(Unirest.get(url).asString().getBody());
 			JSONObject root = new JSONObject(tokener);
 			meb.setTitle("Youtube Search: " + q);
-			meb.setColor(getRainbowColor(2000));
+			meb.setColor(ColorUtils.getRainbowColor(2000));
 			if (!root.has("items")) {
 				meb.addField("No Results", "Unfortunately I couldn't find any results for `" + q + "`", true);
 				return meb.build();
@@ -67,11 +66,4 @@ public class Yt extends Command{
 		}
 		return null;
 	}
-	
-	public static Color getRainbowColor(int speed) {
-        float hue = (System.currentTimeMillis()) % speed;
-        hue /= speed;
-        return Color.getHSBColor(hue, 1f, 1f);
-    }
-	
 }
