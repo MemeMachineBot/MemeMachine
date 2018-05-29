@@ -50,11 +50,9 @@ public class Define extends Command{
 				meb.addField("No Results", "Unfortunately I couldn't find any results for `" + q + "`", false);
 				return meb.build();
 			}
-			jArray.forEach( item -> {
-				JSONObject body = new JSONObject(item.toString());
-				String term = body.getString("term");
-				meb.addField('`' + term + '`', StringUtils.abbreviate(getDescription(term, body.getString("preview")), 1024) + '\n', false);
-			});
+			JSONObject body = jArray.getJSONObject(0);
+			String term = body.getString("term");
+			meb.addField('`' + term + '`', StringUtils.abbreviate(getDescription(term, body.getString("preview")), 1024) + '\n', false);
 			return meb.build();
 		} catch (Exception e) {
 			e.printStackTrace();
