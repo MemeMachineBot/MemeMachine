@@ -23,7 +23,7 @@ public class CoinFlip extends Command{
 					meb.setTitle("Coinflip");
 					meb.setColor(getRainbowColor(2000));
 					
-					meb.addField("It was ", ThreadLocalRandom.current().nextBoolean() ? "`Heads`" : "`Tails`", true);
+					meb.addField("It was " + (ThreadLocalRandom.current().nextBoolean() ? "`Heads`" : "`Tails`"), "", true);
 					
 					event.getChannel().sendMessage(meb.build()).queue();
 				}
