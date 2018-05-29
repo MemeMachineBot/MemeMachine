@@ -19,5 +19,7 @@ public class CommandManager {
 		commands.add(new Reddit());
 		commands.add(new Invite());
 		commands.add(new Define());
+		commands.add(new CoinFlip());
+		commands.add(new Roll());
 	}
 }

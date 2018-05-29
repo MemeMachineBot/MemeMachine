@@ -50,12 +50,12 @@ public class Define extends Command{
 			meb.setColor(getRainbowColor(2000));
 			JSONArray jArray = root.getJSONArray("results");
 			if (jArray.length() == 0) {
-				meb.addField("No Results", "Unfortunately I couldn't find any results for `" + q + "`", true);
+				meb.addField("No Results", "Unfortunately I couldn't find any results for `" + q + "`", false);
 				return meb.build();
 			}
 			jArray.forEach( item -> {
 				JSONObject body = new JSONObject(item.toString());
-				meb.addField('`' + body.getString("term") + '`', body.getString("preview"), true);
+				meb.addField('`' + body.getString("term") + '`', body.getString("preview") + '\n', false);
 			});
 			return meb.build();
 		} catch (Exception e) {
