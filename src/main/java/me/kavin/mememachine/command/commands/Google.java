@@ -7,7 +7,6 @@ import com.mashape.unirest.http.Unirest;
 
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
-import me.kavin.mememachine.utils.Multithreading;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -21,23 +20,18 @@ public class Google extends Command{
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-		Multithreading.runAsync(new Runnable() {
-			@Override
-			public void run() {
-				if (message.toLowerCase().startsWith(getPrefix())){
-					
-					q = null;
-					
-					if(message.length() > 8) {
-						q = "";
-						for (int i = 7;i < message.length();i++)
-							q += message.charAt(i);
-					}
-					
-					event.getChannel().sendMessage(getSearch(q)).queue();
-				}
+		if (message.toLowerCase().startsWith(getPrefix())){
+			
+			q = null;
+			
+			if(message.length() > 8) {
+				q = "";
+				for (int i = 7;i < message.length();i++)
+					q += message.charAt(i);
 			}
-		});
+				
+			event.getChannel().sendMessage(getSearch(q)).queue();
+		}
 	}
 	private MessageEmbed getSearch(String q) {
 		try {

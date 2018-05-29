@@ -5,7 +5,6 @@ import java.util.Random;
 
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
-import me.kavin.mememachine.utils.Multithreading;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -26,22 +25,15 @@ public class Dab extends Command{
 	ArrayList<String> daburls = new ArrayList<String>();
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-		Multithreading.runAsync(new Runnable() {
-			@Override
-			public void run() {
-				if (message.equalsIgnoreCase(getPrefix())){
-					EmbedBuilder meb = new EmbedBuilder();
+		if (message.equalsIgnoreCase(getPrefix())){
+			EmbedBuilder meb = new EmbedBuilder();
+			
+			meb.setTitle("Dab");
+			meb.setImage(getDab());
+			meb.setColor(ColorUtils.getRainbowColor(2000));
 					
-					meb.setTitle("Dab");
-					
-					meb.setImage(getDab());
-					
-					meb.setColor(ColorUtils.getRainbowColor(2000));
-					
-					event.getChannel().sendMessage(getDab()).queue();
-				}
-			}
-		});
+			event.getChannel().sendMessage(getDab()).queue();
+		}
 	}
 	private String getDab() {
 		return daburls.get(new Random().nextInt(daburls.size()));

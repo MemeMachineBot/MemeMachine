@@ -2,7 +2,6 @@ package me.kavin.mememachine.command.commands;
 
 import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
-import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Profile extends Command{
@@ -11,9 +10,6 @@ public class Profile extends Command{
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-	if (event.isFromType(ChannelType.PRIVATE)){
-	return;
-	}
 	if (message.toLowerCase().startsWith(getPrefix())){
 		
 		String[] split = message.split(" ");

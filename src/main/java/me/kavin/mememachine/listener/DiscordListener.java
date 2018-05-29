@@ -1,12 +1,13 @@
 package me.kavin.mememachine.listener;
 
-import java.awt.Color;
 import java.util.ArrayList;
 
 import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.command.CommandManager;
 import me.kavin.mememachine.lists.Api;
+import me.kavin.mememachine.utils.ColorUtils;
+import me.kavin.mememachine.utils.Multithreading;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.ChannelType;
@@ -64,7 +65,7 @@ public class DiscordListener extends ListenerAdapter {
 					for(Guild g : Main.api.getGuilds()){
 						for(Role role : g.getRoles()){
 							if(role.getName().equalsIgnoreCase("rainbow")) {
-								role.getManager().setColor(getRainbowColor(120000)).queue();
+								role.getManager().setColor(ColorUtils.getRainbowColor(120000)).queue();
 								try {
 									Thread.sleep(200);
 								} catch (InterruptedException e) { }
@@ -111,16 +112,16 @@ public class DiscordListener extends ListenerAdapter {
 		if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor() == Main.api.getSelfUser() || event.getAuthor().isBot())
 			return;
 		for (Command cmd : CommandManager.commands)
-			cmd.onCommand(event.getMessage().getContentRaw() , event);
+			Multithreading.runAsync(new Runnable() {
+				@Override
+				public void run() {
+					cmd.onCommand(event.getMessage().getContentRaw() , event);
+				}
+			});
 	}
 	@Override
 	public void onPrivateMessageReceived(PrivateMessageReceivedEvent event) {
 		if(event.getAuthor() != Main.api.getSelfUser() && event.getMessage().getContentRaw().startsWith(">"))
 		event.getMessage().getChannel().sendMessage("Error: I don't reply to PM's!").queue();
 	}
-    public static Color getRainbowColor(int speed) {
-        float hue = (System.currentTimeMillis()) % speed;
-        hue /= speed;
-        return Color.getHSBColor(hue, 1f, 1f);
-    }
 }

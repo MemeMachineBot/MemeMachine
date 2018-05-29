@@ -10,7 +10,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
-import me.kavin.mememachine.utils.Multithreading;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -25,14 +24,9 @@ public class Meme extends Command{
 	
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-		Multithreading.runAsync(new Runnable() {
-			@Override
-			public void run() {
-				if (message.equalsIgnoreCase(getPrefix())){
-					event.getChannel().sendMessage(getMeme()).queue();
-				}
-			}
-		});
+		if (message.equalsIgnoreCase(getPrefix())){
+			event.getChannel().sendMessage(getMeme()).queue();
+		}
 	}
 	private MessageEmbed getMeme() {
 		try{

@@ -30,12 +30,7 @@ public class Yt extends Command{
 				q += message.charAt(i);
 		}
 		
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				event.getChannel().sendMessage(getSearch(q)).queue();
-			}
-		}).start();
+		event.getChannel().sendMessage(getSearch(q)).queue();
 	}
 	}
 	private MessageEmbed getSearch(String q) {

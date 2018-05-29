@@ -4,7 +4,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
-import me.kavin.mememachine.utils.Multithreading;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -14,20 +13,15 @@ public class Roll extends Command{
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-		Multithreading.runAsync(new Runnable() {
-			@Override
-			public void run() {
-				if (message.equalsIgnoreCase(getPrefix())){
-					EmbedBuilder meb = new EmbedBuilder();
+		if (message.equalsIgnoreCase(getPrefix())){
+			EmbedBuilder meb = new EmbedBuilder();
+			
+			meb.setTitle("Dice");
+			meb.setColor(ColorUtils.getRainbowColor(2000));
 					
-					meb.setTitle("Dice");
-					meb.setColor(ColorUtils.getRainbowColor(2000));
+			meb.addField("", "It was `" + (ThreadLocalRandom.current().nextInt(6) + 1) + "`", true);
 					
-					meb.addField("", "It was `" + (ThreadLocalRandom.current().nextInt(6) + 1) + "`", true);
-					
-					event.getChannel().sendMessage(meb.build()).queue();
-				}
-			}
-		});
+			event.getChannel().sendMessage(meb.build()).queue();
+		}
 	}
 }

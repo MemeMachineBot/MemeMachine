@@ -28,16 +28,11 @@ public class Reddit extends Command{
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
 	if (message.toLowerCase().startsWith(getPrefix())){
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				String[] split = message.split(" ");
-				if(split.length != 1)
-					event.getChannel().sendMessage(getPost(split[1])).queue();
-				else
-					event.getChannel().sendMessage("`Please provide a subreddit as your argument like` \n.reddit <subreddit>").queue();
-			}
-		}).start();
+		String[] split = message.split(" ");
+		if(split.length != 1)
+			event.getChannel().sendMessage(getPost(split[1])).queue();
+		else
+			event.getChannel().sendMessage("`Please provide a subreddit as your argument like` \n.reddit <subreddit>").queue();
 	}
 	}
 	private MessageEmbed getPost(String reddit) {

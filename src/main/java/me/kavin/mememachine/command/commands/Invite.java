@@ -2,7 +2,6 @@ package me.kavin.mememachine.command.commands;
 
 import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
-import me.kavin.mememachine.utils.Multithreading;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Invite extends Command{
@@ -11,13 +10,8 @@ public class Invite extends Command{
 	}
 	@Override
 	public void onCommand(String message , MessageReceivedEvent event) {
-		Multithreading.runAsync(new Runnable() {
-			@Override
-			public void run() {
-				if (message.equalsIgnoreCase(getPrefix())){
-					event.getAuthor().openPrivateChannel().complete().sendMessage("`You can invite me here:`\nhttps://discordapp.com/oauth2/authorize?client_id=" + Main.api.getSelfUser().getId() + "&permissions=8&scope=bot").queue();
-				}
-			}
-		});
+		if (message.equalsIgnoreCase(getPrefix())){
+			event.getAuthor().openPrivateChannel().complete().sendMessage("`You can invite me here:`\nhttps://discordapp.com/oauth2/authorize?client_id=" + Main.api.getSelfUser().getId() + "&permissions=8&scope=bot").queue();
+		}
 	}
 }
