@@ -2,19 +2,7 @@ package me.kavin.mememachine.command;
 
 import java.util.ArrayList;
 
-import me.kavin.mememachine.command.commands.Cat;
-import me.kavin.mememachine.command.commands.CoinFlip;
-import me.kavin.mememachine.command.commands.Dab;
-import me.kavin.mememachine.command.commands.Define;
-import me.kavin.mememachine.command.commands.Google;
-import me.kavin.mememachine.command.commands.Help;
-import me.kavin.mememachine.command.commands.Invite;
-import me.kavin.mememachine.command.commands.Meme;
-import me.kavin.mememachine.command.commands.Profile;
-import me.kavin.mememachine.command.commands.Reddit;
-import me.kavin.mememachine.command.commands.Roll;
-import me.kavin.mememachine.command.commands.UpTime;
-import me.kavin.mememachine.command.commands.Yt;
+import me.kavin.mememachine.command.commands.*;
 
 public class CommandManager {
 	
@@ -34,5 +22,6 @@ public class CommandManager {
 		commands.add(new CoinFlip());
 		commands.add(new Roll());
 		commands.add(new Cat());
+		commands.add(new Ping());
 	}
 }
