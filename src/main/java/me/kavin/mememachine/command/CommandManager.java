@@ -23,5 +23,6 @@ public class CommandManager {
 		commands.add(new Roll());
 		commands.add(new Cat());
 		commands.add(new Ping());
+		commands.add(new Aww());
 	}
 }
