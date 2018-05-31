@@ -69,7 +69,7 @@ public class Define extends Command {
         for (int i = 0; i < jArray.length(); i++) {
             JSONObject obj = jArray.getJSONObject(i);
             String s = obj.getString("definition");
-            if (s.startsWith(find))
+            if (s.startsWith(find) || s.equals(find))
                 return s;
         }
         return find;
