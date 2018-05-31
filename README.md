@@ -4,14 +4,13 @@ Meme Machine is a open source Discord bot which uses [JDA](https://github.com/DV
 
 [![Discord Bots](https://discordbots.org/api/widget/445800505315426315.svg)](https://discordbots.org/bot/445800505315426315)
 
-===========================================================================
 Welcome to my Discord Meme Machine bot! This bot is currently a bot in WIP.
 ===========================================================================
 
 Bot Features:
 =============
 
-A rainbow coloured role! (Donators only - Join the support discord)
+A rainbow coloured role! (Donators only - Join the support discord [here](https://discord.gg/Vq4g7HR))
 
 >help `Shows the help message`
 
