@@ -6,6 +6,7 @@ import com.mashape.unirest.http.Unirest;
 
 import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
+import me.kavin.mememachine.lists.Api;
 import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -23,7 +24,9 @@ public class Vote extends Command{
 				meb.setTitle("Vote");
 				meb.setColor(ColorUtils.getRainbowColor(2000));
 				
-				JSONObject jObject = new JSONObject(Unirest.get("https://discordbots.org/api/bots/" + Main.api.getSelfUser().getId() + "/check?userId=" + event.getMember().getUser().getId()).asString().getBody());
+				JSONObject jObject = new JSONObject(Unirest.get("https://discordbots.org/api/bots/" + Main.api.getSelfUser().getId() + "/check?userId=" + event.getMember().getUser().getId())
+						.header("Authorization", Api.getDBL_TOKEN())
+						.asString().getBody());
 				
 				boolean voted = jObject.getInt("voted") == 1;
 				
