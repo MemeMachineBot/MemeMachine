@@ -10,8 +10,6 @@ Welcome to my Discord Meme Machine bot! This bot is currently a bot in WIP.
 Bot Features:
 =============
 
-A rainbow coloured role! (Donators only - Join the support discord [here](https://discord.gg/Vq4g7HR))
-
 >help `Shows the help message`
 
 >uptime `Shows how long the bot has been running for`

@@ -58,24 +58,6 @@ public class DiscordListener extends ListenerAdapter {
 			}
 		}).start();
 		
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				while(true){
-					for(Guild g : Main.api.getGuilds()){
-						for(Role role : g.getRoles()){
-							if(role.getName().equalsIgnoreCase("rainbow")) {
-								role.getManager().setColor(ColorUtils.getRainbowColor(120000)).complete();
-								try {
-									Thread.sleep(200);
-								} catch (InterruptedException e) { }
-							}
-						}
-					}
-				}
-				
-			}
-		}).start();
 	}
 	
 	@Override
