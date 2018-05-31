@@ -6,13 +6,15 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import me.kavin.mememachine.Main;
+import me.kavin.mememachine.utils.Multithreading;
 
 public class Api {
 	
-	private static final String DBL_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ0NTgwMDUwNTMxNTQyNjMxNSIsImJvdCI6dHJ1ZSwiaWF0IjoxNTI2ODk0NTM5fQ.P4FT71CVwGqWoAgU9Lgo-xqlgllFy8BdAZjhWZKRnNE";
+	private static String DBL_TOKEN;
 	
 	public static void loop() {
-		new Thread(new Runnable() {
+		System.getenv().get("DBL_API_KEY");
+		Multithreading.runAsync(new Runnable() {
 			@Override
 			public void run() {
 				while(true) {
@@ -22,7 +24,7 @@ public class Api {
 					} catch (InterruptedException e) { }
 				}
 			}
-		}).start();
+		});
 	}
 	
 	public static void dbl() {
