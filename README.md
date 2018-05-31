@@ -38,6 +38,10 @@ Bot Features:
 
 >aww `Shows a cute image`
 
+>cat `Shows a cat image`
+
+>dog `Shows a cute image`
+
 And more to come!
 
 Feature requests can be made [here](https://github.com/MemeMachineBot/MemeMachine/issues)
