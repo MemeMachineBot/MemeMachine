@@ -16,9 +16,7 @@ public class Main extends ListenerAdapter{
 
 	public static void main(String[] args) {
 		try {
-			// iblizzilo MzY5ODE4NTk2MjQ0NzE3NTY5.DUIiCA.XmnJyu6oHtyK82xRiDuzLbDslMA
-			// Meme Machine NDQ1ODAwNTA1MzE1NDI2MzE1.DdvvmQ.7zoTIo-5hKDGOurO-luWR-hC258
-			JDABuilder builder = new JDABuilder(AccountType.BOT).setToken("NDQ1ODAwNTA1MzE1NDI2MzE1.DdvvmQ.7zoTIo-5hKDGOurO-luWR-hC258");
+			JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(System.getenv().get("BOT_TOKEN"));
 			api = builder.buildAsync();
 			api.setAutoReconnect(true);
 			DiscordListener.init();
