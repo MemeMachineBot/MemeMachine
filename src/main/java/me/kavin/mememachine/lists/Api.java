@@ -13,7 +13,7 @@ public class Api {
 	private static String DBL_TOKEN;
 	
 	public static void loop() {
-		System.getenv().get("DBL_API_KEY");
+		DBL_TOKEN = System.getenv().get("DBL_API_KEY");
 		Multithreading.runAsync(new Runnable() {
 			@Override
 			public void run() {
