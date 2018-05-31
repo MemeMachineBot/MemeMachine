@@ -35,11 +35,11 @@ public class Shorten extends Command {
                 	
                 	meb.addField("Shortened URL ", jObject.getString("id"), true);
                 	
-                	event.getChannel().sendMessage(meb.build());
+                	event.getChannel().sendMessage(meb.build()).complete();
                 } else {
                 	event.getChannel().sendMessage("`Please provide a URL as your argument like` \n>shorten <URL>").complete();
                 }
             }
-		} catch (Exception e) { event.getChannel().sendMessage(e.toString()); }
+		} catch (Exception e) { }
     }
 }
