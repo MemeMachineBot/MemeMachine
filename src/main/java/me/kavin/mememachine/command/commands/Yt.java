@@ -5,6 +5,7 @@ import org.json.JSONTokener;
 
 import com.mashape.unirest.http.Unirest;
 
+import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -36,7 +37,7 @@ public class Yt extends Command{
 	private MessageEmbed getSearch(String q) {
 		try {
 			EmbedBuilder meb = new EmbedBuilder();
-			String url = "https://www.googleapis.com/youtube/v3/search/?" + "safeSearch=moderate" + "&regionCode=US" + "&q=" + q.replace(" ", "%20") + "&type=video,channel&part=snippet&key=AIzaSyBjdQtArYb2oOdPIgPy5NQVW7CgBTZsi5E";
+			String url = "https://www.googleapis.com/youtube/v3/search/?" + "safeSearch=moderate" + "&regionCode=US" + "&q=" + q.replace(" ", "%20") + "&type=video,channel&part=snippet&key=" + Main.GOOGLE_API_KEY;
 			JSONTokener tokener = new JSONTokener(Unirest.get(url).asString().getBody());
 			JSONObject root = new JSONObject(tokener);
 			meb.setTitle("Youtube Search: " + q);
