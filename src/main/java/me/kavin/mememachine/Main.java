@@ -1,7 +1,5 @@
 package me.kavin.mememachine;
 
-import javax.security.auth.login.LoginException;
-
 import me.kavin.mememachine.command.CommandManager;
 import me.kavin.mememachine.listener.DiscordListener;
 import me.kavin.mememachine.utils.Timer;
@@ -24,7 +22,7 @@ public class Main extends ListenerAdapter{
 			DiscordListener.init();
 			uptime.reset();
 			new CommandManager();
-		} catch (LoginException | IllegalArgumentException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

@@ -24,7 +24,7 @@ public class Vote extends Command{
 				meb.setTitle("Vote");
 				meb.setColor(ColorUtils.getRainbowColor(2000));
 				
-				JSONObject jObject = new JSONObject(Unirest.get("https://discordbots.org/api/bots/" + Main.api.getSelfUser().getId() + "/check?userId=" + event.getMember().getUser().getId())
+				JSONObject jObject = new JSONObject(Unirest.get("https://discordbots.org/api/bots/" + Main.api.getSelfUser().getIdLong() + "/check?userId=" + event.getMember().getUser().getIdLong())
 						.header("Authorization", Api.getDBL_TOKEN())
 						.asString().getBody());
 				
