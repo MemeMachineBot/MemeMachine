@@ -44,6 +44,8 @@ Bot Features:
 
 >vote `Vote for the bot!`
 
+You can invite me [here](https://discordapp.com/oauth2/authorize?client_id=445800505315426315&permissions=8&scope=bot)
+
 And more to come!
 
 Feature requests can be made [here](https://github.com/MemeMachineBot/MemeMachine/issues)
