@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.kavin.mememachine</groupId>
-    <artifactId>discord-bot</artifactId>
+    <artifactId>meme-machine</artifactId>
     <version>1.0</version>
 
     <properties>
@@ -59,11 +59,6 @@
             <artifactId>JDA</artifactId>
             <version>3.6.0_365</version>
         </dependency>
-		<dependency>
-			<groupId>com.sedmelluq</groupId>
-			<artifactId>lavaplayer</artifactId>
-			<version>1.2.45</version>
-		</dependency>
 		<dependency>
     		<groupId>org.apache.commons</groupId>
     		<artifactId>commons-lang3</artifactId>
