@@ -25,5 +25,6 @@ public class CommandManager {
 		commands.add(new Ping());
 		commands.add(new Aww());
 		commands.add(new Dog());
+		commands.add(new Vote());
 	}
 }

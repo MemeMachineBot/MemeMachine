@@ -42,6 +42,8 @@ Bot Features:
 
 >dog `Shows a cute image`
 
+>vote `Vote for the bot!`
+
 And more to come!
 
 Feature requests can be made [here](https://github.com/MemeMachineBot/MemeMachine/issues)
