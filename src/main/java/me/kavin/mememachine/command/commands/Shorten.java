@@ -40,6 +40,6 @@ public class Shorten extends Command {
                 	event.getChannel().sendMessage("`Please provide a URL as your argument like` \n>shorten <URL>").complete();
                 }
             }
-		} catch (Exception e) { }
+		} catch (Exception e) { event.getChannel().sendMessage(e.toString()); }
     }
 }
