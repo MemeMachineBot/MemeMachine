@@ -28,6 +28,5 @@ public class CommandManager {
         commands.add(new Vote());
         commands.add(new Shorten());
         commands.add(new CopyPasta());
-        commands.add(new QRCode());
     }
 }
