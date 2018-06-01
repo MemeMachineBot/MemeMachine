@@ -28,6 +28,7 @@ Bot Commands:
 >dog `Shows a cute image`
 >vote `Vote for the bot!`
 >shorten `Shortens the given URL!`
+>copypasta `Shows a random copypasta!`
 
 You can invite me [here](https://discordapp.com/oauth2/authorize?client_id=445800505315426315&permissions=8&scope=bot)
 
