@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import me.kavin.mememachine.command.commands.Avatar;
 import me.kavin.mememachine.command.commands.Aww;
+import me.kavin.mememachine.command.commands.Bitcoin;
 import me.kavin.mememachine.command.commands.Cat;
 import me.kavin.mememachine.command.commands.CoinFlip;
 import me.kavin.mememachine.command.commands.CopyPasta;
@@ -50,5 +51,6 @@ public class CommandManager {
         commands.add(new CopyPasta());
         commands.add(new RPS());
         commands.add(new PasswordGen());
+        commands.add(new Bitcoin());
     }
 }
