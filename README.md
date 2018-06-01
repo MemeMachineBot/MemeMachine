@@ -7,7 +7,7 @@ Meme Machine is a open source Discord bot which uses [JDA](https://github.com/DV
 Welcome to my Discord Meme Machine bot! This bot is currently a bot in WIP.
 ===========================================================================
 
-Bot Features:
+Bot Commands:
 =============
 
 >help `Shows the help message`

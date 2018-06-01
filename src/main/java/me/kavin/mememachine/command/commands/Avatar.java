@@ -4,9 +4,9 @@ import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class Profile extends Command {
-    public Profile() {
-        super(">profile", "`Shows the person you tag's profile picture`");
+public class Avatar extends Command {
+    public Avatar() {
+        super(">avatar", "`Shows the person you tag's profile picture`");
     }
     @Override
     public void onCommand(String message, MessageReceivedEvent event) {
@@ -15,7 +15,7 @@ public class Profile extends Command {
             String[] split = message.split(" ");
 
             if (split.length < 2) {
-                event.getChannel().sendMessage("`Please tag a person as your argument like` \n>profile " + Main.api.getSelfUser().getAsMention()).complete();
+                event.getChannel().sendMessage("`Please tag a person as your argument like` \n>avatar " + Main.api.getSelfUser().getAsMention()).complete();
                 return;
             }
 
@@ -24,7 +24,7 @@ public class Profile extends Command {
             try {
                 memberId = getLong(split[1]);
             } catch (NumberFormatException e) {
-                event.getChannel().sendMessage("`Please tag a person as your argument like` \n>profile " + Main.api.getSelfUser().getAsMention()).complete();
+                event.getChannel().sendMessage("`Please tag a person as your argument like` \n>avatar " + Main.api.getSelfUser().getAsMention()).complete();
                 return;
             }
 

@@ -34,45 +34,12 @@ public class DiscordListener extends ListenerAdapter {
         Api.loop();
         Main.api.getPresence().setStatus(OnlineStatus.IDLE);
         Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | >help | " + Main.api.getGuilds().size() + " Servers!", "Hax.kill"));
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                ArrayList < Guild > toRemove = new ArrayList < Guild > ();
-                for (Guild g: Main.api.getGuilds()) {
-                    g.getMembers().forEach(member -> {
-                        if (member.getUser().isBot())
-                            bots++;
-                        else
-                            users++;
-                    });
-                    if ((double) bots / (double) users > 2) {
-                        g.getOwner().getUser().openPrivateChannel().complete().sendMessage("Unfortunately your discord server has a high user/bot ratio. \nTry inviting more people on your server or delete some bots.\n feel free to invite me back from\n https://discordapp.com/oauth2/authorize?client_id=" + Main.api.getSelfUser().getId() + "&permissions=8&scope=bot").complete();
-                        toRemove.add(g);
-                    }
-                }
-                for (Guild g: toRemove)
-                    g.leave().complete();
-            }
-        }).start();
-
     }
 
     @Override
     public void onGuildJoin(GuildJoinEvent event) {
         if (!event.getGuild().getMember(Main.api.getSelfUser()).hasPermission(Permission.ADMINISTRATOR)) {
             event.getGuild().getDefaultChannel().sendMessage("Please ask a server admistrator to invite me!").complete();
-        }
-        Guild g = event.getGuild();
-        g.getMembers().forEach(member -> {
-            if (member.getUser().isBot())
-                bots++;
-            else
-                users++;
-        });
-        if ((double) bots / (double) users > 2) {
-            g.getOwner().getUser().openPrivateChannel().complete().sendMessage("Unfortunately your discord server has a high user/bot ratio. \nTry inviting more people on your server or delete some bots.\n feel free to invite me back from\n https://discordapp.com/oauth2/authorize?client_id=" + Main.api.getSelfUser().getId() + "&permissions=8&scope=bot").complete();
-            g.leave().complete();
         }
         Main.api.getPresence().setGame(Game.of(GameType.DEFAULT, "Meminq | >help | " + Main.api.getGuilds().size() + " Servers!", "Hax.kill"));
     }
