@@ -14,6 +14,7 @@ import me.kavin.mememachine.command.commands.Google;
 import me.kavin.mememachine.command.commands.Help;
 import me.kavin.mememachine.command.commands.Invite;
 import me.kavin.mememachine.command.commands.Meme;
+import me.kavin.mememachine.command.commands.PasswordGen;
 import me.kavin.mememachine.command.commands.Ping;
 import me.kavin.mememachine.command.commands.RPS;
 import me.kavin.mememachine.command.commands.Reddit;
@@ -48,5 +49,6 @@ public class CommandManager {
         commands.add(new Shorten());
         commands.add(new CopyPasta());
         commands.add(new RPS());
+        commands.add(new PasswordGen());
     }
 }
