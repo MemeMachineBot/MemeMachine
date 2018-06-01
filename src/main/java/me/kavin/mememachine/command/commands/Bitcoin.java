@@ -36,7 +36,19 @@ public class Bitcoin extends Command {
             JSONObject bpi = jObject.getJSONObject("bpi");
             bpi.keys().forEachRemaining( key -> {
             	JSONObject currency = bpi.getJSONObject(key);
-            	meb.addField(key, getPrice(currency.getString("rate")) + " " + currency.getString("symbol") + "\n", false);
+            	char symbol = 0;
+            	switch (key) {
+				case "USD":
+					symbol = '$';
+					break;
+				case "GBP":
+					symbol = '£';
+					break;
+				case "EUR":
+					symbol = '€';
+					break;
+				}
+            	meb.addField(key, getPrice(currency.getString("rate")) + " " + symbol + "\n", false);
             });
 
             return meb.build();
