@@ -19,7 +19,7 @@ public class RPS extends Command {
             String[] split = message.split(" ");
 
             if (split.length < 2) {
-                event.getChannel().sendMessage("`Please choose a choice your argument like` \n>rps <rock/paper/scissor>").complete();
+                event.getChannel().sendMessage("`Please choose a choice your argument like` \n>rps <rock/paper/scissors>").complete();
                 return;
             }
             
@@ -29,7 +29,13 @@ public class RPS extends Command {
             meb.setColor(ColorUtils.getRainbowColor(2000));
 
             RPSChoice computer = RPSChoice.values()[ThreadLocalRandom.current().nextInt(3)];
-            RPSChoice user = RPSChoice.valueOf(split[1].toUpperCase());
+            RPSChoice user = null;
+
+            for(RPSChoice ch : RPSChoice.values())
+            	if(ch.name().equalsIgnoreCase(split[1])) {
+            		user = ch;
+            		break;
+            	}
             
             String RESULT = null;
             
@@ -76,7 +82,7 @@ public class RPS extends Command {
     				break;
     			}
             } else {
-            	event.getChannel().sendMessage("`Please choose a valid choice your argument like` \n>rps <rock/paper/scissor>").complete();
+            	event.getChannel().sendMessage("`Please choose a valid choice your argument like` \n>rps <rock/paper/scissors>").complete();
             	return;
             }
             
