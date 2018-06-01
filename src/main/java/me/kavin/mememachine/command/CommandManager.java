@@ -12,6 +12,7 @@ import me.kavin.mememachine.command.commands.Dab;
 import me.kavin.mememachine.command.commands.Define;
 import me.kavin.mememachine.command.commands.Dog;
 import me.kavin.mememachine.command.commands.Google;
+import me.kavin.mememachine.command.commands.Hacked;
 import me.kavin.mememachine.command.commands.Help;
 import me.kavin.mememachine.command.commands.Invite;
 import me.kavin.mememachine.command.commands.Meme;
@@ -52,5 +53,6 @@ public class CommandManager {
         commands.add(new RPS());
         commands.add(new PasswordGen());
         commands.add(new Bitcoin());
+        commands.add(new Hacked());
     }
 }
