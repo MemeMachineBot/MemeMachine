@@ -1,10 +1,11 @@
 package me.kavin.mememachine.command.commands;
 
 import org.json.JSONObject;
+
 import com.mashape.unirest.http.Unirest;
 
-import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
+import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -23,7 +24,7 @@ public class Shorten extends Command {
                 if (split.length != 1) {
                 	JSONObject body = new JSONObject().put("longUrl", split[1]);
                 	JSONObject jObject = new JSONObject(
-                	Unirest.post("https://www.googleapis.com/urlshortener/v1/url?key=" + Main.GOOGLE_API_KEY).
+                	Unirest.post("https://www.googleapis.com/urlshortener/v1/url?key=" + Constants.GOOGLE_API_KEY).
                 	header("Content-Type", "application/json").
                 	body(body).
                 	asString().getBody());

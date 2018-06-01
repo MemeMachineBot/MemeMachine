@@ -4,7 +4,7 @@ public class Timer {
     private long prevMS = 0;
 
     public boolean delay(float milliSec) {
-        if ((float)(this.getTime() - this.prevMS) >= milliSec) {
+        if (this.getTime() - this.prevMS >= milliSec) {
             return true;
         }
         return false;
