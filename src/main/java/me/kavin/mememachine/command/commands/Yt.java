@@ -1,5 +1,7 @@
 package me.kavin.mememachine.command.commands;
 
+import java.net.URLEncoder;
+
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -37,7 +39,7 @@ public class Yt extends Command {
     private MessageEmbed getSearch(String q) {
         try {
             EmbedBuilder meb = new EmbedBuilder();
-            String url = "https://www.googleapis.com/youtube/v3/search/?" + "safeSearch=moderate" + "&regionCode=US" + "&q=" + q.replace(" ", "%20") + "&type=video,channel&part=snippet&key=" + Constants.GOOGLE_API_KEY;
+            String url = "https://www.googleapis.com/youtube/v3/search/?" + "safeSearch=moderate" + "&regionCode=US" + "&q=" + URLEncoder.encode(q, "UTF-8") + "&type=video,channel&part=snippet&key=" + Constants.GOOGLE_API_KEY;
             JSONTokener tokener = new JSONTokener(Unirest.get(url).asString().getBody());
             JSONObject root = new JSONObject(tokener);
             meb.setTitle("Youtube Search: " + q);

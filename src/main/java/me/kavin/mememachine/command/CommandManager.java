@@ -15,6 +15,7 @@ import me.kavin.mememachine.command.commands.Help;
 import me.kavin.mememachine.command.commands.Invite;
 import me.kavin.mememachine.command.commands.Meme;
 import me.kavin.mememachine.command.commands.Ping;
+import me.kavin.mememachine.command.commands.RPS;
 import me.kavin.mememachine.command.commands.Reddit;
 import me.kavin.mememachine.command.commands.Roll;
 import me.kavin.mememachine.command.commands.Shorten;
@@ -46,5 +47,6 @@ public class CommandManager {
         commands.add(new Vote());
         commands.add(new Shorten());
         commands.add(new CopyPasta());
+        commands.add(new RPS());
     }
 }
