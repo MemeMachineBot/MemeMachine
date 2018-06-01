@@ -27,5 +27,6 @@ public class CommandManager {
         commands.add(new Dog());
         commands.add(new Vote());
         commands.add(new Shorten());
+        commands.add(new CopyPasta());
     }
 }
