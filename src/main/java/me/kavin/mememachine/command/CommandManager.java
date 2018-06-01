@@ -2,7 +2,25 @@ package me.kavin.mememachine.command;
 
 import java.util.ArrayList;
 
-import me.kavin.mememachine.command.commands.*;
+import me.kavin.mememachine.command.commands.Avatar;
+import me.kavin.mememachine.command.commands.Aww;
+import me.kavin.mememachine.command.commands.Cat;
+import me.kavin.mememachine.command.commands.CoinFlip;
+import me.kavin.mememachine.command.commands.CopyPasta;
+import me.kavin.mememachine.command.commands.Dab;
+import me.kavin.mememachine.command.commands.Define;
+import me.kavin.mememachine.command.commands.Dog;
+import me.kavin.mememachine.command.commands.Google;
+import me.kavin.mememachine.command.commands.Help;
+import me.kavin.mememachine.command.commands.Invite;
+import me.kavin.mememachine.command.commands.Meme;
+import me.kavin.mememachine.command.commands.Ping;
+import me.kavin.mememachine.command.commands.Reddit;
+import me.kavin.mememachine.command.commands.Roll;
+import me.kavin.mememachine.command.commands.Shorten;
+import me.kavin.mememachine.command.commands.UpTime;
+import me.kavin.mememachine.command.commands.Vote;
+import me.kavin.mememachine.command.commands.Yt;
 
 public class CommandManager {
 
