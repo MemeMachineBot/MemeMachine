@@ -29,7 +29,7 @@ public class RPS extends Command {
             meb.setColor(ColorUtils.getRainbowColor(2000));
 
             RPSChoice computer = RPSChoice.values()[ThreadLocalRandom.current().nextInt(3)];
-            RPSChoice user = RPSChoice.valueOf(split[1]);
+            RPSChoice user = RPSChoice.valueOf(split[1].toUpperCase());
             
             String RESULT = null;
             
@@ -80,7 +80,7 @@ public class RPS extends Command {
             	return;
             }
             
-            meb.addField("", "It was a `" + RESULT + "`", true);
+            meb.addField("I choose `" + computer.name().toLowerCase() + "`!", "It was a `" + RESULT + "` for you!", true);
 
             event.getChannel().sendMessage(meb.build()).complete();
 
