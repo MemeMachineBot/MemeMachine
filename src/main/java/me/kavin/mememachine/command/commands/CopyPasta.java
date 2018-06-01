@@ -10,6 +10,7 @@ import org.json.JSONTokener;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 
+import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -46,9 +47,11 @@ public class CopyPasta extends Command {
                 found = true;
                 meb.setTitle(post.getString("title"));
                 meb.setColor(ColorUtils.getRainbowColor(2000));
+                meb.setImage(post.getJSONObject("media").getString("content"));
+                String author = post.getString("author");
+                meb.setAuthor(author, "https://www.reddit.com/user/" + author);
+                meb.setFooter("\uD83D\uDC4D" + post.getInt("score") + " | " + "\uD83D\uDCAC" + post.getInt("numComments"), Main.api.getSelfUser().getAvatarUrl());
                 meb.addField("Heres your copypasta: ", StringUtils.abbreviate(StringEscapeUtils.unescapeHtml4(post.getJSONObject("media").getString("content").replaceAll("\\<.*?\\>", "")), 1024), true);
-                meb.setAuthor(post.getString("author"));
-                meb.setDescription("\uD83D\uDC4D" + post.getInt("score") + " | " + "\uD83D\uDCAC" + post.getInt("numComments"));
             }
             return meb.build();
         } catch (Throwable t) {
