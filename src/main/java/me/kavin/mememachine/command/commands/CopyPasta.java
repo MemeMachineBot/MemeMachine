@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -45,7 +46,7 @@ public class CopyPasta extends Command {
                 found = true;
                 meb.setTitle(post.getString("title"));
                 meb.setColor(ColorUtils.getRainbowColor(2000));
-                meb.addField("Heres your copypasta: ", StringUtils.abbreviate(post.getJSONObject("media").getString("content").replaceAll("\\<.*?\\>", ""), 1024), true);
+                meb.addField("Heres your copypasta: ", StringUtils.abbreviate(StringEscapeUtils.unescapeHtml4(post.getJSONObject("media").getString("content").replaceAll("\\<.*?\\>", "")), 1024), true);
                 meb.setAuthor(post.getString("author"));
                 meb.setDescription("\uD83D\uDC4D" + post.getInt("score") + " | " + "\uD83D\uDCAC" + post.getInt("numComments"));
             }
