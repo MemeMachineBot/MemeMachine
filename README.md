@@ -54,6 +54,8 @@ Bot Commands:
 
 >bitcoin `Shows the current bitcoin prices`
 
+>hacked `Searches haveibeenpwned.com to shows whether the given email has been hacked`
+
 You can invite me [here](https://discordapp.com/oauth2/authorize?client_id=445800505315426315&permissions=8&scope=bot)
 
 And more to come!
