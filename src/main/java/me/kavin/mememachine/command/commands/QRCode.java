@@ -1,5 +1,7 @@
 package me.kavin.mememachine.command.commands;
 
+import java.net.URLEncoder;
+
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -32,7 +34,7 @@ public class QRCode extends Command {
 
             meb.setColor(ColorUtils.getRainbowColor(2000));
 
-            meb.setImage("https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=");
+            meb.setImage("https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + URLEncoder.encode(url, "UTF-8"));
 
             return meb.build();
         } catch (Throwable t) {
