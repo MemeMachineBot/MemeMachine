@@ -50,6 +50,10 @@ Bot Commands:
 
 >rps `Rock Paper Scissors!`
 
+>password `Gives you a random secure password to use!`
+
+>bitcoin `Shows the current bitcoin prices`
+
 You can invite me [here](https://discordapp.com/oauth2/authorize?client_id=445800505315426315&permissions=8&scope=bot)
 
 And more to come!
