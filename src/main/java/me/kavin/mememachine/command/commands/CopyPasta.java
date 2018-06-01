@@ -3,6 +3,7 @@ package me.kavin.mememachine.command.commands;
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -44,7 +45,7 @@ public class CopyPasta extends Command {
                 found = true;
                 meb.setTitle(post.getString("title"));
                 meb.setColor(ColorUtils.getRainbowColor(2000));
-                meb.appendDescription(post.getJSONObject("media").getString("content"));
+                meb.addField("Heres your copypasta: ", StringUtils.abbreviate(post.getJSONObject("media").getString("content"), 1024), true);
                 meb.setAuthor(post.getString("author"));
                 meb.setDescription("\uD83D\uDC4D" + post.getInt("score") + " | " + "\uD83D\uDCAC" + post.getInt("numComments"));
             }
