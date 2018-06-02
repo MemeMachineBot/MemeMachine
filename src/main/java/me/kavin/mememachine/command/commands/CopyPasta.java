@@ -47,7 +47,6 @@ public class CopyPasta extends Command {
                 found = true;
                 meb.setTitle(post.getString("title"));
                 meb.setColor(ColorUtils.getRainbowColor(2000));
-                meb.setImage(post.getJSONObject("media").getString("content"));
                 String author = post.getString("author");
                 meb.setAuthor(author, "https://www.reddit.com/user/" + author);
                 meb.setFooter("\uD83D\uDC4D" + post.getInt("score") + " | " + "\uD83D\uDCAC" + post.getInt("numComments"), Main.api.getSelfUser().getAvatarUrl());
