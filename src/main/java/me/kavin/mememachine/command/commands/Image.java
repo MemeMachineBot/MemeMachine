@@ -20,8 +20,8 @@ import net.dv8tion.jda.core.events.message.guild.react.GenericGuildMessageReacti
 
 public class Image extends Command {
 
-	private String q = null;
 	ArrayList<Message> sent = new ArrayList<>();
+	ArrayList<String> queries = new ArrayList<>();
 
 	public Image() {
 		super(">img", "`Allows you to search google for images`");
@@ -31,7 +31,7 @@ public class Image extends Command {
 	public void onCommand(String message, MessageReceivedEvent event) {
 		if (message.toLowerCase().startsWith(getPrefix())) {
 
-			q = null;
+			String q = null;
 
 			if (message.length() > getPrefix().length()) {
 				q = "";
@@ -42,6 +42,7 @@ public class Image extends Command {
 			Message sent = event.getChannel().sendMessage(getSearch(q)).complete();
 			sent.addReaction("◀").complete();
 			sent.addReaction("▶").complete();
+			this.queries.add(q);
 			this.sent.add(sent);
 		}
 	}
@@ -86,12 +87,15 @@ public class Image extends Command {
 						if (page < 1)
 							return;
 
+						int start = 10 * (page / 10);
 						String url = "https://www.googleapis.com/customsearch/v1?" + "safe=medium&searchType=image&"
-								+ "q=" + URLEncoder.encode(q, "UTF-8") + "&cx=008677437472124065250%3Ajljeb59kuse&num="
-								+ page + "&key=" + Constants.GOOGLE_API_KEY;
+								+ "q=" + URLEncoder.encode(queries.get(i), "UTF-8") + "&cx=008677437472124065250%3Ajljeb59kuse&num=10"
+								+ "&key=" + Constants.GOOGLE_API_KEY;
+						if(start != 0)
+							url += "&start=" + start;
 						JSONObject root = new JSONObject(Unirest.get(url).asString().getBody());
 
-						meb.setImage(root.getJSONArray("items").getJSONObject(page - 1).getJSONObject("image")
+						meb.setImage(root.getJSONArray("items").getJSONObject(page < 10 ? (page % 10) - 1 : page % 10).getJSONObject("image")
 								.getString("thumbnailLink"));
 						meb.setDescription("Page " + page + " / 100");
 
@@ -113,12 +117,15 @@ public class Image extends Command {
 						if (page > 100)
 							return;
 
+						int start = 10 * (page / 10);
 						String url = "https://www.googleapis.com/customsearch/v1?" + "safe=medium&searchType=image&"
-								+ "q=" + URLEncoder.encode(q, "UTF-8") + "&cx=008677437472124065250%3Ajljeb59kuse&num="
-								+ page + "&key=" + Constants.GOOGLE_API_KEY;
+								+ "q=" + URLEncoder.encode(queries.get(i), "UTF-8") + "&cx=008677437472124065250%3Ajljeb59kuse&num=10"
+								+ "&key=" + Constants.GOOGLE_API_KEY;
+						if(start != 0)
+							url += "&start=" + start;
 						JSONObject root = new JSONObject(Unirest.get(url).asString().getBody());
 
-						meb.setImage(root.getJSONArray("items").getJSONObject(page - 1).getJSONObject("image")
+						meb.setImage(root.getJSONArray("items").getJSONObject(page < 10 ? (page % 10) - 1 : page % 10).getJSONObject("image")
 								.getString("thumbnailLink"));
 						meb.setDescription("Page " + page + " / 100");
 
