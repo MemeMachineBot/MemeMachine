@@ -58,6 +58,8 @@ Bot Commands:
 
 >img `Allows you to search google for images`
 
+>hastebin `Uploads the given text to hastebin`
+
 You can invite me [here](https://discordapp.com/oauth2/authorize?client_id=445800505315426315&permissions=8&scope=bot)
 
 And more to come!
