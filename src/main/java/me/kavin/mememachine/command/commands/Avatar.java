@@ -5,41 +5,45 @@ import me.kavin.mememachine.command.Command;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Avatar extends Command {
-    public Avatar() {
-        super(">avatar", "`Shows the person you tag's profile picture`");
-    }
-    @Override
-    public void onCommand(String message, MessageReceivedEvent event) {
-        if (message.toLowerCase().startsWith(getPrefix())) {
+	public Avatar() {
+		super(">avatar", "`Shows the person you tag's profile picture`");
+	}
 
-            String[] split = message.split(" ");
+	@Override
+	public void onCommand(String message, MessageReceivedEvent event) {
+		if (message.toLowerCase().startsWith(getPrefix())) {
 
-            if (split.length < 2) {
-                event.getChannel().sendMessage("`Please tag a person as your argument like` \n>avatar " + Main.api.getSelfUser().getAsMention()).complete();
-                return;
-            }
+			String[] split = message.split(" ");
 
-            long memberId;
+			if (split.length < 2) {
+				event.getChannel().sendMessage("`Please tag a person as your argument like` \n>avatar "
+						+ Main.api.getSelfUser().getAsMention()).complete();
+				return;
+			}
 
-            try {
-                memberId = getLong(split[1]);
-            } catch (NumberFormatException e) {
-                event.getChannel().sendMessage("`Please tag a person as your argument like` \n>avatar " + Main.api.getSelfUser().getAsMention()).complete();
-                return;
-            }
+			long memberId;
 
-            if (event.getGuild().getMemberById(memberId) != null)
-                event.getChannel().sendMessage(event.getGuild().getMemberById(memberId).getUser().getAvatarUrl()).complete();
-        }
-    }
+			try {
+				memberId = getLong(split[1]);
+			} catch (NumberFormatException e) {
+				event.getChannel().sendMessage("`Please tag a person as your argument like` \n>avatar "
+						+ Main.api.getSelfUser().getAsMention()).complete();
+				return;
+			}
 
-    private long getLong(String s) throws NumberFormatException {
-        StringBuilder sb = new StringBuilder();
-        char c;
-        for (int i = 0; i < s.length(); i++)
-            if ((c = s.charAt(i)) >= '0' && c <= '9')
-                sb.append(c);
-        return Long.parseLong(sb.toString());
-    }
+			if (event.getGuild().getMemberById(memberId) != null)
+				event.getChannel().sendMessage(event.getGuild().getMemberById(memberId).getUser().getAvatarUrl())
+						.complete();
+		}
+	}
+
+	private long getLong(String s) throws NumberFormatException {
+		StringBuilder sb = new StringBuilder();
+		char c;
+		for (int i = 0; i < s.length(); i++)
+			if ((c = s.charAt(i)) >= '0' && c <= '9')
+				sb.append(c);
+		return Long.parseLong(sb.toString());
+	}
 
 }

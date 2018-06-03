@@ -8,20 +8,21 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Roll extends Command {
-    public Roll() {
-        super(">roll", "`Rolls a dice`");
-    }
-    @Override
-    public void onCommand(String message, MessageReceivedEvent event) {
-        if (message.equalsIgnoreCase(getPrefix())) {
-            EmbedBuilder meb = new EmbedBuilder();
+	public Roll() {
+		super(">roll", "`Rolls a dice`");
+	}
 
-            meb.setTitle("Dice");
-            meb.setColor(ColorUtils.getRainbowColor(2000));
+	@Override
+	public void onCommand(String message, MessageReceivedEvent event) {
+		if (message.equalsIgnoreCase(getPrefix())) {
+			EmbedBuilder meb = new EmbedBuilder();
 
-            meb.addField("", "It was `" + (ThreadLocalRandom.current().nextInt(6) + 1) + "`", true);
+			meb.setTitle("Dice");
+			meb.setColor(ColorUtils.getRainbowColor(2000));
 
-            event.getChannel().sendMessage(meb.build()).complete();
-        }
-    }
+			meb.addField("", "It was `" + (ThreadLocalRandom.current().nextInt(6) + 1) + "`", true);
+
+			event.getChannel().sendMessage(meb.build()).complete();
+		}
+	}
 }

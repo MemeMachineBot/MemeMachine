@@ -56,6 +56,8 @@ Bot Commands:
 
 >hacked `Searches haveibeenpwned.com to shows whether the given email has been hacked`
 
+>img `Allows you to search google for images`
+
 You can invite me [here](https://discordapp.com/oauth2/authorize?client_id=445800505315426315&permissions=8&scope=bot)
 
 And more to come!

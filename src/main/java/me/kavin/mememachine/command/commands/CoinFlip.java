@@ -8,20 +8,21 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class CoinFlip extends Command {
-    public CoinFlip() {
-        super(">cf", "`Flips a coin`");
-    }
-    @Override
-    public void onCommand(String message, MessageReceivedEvent event) {
-        if (message.equalsIgnoreCase(getPrefix())) {
-            EmbedBuilder meb = new EmbedBuilder();
+	public CoinFlip() {
+		super(">cf", "`Flips a coin`");
+	}
 
-            meb.setTitle("Coinflip");
-            meb.setColor(ColorUtils.getRainbowColor(2000));
+	@Override
+	public void onCommand(String message, MessageReceivedEvent event) {
+		if (message.equalsIgnoreCase(getPrefix())) {
+			EmbedBuilder meb = new EmbedBuilder();
 
-            meb.addField("", "It was " + (ThreadLocalRandom.current().nextBoolean() ? "`Heads`" : "`Tails`"), true);
+			meb.setTitle("Coinflip");
+			meb.setColor(ColorUtils.getRainbowColor(2000));
 
-            event.getChannel().sendMessage(meb.build()).complete();
-        }
-    }
+			meb.addField("", "It was " + (ThreadLocalRandom.current().nextBoolean() ? "`Heads`" : "`Tails`"), true);
+
+			event.getChannel().sendMessage(meb.build()).complete();
+		}
+	}
 }

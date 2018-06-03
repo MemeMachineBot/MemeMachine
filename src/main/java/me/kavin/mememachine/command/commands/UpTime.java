@@ -7,29 +7,30 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class UpTime extends Command {
-    public UpTime() {
-        super(">uptime", "`Shows how long the bot has been running for`");
-    }
-    @Override
-    public void onCommand(String message, MessageReceivedEvent event) {
-        if (message.equalsIgnoreCase(getPrefix())) {
-            long millis = Main.uptime.getDifference();
-            long second = (millis / 1000) % 60;
-            long minute = (millis / (1000 * 60)) % 60;
-            long hour = (millis / (1000 * 60 * 60)) % 24;
-            long days = (millis / (1000 * 60 * 60)) % 24;
+	public UpTime() {
+		super(">uptime", "`Shows how long the bot has been running for`");
+	}
 
-            EmbedBuilder meb = new EmbedBuilder();
+	@Override
+	public void onCommand(String message, MessageReceivedEvent event) {
+		if (message.equalsIgnoreCase(getPrefix())) {
+			long millis = Main.uptime.getDifference();
+			long second = (millis / 1000) % 60;
+			long minute = (millis / (1000 * 60)) % 60;
+			long hour = (millis / (1000 * 60 * 60)) % 24;
+			long days = (millis / (1000 * 60 * 60)) / 24;
 
-            meb.setTitle("Uptime");
-            meb.setColor(ColorUtils.getRainbowColor(2000));
+			EmbedBuilder meb = new EmbedBuilder();
 
-            meb.addField("Day", String.valueOf(days) + "\n", false);
-            meb.addField("Hour", String.valueOf(hour) + "\n", false);
-            meb.addField("Minute", String.valueOf(minute) + "\n", false);
-            meb.addField("Second", String.valueOf(second) + "\n", false);
+			meb.setTitle("Uptime");
+			meb.setColor(ColorUtils.getRainbowColor(2000));
 
-            event.getChannel().sendMessage(meb.build()).complete();
-        }
-    }
+			meb.addField("Day", String.valueOf(days) + "\n", false);
+			meb.addField("Hour", String.valueOf(hour) + "\n", false);
+			meb.addField("Minute", String.valueOf(minute) + "\n", false);
+			meb.addField("Second", String.valueOf(second) + "\n", false);
+
+			event.getChannel().sendMessage(meb.build()).complete();
+		}
+	}
 }

@@ -10,19 +10,19 @@ import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class Main extends ListenerAdapter {
-    public static JDA api;
-    public static Timer uptime = new Timer();
+	public static JDA api;
+	public static Timer uptime = new Timer();
 
-    public static void main(String[] args) {
-        try {
-            JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(Constants.BOT_TOKEN);
-            api = builder.buildAsync();
-            api.setAutoReconnect(true);
-            DiscordListener.init();
-            uptime.reset();
-            new CommandManager();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	public static void main(String[] args) {
+		try {
+			JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(Constants.BOT_TOKEN);
+			api = builder.buildAsync();
+			api.setAutoReconnect(true);
+			DiscordListener.init();
+			uptime.reset();
+			new CommandManager();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -1,0 +1,137 @@
+package me.kavin.mememachine.command.commands;
+
+import java.net.URLEncoder;
+import java.util.ArrayList;
+
+import org.json.JSONObject;
+import com.mashape.unirest.http.Unirest;
+
+import me.kavin.mememachine.Main;
+import me.kavin.mememachine.command.Command;
+import me.kavin.mememachine.consts.Constants;
+import me.kavin.mememachine.event.EventHandler;
+import me.kavin.mememachine.event.events.EventGuildReaction;
+import me.kavin.mememachine.utils.ColorUtils;
+import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.MessageEmbed;
+import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.events.message.guild.react.GenericGuildMessageReactionEvent;
+
+public class Image extends Command {
+
+	private String q = null;
+	ArrayList<Message> sent = new ArrayList<>();
+
+	public Image() {
+		super(">img", "`Allows you to search google for images`");
+	}
+
+	@Override
+	public void onCommand(String message, MessageReceivedEvent event) {
+		if (message.toLowerCase().startsWith(getPrefix())) {
+
+			q = null;
+
+			if (message.length() > getPrefix().length()) {
+				q = "";
+				for (int i = getPrefix().length() + 1; i < message.length(); i++)
+					q += message.charAt(i);
+			}
+
+			Message sent = event.getChannel().sendMessage(getSearch(q)).complete();
+			sent.addReaction("◀").complete();
+			sent.addReaction("▶").complete();
+			this.sent.add(sent);
+		}
+	}
+
+	private MessageEmbed getSearch(String q) {
+		try {
+			EmbedBuilder meb = new EmbedBuilder();
+			String url = "https://www.googleapis.com/customsearch/v1?" + "safe=medium&searchType=image&" + "q="
+					+ URLEncoder.encode(q, "UTF-8") + "&cx=008677437472124065250%3Ajljeb59kuse&num=1&key="
+					+ Constants.GOOGLE_API_KEY;
+			JSONObject root = new JSONObject(Unirest.get(url).asString().getBody());
+			meb.setTitle("Google Image Search: " + q);
+			meb.setColor(ColorUtils.getRainbowColor(2000));
+			if (!root.has("items")) {
+				meb.addField("No Results", "Unfortunately I couldn't find any results for `" + q + "`", true);
+				return meb.build();
+			}
+			meb.setImage(root.getJSONArray("items").getJSONObject(0).getJSONObject("image").getString("thumbnailLink"));
+			meb.setDescription("Page 1 / 100");
+			return meb.build();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@EventHandler
+	private void onReaction(EventGuildReaction event) {
+		GenericGuildMessageReactionEvent reactionEvent = event.getEvent();
+		for (int i = 0; i < sent.size(); i++) {
+			Message msg = sent.get(i);
+			if (msg.getIdLong() == reactionEvent.getMessageIdLong()
+					&& reactionEvent.getUser().getIdLong() != Main.api.getSelfUser().getIdLong()) {
+				switch (reactionEvent.getReactionEmote().getName()) {
+				case "◀":
+					try {
+						EmbedBuilder meb = new EmbedBuilder(msg.getEmbeds().get(0));
+
+						int page = Integer.parseInt(meb.getDescriptionBuilder().toString().split(" ")[1]);
+						page--;
+
+						if (page < 1)
+							return;
+
+						String url = "https://www.googleapis.com/customsearch/v1?" + "safe=medium&searchType=image&"
+								+ "q=" + URLEncoder.encode(q, "UTF-8") + "&cx=008677437472124065250%3Ajljeb59kuse&num="
+								+ page + "&key=" + Constants.GOOGLE_API_KEY;
+						JSONObject root = new JSONObject(Unirest.get(url).asString().getBody());
+
+						meb.setImage(root.getJSONArray("items").getJSONObject(page - 1).getJSONObject("image")
+								.getString("thumbnailLink"));
+						meb.setDescription("Page " + page + " / 100");
+
+						sent.set(i, msg.editMessage(meb.build()).complete());
+
+						break;
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					break;
+				case "▶":
+					try {
+						EmbedBuilder meb = new EmbedBuilder(msg.getEmbeds().get(0));
+
+						int page = Integer.parseInt(meb.getDescriptionBuilder().toString().split(" ")[1]);
+						page++;
+
+						if (page > 100)
+							return;
+
+						String url = "https://www.googleapis.com/customsearch/v1?" + "safe=medium&searchType=image&"
+								+ "q=" + URLEncoder.encode(q, "UTF-8") + "&cx=008677437472124065250%3Ajljeb59kuse&num="
+								+ page + "&key=" + Constants.GOOGLE_API_KEY;
+						JSONObject root = new JSONObject(Unirest.get(url).asString().getBody());
+
+						meb.setImage(root.getJSONArray("items").getJSONObject(page - 1).getJSONObject("image")
+								.getString("thumbnailLink"));
+						meb.setDescription("Page " + page + " / 100");
+
+						sent.set(i, msg.editMessage(meb.build()).complete());
+
+						break;
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					break;
+				}
+			}
+		}
+	}
+}
