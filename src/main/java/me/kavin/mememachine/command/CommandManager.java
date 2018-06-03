@@ -24,6 +24,7 @@ import me.kavin.mememachine.command.commands.RPS;
 import me.kavin.mememachine.command.commands.Reddit;
 import me.kavin.mememachine.command.commands.Roll;
 import me.kavin.mememachine.command.commands.Shorten;
+import me.kavin.mememachine.command.commands.Subs;
 import me.kavin.mememachine.command.commands.UpTime;
 import me.kavin.mememachine.command.commands.Vote;
 import me.kavin.mememachine.command.commands.Yt;
@@ -58,5 +59,6 @@ public class CommandManager {
 		commands.add(new Hacked());
 		commands.add(new Image());
 		commands.add(new Hastebin());
+		commands.add(new Subs());
 	}
 }

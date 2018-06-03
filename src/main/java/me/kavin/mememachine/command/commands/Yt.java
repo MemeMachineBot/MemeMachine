@@ -3,7 +3,6 @@ package me.kavin.mememachine.command.commands;
 import java.net.URLEncoder;
 
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import com.mashape.unirest.http.Unirest;
 
@@ -44,8 +43,7 @@ public class Yt extends Command {
 			String url = "https://www.googleapis.com/youtube/v3/search/?" + "safeSearch=moderate" + "&regionCode=US"
 					+ "&q=" + URLEncoder.encode(q, "UTF-8") + "&type=video,channel&part=snippet&key="
 					+ Constants.GOOGLE_API_KEY;
-			JSONTokener tokener = new JSONTokener(Unirest.get(url).asString().getBody());
-			JSONObject root = new JSONObject(tokener);
+			JSONObject root = new JSONObject(Unirest.get(url).asString().getBody());
 			meb.setTitle("Youtube Search: " + q);
 			meb.setColor(ColorUtils.getRainbowColor(2000));
 			if (!root.has("items")) {
@@ -53,8 +51,7 @@ public class Yt extends Command {
 				return meb.build();
 			}
 			root.getJSONArray("items").forEach(item -> {
-				JSONTokener itemTokener = new JSONTokener(item.toString());
-				JSONObject body = new JSONObject(itemTokener);
+				JSONObject body = new JSONObject(item.toString());
 				boolean video = body.getJSONObject("id").getString("kind").equals("youtube#video");
 				if (video) {
 					meb.addField('`' + body.getJSONObject("snippet").getString("title") + '`',
