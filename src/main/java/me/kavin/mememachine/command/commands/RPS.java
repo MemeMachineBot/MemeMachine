@@ -9,40 +9,43 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class RPS extends Command {
-    public RPS() {
-        super(">rps", "`Rock Paper Scissors!`");
-    }
-    @Override
-    public void onCommand(String message, MessageReceivedEvent event) {
-    	if (message.toLowerCase().startsWith(getPrefix())) {
+	public RPS() {
+		super(">rps", "`Rock Paper Scissors!`");
+	}
 
-            String[] split = message.split(" ");
+	@Override
+	public void onCommand(String message, MessageReceivedEvent event) {
+		if (message.toLowerCase().startsWith(getPrefix())) {
 
-            if (split.length < 2) {
-                event.getChannel().sendMessage("`Please choose a choice your argument like` \n>rps <rock/paper/scissors>").complete();
-                return;
-            }
-            
-            EmbedBuilder meb = new EmbedBuilder();
+			String[] split = message.split(" ");
 
-            meb.setTitle("Rock Paper Scissors");
-            meb.setColor(ColorUtils.getRainbowColor(2000));
+			if (split.length < 2) {
+				event.getChannel()
+						.sendMessage("`Please choose a choice your argument like` \n>rps <rock/paper/scissors>")
+						.complete();
+				return;
+			}
 
-            RPSChoice computer = RPSChoice.values()[ThreadLocalRandom.current().nextInt(3)];
-            RPSChoice user = null;
+			EmbedBuilder meb = new EmbedBuilder();
 
-            for(RPSChoice ch : RPSChoice.values())
-            	if(ch.name().equalsIgnoreCase(split[1])) {
-            		user = ch;
-            		break;
-            	}
-            
-            String RESULT = null;
-            
-            if(user != null) {
-            	switch (computer) {
-    			case ROCK:
-    				switch (user) {
+			meb.setTitle("Rock Paper Scissors");
+			meb.setColor(ColorUtils.getRainbowColor(2000));
+
+			RPSChoice computer = RPSChoice.values()[ThreadLocalRandom.current().nextInt(3)];
+			RPSChoice user = null;
+
+			for (RPSChoice ch : RPSChoice.values())
+				if (ch.name().equalsIgnoreCase(split[1])) {
+					user = ch;
+					break;
+				}
+
+			String RESULT = null;
+
+			if (user != null) {
+				switch (computer) {
+				case ROCK:
+					switch (user) {
 					case ROCK:
 						RESULT = "Tie";
 						break;
@@ -53,9 +56,9 @@ public class RPS extends Command {
 						RESULT = "Lose";
 						break;
 					}
-    				break;
-    			case PAPER:
-    				switch (user) {
+					break;
+				case PAPER:
+					switch (user) {
 					case ROCK:
 						RESULT = "Lose";
 						break;
@@ -66,9 +69,9 @@ public class RPS extends Command {
 						RESULT = "Win";
 						break;
 					}
-    				break;
-    			case SCISSORS:
-    				switch (user) {
+					break;
+				case SCISSORS:
+					switch (user) {
 					case ROCK:
 						RESULT = "Win";
 						break;
@@ -79,17 +82,20 @@ public class RPS extends Command {
 						RESULT = "Tie";
 						break;
 					}
-    				break;
-    			}
-            } else {
-            	event.getChannel().sendMessage("`Please choose a valid choice your argument like` \n>rps <rock/paper/scissors>").complete();
-            	return;
-            }
-            
-            meb.addField("I choose `" + computer.name().toLowerCase() + "`!", "It was a `" + RESULT + "` for you!", true);
+					break;
+				}
+			} else {
+				event.getChannel()
+						.sendMessage("`Please choose a valid choice your argument like` \n>rps <rock/paper/scissors>")
+						.complete();
+				return;
+			}
 
-            event.getChannel().sendMessage(meb.build()).complete();
+			meb.addField("I choose `" + computer.name().toLowerCase() + "`!", "It was a `" + RESULT + "` for you!",
+					true);
 
-        }
-    }
+			event.getChannel().sendMessage(meb.build()).complete();
+
+		}
+	}
 }

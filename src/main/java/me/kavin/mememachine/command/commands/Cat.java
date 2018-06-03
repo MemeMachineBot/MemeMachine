@@ -8,31 +8,32 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Cat extends Command {
 
-    public Cat() {
-        super(">cat", "`Shows a cat image`");
-    }
+	public Cat() {
+		super(">cat", "`Shows a cat image`");
+	}
 
-    @Override
-    public void onCommand(String message, MessageReceivedEvent event) {
-        if (message.equalsIgnoreCase(getPrefix())) {
-            event.getChannel().sendMessage(getCat()).complete();
-        }
+	@Override
+	public void onCommand(String message, MessageReceivedEvent event) {
+		if (message.equalsIgnoreCase(getPrefix())) {
+			event.getChannel().sendMessage(getCat()).complete();
+		}
 
-    }
-    private MessageEmbed getCat() {
-        try {
-            EmbedBuilder meb = new EmbedBuilder();
+	}
 
-            meb.setTitle("Cat");
+	private MessageEmbed getCat() {
+		try {
+			EmbedBuilder meb = new EmbedBuilder();
 
-            meb.setColor(ColorUtils.getRainbowColor(2000));
+			meb.setTitle("Cat");
 
-            meb.setImage("https://cataas.com/cat");
+			meb.setColor(ColorUtils.getRainbowColor(2000));
 
-            return meb.build();
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
-        return null;
-    }
+			meb.setImage("https://cataas.com/cat");
+
+			return meb.build();
+		} catch (Throwable t) {
+			t.printStackTrace();
+		}
+		return null;
+	}
 }

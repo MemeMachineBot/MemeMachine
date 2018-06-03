@@ -10,32 +10,30 @@ import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.utils.Multithreading;
 
 public class Api {
-	
+
 	public static void loop() {
 		Multithreading.runAsync(new Runnable() {
 			@Override
 			public void run() {
-				while(true) {
+				while (true) {
 					dbl();
 					try {
 						Thread.sleep(300000);
-					} catch (InterruptedException e) { }
+					} catch (InterruptedException e) {
+					}
 				}
 			}
 		});
 	}
-	
+
 	public static void dbl() {
-		JSONObject obj = new JSONObject()
-			    .put("server_count", Main.api.getGuilds().size());
-			    try {
-					Unirest.post("https://discordbots.org/api/bots/" + Main.api.getSelfUser().getId() + "/stats")
-					        .header("Authorization", Constants.DBL_TOKEN)
-					        .header("Content-Type", "application/json")
-					        .body(obj.toString())
-					        .asJson();
-				} catch (UnirestException e) {
-					e.printStackTrace();
-				}
+		JSONObject obj = new JSONObject().put("server_count", Main.api.getGuilds().size());
+		try {
+			Unirest.post("https://discordbots.org/api/bots/" + Main.api.getSelfUser().getId() + "/stats")
+					.header("Authorization", Constants.DBL_TOKEN).header("Content-Type", "application/json")
+					.body(obj.toString()).asJson();
+		} catch (UnirestException e) {
+			e.printStackTrace();
+		}
 	}
 }

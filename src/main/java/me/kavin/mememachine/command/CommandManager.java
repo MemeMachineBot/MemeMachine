@@ -14,6 +14,7 @@ import me.kavin.mememachine.command.commands.Dog;
 import me.kavin.mememachine.command.commands.Google;
 import me.kavin.mememachine.command.commands.Hacked;
 import me.kavin.mememachine.command.commands.Help;
+import me.kavin.mememachine.command.commands.Image;
 import me.kavin.mememachine.command.commands.Invite;
 import me.kavin.mememachine.command.commands.Meme;
 import me.kavin.mememachine.command.commands.PasswordGen;
@@ -28,31 +29,32 @@ import me.kavin.mememachine.command.commands.Yt;
 
 public class CommandManager {
 
-    public static ArrayList < Command > commands = new ArrayList < Command > ();
+	public static ArrayList<Command> commands = new ArrayList<Command>();
 
-    public CommandManager() {
-        commands.add(new Help());
-        commands.add(new UpTime());
-        commands.add(new Meme());
-        commands.add(new Dab());
-        commands.add(new Yt());
-        commands.add(new Google());
-        commands.add(new Avatar());
-        commands.add(new Reddit());
-        commands.add(new Invite());
-        commands.add(new Define());
-        commands.add(new CoinFlip());
-        commands.add(new Roll());
-        commands.add(new Cat());
-        commands.add(new Ping());
-        commands.add(new Aww());
-        commands.add(new Dog());
-        commands.add(new Vote());
-        commands.add(new Shorten());
-        commands.add(new CopyPasta());
-        commands.add(new RPS());
-        commands.add(new PasswordGen());
-        commands.add(new Bitcoin());
-        commands.add(new Hacked());
-    }
+	public CommandManager() {
+		commands.add(new Help());
+		commands.add(new UpTime());
+		commands.add(new Meme());
+		commands.add(new Dab());
+		commands.add(new Yt());
+		commands.add(new Google());
+		commands.add(new Avatar());
+		commands.add(new Reddit());
+		commands.add(new Invite());
+		commands.add(new Define());
+		commands.add(new CoinFlip());
+		commands.add(new Roll());
+		commands.add(new Cat());
+		commands.add(new Ping());
+		commands.add(new Aww());
+		commands.add(new Dog());
+		commands.add(new Vote());
+		commands.add(new Shorten());
+		commands.add(new CopyPasta());
+		commands.add(new RPS());
+		commands.add(new PasswordGen());
+		commands.add(new Bitcoin());
+		commands.add(new Hacked());
+		commands.add(new Image());
+	}
 }
