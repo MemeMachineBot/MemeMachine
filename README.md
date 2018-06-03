@@ -60,6 +60,8 @@ Bot Commands:
 
 >hastebin `Uploads the given text to hastebin`
 
+>subs `Checks the number of subscribers the given youtuber has`
+
 You can invite me [here](https://discordapp.com/oauth2/authorize?client_id=445800505315426315&permissions=8&scope=bot)
 
 And more to come!
