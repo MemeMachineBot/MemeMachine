@@ -64,6 +64,8 @@ Bot Commands:
 
 >stats `Shows you the server stastics`
 
+>botstats `Shows you the bot's stastics`
+
 You can invite me [here](https://discordapp.com/oauth2/authorize?client_id=445800505315426315&permissions=8&scope=bot)
 
 And more to come!
