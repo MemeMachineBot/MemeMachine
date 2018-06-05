@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import me.kavin.mememachine.command.commands.Avatar;
 import me.kavin.mememachine.command.commands.Aww;
 import me.kavin.mememachine.command.commands.Bitcoin;
+import me.kavin.mememachine.command.commands.BotStats;
 import me.kavin.mememachine.command.commands.Cat;
 import me.kavin.mememachine.command.commands.CoinFlip;
 import me.kavin.mememachine.command.commands.CopyPasta;
@@ -62,5 +63,6 @@ public class CommandManager {
 		commands.add(new Hastebin());
 		commands.add(new Subs());
 		commands.add(new Stats());
+		commands.add(new BotStats());
 	}
 }
