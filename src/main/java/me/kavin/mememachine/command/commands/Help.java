@@ -27,7 +27,8 @@ public class Help extends Command {
 				}
 				
 			}
-			event.getChannel().sendMessage(meb.build()).complete();
+			if(meb.getFields().size() > 0)
+				event.getChannel().sendMessage(meb.build()).queue();
 		}
 	}
 }

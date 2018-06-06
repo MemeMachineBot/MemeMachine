@@ -26,11 +26,11 @@ public class Aww extends Command {
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
 		if (message.equalsIgnoreCase(getPrefix())) {
-			event.getChannel().sendMessage(getMeme()).complete();
+			event.getChannel().sendMessage(getPost()).complete();
 		}
 	}
 
-	private MessageEmbed getMeme() {
+	private MessageEmbed getPost() {
 		try {
 			EmbedBuilder meb = new EmbedBuilder();
 			String data = wc.getPage("https://gateway.reddit.com/desktopapi/v1/subreddits/aww?sort=hot")
@@ -43,7 +43,7 @@ public class Aww extends Command {
 			String[] keys = Arrays.copyOf(posts.keySet().toArray(), posts.keySet().size(), String[].class);
 			while (!found && tries <= 5) {
 				JSONObject post = posts.getJSONObject(keys[ThreadLocalRandom.current().nextInt(keys.length)]);
-				if (post.getBoolean("isLocked"))
+				if (post.getBoolean("isLocked") || post.isNull("media") || !post.getJSONObject("media").has("content"))
 					continue;
 				tries++;
 				found = true;
