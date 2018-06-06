@@ -15,12 +15,12 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class Meme extends Command {
+public class Greentext extends Command {
 
 	WebClient wc = new WebClient();
 
-	public Meme() {
-		super(">meme", "`Shows a random meme from /r/Memes`");
+	public Greentext() {
+		super(">greentext", "`Shows a greentext meme`");
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class Meme extends Command {
 	private MessageEmbed getMeme() {
 		try {
 			EmbedBuilder meb = new EmbedBuilder();
-			String data = wc.getPage("https://gateway.reddit.com/desktopapi/v1/subreddits/memes?sort=hot")
+			String data = wc.getPage("https://gateway.reddit.com/desktopapi/v1/subreddits/greentext?sort=hot")
 					.getWebResponse().getContentAsString();
 			int tries = 0;
 			JSONTokener tokener = new JSONTokener(data);

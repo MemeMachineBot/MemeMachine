@@ -51,10 +51,11 @@ public class Reddit extends Command {
 			JSONObject posts = root.getJSONObject("posts");
 			String[] keys = Arrays.copyOf(posts.keySet().toArray(), posts.keySet().size(), String[].class);
 			while (!found && tries <= 5) {
-				tries++;
 				JSONObject post = posts.getJSONObject(keys[ThreadLocalRandom.current().nextInt(keys.length)]);
-				if (post.getBoolean("isLocked"))
+				if (post.getBoolean("isLocked") || post.isNull("media") || !post.getJSONObject("media").has("content")) {
+					tries++;
 					continue;
+				}
 				found = true;
 				meb.setTitle(post.getString("title"));
 				meb.setColor(ColorUtils.getRainbowColor(2000));
