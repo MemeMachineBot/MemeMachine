@@ -13,6 +13,7 @@ import me.kavin.mememachine.command.commands.Dab;
 import me.kavin.mememachine.command.commands.Define;
 import me.kavin.mememachine.command.commands.Dog;
 import me.kavin.mememachine.command.commands.Google;
+import me.kavin.mememachine.command.commands.Greentext;
 import me.kavin.mememachine.command.commands.Hacked;
 import me.kavin.mememachine.command.commands.Hastebin;
 import me.kavin.mememachine.command.commands.Help;
@@ -64,5 +65,6 @@ public class CommandManager {
 		commands.add(new Subs());
 		commands.add(new Stats());
 		commands.add(new BotStats());
+		commands.add(new Greentext());
 	}
 }
