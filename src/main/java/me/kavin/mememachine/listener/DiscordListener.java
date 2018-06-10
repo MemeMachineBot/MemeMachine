@@ -37,10 +37,6 @@ public class DiscordListener extends ListenerAdapter {
 
 	@Override
 	public void onGuildJoin(GuildJoinEvent event) {
-		if (!event.getGuild().getMember(Main.api.getSelfUser()).hasPermission(Permission.ADMINISTRATOR)) {
-			event.getGuild().getDefaultChannel().sendMessage("Please ask a server admistrator to invite me!")
-					.complete();
-		}
 		Main.api.getPresence().setGame(
 				Game.of(GameType.DEFAULT, "Meminq | >help | " + Main.api.getGuilds().size() + " Servers!", "Hax.kill"));
 	}
