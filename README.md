@@ -68,6 +68,8 @@ Bot Commands:
 
 >greentext `Shows a greentext meme`
 
+>anime `Allows you to search for anime!`
+
 You can invite me [here](https://discordapp.com/oauth2/authorize?client_id=445800505315426315&permissions=8&scope=bot)
 
 And more to come!
