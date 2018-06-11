@@ -2,6 +2,7 @@ package me.kavin.mememachine.command;
 
 import java.util.ArrayList;
 
+import me.kavin.mememachine.command.commands.Anime;
 import me.kavin.mememachine.command.commands.Avatar;
 import me.kavin.mememachine.command.commands.Aww;
 import me.kavin.mememachine.command.commands.Bitcoin;
@@ -66,5 +67,6 @@ public class CommandManager {
 		commands.add(new Stats());
 		commands.add(new BotStats());
 		commands.add(new Greentext());
+		commands.add(new Anime());
 	}
 }
