@@ -31,6 +31,7 @@ import me.kavin.mememachine.command.commands.Stats;
 import me.kavin.mememachine.command.commands.Subs;
 import me.kavin.mememachine.command.commands.UpTime;
 import me.kavin.mememachine.command.commands.Vote;
+import me.kavin.mememachine.command.commands.WYR;
 import me.kavin.mememachine.command.commands.Yt;
 
 public class CommandManager {
@@ -68,5 +69,6 @@ public class CommandManager {
 		commands.add(new BotStats());
 		commands.add(new Greentext());
 		commands.add(new Anime());
+		commands.add(new WYR());
 	}
 }
