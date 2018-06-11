@@ -5,6 +5,8 @@ import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.command.CommandManager;
 import me.kavin.mememachine.event.EventManager;
 import me.kavin.mememachine.event.events.EventGuildReaction;
+import me.kavin.mememachine.event.events.EventGuildReactionAdd;
+import me.kavin.mememachine.event.events.EventGuildReactionRemove;
 import me.kavin.mememachine.lists.Api;
 import me.kavin.mememachine.utils.Multithreading;
 import net.dv8tion.jda.core.OnlineStatus;
@@ -17,6 +19,8 @@ import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.core.events.guild.update.GuildUpdateOwnerEvent;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.events.message.guild.react.GenericGuildMessageReactionEvent;
+import net.dv8tion.jda.core.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.core.events.message.guild.react.GuildMessageReactionRemoveEvent;
 import net.dv8tion.jda.core.events.message.priv.PrivateMessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
@@ -79,6 +83,26 @@ public class DiscordListener extends ListenerAdapter {
 			@Override
 			public void run() {
 				EventManager.getDefault().call(new EventGuildReaction(event));
+			}
+		});
+	}
+	
+	@Override
+	public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event) {
+		Multithreading.runAsync(new Runnable() {
+			@Override
+			public void run() {
+				EventManager.getDefault().call(new EventGuildReactionAdd(event));
+			}
+		});
+	}
+	
+	@Override
+	public void onGuildMessageReactionRemove(GuildMessageReactionRemoveEvent event) {
+		Multithreading.runAsync(new Runnable() {
+			@Override
+			public void run() {
+				EventManager.getDefault().call(new EventGuildReactionRemove(event));
 			}
 		});
 	}
