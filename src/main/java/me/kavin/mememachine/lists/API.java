@@ -32,7 +32,7 @@ public class API {
 				.put("count", Main.api.getUsers().size())
 				.put("server_count", Main.api.getGuilds().size());
 		try {
-			Unirest.post("https://discordbots.org/api/bots/" + Main.api.getSelfUser().getId())
+			Unirest.post("https://botsfordiscord.com/api/v1/bots/" + Main.api.getSelfUser().getId())
 					.header("Authorization", Constants.DBL_TOKEN).header("Content-Type", "application/json")
 					.body(obj.toString()).asJson();
 		} catch (UnirestException e) {
