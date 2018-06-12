@@ -7,7 +7,7 @@ import me.kavin.mememachine.event.EventManager;
 import me.kavin.mememachine.event.events.EventGuildReaction;
 import me.kavin.mememachine.event.events.EventGuildReactionAdd;
 import me.kavin.mememachine.event.events.EventGuildReactionRemove;
-import me.kavin.mememachine.lists.Api;
+import me.kavin.mememachine.lists.API;
 import me.kavin.mememachine.utils.Multithreading;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.ChannelType;
@@ -32,7 +32,7 @@ public class DiscordListener extends ListenerAdapter {
 
 	@Override
 	public void onReady(ReadyEvent event) {
-		Api.loop();
+		API.loop();
 		Main.api.getPresence().setStatus(OnlineStatus.IDLE);
 		Main.api.getPresence().setGame(
 				Game.of(GameType.DEFAULT, "Meminq | >help | " + Main.api.getGuilds().size() + " Servers!", "Hax.kill"));
