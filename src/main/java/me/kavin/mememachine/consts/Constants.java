@@ -7,6 +7,8 @@ public class Constants {
 	public static final String GOOGLE_API_KEY = System.getenv().get("GOOGLE_API_KEY");
 
 	public static final String DBL_TOKEN = System.getenv().get("DBL_API_KEY");
-	
+
 	public static final String B4D_TOKEN = System.getenv().get("B4D_API_KEY");
+
+	public static final String DISCORD_BOTS_PW_TOKEN = System.getenv().get("DISCORD_BOTS_PW_KEY");
 }

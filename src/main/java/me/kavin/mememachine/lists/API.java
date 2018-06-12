@@ -18,6 +18,7 @@ public class API {
 				while (true) {
 					dbl();
 					b4d();
+					dcbotspw();
 					try {
 						Thread.sleep(300000);
 					} catch (InterruptedException e) {
@@ -25,6 +26,18 @@ public class API {
 				}
 			}
 		});
+	}
+	
+	public static void dcbotspw() {
+		JSONObject obj = new JSONObject()
+				.put("server_count", Main.api.getGuilds().size());
+		try {
+			Unirest.post("https://bots.discord.pw/api/bots/" + Main.api.getSelfUser().getId() + "/stats")
+					.header("Authorization", Constants.DISCORD_BOTS_PW_TOKEN).header("Content-Type", "application/json")
+					.body(obj.toString()).asJson();
+		} catch (UnirestException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void b4d() {
