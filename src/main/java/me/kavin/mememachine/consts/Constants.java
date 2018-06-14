@@ -11,4 +11,8 @@ public class Constants {
 	public static final String B4D_TOKEN = System.getenv().get("B4D_API_KEY");
 
 	public static final String DISCORD_BOTS_PW_TOKEN = System.getenv().get("DISCORD_BOTS_PW_KEY");
+	
+	public static final String FB_URL = System.getenv().get("FB_URL");
+	
+	public static final String FB_SECRET = System.getenv().get("FB_SECRET");
 }
