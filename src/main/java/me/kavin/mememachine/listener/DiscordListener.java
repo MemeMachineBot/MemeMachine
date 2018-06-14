@@ -1,8 +1,15 @@
 package me.kavin.mememachine.listener;
 
+import java.util.HashMap;
+
+import org.json.JSONObject;
+
+import com.mashape.unirest.http.Unirest;
+
 import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.command.CommandManager;
+import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.event.EventManager;
 import me.kavin.mememachine.event.events.EventGuildReaction;
 import me.kavin.mememachine.event.events.EventGuildReactionAdd;
@@ -26,6 +33,8 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class DiscordListener extends ListenerAdapter {
 
+	HashMap<Long, Long> lastMsg = new HashMap<>();
+	
 	public static void init() {
 		Main.api.addEventListener(new DiscordListener());
 	}
@@ -69,6 +78,32 @@ public class DiscordListener extends ListenerAdapter {
 						cmd.onCommand(event.getMessage().getContentRaw(), event);
 					}
 				});
+		addXp(event.getAuthor().getIdLong());
+	}
+	
+	private void addXp(long id) {
+		try {
+			if(!lastMsg.containsKey(id))
+				lastMsg.put(id, 0L);
+			
+			if(lastMsg.containsKey(id) && System.currentTimeMillis() - lastMsg.get(id) > 60000) {
+				String resp = Unirest.get("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json" + "?auth=" + Constants.FB_SECRET)
+						.asString().getBody();
+				if(resp.equals("null")) {
+					Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json" + "?auth=" + Constants.FB_SECRET)
+					.header("content-type", "application/json")
+					.body(new JSONObject().put("xp", 25))
+					.asString();
+				} else {
+					JSONObject xp = new JSONObject(resp);
+					Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json" + "?auth=" + Constants.FB_SECRET)
+					.header("content-type", "application/json")
+					.body(new JSONObject(resp).put("xp", xp.getInt("xp") + 25))
+					.asString();
+				}
+				lastMsg.put(id, 0L);
+			}
+		} catch (Exception e) { }
 	}
 
 	@Override
