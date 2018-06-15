@@ -10,6 +10,7 @@ import me.kavin.mememachine.command.commands.BotStats;
 import me.kavin.mememachine.command.commands.Cat;
 import me.kavin.mememachine.command.commands.CatFact;
 import me.kavin.mememachine.command.commands.CoinFlip;
+import me.kavin.mememachine.command.commands.Cookie;
 import me.kavin.mememachine.command.commands.CopyPasta;
 import me.kavin.mememachine.command.commands.Dab;
 import me.kavin.mememachine.command.commands.Define;
@@ -74,5 +75,6 @@ public class CommandManager {
 		commands.add(new WYR());
 		commands.add(new Profile());
 		commands.add(new CatFact());
+		commands.add(new Cookie());
 	}
 }
