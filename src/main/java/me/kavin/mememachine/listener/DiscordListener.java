@@ -38,19 +38,22 @@ public class DiscordListener extends ListenerAdapter {
 	public static void init() {
 		Main.api.addEventListener(new DiscordListener());
 	}
-
-	@Override
-	public void onReady(ReadyEvent event) {
-		API.loop();
-		Main.api.getPresence().setStatus(OnlineStatus.IDLE);
+	
+	private void setPresence() {
 		Main.api.getPresence().setGame(
 				Game.of(GameType.DEFAULT, "Meminq | >help | " + Main.api.getGuilds().size() + " Servers!", "Hax.kill"));
 	}
 
 	@Override
+	public void onReady(ReadyEvent event) {
+		API.loop();
+		Main.api.getPresence().setStatus(OnlineStatus.IDLE);
+		setPresence();
+	}
+
+	@Override
 	public void onGuildJoin(GuildJoinEvent event) {
-		Main.api.getPresence().setGame(
-				Game.of(GameType.DEFAULT, "Meminq | >help | " + Main.api.getGuilds().size() + " Servers!", "Hax.kill"));
+		setPresence();
 	}
 
 	@Override
@@ -61,8 +64,7 @@ public class DiscordListener extends ListenerAdapter {
 
 	@Override
 	public void onGuildLeave(GuildLeaveEvent event) {
-		Main.api.getPresence().setGame(
-				Game.of(GameType.DEFAULT, "Meminq | >help | " + Main.api.getGuilds().size() + " Servers!", "Hax.kill"));
+		setPresence();
 	}
 
 	@Override
