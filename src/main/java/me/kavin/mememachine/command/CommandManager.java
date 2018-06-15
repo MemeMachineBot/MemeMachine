@@ -23,6 +23,7 @@ import me.kavin.mememachine.command.commands.Invite;
 import me.kavin.mememachine.command.commands.Meme;
 import me.kavin.mememachine.command.commands.PasswordGen;
 import me.kavin.mememachine.command.commands.Ping;
+import me.kavin.mememachine.command.commands.Profile;
 import me.kavin.mememachine.command.commands.RPS;
 import me.kavin.mememachine.command.commands.Reddit;
 import me.kavin.mememachine.command.commands.Roll;
@@ -70,5 +71,6 @@ public class CommandManager {
 		commands.add(new Greentext());
 		commands.add(new Anime());
 		commands.add(new WYR());
+		commands.add(new Profile());
 	}
 }
