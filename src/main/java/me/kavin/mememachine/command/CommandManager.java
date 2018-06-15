@@ -8,6 +8,7 @@ import me.kavin.mememachine.command.commands.Aww;
 import me.kavin.mememachine.command.commands.Bitcoin;
 import me.kavin.mememachine.command.commands.BotStats;
 import me.kavin.mememachine.command.commands.Cat;
+import me.kavin.mememachine.command.commands.CatFact;
 import me.kavin.mememachine.command.commands.CoinFlip;
 import me.kavin.mememachine.command.commands.CopyPasta;
 import me.kavin.mememachine.command.commands.Dab;
@@ -72,5 +73,6 @@ public class CommandManager {
 		commands.add(new Anime());
 		commands.add(new WYR());
 		commands.add(new Profile());
+		commands.add(new CatFact());
 	}
 }
