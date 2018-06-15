@@ -32,7 +32,7 @@ public class Profile extends Command {
 				if(resp.equals("null")) {
 					meb.addField("", "No Data Available" + "\n", false);
 				} else {
-					meb.addField("XP required:", new JSONObject(resp).getInt("xp") % 500 + "\n", false);
+					meb.addField("XP required:", 500 - (new JSONObject(resp).getInt("xp") % 500) + "\n", false);
 					meb.addField("Your Level:", new JSONObject(resp).getInt("xp") / 500 + "\n", false);
 				}
 				
