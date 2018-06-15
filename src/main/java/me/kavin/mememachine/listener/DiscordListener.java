@@ -101,7 +101,7 @@ public class DiscordListener extends ListenerAdapter {
 					.body(new JSONObject(resp).put("xp", xp.getInt("xp") + 25))
 					.asString();
 				}
-				lastMsg.put(id, 0L);
+				lastMsg.put(id, System.currentTimeMillis());
 			}
 		} catch (Exception e) { }
 	}
