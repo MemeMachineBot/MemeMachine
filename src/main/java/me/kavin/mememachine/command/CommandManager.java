@@ -32,6 +32,7 @@ import me.kavin.mememachine.command.commands.Roll;
 import me.kavin.mememachine.command.commands.Shorten;
 import me.kavin.mememachine.command.commands.Stats;
 import me.kavin.mememachine.command.commands.Subs;
+import me.kavin.mememachine.command.commands.TopSongs;
 import me.kavin.mememachine.command.commands.UpTime;
 import me.kavin.mememachine.command.commands.Vote;
 import me.kavin.mememachine.command.commands.WYR;
@@ -76,5 +77,6 @@ public class CommandManager {
 		commands.add(new Profile());
 		commands.add(new CatFact());
 		commands.add(new Cookie());
+		commands.add(new TopSongs());
 	}
 }
