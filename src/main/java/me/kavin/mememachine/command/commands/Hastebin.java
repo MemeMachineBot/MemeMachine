@@ -26,20 +26,22 @@ public class Hastebin extends Command {
 					for (int i = getPrefix().length() + 1; i < message.length(); i++)
 						q += message.charAt(i);
 				}
-				
-				JSONObject jObject = new JSONObject(Unirest.post("https://hastebin.com/documents").body(q).asString().getBody());
-				
+
+				JSONObject jObject = new JSONObject(
+						Unirest.post("https://hastebin.com/documents").body(q).asString().getBody());
+
 				String url = "https://hastebin.com/" + jObject.getString("key");
-				
+
 				EmbedBuilder meb = new EmbedBuilder();
-				
+
 				meb.setTitle("Hastebin");
 				meb.setColor(ColorUtils.getRainbowColor(2000));
-				
+
 				meb.addField("`Heres your hastebin link: `", url, true);
-				
+
 				event.getChannel().sendMessage(meb.build()).complete();
 			}
-		} catch (Exception e) { }
+		} catch (Exception e) {
+		}
 	}
 }

@@ -35,11 +35,11 @@ public class DiscordListener extends ListenerAdapter {
 
 	HashMap<Long, Long> lastMsg = new HashMap<>();
 	HashMap<Long, Integer> cachedXp = new HashMap<>();
-	
+
 	public static void init() {
 		Main.api.addEventListener(new DiscordListener());
 	}
-	
+
 	private void setPresence() {
 		Main.api.getPresence().setGame(
 				Game.of(GameType.DEFAULT, "Meminq | >help | " + Main.api.getGuilds().size() + " Servers!", "Hax.kill"));
@@ -73,7 +73,7 @@ public class DiscordListener extends ListenerAdapter {
 		if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor() == Main.api.getSelfUser()
 				|| event.getAuthor().isBot())
 			return;
-		if(event.getMessage().getContentRaw().startsWith(">"))
+		if (event.getMessage().getContentRaw().startsWith(">"))
 			for (Command cmd : CommandManager.commands)
 				Multithreading.runAsync(new Runnable() {
 					@Override
@@ -83,40 +83,38 @@ public class DiscordListener extends ListenerAdapter {
 				});
 		addXp(event.getAuthor().getIdLong());
 	}
-	
+
 	private void addXp(long id) {
 		try {
-			if(!lastMsg.containsKey(id))
+			if (!lastMsg.containsKey(id))
 				lastMsg.put(id, 0L);
-			
-			if(lastMsg.containsKey(id) && System.currentTimeMillis() - lastMsg.get(id) > 60000) {
-				if(cachedXp.containsKey(id)) {
-					Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json" + "?auth=" + Constants.FB_SECRET)
-					.header("content-type", "application/json")
-					.body(new JSONObject().put("xp", cachedXp.get(id) + 25))
-					.asString();
+
+			if (lastMsg.containsKey(id) && System.currentTimeMillis() - lastMsg.get(id) > 60000) {
+				if (cachedXp.containsKey(id)) {
+					Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json" + "?auth="
+							+ Constants.FB_SECRET).header("content-type", "application/json")
+							.body(new JSONObject().put("xp", cachedXp.get(id) + 25)).asString();
 				} else {
-					String resp = Unirest.get("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json" + "?auth=" + Constants.FB_SECRET)
-							.asString().getBody();
-					if(resp.equals("null")) {
+					String resp = Unirest.get("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json"
+							+ "?auth=" + Constants.FB_SECRET).asString().getBody();
+					if (resp.equals("null")) {
 						cachedXp.put(id, 25);
-						Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json" + "?auth=" + Constants.FB_SECRET)
-						.header("content-type", "application/json")
-						.body(new JSONObject().put("xp", 25))
-						.asString();
+						Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json"
+								+ "?auth=" + Constants.FB_SECRET).header("content-type", "application/json")
+								.body(new JSONObject().put("xp", 25)).asString();
 					} else {
 						JSONObject xp = new JSONObject(resp);
 						cachedXp.put(id, xp.getInt("xp") + 25);
-						Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json" + "?auth=" + Constants.FB_SECRET)
-						.header("content-type", "application/json")
-						.body(new JSONObject(resp).put("xp", cachedXp.get(id)))
-						.asString();
+						Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json"
+								+ "?auth=" + Constants.FB_SECRET).header("content-type", "application/json")
+								.body(new JSONObject(resp).put("xp", cachedXp.get(id))).asString();
 					}
 				}
-				
+
 				lastMsg.put(id, System.currentTimeMillis());
 			}
-		} catch (Exception e) { }
+		} catch (Exception e) {
+		}
 	}
 
 	@Override
@@ -134,7 +132,7 @@ public class DiscordListener extends ListenerAdapter {
 			}
 		});
 	}
-	
+
 	@Override
 	public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event) {
 		Multithreading.runAsync(new Runnable() {
@@ -144,7 +142,7 @@ public class DiscordListener extends ListenerAdapter {
 			}
 		});
 	}
-	
+
 	@Override
 	public void onGuildMessageReactionRemove(GuildMessageReactionRemoveEvent event) {
 		Multithreading.runAsync(new Runnable() {

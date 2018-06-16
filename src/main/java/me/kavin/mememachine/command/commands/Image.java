@@ -4,6 +4,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import org.json.JSONObject;
+
 import com.mashape.unirest.http.Unirest;
 
 import me.kavin.mememachine.Main;
@@ -89,14 +90,14 @@ public class Image extends Command {
 
 						int start = 10 * (page / 10);
 						String url = "https://www.googleapis.com/customsearch/v1?" + "safe=medium&searchType=image&"
-								+ "q=" + URLEncoder.encode(queries.get(i), "UTF-8") + "&cx=008677437472124065250%3Ajljeb59kuse&num=10"
-								+ "&key=" + Constants.GOOGLE_API_KEY;
-						if(start != 0)
+								+ "q=" + URLEncoder.encode(queries.get(i), "UTF-8")
+								+ "&cx=008677437472124065250%3Ajljeb59kuse&num=10" + "&key=" + Constants.GOOGLE_API_KEY;
+						if (start != 0)
 							url += "&start=" + start;
 						JSONObject root = new JSONObject(Unirest.get(url).asString().getBody());
 
-						meb.setImage(root.getJSONArray("items").getJSONObject(page < 10 ? (page % 10) - 1 : page % 10).getJSONObject("image")
-								.getString("thumbnailLink"));
+						meb.setImage(root.getJSONArray("items").getJSONObject(page < 10 ? (page % 10) - 1 : page % 10)
+								.getJSONObject("image").getString("thumbnailLink"));
 						meb.setDescription("Page " + page + " / 100");
 
 						sent.set(i, msg.editMessage(meb.build()).complete());
@@ -119,14 +120,14 @@ public class Image extends Command {
 
 						int start = 10 * (page / 10);
 						String url = "https://www.googleapis.com/customsearch/v1?" + "safe=medium&searchType=image&"
-								+ "q=" + URLEncoder.encode(queries.get(i), "UTF-8") + "&cx=008677437472124065250%3Ajljeb59kuse&num=10"
-								+ "&key=" + Constants.GOOGLE_API_KEY;
-						if(start != 0)
+								+ "q=" + URLEncoder.encode(queries.get(i), "UTF-8")
+								+ "&cx=008677437472124065250%3Ajljeb59kuse&num=10" + "&key=" + Constants.GOOGLE_API_KEY;
+						if (start != 0)
 							url += "&start=" + start;
 						JSONObject root = new JSONObject(Unirest.get(url).asString().getBody());
 
-						meb.setImage(root.getJSONArray("items").getJSONObject(page < 10 ? (page % 10) - 1 : page % 10).getJSONObject("image")
-								.getString("thumbnailLink"));
+						meb.setImage(root.getJSONArray("items").getJSONObject(page < 10 ? (page % 10) - 1 : page % 10)
+								.getJSONObject("image").getString("thumbnailLink"));
 						meb.setDescription("Page " + page + " / 100");
 
 						sent.set(i, msg.editMessage(meb.build()).complete());

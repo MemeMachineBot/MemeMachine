@@ -43,7 +43,8 @@ public class Anime extends Command {
 
 				if (jObject.getString("results").length() > 0) {
 					for (Element element : Jsoup.parse(jObject.getString("results")).getElementsByClass("name")) {
-						meb.addField("`" + element.text() + "`", "https://kiss-anime.io" + element.attr("href") + "\n", false);
+						meb.addField("`" + element.text() + "`", "https://kiss-anime.io" + element.attr("href") + "\n",
+								false);
 					}
 				} else {
 					meb.addField("No Results", "Unfortunately I couldn't find any results for `" + q + "`", true);
@@ -51,6 +52,7 @@ public class Anime extends Command {
 
 				event.getChannel().sendMessage(meb.build()).complete();
 			}
-		} catch (Exception e) { }
+		} catch (Exception e) {
+		}
 	}
 }

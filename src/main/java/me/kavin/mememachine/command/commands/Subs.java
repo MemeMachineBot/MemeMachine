@@ -14,9 +14,9 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Subs extends Command {
-	
+
 	private DecimalFormat df = new DecimalFormat("#,###");
-	
+
 	public Subs() {
 		super(">subs", "`Checks the number of subscribers the given youtuber has`");
 	}
@@ -33,33 +33,40 @@ public class Subs extends Command {
 					for (int i = getPrefix().length() + 1; i < message.length(); i++)
 						q += message.charAt(i);
 				}
-				
+
 				String url = "https://www.googleapis.com/youtube/v3/search/?" + "safeSearch=moderate" + "&regionCode=US"
-						+ "&q=" + URLEncoder.encode(q, "UTF-8")
-						+ "&type=channel&part=snippet&key="
+						+ "&q=" + URLEncoder.encode(q, "UTF-8") + "&type=channel&part=snippet&key="
 						+ Constants.GOOGLE_API_KEY;
-				
+
 				JSONObject root = new JSONObject(Unirest.get(url).asString().getBody());
-				
+
 				EmbedBuilder meb = new EmbedBuilder();
-				
+
 				meb.setTitle("YouTube Subscribers");
 				meb.setColor(ColorUtils.getRainbowColor(2000));
-				
+
 				if (!root.has("items")) {
 					meb.addField("No Results", "Unfortunately I couldn't find any results for `" + q + "`", true);
 					event.getChannel().sendMessage(meb.build()).complete();
 					return;
 				}
-				
-				meb.addField("`Channel: `", "https://www.youtube.com/channel/" + root.getJSONArray("items").getJSONObject(0).getJSONObject("id").getString("channelId") + "\n", false);
-				
-				JSONObject subs = new JSONObject(Unirest.get("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + root.getJSONArray("items").getJSONObject(0).getJSONObject("id").getString("channelId") + "&fields=items/statistics/subscriberCount&key=" + Constants.GOOGLE_API_KEY).asString().getBody());
-				
-				meb.addField("`Subscribers: `", df.format(subs.getJSONArray("items").getJSONObject(0).getJSONObject("statistics").getInt("subscriberCount")) + "\n", false);
-				
+
+				meb.addField("`Channel: `", "https://www.youtube.com/channel/"
+						+ root.getJSONArray("items").getJSONObject(0).getJSONObject("id").getString("channelId") + "\n",
+						false);
+
+				JSONObject subs = new JSONObject(Unirest
+						.get("https://www.googleapis.com/youtube/v3/channels?part=statistics&id="
+								+ root.getJSONArray("items").getJSONObject(0).getJSONObject("id").getString("channelId")
+								+ "&fields=items/statistics/subscriberCount&key=" + Constants.GOOGLE_API_KEY)
+						.asString().getBody());
+
+				meb.addField("`Subscribers: `", df.format(subs.getJSONArray("items").getJSONObject(0)
+						.getJSONObject("statistics").getInt("subscriberCount")) + "\n", false);
+
 				event.getChannel().sendMessage(meb.build()).complete();
 			}
-		} catch (Exception e) { }
+		} catch (Exception e) {
+		}
 	}
 }

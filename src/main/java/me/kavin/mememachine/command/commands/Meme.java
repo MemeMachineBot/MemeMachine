@@ -43,7 +43,8 @@ public class Meme extends Command {
 			String[] keys = Arrays.copyOf(posts.keySet().toArray(), posts.keySet().size(), String[].class);
 			while (!found && tries <= 5) {
 				JSONObject post = posts.getJSONObject(keys[ThreadLocalRandom.current().nextInt(keys.length)]);
-				if (post.getBoolean("isLocked") || post.isNull("media") || !post.getJSONObject("media").has("content")) {
+				if (post.getBoolean("isLocked") || post.isNull("media")
+						|| !post.getJSONObject("media").has("content")) {
 					tries++;
 					continue;
 				}
