@@ -20,14 +20,18 @@ public class CatFact extends Command {
 			if (message.toLowerCase().equals(getPrefix())) {
 
 				EmbedBuilder meb = new EmbedBuilder();
-				
+
 				meb.setTitle("Cat Fact");
 				meb.setColor(ColorUtils.getRainbowColor(2000));
-				
-				meb.addField("Heres a cat fact:", new JSONObject(Unirest.get("https://catfact.ninja/fact").asString().getBody()).getString("fact") + "\n", false);
-				
+
+				meb.addField("Heres a cat fact:",
+						new JSONObject(Unirest.get("https://catfact.ninja/fact").asString().getBody()).getString("fact")
+								+ "\n",
+						false);
+
 				event.getChannel().sendMessage(meb.build()).complete();
 			}
-		} catch (Exception e) { }
+		} catch (Exception e) {
+		}
 	}
 }

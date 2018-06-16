@@ -1,6 +1,7 @@
 package me.kavin.mememachine.command.commands;
 
 import java.net.URLEncoder;
+
 import org.json.JSONObject;
 import org.json.JSONTokener;
 

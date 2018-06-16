@@ -20,14 +20,18 @@ public class Cookie extends Command {
 			if (message.toLowerCase().equals(getPrefix())) {
 
 				EmbedBuilder meb = new EmbedBuilder();
-				
+
 				meb.setTitle("Fortune Cookie");
 				meb.setColor(ColorUtils.getRainbowColor(2000));
-				
-				meb.addField("You opened a fortune cookie:", new JSONObject(Unirest.get("http://www.yerkee.com/api/fortune").asString().getBody()).getString("fortune") + "\n", false);
-				
+
+				meb.addField("You opened a fortune cookie:",
+						new JSONObject(Unirest.get("http://www.yerkee.com/api/fortune").asString().getBody())
+								.getString("fortune") + "\n",
+						false);
+
 				event.getChannel().sendMessage(meb.build()).complete();
 			}
-		} catch (Exception e) { }
+		} catch (Exception e) {
+		}
 	}
 }
