@@ -34,6 +34,7 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 public class DiscordListener extends ListenerAdapter {
 
 	HashMap<Long, Long> lastMsg = new HashMap<>();
+	HashMap<Long, Integer> cachedXp = new HashMap<>();
 	
 	public static void init() {
 		Main.api.addEventListener(new DiscordListener());
@@ -89,20 +90,30 @@ public class DiscordListener extends ListenerAdapter {
 				lastMsg.put(id, 0L);
 			
 			if(lastMsg.containsKey(id) && System.currentTimeMillis() - lastMsg.get(id) > 60000) {
-				String resp = Unirest.get("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json" + "?auth=" + Constants.FB_SECRET)
-						.asString().getBody();
-				if(resp.equals("null")) {
+				if(cachedXp.containsKey(id)) {
 					Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json" + "?auth=" + Constants.FB_SECRET)
 					.header("content-type", "application/json")
-					.body(new JSONObject().put("xp", 25))
+					.body(new JSONObject().put("xp", cachedXp.get(id) + 25))
 					.asString();
 				} else {
-					JSONObject xp = new JSONObject(resp);
-					Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json" + "?auth=" + Constants.FB_SECRET)
-					.header("content-type", "application/json")
-					.body(new JSONObject(resp).put("xp", xp.getInt("xp") + 25))
-					.asString();
+					String resp = Unirest.get("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json" + "?auth=" + Constants.FB_SECRET)
+							.asString().getBody();
+					if(resp.equals("null")) {
+						cachedXp.put(id, 25);
+						Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json" + "?auth=" + Constants.FB_SECRET)
+						.header("content-type", "application/json")
+						.body(new JSONObject().put("xp", 25))
+						.asString();
+					} else {
+						JSONObject xp = new JSONObject(resp);
+						cachedXp.put(id, xp.getInt("xp") + 25);
+						Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json" + "?auth=" + Constants.FB_SECRET)
+						.header("content-type", "application/json")
+						.body(new JSONObject(resp).put("xp", cachedXp.get(id)))
+						.asString();
+					}
 				}
+				
 				lastMsg.put(id, System.currentTimeMillis());
 			}
 		} catch (Exception e) { }
