@@ -15,7 +15,6 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Yt extends Command {
 
-	private String q = null;
 
 	public Yt() {
 		super(">yt", "`Allows you to search youtube`");
@@ -25,13 +24,10 @@ public class Yt extends Command {
 	public void onCommand(String message, MessageReceivedEvent event) {
 		if (message.toLowerCase().startsWith(getPrefix())) {
 
-			q = null;
+			String q = null;
 
-			if (message.length() > 4) {
-				q = "";
-				for (int i = 4; i < message.length(); i++)
-					q += message.charAt(i);
-			}
+			for (int i = getPrefix().length() + 1; i < message.length(); i++)
+				q += message.charAt(i);
 
 			event.getChannel().sendMessage(getSearch(q)).complete();
 		}
