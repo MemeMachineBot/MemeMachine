@@ -1,7 +1,6 @@
 package me.kavin.mememachine.command.commands;
 
 import java.util.Arrays;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.json.JSONObject;
@@ -18,8 +17,6 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Reddit extends Command {
 
-	Random rnd = new Random();
-	String url = null;
 	WebClient wc = new WebClient();
 
 	public Reddit() {

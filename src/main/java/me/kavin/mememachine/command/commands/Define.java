@@ -17,8 +17,6 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Define extends Command {
 
-	private String q = null;
-
 	public Define() {
 		super(">define", "`Gets the definition of a term from urbandictionary.com`");
 	}
@@ -27,13 +25,10 @@ public class Define extends Command {
 	public void onCommand(String message, MessageReceivedEvent event) {
 		if (message.toLowerCase().startsWith(getPrefix())) {
 
-			q = null;
+			String q = null;
 
-			if (message.length() > 8) {
-				q = "";
-				for (int i = 7; i < message.length(); i++)
-					q += message.charAt(i);
-			}
+			for (int i = getPrefix().length() + 1; i < message.length(); i++)
+				q += message.charAt(i);
 
 			event.getChannel().sendMessage(getSearch(q)).complete();
 		}
