@@ -91,21 +91,21 @@ public class DiscordListener extends ListenerAdapter {
 
 			if (lastMsg.containsKey(id) && System.currentTimeMillis() - lastMsg.get(id) > 60000) {
 				if (cachedXp.containsKey(id)) {
-					Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json" + "?auth="
+					Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/xp/" + id + ".json" + "?auth="
 							+ Constants.FB_SECRET).header("content-type", "application/json")
 							.body(new JSONObject().put("xp", cachedXp.get(id) + 25)).asString();
 				} else {
-					String resp = Unirest.get("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json"
+					String resp = Unirest.get("https://" + Constants.FB_URL + ".firebaseio.com/users/xp/" + id + ".json"
 							+ "?auth=" + Constants.FB_SECRET).asString().getBody();
 					if (resp.equals("null")) {
 						cachedXp.put(id, 25);
-						Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json"
+						Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/xp/" + id + ".json"
 								+ "?auth=" + Constants.FB_SECRET).header("content-type", "application/json")
 								.body(new JSONObject().put("xp", 25)).asString();
 					} else {
 						JSONObject xp = new JSONObject(resp);
 						cachedXp.put(id, xp.getInt("xp") + 25);
-						Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/" + id + "/xp.json"
+						Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/xp/" + id + ".json"
 								+ "?auth=" + Constants.FB_SECRET).header("content-type", "application/json")
 								.body(new JSONObject(resp).put("xp", cachedXp.get(id))).asString();
 					}
