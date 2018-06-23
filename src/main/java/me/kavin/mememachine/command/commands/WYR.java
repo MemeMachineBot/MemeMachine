@@ -1,12 +1,11 @@
 package me.kavin.mememachine.command.commands;
 
-import java.util.HashMap;
-
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
 
 import com.mashape.unirest.http.Unirest;
 
+import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.event.EventHandler;
 import me.kavin.mememachine.event.events.EventGuildReactionAdd;
@@ -22,7 +21,7 @@ import net.dv8tion.jda.core.events.message.guild.react.GuildMessageReactionRemov
 
 public class WYR extends Command {
 
-	HashMap<Long, WYRGame> sent = new HashMap<>();
+	Long2ObjectOpenHashMap<WYRGame> sent = new Long2ObjectOpenHashMap<>();
 	private String emoji1 = "1⃣";
 	private String emoji2 = "2⃣";
 

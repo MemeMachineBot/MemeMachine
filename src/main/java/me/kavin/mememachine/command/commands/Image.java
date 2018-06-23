@@ -1,12 +1,12 @@
 package me.kavin.mememachine.command.commands;
 
 import java.net.URLEncoder;
-import java.util.ArrayList;
 
 import org.json.JSONObject;
 
 import com.mashape.unirest.http.Unirest;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.consts.Constants;
@@ -21,8 +21,8 @@ import net.dv8tion.jda.core.events.message.guild.react.GenericGuildMessageReacti
 
 public class Image extends Command {
 
-	ArrayList<Message> sent = new ArrayList<>();
-	ArrayList<String> queries = new ArrayList<>();
+	ObjectArrayList<Message> sent = new ObjectArrayList<>();
+	ObjectArrayList<String> queries = new ObjectArrayList<>();
 
 	public Image() {
 		super(">img", "`Allows you to search google for images`");

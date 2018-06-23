@@ -4,13 +4,10 @@ import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.OnlineStatus;
+import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Stats extends Command {
-
-	int bots = 0;
-	int users = 0;
-	int online = 0;
 
 	public Stats() {
 		super(">stats", "`Shows you the server stastics`");
@@ -24,11 +21,11 @@ public class Stats extends Command {
 			meb.setTitle("Server Statistics");
 			meb.setColor(ColorUtils.getRainbowColor(2000));
 
-			bots = 0;
-			users = 0;
-			online = 0;
+			int bots = 0;
+			int users = 0;
+			int online = 0;
 
-			event.getGuild().getMembers().forEach(member -> {
+			for (Member member : event.getGuild().getMembers()) {
 				if (member.getUser().isBot())
 					bots++;
 				else {
@@ -36,7 +33,7 @@ public class Stats extends Command {
 					if (member.getOnlineStatus() != OnlineStatus.OFFLINE)
 						online++;
 				}
-			});
+			}
 
 			meb.addField("Bots: ", String.valueOf(bots) + "\n", false);
 			meb.addField("Users: ", String.valueOf(users) + "\n", false);

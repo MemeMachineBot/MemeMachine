@@ -15,7 +15,6 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Yt extends Command {
 
-
 	public Yt() {
 		super(">yt", "`Allows you to search youtube`");
 	}

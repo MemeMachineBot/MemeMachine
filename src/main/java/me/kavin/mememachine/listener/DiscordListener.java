@@ -1,11 +1,11 @@
 package me.kavin.mememachine.listener;
 
-import java.util.HashMap;
-
 import org.json.JSONObject;
 
 import com.mashape.unirest.http.Unirest;
 
+import it.unimi.dsi.fastutil.longs.Long2IntOpenHashMap;
+import it.unimi.dsi.fastutil.longs.Long2LongOpenHashMap;
 import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.command.CommandManager;
@@ -33,8 +33,8 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class DiscordListener extends ListenerAdapter {
 
-	HashMap<Long, Long> lastMsg = new HashMap<>();
-	HashMap<Long, Integer> cachedXp = new HashMap<>();
+	Long2LongOpenHashMap lastMsg = new Long2LongOpenHashMap();
+	Long2IntOpenHashMap cachedXp = new Long2IntOpenHashMap();
 
 	public static void init() {
 		Main.api.addEventListener(new DiscordListener());
