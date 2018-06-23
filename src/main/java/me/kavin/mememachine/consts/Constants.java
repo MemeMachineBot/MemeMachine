@@ -16,5 +16,5 @@ public class Constants {
 
 	public static final String FB_SECRET = System.getenv().get("FB_SECRET");
 
-	public static final String GOOGLE_PROXY_IMAGE = "https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&resize_w=250&url=";
+	public static final String GOOGLE_PROXY_IMAGE = "https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&resize_h=250&resize_w=250&url=";
 }
