@@ -80,6 +80,8 @@ Bot Commands:
 
 >topsongs `Lists the top songs!`
 
+>robot `Shows a robot avatar of you or the person you tag!`
+
 You can invite me [here](https://discordapp.com/oauth2/authorize?client_id=445800505315426315&permissions=8&scope=bot)
 
 And more to come!
