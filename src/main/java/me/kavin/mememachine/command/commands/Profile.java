@@ -27,8 +27,8 @@ public class Profile extends Command {
 				meb.setColor(ColorUtils.getRainbowColor(2000));
 
 				String resp = Unirest
-						.get("https://" + Constants.FB_URL + ".firebaseio.com/users/"
-								+ event.getMember().getUser().getIdLong() + "/xp.json" + "?auth=" + Constants.FB_SECRET)
+						.get("https://" + Constants.FB_URL + ".firebaseio.com/users/xp/"
+								+ event.getMember().getUser().getIdLong() + ".json" + "?auth=" + Constants.FB_SECRET)
 						.asString().getBody();
 
 				if (resp.equals("null")) {
