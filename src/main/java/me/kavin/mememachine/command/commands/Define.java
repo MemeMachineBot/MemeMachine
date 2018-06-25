@@ -30,7 +30,19 @@ public class Define extends Command {
 			for (int i = getPrefix().length() + 1; i < message.length(); i++)
 				q += message.charAt(i);
 
-			event.getChannel().sendMessage(getSearch(q)).complete();
+			if(event.getTextChannel().isNSFW())
+				event.getChannel().sendMessage(getSearch(q)).complete();
+			else {
+				EmbedBuilder meb = new EmbedBuilder();
+				
+				meb.setTitle("Enable NSFW Channel");
+				meb.setColor(ColorUtils.getRainbowColor(2000));
+				
+				meb.setImage("https://i.gyazo.com/9ac5c5a6ddf46b5c446853a7778b0cae.gif");
+				
+				event.getChannel().sendMessage(meb.build()).complete();
+				
+			}
 		}
 	}
 
