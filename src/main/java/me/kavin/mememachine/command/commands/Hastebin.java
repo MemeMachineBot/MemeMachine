@@ -21,10 +21,10 @@ public class Hastebin extends Command {
 
 				String q = null;
 
-				if (message.length() > getPrefix().length()) {
-					q = "";
-					for (int i = getPrefix().length() + 1; i < message.length(); i++)
-						q += message.charAt(i);
+				for (int i = getPrefix().length() + 1; i < message.length(); i++) {
+					if(q == null)
+						q = "";
+					q += message.charAt(i);
 				}
 
 				JSONObject jObject = new JSONObject(
