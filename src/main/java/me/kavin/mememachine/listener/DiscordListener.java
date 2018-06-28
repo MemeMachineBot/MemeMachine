@@ -50,6 +50,7 @@ public class DiscordListener extends ListenerAdapter {
 		API.loop();
 		Main.api.getPresence().setStatus(OnlineStatus.IDLE);
 		setPresence();
+		System.gc();
 	}
 
 	@Override
