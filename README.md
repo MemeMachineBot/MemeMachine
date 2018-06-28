@@ -81,6 +81,8 @@ Bot Commands:
 
 >robot `Shows a robot avatar of you or the person you tag!`
 
+>mcserver `Searches for a minecraft server`
+
 You can invite me [here](https://discordapp.com/oauth2/authorize?client_id=445800505315426315&permissions=8&scope=bot)
 
 And more to come!

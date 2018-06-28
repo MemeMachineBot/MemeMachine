@@ -22,6 +22,7 @@ import me.kavin.mememachine.command.commands.Hastebin;
 import me.kavin.mememachine.command.commands.Help;
 import me.kavin.mememachine.command.commands.Image;
 import me.kavin.mememachine.command.commands.Invite;
+import me.kavin.mememachine.command.commands.McServer;
 import me.kavin.mememachine.command.commands.Meme;
 import me.kavin.mememachine.command.commands.PasswordGen;
 import me.kavin.mememachine.command.commands.Ping;
@@ -80,5 +81,6 @@ public class CommandManager {
 		commands.add(new Cookie());
 		commands.add(new TopSongs());
 		commands.add(new Robot());
+		commands.add(new McServer());
 	}
 }
