@@ -26,9 +26,11 @@ public class Google extends Command {
 
 			String q = null;
 
-			q = "";
-			for (int i = getPrefix().length() + 1; i < message.length(); i++)
+			for (int i = getPrefix().length() + 1; i < message.length(); i++) {
+				if(q == null)
+					q = "";
 				q += message.charAt(i);
+			}
 
 			event.getChannel().sendMessage(getSearch(q)).complete();
 		}

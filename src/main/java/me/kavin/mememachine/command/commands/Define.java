@@ -27,8 +27,11 @@ public class Define extends Command {
 
 			String q = null;
 
-			for (int i = getPrefix().length() + 1; i < message.length(); i++)
+			for (int i = getPrefix().length() + 1; i < message.length(); i++) {
+				if(q == null)
+					q = "";
 				q += message.charAt(i);
+			}
 
 			if(event.getTextChannel().isNSFW())
 				event.getChannel().sendMessage(getSearch(q)).complete();
