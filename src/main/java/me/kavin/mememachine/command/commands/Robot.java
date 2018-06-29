@@ -18,38 +18,35 @@ public class Robot extends Command {
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
 		try {
-			if (message.toLowerCase().startsWith(getPrefix()) || message.equalsIgnoreCase(getPrefix())) {
 
-				EmbedBuilder meb = new EmbedBuilder();
+			EmbedBuilder meb = new EmbedBuilder();
 
-				meb.setTitle("Your Robot Avatar");
-				meb.setColor(ColorUtils.getRainbowColor(2000));
+			meb.setTitle("Your Robot Avatar");
+			meb.setColor(ColorUtils.getRainbowColor(2000));
 
-				String[] split = message.split(" ");
+			String[] split = message.split(" ");
 
-				if (split.length == 1)
-					meb.setImage(Constants.GOOGLE_PROXY_IMAGE + URLEncoder.encode(
-							"https://robohash.org/" + URLEncoder.encode(event.getAuthor().getName(), "UTF-8"),
-							"UTF-8"));
-				else {
-					long memberId;
-					try {
-						memberId = getLong(split[1]);
-					} catch (NumberFormatException e) {
-						event.getChannel().sendMessage("`Please tag a person as your argument like` \n>robot "
-								+ Main.api.getSelfUser().getAsMention()).complete();
-						return;
-					}
-
-					if (event.getGuild().getMemberById(memberId) != null)
-						meb.setImage(Constants.GOOGLE_PROXY_IMAGE + URLEncoder.encode(
-								"https://robohash.org/" + URLEncoder
-										.encode(event.getGuild().getMemberById(memberId).getUser().getName(), "UTF-8"),
-								"UTF-8"));
-
+			if (split.length == 1)
+				meb.setImage(Constants.GOOGLE_PROXY_IMAGE + URLEncoder.encode(
+						"https://robohash.org/" + URLEncoder.encode(event.getAuthor().getName(), "UTF-8"), "UTF-8"));
+			else {
+				long memberId;
+				try {
+					memberId = getLong(split[1]);
+				} catch (NumberFormatException e) {
+					event.getChannel().sendMessage("`Please tag a person as your argument like` \n>robot "
+							+ Main.api.getSelfUser().getAsMention()).complete();
+					return;
 				}
-				event.getChannel().sendMessage(meb.build()).complete();
+
+				if (event.getGuild().getMemberById(memberId) != null)
+					meb.setImage(Constants.GOOGLE_PROXY_IMAGE + URLEncoder.encode(
+							"https://robohash.org/" + URLEncoder
+									.encode(event.getGuild().getMemberById(memberId).getUser().getName(), "UTF-8"),
+							"UTF-8"));
+
 			}
+			event.getChannel().sendMessage(meb.build()).complete();
 		} catch (Exception e) {
 		}
 	}

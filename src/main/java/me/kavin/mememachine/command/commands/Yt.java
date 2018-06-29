@@ -21,18 +21,16 @@ public class Yt extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		if (message.toLowerCase().startsWith(getPrefix())) {
 
-			String q = null;
+		String q = null;
 
-			for (int i = getPrefix().length() + 1; i < message.length(); i++) {
-				if(q == null)
-					q = "";
-				q += message.charAt(i);
-			}
-
-			event.getChannel().sendMessage(getSearch(q)).complete();
+		for (int i = getPrefix().length() + 1; i < message.length(); i++) {
+			if (q == null)
+				q = "";
+			q += message.charAt(i);
 		}
+
+		event.getChannel().sendMessage(getSearch(q)).complete();
 	}
 
 	private MessageEmbed getSearch(String q) {

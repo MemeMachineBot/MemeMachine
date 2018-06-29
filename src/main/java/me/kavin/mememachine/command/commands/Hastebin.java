@@ -17,30 +17,28 @@ public class Hastebin extends Command {
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
 		try {
-			if (message.toLowerCase().startsWith(getPrefix())) {
 
-				String q = null;
+			String q = null;
 
-				for (int i = getPrefix().length() + 1; i < message.length(); i++) {
-					if(q == null)
-						q = "";
-					q += message.charAt(i);
-				}
-
-				JSONObject jObject = new JSONObject(
-						Unirest.post("https://hastebin.com/documents").body(q).asString().getBody());
-
-				String url = "https://hastebin.com/" + jObject.getString("key");
-
-				EmbedBuilder meb = new EmbedBuilder();
-
-				meb.setTitle("Hastebin");
-				meb.setColor(ColorUtils.getRainbowColor(2000));
-
-				meb.addField("`Heres your hastebin link: `", url, true);
-
-				event.getChannel().sendMessage(meb.build()).complete();
+			for (int i = getPrefix().length() + 1; i < message.length(); i++) {
+				if (q == null)
+					q = "";
+				q += message.charAt(i);
 			}
+
+			JSONObject jObject = new JSONObject(
+					Unirest.post("https://hastebin.com/documents").body(q).asString().getBody());
+
+			String url = "https://hastebin.com/" + jObject.getString("key");
+
+			EmbedBuilder meb = new EmbedBuilder();
+
+			meb.setTitle("Hastebin");
+			meb.setColor(ColorUtils.getRainbowColor(2000));
+
+			meb.addField("`Heres your hastebin link: `", url, true);
+
+			event.getChannel().sendMessage(meb.build()).complete();
 		} catch (Exception e) {
 		}
 	}

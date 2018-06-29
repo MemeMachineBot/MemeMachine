@@ -13,6 +13,7 @@ public class PasswordGen extends Command {
 
 	public PasswordGen() {
 		super(">password", "`Gives you a random secure password to use!`");
+
 		for (int i = 33; i < 127; i++) {
 			l.add(i);
 		}
@@ -25,16 +26,13 @@ public class PasswordGen extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		if (message.equalsIgnoreCase(getPrefix())) {
+		StringBuilder sb = new StringBuilder();
 
-			StringBuilder sb = new StringBuilder();
-
-			for (int i = 0; i < 10; i++) {
-				sb.append((char) l.get(ThreadLocalRandom.current().nextInt(l.size())).intValue());
-			}
-
-			event.getAuthor().openPrivateChannel().complete()
-					.sendMessage("Heres a random password:\n`" + sb.toString() + "`").complete();
+		for (int i = 0; i < 10; i++) {
+			sb.append((char) l.get(ThreadLocalRandom.current().nextInt(l.size())).intValue());
 		}
+
+		event.getAuthor().openPrivateChannel().complete()
+				.sendMessage("Heres a random password:\n`" + sb.toString() + "`").complete();
 	}
 }

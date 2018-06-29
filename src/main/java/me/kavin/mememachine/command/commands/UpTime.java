@@ -13,24 +13,22 @@ public class UpTime extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		if (message.equalsIgnoreCase(getPrefix())) {
-			long millis = Main.uptime.getDifference();
-			long second = (millis / 1000) % 60;
-			long minute = (millis / (1000 * 60)) % 60;
-			long hour = (millis / (1000 * 60 * 60)) % 24;
-			long days = (millis / (1000 * 60 * 60)) / 24;
+		long millis = Main.uptime.getDifference();
+		long second = (millis / 1000) % 60;
+		long minute = (millis / (1000 * 60)) % 60;
+		long hour = (millis / (1000 * 60 * 60)) % 24;
+		long days = (millis / (1000 * 60 * 60)) / 24;
 
-			EmbedBuilder meb = new EmbedBuilder();
+		EmbedBuilder meb = new EmbedBuilder();
 
-			meb.setTitle("Uptime");
-			meb.setColor(ColorUtils.getRainbowColor(2000));
+		meb.setTitle("Uptime");
+		meb.setColor(ColorUtils.getRainbowColor(2000));
 
-			meb.addField("Day", String.valueOf(days) + "\n", false);
-			meb.addField("Hour", String.valueOf(hour) + "\n", false);
-			meb.addField("Minute", String.valueOf(minute) + "\n", false);
-			meb.addField("Second", String.valueOf(second) + "\n", false);
+		meb.addField("Day", String.valueOf(days) + "\n", false);
+		meb.addField("Hour", String.valueOf(hour) + "\n", false);
+		meb.addField("Minute", String.valueOf(minute) + "\n", false);
+		meb.addField("Second", String.valueOf(second) + "\n", false);
 
-			event.getChannel().sendMessage(meb.build()).complete();
-		}
+		event.getChannel().sendMessage(meb.build()).complete();
 	}
 }

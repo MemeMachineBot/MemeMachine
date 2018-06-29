@@ -32,63 +32,61 @@ public class WYR extends Command {
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
 		try {
-			if (message.equalsIgnoreCase(getPrefix())) {
 
-				EmbedBuilder meb = new EmbedBuilder();
+			EmbedBuilder meb = new EmbedBuilder();
 
-				meb.setTitle("Would You Rather");
-				meb.setColor(ColorUtils.getRainbowColor(2000));
+			meb.setTitle("Would You Rather");
+			meb.setColor(ColorUtils.getRainbowColor(2000));
 
-				Elements options = Jsoup.parse(Unirest.get("http://either.io/").asString().getBody())
-						.getElementsByClass("option-text");
+			Elements options = Jsoup.parse(Unirest.get("http://either.io/").asString().getBody())
+					.getElementsByClass("option-text");
 
-				String choice1 = options.get(0).text();
-				String choice2 = options.get(1).text();
+			String choice1 = options.get(0).text();
+			String choice2 = options.get(1).text();
 
-				meb.addField(emoji1, choice1 + "\n", false);
-				meb.addField(emoji2, choice2 + "\n", false);
+			meb.addField(emoji1, choice1 + "\n", false);
+			meb.addField(emoji2, choice2 + "\n", false);
 
-				Message msg = event.getChannel().sendMessage(meb.build()).complete();
+			Message msg = event.getChannel().sendMessage(meb.build()).complete();
 
-				msg.addReaction(emoji1).queue();
-				msg.addReaction(emoji2).queue();
+			msg.addReaction(emoji1).queue();
+			msg.addReaction(emoji2).queue();
 
-				sent.put(msg.getIdLong(), new WYRGame(choice1, choice2));
+			sent.put(msg.getIdLong(), new WYRGame(choice1, choice2));
 
-				Multithreading.runAsync(new Runnable() {
-					@Override
-					public void run() {
+			Multithreading.runAsync(new Runnable() {
+				@Override
+				public void run() {
 
-						try {
-							Thread.sleep(45000);
-						} catch (Exception e) {
-						}
-
-						long msgId = msg.getIdLong();
-						WYRGame game = sent.get(msgId);
-
-						int votes1 = game.getVotes1();
-						int votes2 = game.getVotes2();
-
-						EmbedBuilder meb = new EmbedBuilder();
-
-						meb.setTitle("Would You Rather Results");
-						meb.setColor(ColorUtils.getRainbowColor(2000));
-
-						if (votes1 > votes2) {
-							meb.addField("", "The winner was `" + game.getChoice1() + "`", false);
-						} else if (votes2 > votes1) {
-							meb.addField("", "The winner was `" + game.getChoice2() + "`", false);
-						} else {
-							meb.addField("", "It was a `draw`", false);
-						}
-
-						event.getChannel().sendMessage(meb.build()).complete();
-
-						sent.remove(msgId);
+					try {
+						Thread.sleep(45000);
+					} catch (Exception e) {
 					}
-				});
-			}
+
+					long msgId = msg.getIdLong();
+					WYRGame game = sent.get(msgId);
+
+					int votes1 = game.getVotes1();
+					int votes2 = game.getVotes2();
+
+					EmbedBuilder meb = new EmbedBuilder();
+
+					meb.setTitle("Would You Rather Results");
+					meb.setColor(ColorUtils.getRainbowColor(2000));
+
+					if (votes1 > votes2) {
+						meb.addField("", "The winner was `" + game.getChoice1() + "`", false);
+					} else if (votes2 > votes1) {
+						meb.addField("", "The winner was `" + game.getChoice2() + "`", false);
+					} else {
+						meb.addField("", "It was a `draw`", false);
+					}
+
+					event.getChannel().sendMessage(meb.build()).complete();
+
+					sent.remove(msgId);
+				}
+			});
 		} catch (Exception e) {
 		}
 	}

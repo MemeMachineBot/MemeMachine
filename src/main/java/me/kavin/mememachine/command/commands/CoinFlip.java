@@ -14,15 +14,13 @@ public class CoinFlip extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		if (message.equalsIgnoreCase(getPrefix())) {
-			EmbedBuilder meb = new EmbedBuilder();
+		EmbedBuilder meb = new EmbedBuilder();
 
-			meb.setTitle("Coinflip");
-			meb.setColor(ColorUtils.getRainbowColor(2000));
+		meb.setTitle("Coinflip");
+		meb.setColor(ColorUtils.getRainbowColor(2000));
 
-			meb.addField("", "It was " + (ThreadLocalRandom.current().nextBoolean() ? "`Heads`" : "`Tails`"), true);
+		meb.addField("", "It was " + (ThreadLocalRandom.current().nextBoolean() ? "`Heads`" : "`Tails`"), true);
 
-			event.getChannel().sendMessage(meb.build()).complete();
-		}
+		event.getChannel().sendMessage(meb.build()).complete();
 	}
 }

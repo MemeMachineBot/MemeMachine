@@ -30,22 +30,19 @@ public class Image extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		if (message.toLowerCase().startsWith(getPrefix())) {
+		String q = null;
 
-			String q = null;
-
-			if (message.length() > getPrefix().length()) {
-				q = "";
-				for (int i = getPrefix().length() + 1; i < message.length(); i++)
-					q += message.charAt(i);
-			}
-
-			Message sent = event.getChannel().sendMessage(getSearch(q)).complete();
-			sent.addReaction("◀").complete();
-			sent.addReaction("▶").complete();
-			this.queries.add(q);
-			this.sent.add(sent);
+		if (message.length() > getPrefix().length()) {
+			q = "";
+			for (int i = getPrefix().length() + 1; i < message.length(); i++)
+				q += message.charAt(i);
 		}
+
+		Message sent = event.getChannel().sendMessage(getSearch(q)).complete();
+		sent.addReaction("◀").complete();
+		sent.addReaction("▶").complete();
+		this.queries.add(q);
+		this.sent.add(sent);
 	}
 
 	private MessageEmbed getSearch(String q) {
