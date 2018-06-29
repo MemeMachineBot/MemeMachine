@@ -1,7 +1,11 @@
 package me.kavin.mememachine.command.commands;
 
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
+import org.jsoup.Jsoup;
+
+import com.mashape.unirest.http.Unirest;
 
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
@@ -27,16 +31,21 @@ public class Dab extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		EmbedBuilder meb = new EmbedBuilder();
+		try {
+			EmbedBuilder meb = new EmbedBuilder();
 
-		meb.setTitle("Dab");
-		meb.setImage(getDab());
-		meb.setColor(ColorUtils.getRainbowColor(2000));
+			meb.setTitle("Dab");
+			meb.setImage(getDab());
+			meb.setColor(ColorUtils.getRainbowColor(2000));
 
-		event.getChannel().sendMessage(getDab()).complete();
+			meb.setImage(Jsoup.parse(Unirest.get(getDab()).asString().getBody()).selectFirst("#image-viewer-container > img").attr("src"));
+			
+			event.getChannel().sendMessage(meb.build()).complete();
+		} catch (Exception e) {
+		}
 	}
 
 	private String getDab() {
-		return daburls.get(new Random().nextInt(daburls.size()));
+		return daburls.get(ThreadLocalRandom.current().nextInt(daburls.size()));
 	}
 }
