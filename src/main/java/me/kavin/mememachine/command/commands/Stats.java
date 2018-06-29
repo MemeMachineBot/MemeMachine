@@ -15,31 +15,29 @@ public class Stats extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		if (message.equalsIgnoreCase(getPrefix())) {
-			EmbedBuilder meb = new EmbedBuilder();
+		EmbedBuilder meb = new EmbedBuilder();
 
-			meb.setTitle("Server Statistics");
-			meb.setColor(ColorUtils.getRainbowColor(2000));
+		meb.setTitle("Server Statistics");
+		meb.setColor(ColorUtils.getRainbowColor(2000));
 
-			int bots = 0;
-			int users = 0;
-			int online = 0;
+		int bots = 0;
+		int users = 0;
+		int online = 0;
 
-			for (Member member : event.getGuild().getMembers()) {
-				if (member.getUser().isBot())
-					bots++;
-				else {
-					users++;
-					if (member.getOnlineStatus() != OnlineStatus.OFFLINE)
-						online++;
-				}
+		for (Member member : event.getGuild().getMembers()) {
+			if (member.getUser().isBot())
+				bots++;
+			else {
+				users++;
+				if (member.getOnlineStatus() != OnlineStatus.OFFLINE)
+					online++;
 			}
-
-			meb.addField("Bots: ", String.valueOf(bots) + "\n", false);
-			meb.addField("Users: ", String.valueOf(users) + "\n", false);
-			meb.addField("Online Users: ", String.valueOf(online) + "\n", false);
-
-			event.getChannel().sendMessage(meb.build()).complete();
 		}
+
+		meb.addField("Bots: ", String.valueOf(bots) + "\n", false);
+		meb.addField("Users: ", String.valueOf(users) + "\n", false);
+		meb.addField("Online Users: ", String.valueOf(online) + "\n", false);
+
+		event.getChannel().sendMessage(meb.build()).complete();
 	}
 }

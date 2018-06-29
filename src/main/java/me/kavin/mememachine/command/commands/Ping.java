@@ -11,8 +11,6 @@ public class Ping extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		if (message.equalsIgnoreCase(getPrefix())) {
-			event.getChannel().sendMessage("The ping took `" + Main.api.getPing() / 2 + "` ms!").complete();
-		}
+		event.getChannel().sendMessage("The ping took `" + Main.api.getPing() / 2 + "` ms!").complete();
 	}
 }

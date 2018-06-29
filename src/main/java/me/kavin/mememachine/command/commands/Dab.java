@@ -27,15 +27,13 @@ public class Dab extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		if (message.equalsIgnoreCase(getPrefix())) {
-			EmbedBuilder meb = new EmbedBuilder();
+		EmbedBuilder meb = new EmbedBuilder();
 
-			meb.setTitle("Dab");
-			meb.setImage(getDab());
-			meb.setColor(ColorUtils.getRainbowColor(2000));
+		meb.setTitle("Dab");
+		meb.setImage(getDab());
+		meb.setColor(ColorUtils.getRainbowColor(2000));
 
-			event.getChannel().sendMessage(getDab()).complete();
-		}
+		event.getChannel().sendMessage(getDab()).complete();
 	}
 
 	private String getDab() {

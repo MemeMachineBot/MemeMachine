@@ -13,22 +13,20 @@ public class Help extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		if (message.equalsIgnoreCase(getPrefix())) {
-			EmbedBuilder meb = new EmbedBuilder();
-			meb.setColor(ColorUtils.getRainbowColor(2000));
-			meb.setTitle("Meme Machine's Commands:");
-			for (Command cmd : CommandManager.commands) {
-				if (meb.getFields().size() >= 25) {
-					event.getChannel().sendMessage(meb.build()).queue();
-					meb.clearFields();
-					meb.addField(cmd.getPrefix(), cmd.getHelp() + '\n', false);
-				} else {
-					meb.addField(cmd.getPrefix(), cmd.getHelp() + '\n', false);
-				}
-
-			}
-			if (meb.getFields().size() > 0)
+		EmbedBuilder meb = new EmbedBuilder();
+		meb.setColor(ColorUtils.getRainbowColor(2000));
+		meb.setTitle("Meme Machine's Commands:");
+		for (Command cmd : CommandManager.commands) {
+			if (meb.getFields().size() >= 25) {
 				event.getChannel().sendMessage(meb.build()).queue();
+				meb.clearFields();
+				meb.addField(cmd.getPrefix(), cmd.getHelp() + '\n', false);
+			} else {
+				meb.addField(cmd.getPrefix(), cmd.getHelp() + '\n', false);
+			}
+
 		}
+		if (meb.getFields().size() > 0)
+			event.getChannel().sendMessage(meb.build()).queue();
 	}
 }

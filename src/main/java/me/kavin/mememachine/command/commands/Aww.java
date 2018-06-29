@@ -25,9 +25,7 @@ public class Aww extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		if (message.equalsIgnoreCase(getPrefix())) {
-			event.getChannel().sendMessage(getPost()).complete();
-		}
+		event.getChannel().sendMessage(getPost()).complete();
 	}
 
 	private MessageEmbed getPost() {

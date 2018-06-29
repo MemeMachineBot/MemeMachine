@@ -14,15 +14,13 @@ public class Roll extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		if (message.equalsIgnoreCase(getPrefix())) {
-			EmbedBuilder meb = new EmbedBuilder();
+		EmbedBuilder meb = new EmbedBuilder();
 
-			meb.setTitle("Dice");
-			meb.setColor(ColorUtils.getRainbowColor(2000));
+		meb.setTitle("Dice");
+		meb.setColor(ColorUtils.getRainbowColor(2000));
 
-			meb.addField("", "It was `" + (ThreadLocalRandom.current().nextInt(6) + 1) + "`", true);
+		meb.addField("", "It was `" + (ThreadLocalRandom.current().nextInt(6) + 1) + "`", true);
 
-			event.getChannel().sendMessage(meb.build()).complete();
-		}
+		event.getChannel().sendMessage(meb.build()).complete();
 	}
 }

@@ -18,10 +18,7 @@ public class Bitcoin extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		if (message.equalsIgnoreCase(getPrefix())) {
-			event.getChannel().sendMessage(getPrice()).complete();
-		}
-
+		event.getChannel().sendMessage(getPrice()).complete();
 	}
 
 	private MessageEmbed getPrice() {

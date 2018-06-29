@@ -74,14 +74,19 @@ public class DiscordListener extends ListenerAdapter {
 		if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor() == Main.api.getSelfUser()
 				|| event.getAuthor().isBot())
 			return;
-		if (event.getMessage().getContentRaw().startsWith(">"))
-			for (Command cmd : CommandManager.commands)
-				Multithreading.runAsync(new Runnable() {
-					@Override
-					public void run() {
-						cmd.onCommand(event.getMessage().getContentRaw(), event);
-					}
-				});
+
+		{
+			if (event.getMessage().getContentRaw().charAt(0) == '>')
+				for (Command cmd : CommandManager.commands)
+					if (event.getMessage().getContentRaw().split(" ")[0].equalsIgnoreCase(cmd.getPrefix()))
+						Multithreading.runAsync(new Runnable() {
+							@Override
+							public void run() {
+								cmd.onCommand(event.getMessage().getContentRaw(), event);
+							}
+						});
+		}
+
 		addXp(event.getAuthor().getIdLong());
 	}
 

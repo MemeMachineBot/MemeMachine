@@ -20,46 +20,52 @@ public class McServer extends Command {
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
 		try {
-			if (message.toLowerCase().startsWith(getPrefix())) {
-				
-				String q = null;
+			String q = null;
 
-				for (int i = getPrefix().length() + 1; i < message.length(); i++) {
-					if(q == null)
-						q = "";
-					q += message.charAt(i);
-				}
-				
-				if (q != null) {
-					EmbedBuilder meb = new EmbedBuilder();
+			for (int i = getPrefix().length() + 1; i < message.length(); i++) {
+				if (q == null)
+					q = "";
+				q += message.charAt(i);
+			}
 
-					meb.setTitle("Minecraft Server Search");
-					meb.setColor(ColorUtils.getRainbowColor(2000));
+			if (q != null) {
+				EmbedBuilder meb = new EmbedBuilder();
 
-					Document doc = Jsoup.parse(Unirest.post("https://minecraftservers.org/search").field("term", q).asString().getBody());
+				meb.setTitle("Minecraft Server Search");
+				meb.setColor(ColorUtils.getRainbowColor(2000));
 
-					Elements names = doc.select("#main > div.sponsored-servers.container.cf > table > tbody > tr:nth-child(1) > td.col-name > h3 > a");
-					Elements ips = doc.select("#main > div.sponsored-servers.container.cf > table > tbody > tr:nth-child(1) > td.col-server > div > a");
-					Elements players = doc.select("#main > div.sponsored-servers.container.cf > table > tbody > tr:nth-child(1) > td.col-players > span");
-					Elements online = doc.select("#main > div.sponsored-servers.container.cf > table > tbody > tr:nth-child(1) > td.col-status > span");
-					Elements ranking = doc.select("#main > div.sponsored-servers.container.cf > table > tbody > tr:nth-child(1) > td.col-rank > span");
-					
-					if(names.size() > 0) {
-						meb.addField("Server Name: ", names.get(0).text() + "\n", false);
-						meb.addField("Server IP: ", ips.get(0).attr("data-clipboard-text") + "\n", false);
-						meb.addField("Players: ", players.get(0).text() + "\n", false);
-						meb.addField("Online Status: ", online.get(0).text() + "\n", false);
-						meb.addField("Ranking: ", ranking.get(0).text() + "\n", false);
-						meb.setImage("https://minecraftservers.org" + doc.selectFirst("#main > div.sponsored-servers.container.cf > table > tbody > tr:nth-child(1) > td.col-server > a > img").attr("src"));
-					} else {
-						meb.setDescription("No servers found!");
-					}
+				Document doc = Jsoup.parse(
+						Unirest.post("https://minecraftservers.org/search").field("term", q).asString().getBody());
 
-					event.getChannel().sendMessage(meb.build()).complete();
+				Elements names = doc.select(
+						"#main > div.sponsored-servers.container.cf > table > tbody > tr:nth-child(1) > td.col-name > h3 > a");
+				Elements ips = doc.select(
+						"#main > div.sponsored-servers.container.cf > table > tbody > tr:nth-child(1) > td.col-server > div > a");
+				Elements players = doc.select(
+						"#main > div.sponsored-servers.container.cf > table > tbody > tr:nth-child(1) > td.col-players > span");
+				Elements online = doc.select(
+						"#main > div.sponsored-servers.container.cf > table > tbody > tr:nth-child(1) > td.col-status > span");
+				Elements ranking = doc.select(
+						"#main > div.sponsored-servers.container.cf > table > tbody > tr:nth-child(1) > td.col-rank > span");
+
+				if (names.size() > 0) {
+					meb.addField("Server Name: ", names.get(0).text() + "\n", false);
+					meb.addField("Server IP: ", ips.get(0).attr("data-clipboard-text") + "\n", false);
+					meb.addField("Players: ", players.get(0).text() + "\n", false);
+					meb.addField("Online Status: ", online.get(0).text() + "\n", false);
+					meb.addField("Ranking: ", ranking.get(0).text() + "\n", false);
+					meb.setImage("https://minecraftservers.org" + doc.selectFirst(
+							"#main > div.sponsored-servers.container.cf > table > tbody > tr:nth-child(1) > td.col-server > a > img")
+							.attr("src"));
 				} else {
-					event.getChannel().sendMessage("`Please provide an server name as your argument like` \n>mcserver <name>")
-							.complete();
+					meb.setDescription("No servers found!");
 				}
+
+				event.getChannel().sendMessage(meb.build()).complete();
+			} else {
+				event.getChannel()
+						.sendMessage("`Please provide an server name as your argument like` \n>mcserver <name>")
+						.complete();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

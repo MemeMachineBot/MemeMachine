@@ -23,29 +23,26 @@ public class Define extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		if (message.toLowerCase().startsWith(getPrefix())) {
+		String q = null;
 
-			String q = null;
+		for (int i = getPrefix().length() + 1; i < message.length(); i++) {
+			if (q == null)
+				q = "";
+			q += message.charAt(i);
+		}
 
-			for (int i = getPrefix().length() + 1; i < message.length(); i++) {
-				if(q == null)
-					q = "";
-				q += message.charAt(i);
-			}
+		if (event.getTextChannel().isNSFW())
+			event.getChannel().sendMessage(getSearch(q)).complete();
+		else {
+			EmbedBuilder meb = new EmbedBuilder();
 
-			if(event.getTextChannel().isNSFW())
-				event.getChannel().sendMessage(getSearch(q)).complete();
-			else {
-				EmbedBuilder meb = new EmbedBuilder();
-				
-				meb.setTitle("Enable NSFW Channel");
-				meb.setColor(ColorUtils.getRainbowColor(2000));
-				
-				meb.setImage("https://i.gyazo.com/9ac5c5a6ddf46b5c446853a7778b0cae.gif");
-				
-				event.getChannel().sendMessage(meb.build()).complete();
-				
-			}
+			meb.setTitle("Enable NSFW Channel");
+			meb.setColor(ColorUtils.getRainbowColor(2000));
+
+			meb.setImage("https://i.gyazo.com/9ac5c5a6ddf46b5c446853a7778b0cae.gif");
+
+			event.getChannel().sendMessage(meb.build()).complete();
+
 		}
 	}
 

@@ -19,27 +19,25 @@ public class Profile extends Command {
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
 		try {
-			if (message.toLowerCase().equals(getPrefix())) {
 
-				EmbedBuilder meb = new EmbedBuilder();
+			EmbedBuilder meb = new EmbedBuilder();
 
-				meb.setTitle("Your Profile");
-				meb.setColor(ColorUtils.getRainbowColor(2000));
+			meb.setTitle("Your Profile");
+			meb.setColor(ColorUtils.getRainbowColor(2000));
 
-				String resp = Unirest
-						.get("https://" + Constants.FB_URL + ".firebaseio.com/users/xp/"
-								+ event.getMember().getUser().getIdLong() + ".json" + "?auth=" + Constants.FB_SECRET)
-						.asString().getBody();
+			String resp = Unirest
+					.get("https://" + Constants.FB_URL + ".firebaseio.com/users/xp/"
+							+ event.getMember().getUser().getIdLong() + ".json" + "?auth=" + Constants.FB_SECRET)
+					.asString().getBody();
 
-				if (resp.equals("null")) {
-					meb.addField("", "No Data Available" + "\n", false);
-				} else {
-					meb.addField("XP required:", 500 - (new JSONObject(resp).getInt("xp") % 500) + "\n", false);
-					meb.addField("Your Level:", new JSONObject(resp).getInt("xp") / 500 + "\n", false);
-				}
-
-				event.getChannel().sendMessage(meb.build()).complete();
+			if (resp.equals("null")) {
+				meb.addField("", "No Data Available" + "\n", false);
+			} else {
+				meb.addField("XP required:", 500 - (new JSONObject(resp).getInt("xp") % 500) + "\n", false);
+				meb.addField("Your Level:", new JSONObject(resp).getInt("xp") / 500 + "\n", false);
 			}
+
+			event.getChannel().sendMessage(meb.build()).complete();
 		} catch (Exception e) {
 		}
 	}
