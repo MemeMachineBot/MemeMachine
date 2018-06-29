@@ -76,7 +76,7 @@ public class DiscordListener extends ListenerAdapter {
 			return;
 
 		{
-			if (event.getMessage().getContentRaw().charAt(0) == '>')
+			if (event.getMessage().getContentRaw().length() > 0 && event.getMessage().getContentRaw().charAt(0) == '>')
 				for (Command cmd : CommandManager.commands)
 					if (event.getMessage().getContentRaw().split(" ")[0].equalsIgnoreCase(cmd.getPrefix()))
 						Multithreading.runAsync(new Runnable() {
