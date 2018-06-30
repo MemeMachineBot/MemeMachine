@@ -58,7 +58,8 @@ public class Image extends Command {
 				meb.addField("No Results", "Unfortunately I couldn't find any results for `" + q + "`", true);
 				return meb.build();
 			}
-			meb.setImage(root.getJSONArray("items").getJSONObject(0).getJSONObject("image").getString("thumbnailLink"));
+			meb.setImage(Constants.GOOGLE_PROXY_IMAGE
+					+ URLEncoder.encode(root.getJSONArray("items").getJSONObject(0).getString("link"), "UTF-8"));
 			meb.setDescription("Page 1 / 100");
 			return meb.build();
 		} catch (Exception e) {
@@ -93,8 +94,8 @@ public class Image extends Command {
 							url += "&start=" + start;
 						JSONObject root = new JSONObject(Unirest.get(url).asString().getBody());
 
-						meb.setImage(root.getJSONArray("items").getJSONObject(page < 10 ? (page % 10) - 1 : page % 10)
-								.getJSONObject("image").getString("thumbnailLink"));
+						meb.setImage(Constants.GOOGLE_PROXY_IMAGE + URLEncoder.encode(root.getJSONArray("items")
+								.getJSONObject(page < 10 ? (page % 10) - 1 : page % 10).getString("link"), "UTF-8"));
 						meb.setDescription("Page " + page + " / 100");
 
 						sent.set(i, msg.editMessage(meb.build()).complete());
@@ -123,8 +124,8 @@ public class Image extends Command {
 							url += "&start=" + start;
 						JSONObject root = new JSONObject(Unirest.get(url).asString().getBody());
 
-						meb.setImage(root.getJSONArray("items").getJSONObject(page < 10 ? (page % 10) - 1 : page % 10)
-								.getJSONObject("image").getString("thumbnailLink"));
+						meb.setImage(Constants.GOOGLE_PROXY_IMAGE + URLEncoder.encode(root.getJSONArray("items")
+								.getJSONObject(page < 10 ? (page % 10) - 1 : page % 10).getString("link"), "UTF-8"));
 						meb.setDescription("Page " + page + " / 100");
 
 						sent.set(i, msg.editMessage(meb.build()).complete());
