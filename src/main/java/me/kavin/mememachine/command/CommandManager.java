@@ -13,6 +13,7 @@ import me.kavin.mememachine.command.commands.CoinFlip;
 import me.kavin.mememachine.command.commands.Cookie;
 import me.kavin.mememachine.command.commands.CopyPasta;
 import me.kavin.mememachine.command.commands.Dab;
+import me.kavin.mememachine.command.commands.DadJoke;
 import me.kavin.mememachine.command.commands.Define;
 import me.kavin.mememachine.command.commands.Dog;
 import me.kavin.mememachine.command.commands.Google;
@@ -82,5 +83,6 @@ public class CommandManager {
 		commands.add(new TopSongs());
 		commands.add(new Robot());
 		commands.add(new McServer());
+		commands.add(new DadJoke());
 	}
 }
