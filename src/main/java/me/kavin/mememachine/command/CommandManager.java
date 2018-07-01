@@ -33,7 +33,7 @@ import me.kavin.mememachine.command.commands.Reddit;
 import me.kavin.mememachine.command.commands.Robot;
 import me.kavin.mememachine.command.commands.Roll;
 import me.kavin.mememachine.command.commands.Shorten;
-import me.kavin.mememachine.command.commands.Stats;
+import me.kavin.mememachine.command.commands.ServerStats;
 import me.kavin.mememachine.command.commands.Subs;
 import me.kavin.mememachine.command.commands.TopSongs;
 import me.kavin.mememachine.command.commands.UpTime;
@@ -72,7 +72,7 @@ public class CommandManager {
 		commands.add(new Image());
 		commands.add(new Hastebin());
 		commands.add(new Subs());
-		commands.add(new Stats());
+		commands.add(new ServerStats());
 		commands.add(new BotStats());
 		commands.add(new Greentext());
 		commands.add(new Anime());
