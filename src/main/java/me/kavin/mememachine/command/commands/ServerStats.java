@@ -7,10 +7,10 @@ import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class Stats extends Command {
+public class ServerStats extends Command {
 
-	public Stats() {
-		super(">stats", "`Shows you the server stastics`");
+	public ServerStats() {
+		super(">serverstats", "`Shows you the server stastics`");
 	}
 
 	@Override

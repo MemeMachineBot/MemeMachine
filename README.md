@@ -61,7 +61,7 @@ Bot Commands:
 
 >subs `Checks the number of subscribers the given youtuber has`
 
->stats `Shows you the server stastics`
+>serverstats `Shows you the server stastics`
 
 >botstats `Shows you the bot's stastics`
 
