@@ -38,8 +38,9 @@ public class Dab extends Command {
 			meb.setImage(getDab());
 			meb.setColor(ColorUtils.getRainbowColor(2000));
 
-			meb.setImage(Jsoup.parse(Unirest.get(getDab()).asString().getBody()).selectFirst("#image-viewer-container > img").attr("src"));
-			
+			meb.setImage(Jsoup.parse(Unirest.get(getDab()).asString().getBody())
+					.selectFirst("#image-viewer-container > img").attr("src"));
+
 			event.getChannel().sendMessage(meb.build()).complete();
 		} catch (Exception e) {
 		}
