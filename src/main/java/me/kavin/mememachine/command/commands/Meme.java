@@ -1,15 +1,15 @@
 package me.kavin.mememachine.command.commands;
 
-import java.util.Arrays;
+import java.net.URLEncoder;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONTokener;
-
 import com.gargoylesoftware.htmlunit.WebClient;
 
 import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
+import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
@@ -18,6 +18,9 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 public class Meme extends Command {
 
 	WebClient wc = new WebClient();
+	
+	String lastData = null;
+	long lastUpdate = 0;
 
 	public Meme() {
 		super(">meme", "`Shows a random meme from /r/Memes`");
@@ -31,35 +34,22 @@ public class Meme extends Command {
 	private MessageEmbed getMeme() {
 		try {
 			EmbedBuilder meb = new EmbedBuilder();
-			String data = wc.getPage("https://gateway.reddit.com/desktopapi/v1/subreddits/memes?sort=hot")
-					.getWebResponse().getContentAsString();
-			int tries = 0;
-			JSONTokener tokener = new JSONTokener(data);
-			JSONObject root = new JSONObject(tokener);
-			boolean found = false;
-			JSONObject posts = root.getJSONObject("posts");
-			String[] keys = Arrays.copyOf(posts.keySet().toArray(), posts.keySet().size(), String[].class);
-			while (!found && tries <= 5) {
-				JSONObject post = posts.getJSONObject(keys[ThreadLocalRandom.current().nextInt(keys.length)]);
-				if (post.getBoolean("isLocked") || post.isNull("media")
-						|| !post.getJSONObject("media").has("content")) {
-					tries++;
-					continue;
-				}
-				found = true;
+			if(System.currentTimeMillis() - lastUpdate > 300000)
+				lastData = wc.getPage("https://www.reddit.com/r/memes/top/.json?sort=top&t=day&limit=250").getWebResponse().getContentAsString();
+			JSONObject root = new JSONObject(lastData);
+			JSONArray posts = root.getJSONObject("data").getJSONArray("children");
+				JSONObject post = posts.getJSONObject(ThreadLocalRandom.current().nextInt(posts.length())).getJSONObject("data");
 				meb.setTitle(post.getString("title"));
 				meb.setColor(ColorUtils.getRainbowColor(2000));
-				meb.setImage(post.getJSONObject("media").getString("content"));
+				meb.setImage(Constants.GOOGLE_PROXY_IMAGE + URLEncoder.encode(post.getString("url"), "UTF-8"));
 				String author = post.getString("author");
 				meb.setAuthor(author, "https://www.reddit.com/user/" + author);
 				meb.setFooter(
-						"\uD83D\uDC4D" + post.getInt("score") + " | " + "\uD83D\uDCAC" + post.getInt("numComments"),
+						"\uD83D\uDC4D" + post.getInt("ups") + " | " + "\uD83D\uDCAC" + post.getInt("num_comments"),
 						Main.api.getSelfUser().getAvatarUrl());
-			}
 			return meb.build();
-		} catch (Throwable t) {
-			t.printStackTrace();
+		} catch (Exception e) {
+			return null;
 		}
-		return null;
 	}
 }
