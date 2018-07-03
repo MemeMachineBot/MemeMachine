@@ -21,7 +21,7 @@ public class Meme extends Command {
 
 	WebClient wc = new WebClient();
 
-	ObjectArrayList<MemeData> lastData = null;
+	ObjectArrayList<MemeData> lastData = new ObjectArrayList<>();
 	long lastUpdate = 0;
 
 	public Meme() {
@@ -49,7 +49,7 @@ public class Meme extends Command {
 				for (int i = 0; i < posts.length(); i++) {
 					JSONObject post = posts.getJSONObject(i).getJSONObject("data");
 					lastData.add(new MemeData(post.getString("title"), post.getString("author"),
-							Constants.GOOGLE_PROXY_IMAGE + URLEncoder.encode(post.getString("img_url"), "UTF-8"),
+							Constants.GOOGLE_PROXY_IMAGE + URLEncoder.encode(post.getString("url"), "UTF-8"),
 							post.getInt("num_comments"), post.getInt("ups")));
 				}
 
