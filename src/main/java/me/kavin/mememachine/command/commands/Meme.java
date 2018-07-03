@@ -48,11 +48,12 @@ public class Meme extends Command {
 
 				for (int i = 0; i < posts.length(); i++) {
 					JSONObject post = posts.getJSONObject(i).getJSONObject("data");
-					lastData.add(new MemeData(post.getString("title"), post.getString("author"),
-							Constants.GOOGLE_PROXY_IMAGE + URLEncoder.encode(post.getString("url"), "UTF-8"),
-							post.getInt("num_comments"), post.getInt("ups")));
+					String img_url = URLEncoder.encode(post.getString("url"), "UTF-8");
+					if(img_url.contains("i.redd.it"))
+						lastData.add(new MemeData(post.getString("title"), post.getString("author"),
+								Constants.GOOGLE_PROXY_IMAGE + img_url,
+								post.getInt("num_comments"), post.getInt("ups")));
 				}
-
 				lastUpdate = System.currentTimeMillis();
 			}
 
