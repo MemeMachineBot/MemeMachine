@@ -7,10 +7,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import com.gargoylesoftware.htmlunit.WebClient;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.utils.ColorUtils;
+import me.kavin.mememachine.utils.MemeData;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -19,7 +21,7 @@ public class Meme extends Command {
 
 	WebClient wc = new WebClient();
 
-	String lastData = null;
+	ObjectArrayList<MemeData> lastData = null;
 	long lastUpdate = 0;
 
 	public Meme() {
@@ -34,20 +36,37 @@ public class Meme extends Command {
 	private MessageEmbed getMeme() {
 		try {
 			EmbedBuilder meb = new EmbedBuilder();
-			if (System.currentTimeMillis() - lastUpdate > 300000)
-				lastData = wc.getPage("https://www.reddit.com/r/memes/top/.json?sort=top&t=day&limit=250")
-						.getWebResponse().getContentAsString();
-			JSONObject root = new JSONObject(lastData);
-			JSONArray posts = root.getJSONObject("data").getJSONArray("children");
-			JSONObject post = posts.getJSONObject(ThreadLocalRandom.current().nextInt(posts.length()))
-					.getJSONObject("data");
-			meb.setTitle(post.getString("title"));
+			if (System.currentTimeMillis() - lastUpdate > 300000) {
+
+				JSONObject root = new JSONObject(
+						wc.getPage("https://www.reddit.com/r/memes/top/.json?sort=top&t=day&limit=250").getWebResponse()
+								.getContentAsString());
+
+				JSONArray posts = root.getJSONObject("data").getJSONArray("children");
+
+				lastData.clear();
+
+				for (int i = 0; i < posts.length(); i++) {
+					JSONObject post = posts.getJSONObject(i).getJSONObject("data");
+					lastData.add(new MemeData(post.getString("title"), post.getString("author"),
+							Constants.GOOGLE_PROXY_IMAGE + URLEncoder.encode(post.getString("img_url"), "UTF-8"),
+							post.getInt("num_comments"), post.getInt("ups")));
+				}
+
+				lastUpdate = System.currentTimeMillis();
+			}
+
+			MemeData memeData = lastData.get(ThreadLocalRandom.current().nextInt(lastData.size()));
+
+			String author = memeData.author;
+
+			meb.setTitle(memeData.title);
 			meb.setColor(ColorUtils.getRainbowColor(2000));
-			meb.setImage(Constants.GOOGLE_PROXY_IMAGE + URLEncoder.encode(post.getString("url"), "UTF-8"));
-			String author = post.getString("author");
+			meb.setImage(memeData.img_url);
 			meb.setAuthor(author, "https://www.reddit.com/user/" + author);
-			meb.setFooter("\uD83D\uDC4D" + post.getInt("ups") + " | " + "\uD83D\uDCAC" + post.getInt("num_comments"),
+			meb.setFooter("\uD83D\uDC4D" + memeData.num_upvotes + " | " + "\uD83D\uDCAC" + memeData.num_comments,
 					Main.api.getSelfUser().getAvatarUrl());
+
 			return meb.build();
 		} catch (Exception e) {
 			return null;
