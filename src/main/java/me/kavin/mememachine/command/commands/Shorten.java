@@ -23,7 +23,7 @@ public class Shorten extends Command {
 			if (split.length != 1) {
 				JSONObject body = new JSONObject().put("longUrl", split[1]);
 				JSONObject jObject = new JSONObject(
-						Unirest.post("https://www.googleapis.com/urlshortener/v1/url?key=" + Constants.GOOGLE_API_KEY)
+						Unirest.post("https://www.googleapis.com/urlshortener/v1/img_url?key=" + Constants.GOOGLE_API_KEY)
 								.header("Content-Type", "application/json").body(body).asString().getBody());
 
 				EmbedBuilder meb = new EmbedBuilder();
