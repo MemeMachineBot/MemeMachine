@@ -35,6 +35,7 @@ import me.kavin.mememachine.command.commands.Roll;
 import me.kavin.mememachine.command.commands.Shorten;
 import me.kavin.mememachine.command.commands.ServerStats;
 import me.kavin.mememachine.command.commands.Subs;
+import me.kavin.mememachine.command.commands.Today;
 import me.kavin.mememachine.command.commands.TopSongs;
 import me.kavin.mememachine.command.commands.UpTime;
 import me.kavin.mememachine.command.commands.Vote;
@@ -84,5 +85,6 @@ public class CommandManager {
 		commands.add(new Robot());
 		commands.add(new McServer());
 		commands.add(new DadJoke());
+		commands.add(new Today());
 	}
 }
