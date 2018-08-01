@@ -1,6 +1,5 @@
 package me.kavin.mememachine.command.commands;
 
-import java.net.URLEncoder;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.json.JSONArray;
@@ -10,7 +9,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
-import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.utils.ColorUtils;
 import me.kavin.mememachine.utils.MemeData;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -48,7 +46,7 @@ public class Meme extends Command {
 
 				for (int i = 0; i < posts.length(); i++) {
 					JSONObject post = posts.getJSONObject(i).getJSONObject("data");
-					String img_url = URLEncoder.encode(post.getString("url"), "UTF-8");
+					String img_url = post.getString("url");
 					if(img_url.contains("i.redd.it"))
 						lastData.add(new MemeData(post.getString("title"), post.getString("author"),
 								img_url,
