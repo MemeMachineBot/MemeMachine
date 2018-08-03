@@ -56,7 +56,7 @@ public class CopyPasta extends Command {
 						StringUtils.abbreviate(
 								StringEscapeUtils.unescapeHtml4(
 										post.getJSONObject("media").getString("content").replaceAll("\\<.*?\\>", "")),
-								1024),
+								2048),
 						true);
 			}
 			return meb.build();
