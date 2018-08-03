@@ -49,8 +49,8 @@ public class Image extends Command {
 		try {
 			EmbedBuilder meb = new EmbedBuilder();
 			String url = "https://www.googleapis.com/customsearch/v1?" + "safe=medium&searchType=image&" + "q="
-					+ URLEncoder.encode(q + " filetype:png", "UTF-8") + "&cx=008677437472124065250%3Ajljeb59kuse&num=1&key="
-					+ Constants.GOOGLE_API_KEY;
+					+ URLEncoder.encode(q + " filetype:png", "UTF-8")
+					+ "&cx=008677437472124065250%3Ajljeb59kuse&num=1&key=" + Constants.GOOGLE_API_KEY;
 			JSONObject root = new JSONObject(Unirest.get(url).asString().getBody());
 			meb.setTitle("Google Image Search: " + q);
 			meb.setColor(ColorUtils.getRainbowColor(2000));
