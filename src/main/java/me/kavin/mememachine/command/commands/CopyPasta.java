@@ -1,25 +1,26 @@
 package me.kavin.mememachine.command.commands;
 
-import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.text.StringEscapeUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONTokener;
-
 import com.gargoylesoftware.htmlunit.WebClient;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
+import me.kavin.mememachine.utils.reddit.TextPostData;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class CopyPasta extends Command {
 
 	WebClient wc = new WebClient();
+
+	ObjectArrayList<TextPostData> lastData = new ObjectArrayList<>();
+	long lastUpdate = 0;
 
 	public CopyPasta() {
 		super(">copypasta", "`Shows a random copypasta!`");
@@ -27,42 +28,46 @@ public class CopyPasta extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		event.getChannel().sendMessage(getMeme()).complete();
-	}
-
-	private MessageEmbed getMeme() {
 		try {
-			EmbedBuilder meb = new EmbedBuilder();
-			String data = wc.getPage("https://gateway.reddit.com/desktopapi/v1/subreddits/copypasta?sort=hot")
-					.getWebResponse().getContentAsString();
-			JSONTokener tokener = new JSONTokener(data);
-			JSONObject root = new JSONObject(tokener);
-			boolean found = false;
-			JSONObject posts = root.getJSONObject("posts");
-			String[] keys = Arrays.copyOf(posts.keySet().toArray(), posts.keySet().size(), String[].class);
-			while (!found) {
-				JSONObject post = posts.getJSONObject(keys[ThreadLocalRandom.current().nextInt(keys.length)]);
-				if (post.getBoolean("isLocked") || post.getJSONObject("media").isNull("content"))
-					continue;
-				found = true;
-				meb.setTitle(post.getString("title"));
-				meb.setColor(ColorUtils.getRainbowColor(2000));
-				String author = post.getString("author");
-				meb.setAuthor(author, "https://www.reddit.com/user/" + author);
-				meb.setFooter(
-						"\uD83D\uDC4D" + post.getInt("score") + " | " + "\uD83D\uDCAC" + post.getInt("numComments"),
-						Main.api.getSelfUser().getAvatarUrl());
-				meb.addField("Heres your copypasta: ",
-						StringUtils.abbreviate(
-								StringEscapeUtils.unescapeHtml4(
-										post.getJSONObject("media").getString("content").replaceAll("\\<.*?\\>", "")),
-								2048),
-						true);
+
+			if (System.currentTimeMillis() - lastUpdate > 300000) {
+
+				JSONObject root = new JSONObject(
+						wc.getPage("https://www.reddit.com/r/copypasta/top/.json?sort=top&t=day&limit=250")
+								.getWebResponse().getContentAsString());
+
+				JSONArray posts = root.getJSONObject("data").getJSONArray("children");
+
+				lastData.clear();
+
+				for (int i = 0; i < posts.length(); i++) {
+					JSONObject post = posts.getJSONObject(i).getJSONObject("data");
+					if (!post.getBoolean("over_18"))
+						lastData.add(new TextPostData(post.getString("title"), post.getString("author"),
+								post.getString("selftext"), post.getInt("num_comments"), post.getInt("ups")));
+				}
+				lastUpdate = System.currentTimeMillis();
 			}
-			return meb.build();
-		} catch (Throwable t) {
-			t.printStackTrace();
+
+			EmbedBuilder meb = new EmbedBuilder();
+
+			TextPostData textPostData = lastData.get(ThreadLocalRandom.current().nextInt(lastData.size()));
+
+			String author = textPostData.author;
+
+			meb.setTitle(textPostData.title);
+			meb.setColor(ColorUtils.getRainbowColor(2000));
+
+			meb.setAuthor(author, "https://www.reddit.com/user/" + author);
+			meb.setFooter(
+					"\uD83D\uDC4D" + textPostData.num_upvotes + " | " + "\uD83D\uDCAC" + textPostData.num_comments,
+					Main.api.getSelfUser().getAvatarUrl());
+			meb.setDescription(StringUtils.abbreviate(textPostData.data, 2048));
+
+			event.getChannel().sendMessage(meb.build()).complete();
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return null;
 	}
 }
