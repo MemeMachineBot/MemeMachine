@@ -67,7 +67,6 @@ public class Tifu extends Command {
 			event.getChannel().sendMessage(meb.build()).complete();
 
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 }

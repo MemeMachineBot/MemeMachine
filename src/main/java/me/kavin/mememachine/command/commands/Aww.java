@@ -58,7 +58,6 @@ public class Aww extends Command {
 			}
 			return meb.build();
 		} catch (Throwable t) {
-			t.printStackTrace();
 		}
 		return null;
 	}
