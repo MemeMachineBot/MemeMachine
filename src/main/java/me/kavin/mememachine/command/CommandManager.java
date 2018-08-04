@@ -24,6 +24,7 @@ import me.kavin.mememachine.command.commands.Help;
 import me.kavin.mememachine.command.commands.Image;
 import me.kavin.mememachine.command.commands.Invite;
 import me.kavin.mememachine.command.commands.McServer;
+import me.kavin.mememachine.command.commands.MeIRL;
 import me.kavin.mememachine.command.commands.Meme;
 import me.kavin.mememachine.command.commands.PasswordGen;
 import me.kavin.mememachine.command.commands.Ping;
@@ -88,5 +89,6 @@ public class CommandManager {
 		commands.add(new DadJoke());
 		commands.add(new Today());
 		commands.add(new Tifu());
+		commands.add(new MeIRL());
 	}
 }
