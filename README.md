@@ -87,6 +87,8 @@ Bot Commands:
 
 >today `Shows a historic event that happened this day, that year`
 
+>tifu `Today I f*cked up!`
+
 You can invite me [here](https://discordapp.com/oauth2/authorize?client_id=445800505315426315&permissions=8&scope=bot)
 
 And more to come!
