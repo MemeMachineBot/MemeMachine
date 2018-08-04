@@ -10,7 +10,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
-import me.kavin.mememachine.utils.MemeData;
+import me.kavin.mememachine.utils.reddit.ImagePostData;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -19,7 +19,7 @@ public class Meme extends Command {
 
 	WebClient wc = new WebClient();
 
-	ObjectArrayList<MemeData> lastData = new ObjectArrayList<>();
+	ObjectArrayList<ImagePostData> lastData = new ObjectArrayList<>();
 	long lastUpdate = 0;
 
 	public Meme() {
@@ -48,21 +48,22 @@ public class Meme extends Command {
 					JSONObject post = posts.getJSONObject(i).getJSONObject("data");
 					String img_url = post.getString("url");
 					if (img_url.contains("i.redd.it"))
-						lastData.add(new MemeData(post.getString("title"), post.getString("author"), img_url,
+						lastData.add(new ImagePostData(post.getString("title"), post.getString("author"), img_url,
 								post.getInt("num_comments"), post.getInt("ups")));
 				}
 				lastUpdate = System.currentTimeMillis();
 			}
 
-			MemeData memeData = lastData.get(ThreadLocalRandom.current().nextInt(lastData.size()));
+			ImagePostData imagePostData = lastData.get(ThreadLocalRandom.current().nextInt(lastData.size()));
 
-			String author = memeData.author;
+			String author = imagePostData.author;
 
-			meb.setTitle(memeData.title);
+			meb.setTitle(imagePostData.title);
 			meb.setColor(ColorUtils.getRainbowColor(2000));
-			meb.setImage(memeData.img_url);
+			meb.setImage(imagePostData.img_url);
 			meb.setAuthor(author, "https://www.reddit.com/user/" + author);
-			meb.setFooter("\uD83D\uDC4D" + memeData.num_upvotes + " | " + "\uD83D\uDCAC" + memeData.num_comments,
+			meb.setFooter(
+					"\uD83D\uDC4D" + imagePostData.num_upvotes + " | " + "\uD83D\uDCAC" + imagePostData.num_comments,
 					Main.api.getSelfUser().getAvatarUrl());
 
 			return meb.build();

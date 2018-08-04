@@ -1,6 +1,6 @@
-package me.kavin.mememachine.utils;
+package me.kavin.mememachine.utils.reddit;
 
-public class MemeData {
+public class ImagePostData {
 
 	public String title;
 
@@ -12,7 +12,7 @@ public class MemeData {
 
 	public int num_upvotes;
 
-	public MemeData(String title, String author, String img_url, int num_comments, int num_upvotes) {
+	public ImagePostData(String title, String author, String img_url, int num_comments, int num_upvotes) {
 		this.title = title;
 		this.author = author;
 		this.img_url = img_url;
