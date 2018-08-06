@@ -47,9 +47,10 @@ public class Aww extends Command {
 				for (int i = 0; i < posts.length(); i++) {
 					JSONObject post = posts.getJSONObject(i).getJSONObject("data");
 					String img_url = post.getString("url");
-					if (img_url.contains("i.redd.it"))
-						lastData.add(new ImagePostData(post.getString("title"), post.getString("author"), img_url,
-								post.getInt("num_comments"), post.getInt("ups")));
+					if (!post.getBoolean("over_18"))
+						if (img_url.contains("i.redd.it"))
+							lastData.add(new ImagePostData(post.getString("title"), post.getString("author"), img_url,
+									post.getInt("num_comments"), post.getInt("ups")));
 				}
 				lastUpdate = System.currentTimeMillis();
 			}
