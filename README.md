@@ -15,8 +15,6 @@ Bot Commands:
 
 >meme `Shows a random meme from /r/Memes`
 
->reddit `Allows you to get a trending post from a subreddit`
-
 >dab `Shows a person dabbing`
 
 >Profile `Shows the person you tag's profile picture`

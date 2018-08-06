@@ -30,7 +30,6 @@ import me.kavin.mememachine.command.commands.PasswordGen;
 import me.kavin.mememachine.command.commands.Ping;
 import me.kavin.mememachine.command.commands.Profile;
 import me.kavin.mememachine.command.commands.RPS;
-import me.kavin.mememachine.command.commands.Reddit;
 import me.kavin.mememachine.command.commands.Robot;
 import me.kavin.mememachine.command.commands.Roll;
 import me.kavin.mememachine.command.commands.Shorten;
@@ -56,7 +55,6 @@ public class CommandManager {
 		commands.add(new Yt());
 		commands.add(new Google());
 		commands.add(new Avatar());
-		commands.add(new Reddit());
 		commands.add(new Invite());
 		commands.add(new Define());
 		commands.add(new CoinFlip());
