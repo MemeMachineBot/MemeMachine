@@ -20,9 +20,9 @@ public class Help extends Command {
 			if (meb.getFields().size() >= 25) {
 				event.getChannel().sendMessage(meb.build()).queue();
 				meb.clearFields();
-				meb.addField(cmd.getPrefix(), cmd.getHelp(), true);
+				meb.addField(cmd.getPrefix(), cmd.getHelp() + '\n', true);
 			} else {
-				meb.addField(cmd.getPrefix(), cmd.getHelp(), true);
+				meb.addField(cmd.getPrefix(), cmd.getHelp() + '\n', true);
 			}
 
 		}
