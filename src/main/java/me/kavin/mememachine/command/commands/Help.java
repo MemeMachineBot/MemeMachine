@@ -30,6 +30,6 @@ public class Help extends Command {
 		}
 		if (meb.getFields().size() > 0)
 			pc.sendMessage(meb.build()).queue();
-		event.getChannel().sendMessage("Help sent! Check DMs! ✅");
+		event.getChannel().sendMessage("Help sent! Check DMs! ✅").complete();
 	}
 }
