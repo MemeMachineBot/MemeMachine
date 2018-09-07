@@ -41,10 +41,10 @@ public class Bitcoin extends Command {
 					symbol = '$';
 					break;
 				case "GBP":
-					symbol = 'Â£';
+					symbol = '£';
 					break;
 				case "EUR":
-					symbol = 'â‚¬';
+					symbol = '€';
 					break;
 				}
 				meb.addField(key, getPrice(currency.getString("rate")) + " " + symbol + "\n", false);
