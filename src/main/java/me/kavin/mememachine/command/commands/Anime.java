@@ -2,9 +2,12 @@ package me.kavin.mememachine.command.commands;
 
 import java.net.URLEncoder;
 
+import org.apache.commons.text.StringEscapeUtils;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import com.mashape.unirest.http.Unirest;
 
@@ -33,16 +36,18 @@ public class Anime extends Command {
 
 			EmbedBuilder meb = new EmbedBuilder();
 
-			meb.setTitle("Kiss Anime Search: " + q);
+			meb.setTitle("9Anime Search: " + q);
 			meb.setColor(ColorUtils.getRainbowColor(2000));
 
-			JSONObject jObject = new JSONObject(
-					Unirest.post("https://kiss-anime.io/search.ajax?query=" + URLEncoder.encode(q, "UTF-8")).asString()
-							.getBody());
+			Document doc = Jsoup.parse(StringEscapeUtils.unescapeHtml4(new JSONObject(
+					Unirest.get("https://www1.9anime.to/ajax/film/search?keyword=" + URLEncoder.encode(q, "UTF-8"))
+							.asString().getBody()).getString("html")));
 
-			if (jObject.getString("results").length() > 0) {
-				for (Element element : Jsoup.parse(jObject.getString("results")).getElementsByClass("name")) {
-					meb.addField("`" + element.text() + "`", "https://kiss-anime.io" + element.attr("href") + "\n",
+			Elements data = doc.select("body > div:nth-child(n) > div > a");
+
+			if (data.size() > 0) {
+				for (Element element : data) {
+					meb.addField("`" + element.text() + "`", "https://www1.9anime.to" + element.attr("href") + "\n",
 							false);
 				}
 			} else {
