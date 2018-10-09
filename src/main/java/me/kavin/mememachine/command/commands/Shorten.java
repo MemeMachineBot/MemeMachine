@@ -5,7 +5,6 @@ import org.json.JSONObject;
 import com.mashape.unirest.http.Unirest;
 
 import me.kavin.mememachine.command.Command;
-import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -21,17 +20,17 @@ public class Shorten extends Command {
 		try {
 			String[] split = message.split(" ");
 			if (split.length != 1) {
-				JSONObject body = new JSONObject().put("longUrl", split[1]);
-				JSONObject jObject = new JSONObject(Unirest
-						.post("https://www.googleapis.com/urlshortener/v1/img_url?key=" + Constants.GOOGLE_API_KEY)
-						.header("Content-Type", "application/json").body(body).asString().getBody());
+				JSONObject jObject = new JSONObject(Unirest.post("https://elbo.in/~shorten")
+						.header("Content-Type", "application/x-www-form-urlencoded").body("url=" + split[1]).asString()
+						.getBody());
 
 				EmbedBuilder meb = new EmbedBuilder();
 
 				meb.setTitle("URL Shortener");
 				meb.setColor(ColorUtils.getRainbowColor(2000));
 
-				meb.addField("Shortened URL ", jObject.getString("id"), true);
+				System.out.println(jObject);
+				meb.addField("Shortened URL ", "https://elbo.in/" + jObject.getString("shorturl"), true);
 
 				event.getChannel().sendMessage(meb.build()).complete();
 			} else {
