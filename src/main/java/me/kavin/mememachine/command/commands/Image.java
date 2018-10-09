@@ -133,10 +133,10 @@ public class Image extends Command {
 						break;
 
 					} catch (Exception e) {
-						e.printStackTrace();
 					}
 					break;
 				}
+				event.getEvent().getReaction().removeReaction().complete();
 			}
 		}
 	}
