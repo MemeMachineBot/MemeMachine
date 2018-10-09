@@ -7,7 +7,6 @@ import com.mashape.unirest.http.Unirest;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Bitcoin extends Command {
@@ -18,10 +17,7 @@ public class Bitcoin extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		event.getChannel().sendMessage(getPrice()).complete();
-	}
 
-	private MessageEmbed getPrice() {
 		try {
 			EmbedBuilder meb = new EmbedBuilder();
 
@@ -47,17 +43,16 @@ public class Bitcoin extends Command {
 					symbol = '€';
 					break;
 				}
-				meb.addField(key, getPrice(currency.getString("rate")) + " " + symbol + "\n", false);
+				meb.addField(key, removeDecimal(currency.getString("rate")) + " " + symbol + "\n", false);
 			});
 
-			return meb.build();
+			event.getChannel().sendMessage(meb.build()).complete();
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
-		return null;
 	}
 
-	private String getPrice(String in) {
+	private String removeDecimal(String in) {
 
 		StringBuilder sb = new StringBuilder();
 
