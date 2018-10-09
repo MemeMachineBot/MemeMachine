@@ -30,7 +30,6 @@ import me.kavin.mememachine.command.commands.PasswordGen;
 import me.kavin.mememachine.command.commands.Ping;
 import me.kavin.mememachine.command.commands.Profile;
 import me.kavin.mememachine.command.commands.RPS;
-import me.kavin.mememachine.command.commands.Robot;
 import me.kavin.mememachine.command.commands.Roll;
 import me.kavin.mememachine.command.commands.Shorten;
 import me.kavin.mememachine.command.commands.ServerStats;
@@ -82,7 +81,6 @@ public class CommandManager {
 		commands.add(new CatFact());
 		commands.add(new Cookie());
 		commands.add(new TopSongs());
-		commands.add(new Robot());
 		commands.add(new McServer());
 		commands.add(new DadJoke());
 		commands.add(new Today());
