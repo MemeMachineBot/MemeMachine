@@ -46,13 +46,13 @@ public class Google extends Command {
 			meb.setTitle("Google Search: " + q);
 			meb.setColor(ColorUtils.getRainbowColor(2000));
 			if (!root.has("items")) {
-				meb.addField("No Results", "Unfortunately I couldn't find any results for `" + q + "`", true);
+				meb.addField("No Results", "Unfortunately I couldn't find any results for `" + q + "`" + "\n", false);
 				return meb.build();
 			}
 			root.getJSONArray("items").forEach(item -> {
 				JSONTokener itemTokener = new JSONTokener(item.toString());
 				JSONObject body = new JSONObject(itemTokener);
-				meb.addField('`' + body.getString("title") + '`', body.getString("link"), true);
+				meb.addField('`' + body.getString("title") + '`', body.getString("link") + "\n", false);
 			});
 			return meb.build();
 		} catch (Exception e) {
