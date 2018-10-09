@@ -35,6 +35,10 @@ public class Avatar extends Command {
 		if (event.getGuild().getMemberById(memberId) != null)
 			event.getChannel().sendMessage(event.getGuild().getMemberById(memberId).getUser().getAvatarUrl())
 					.complete();
+		else
+			event.getChannel().sendMessage(
+					"`Please tag a person as your argument like` \n>avatar " + Main.api.getSelfUser().getAsMention())
+					.complete();
 	}
 
 	private long getLong(String s) throws NumberFormatException {
