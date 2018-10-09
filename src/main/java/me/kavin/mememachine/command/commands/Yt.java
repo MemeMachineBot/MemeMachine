@@ -43,7 +43,7 @@ public class Yt extends Command {
 			meb.setTitle("Youtube Search: " + q);
 			meb.setColor(ColorUtils.getRainbowColor(2000));
 			if (!root.has("items")) {
-				meb.addField("No Results", "Unfortunately I couldn't find any results for `" + q + "`", true);
+				meb.addField("No Results", "Unfortunately I couldn't find any results for `" + q + "`" + "\n", false);
 				return meb.build();
 			}
 			root.getJSONArray("items").forEach(item -> {
@@ -51,10 +51,10 @@ public class Yt extends Command {
 				boolean video = body.getJSONObject("id").getString("kind").equals("youtube#video");
 				if (video) {
 					meb.addField('`' + body.getJSONObject("snippet").getString("title") + '`',
-							"https://www.youtube.com/watch?v=" + body.getJSONObject("id").getString("videoId"), true);
+							"https://www.youtube.com/watch?v=" + body.getJSONObject("id").getString("videoId") + "\n", false);
 				} else {
 					meb.addField('`' + body.getJSONObject("snippet").getString("title") + '`',
-							"https://www.youtube.com/channel/" + body.getJSONObject("id").getString("channelId"), true);
+							"https://www.youtube.com/channel/" + body.getJSONObject("id").getString("channelId") + "\n", false);
 				}
 			});
 			return meb.build();
