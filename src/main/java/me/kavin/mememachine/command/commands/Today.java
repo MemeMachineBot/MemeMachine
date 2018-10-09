@@ -22,7 +22,7 @@ public class Today extends Command {
 
 			JSONObject jObject = XML
 					.toJSONObject(Unirest.get("https://www.history.com/this-day-in-history/rss").asString().getBody())
-					.getJSONObject("rss").getJSONObject("channel").getJSONObject("item");
+					.getJSONObject("rss").getJSONObject("channel").getJSONArray("item").getJSONObject(0);
 
 			EmbedBuilder meb = new EmbedBuilder();
 
