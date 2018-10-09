@@ -28,8 +28,8 @@ public class TopSongs extends Command {
 			Document document = Jsoup
 					.parse(Unirest.get("https://www.billboard.com/charts/hot-100").asString().getBody());
 
-			Elements songNames = document.getElementsByClass("chart-row__song");
-			Elements songArtists = document.getElementsByClass("chart-row__artist");
+			Elements songNames = document.getElementsByClass("chart-list-item__title-text");
+			Elements songArtists = document.getElementsByClass("chart-list-item__artist");
 
 			for (int i = 0; i < 5; i++)
 				meb.addField("`" + songNames.get(i).text() + "`", songArtists.get(i).text() + "\n", false);
