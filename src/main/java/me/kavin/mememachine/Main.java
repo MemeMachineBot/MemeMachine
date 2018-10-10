@@ -1,5 +1,12 @@
 package me.kavin.mememachine;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.impl.client.HttpClients;
+
+import com.mashape.unirest.http.Unirest;
+
 import me.kavin.mememachine.command.CommandManager;
 import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.listener.DiscordListener;
@@ -20,6 +27,10 @@ public class Main extends ListenerAdapter {
 			api.setAutoReconnect(true);
 			DiscordListener.init();
 			uptime.reset();
+			HttpClient customClient = HttpClients.custom()
+					.setDefaultRequestConfig(RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build())
+					.build();
+			Unirest.setHttpClient(customClient);
 			new CommandManager();
 		} catch (Exception e) {
 			e.printStackTrace();
