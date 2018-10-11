@@ -23,6 +23,7 @@ import me.kavin.mememachine.command.commands.Hastebin;
 import me.kavin.mememachine.command.commands.Help;
 import me.kavin.mememachine.command.commands.Image;
 import me.kavin.mememachine.command.commands.Invite;
+import me.kavin.mememachine.command.commands.Lyrics;
 import me.kavin.mememachine.command.commands.McServer;
 import me.kavin.mememachine.command.commands.MeIRL;
 import me.kavin.mememachine.command.commands.Meme;
@@ -86,5 +87,6 @@ public class CommandManager {
 		commands.add(new Today());
 		commands.add(new Tifu());
 		commands.add(new MeIRL());
+		commands.add(new Lyrics());
 	}
 }
