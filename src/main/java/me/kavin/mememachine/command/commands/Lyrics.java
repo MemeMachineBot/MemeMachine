@@ -59,7 +59,7 @@ public class Lyrics extends Command {
 				if (meb.getFields().size() >= 25) {
 					event.getChannel().sendMessage(meb.build()).complete();
 					meb.clearFields();
-					meb.setTitle("");
+					meb.setTitle(" ");
 					if (line.length() > 0)
 						if (i + 1 == lines.length)
 							meb.addField(StringEscapeUtils.unescapeHtml4(line) + "\n", "", false);

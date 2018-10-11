@@ -22,7 +22,7 @@ public class Help extends Command {
 			if (meb.getFields().size() >= 25) {
 				pc.sendMessage(meb.build()).queue();
 				meb.clearFields();
-				meb.setTitle("");
+				meb.setTitle(" ");
 				meb.addField(cmd.getPrefix(), cmd.getHelp() + '\n', false);
 			} else {
 				meb.addField(cmd.getPrefix(), cmd.getHelp() + '\n', false);
