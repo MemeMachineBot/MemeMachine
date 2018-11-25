@@ -91,6 +91,8 @@ Bot Commands:
 
 >lyrics `Allows you to search for a song's lyrics!`
 
+>uselessweb `Shows a random useless website! (from theuselessweb.com)`
+
 You can invite me [here](https://discordapp.com/oauth2/authorize?client_id=445800505315426315&permissions=8&scope=bot)
 
 And more to come!
