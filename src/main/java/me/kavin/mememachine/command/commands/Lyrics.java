@@ -64,13 +64,13 @@ public class Lyrics extends Command {
 						if (i + 1 == lines.length)
 							meb.addField(StringEscapeUtils.unescapeHtml4(line) + "\n", "", false);
 						else
-							meb.addField(StringEscapeUtils.unescapeHtml4(line) + "\n", lines[++i], false);
+							meb.addField(StringEscapeUtils.unescapeHtml4(line) + "\n", StringEscapeUtils.unescapeHtml4(lines[++i]), false);
 				} else {
 					if (line.length() > 0)
 						if (i + 1 == lines.length)
 							meb.addField(StringEscapeUtils.unescapeHtml4(line) + "\n", "", false);
 						else
-							meb.addField(StringEscapeUtils.unescapeHtml4(line) + "\n", lines[++i], false);
+							meb.addField(StringEscapeUtils.unescapeHtml4(line) + "\n", StringEscapeUtils.unescapeHtml4(lines[++i]), false);
 					else
 						meb.addBlankField(false);
 				}
