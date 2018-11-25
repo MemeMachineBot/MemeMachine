@@ -39,6 +39,7 @@ import me.kavin.mememachine.command.commands.Tifu;
 import me.kavin.mememachine.command.commands.Today;
 import me.kavin.mememachine.command.commands.TopSongs;
 import me.kavin.mememachine.command.commands.UpTime;
+import me.kavin.mememachine.command.commands.UselessWeb;
 import me.kavin.mememachine.command.commands.Vote;
 import me.kavin.mememachine.command.commands.WYR;
 import me.kavin.mememachine.command.commands.Yt;
@@ -88,5 +89,6 @@ public class CommandManager {
 		commands.add(new Tifu());
 		commands.add(new MeIRL());
 		commands.add(new Lyrics());
+		commands.add(new UselessWeb());
 	}
 }
