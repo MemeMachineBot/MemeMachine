@@ -7,11 +7,10 @@ import org.json.JSONObject;
 import com.mashape.unirest.http.Unirest;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.event.EventHandler;
-import me.kavin.mememachine.event.events.EventGuildReaction;
+import me.kavin.mememachine.event.events.EventGuildReactionAdd;
 import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
@@ -69,12 +68,11 @@ public class Image extends Command {
 	}
 
 	@EventHandler
-	private void onReaction(EventGuildReaction event) {
+	private void onReaction(EventGuildReactionAdd event) {
 		GenericGuildMessageReactionEvent reactionEvent = event.getEvent();
 		for (int i = 0; i < sent.size(); i++) {
 			Message msg = sent.get(i);
-			if (msg.getIdLong() == reactionEvent.getMessageIdLong()
-					&& reactionEvent.getUser().getIdLong() != Main.api.getSelfUser().getIdLong()) {
+			if (msg.getIdLong() == reactionEvent.getMessageIdLong() && !reactionEvent.getUser().isBot()) {
 				switch (reactionEvent.getReactionEmote().getName()) {
 				case "◀":
 					try {
@@ -136,7 +134,7 @@ public class Image extends Command {
 					}
 					break;
 				}
-				event.getEvent().getReaction().removeReaction().complete();
+				reactionEvent.getReaction().removeReaction(reactionEvent.getUser()).complete();
 			}
 		}
 	}
