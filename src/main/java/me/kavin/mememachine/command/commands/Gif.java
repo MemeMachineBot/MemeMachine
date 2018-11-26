@@ -63,6 +63,7 @@ public class Gif extends Command {
 				this.sent.add(sent);
 			} else {
 				meb.setDescription("No search results found");
+				event.getChannel().sendMessage(meb.build()).queue();
 			}
 
 		} catch (Exception e) {
