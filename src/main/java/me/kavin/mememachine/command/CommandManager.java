@@ -44,6 +44,7 @@ import me.kavin.mememachine.command.commands.UselessWeb;
 import me.kavin.mememachine.command.commands.Vote;
 import me.kavin.mememachine.command.commands.WYR;
 import me.kavin.mememachine.command.commands.Yt;
+import me.kavin.mememachine.command.commands.r9k_4Chan;
 
 public class CommandManager {
 
@@ -92,5 +93,6 @@ public class CommandManager {
 		commands.add(new Lyrics());
 		commands.add(new UselessWeb());
 		commands.add(new Gif());
+		commands.add(new r9k_4Chan());
 	}
 }
