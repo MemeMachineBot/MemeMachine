@@ -16,6 +16,7 @@ import me.kavin.mememachine.command.commands.Dab;
 import me.kavin.mememachine.command.commands.DadJoke;
 import me.kavin.mememachine.command.commands.Define;
 import me.kavin.mememachine.command.commands.Dog;
+import me.kavin.mememachine.command.commands.Gif;
 import me.kavin.mememachine.command.commands.Google;
 import me.kavin.mememachine.command.commands.Greentext;
 import me.kavin.mememachine.command.commands.Hacked;
@@ -90,5 +91,6 @@ public class CommandManager {
 		commands.add(new MeIRL());
 		commands.add(new Lyrics());
 		commands.add(new UselessWeb());
+		commands.add(new Gif());
 	}
 }

@@ -93,6 +93,8 @@ Bot Commands:
 
 >uselessweb `Shows a random useless website! (from theuselessweb.com)`
 
+>gif `Allows you to search for gifs!`
+
 You can invite me [here](https://discordapp.com/oauth2/authorize?client_id=445800505315426315&permissions=8&scope=bot)
 
 And more to come!
