@@ -95,6 +95,8 @@ Bot Commands:
 
 >gif `Allows you to search for gifs!`
 
+>4chan `Allows you to browse r9k (aka ROBOT9001) on 4chan through discord!`
+
 You can invite me [here](https://discordapp.com/oauth2/authorize?client_id=445800505315426315&permissions=8&scope=bot)
 
 And more to come!
