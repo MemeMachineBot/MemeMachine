@@ -5,7 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import com.gargoylesoftware.htmlunit.WebClient;
+import com.mashape.unirest.http.Unirest;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.kavin.mememachine.Main;
@@ -16,8 +16,6 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class CopyPasta extends Command {
-
-	WebClient wc = new WebClient();
 
 	ObjectArrayList<TextPostData> lastData = new ObjectArrayList<>();
 	long lastUpdate = 0;
@@ -33,8 +31,8 @@ public class CopyPasta extends Command {
 			if (System.currentTimeMillis() - lastUpdate > 300000) {
 
 				JSONObject root = new JSONObject(
-						wc.getPage("https://www.reddit.com/r/copypasta/top/.json?sort=top&t=day&limit=250")
-								.getWebResponse().getContentAsString());
+						Unirest.get("https://www.reddit.com/r/copypasta/top/.json?sort=top&t=day&limit=250").asString()
+								.getBody());
 
 				JSONArray posts = root.getJSONObject("data").getJSONArray("children");
 
