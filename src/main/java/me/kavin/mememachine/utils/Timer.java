@@ -1,7 +1,8 @@
 package me.kavin.mememachine.utils;
 
 public class Timer {
-	private long prevMS = 0;
+
+	private long prevMS = getTime();
 
 	public boolean delay(float milliSec) {
 		if (this.getTime() - this.prevMS >= milliSec) {
