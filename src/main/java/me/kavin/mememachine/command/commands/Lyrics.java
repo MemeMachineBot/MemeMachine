@@ -30,7 +30,7 @@ public class Lyrics extends Command {
 					q = "";
 				q += message.charAt(i);
 			}
-			
+
 			EmbedBuilder meb = new EmbedBuilder();
 
 			meb.setTitle("Genius Lyrics Search: " + q);
@@ -64,13 +64,15 @@ public class Lyrics extends Command {
 						if (i + 1 == lines.length)
 							meb.addField(StringEscapeUtils.unescapeHtml4(line) + "\n", "", false);
 						else
-							meb.addField(StringEscapeUtils.unescapeHtml4(line) + "\n", StringEscapeUtils.unescapeHtml4(lines[++i]), false);
+							meb.addField(StringEscapeUtils.unescapeHtml4(line) + "\n",
+									StringEscapeUtils.unescapeHtml4(lines[++i]), false);
 				} else {
 					if (line.length() > 0)
 						if (i + 1 == lines.length)
 							meb.addField(StringEscapeUtils.unescapeHtml4(line) + "\n", "", false);
 						else
-							meb.addField(StringEscapeUtils.unescapeHtml4(line) + "\n", StringEscapeUtils.unescapeHtml4(lines[++i]), false);
+							meb.addField(StringEscapeUtils.unescapeHtml4(line) + "\n",
+									StringEscapeUtils.unescapeHtml4(lines[++i]), false);
 					else
 						meb.addBlankField(false);
 				}
