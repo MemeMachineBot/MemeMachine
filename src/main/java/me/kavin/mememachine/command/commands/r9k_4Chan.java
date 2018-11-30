@@ -2,6 +2,7 @@ package me.kavin.mememachine.command.commands;
 
 import java.util.Random;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -67,17 +68,17 @@ public class r9k_4Chan extends Command {
 							meb.setTitle(" ");
 							if (line.length() > 0)
 								if (i + 1 == lines.length)
-									meb.addField(StringEscapeUtils.unescapeHtml4(line) + "\n", "", false);
+									meb.addField(StringUtils.abbreviate(StringEscapeUtils.unescapeHtml4(line), 255) + "\n", "", false);
 								else
-									meb.addField(StringEscapeUtils.unescapeHtml4(line) + "\n",
-											StringEscapeUtils.unescapeHtml4(lines[++i]), false);
+									meb.addField(StringUtils.abbreviate(StringEscapeUtils.unescapeHtml4(line), 255) + "\n",
+											StringUtils.abbreviate(StringEscapeUtils.unescapeHtml4(lines[++i]), 1024), false);
 						} else {
 							if (line.length() > 0)
 								if (i + 1 == lines.length)
-									meb.addField(StringEscapeUtils.unescapeHtml4(line) + "\n", "", false);
+									meb.addField(StringUtils.abbreviate(StringEscapeUtils.unescapeHtml4(line), 255) + "\n", "", false);
 								else
-									meb.addField(StringEscapeUtils.unescapeHtml4(line) + "\n",
-											StringEscapeUtils.unescapeHtml4(lines[++i]), false);
+									meb.addField(StringUtils.abbreviate(StringEscapeUtils.unescapeHtml4(line), 255) + "\n",
+											StringUtils.abbreviate(StringEscapeUtils.unescapeHtml4(lines[++i]), 1024), false);
 							else
 								meb.addBlankField(false);
 						}
