@@ -42,7 +42,7 @@ public class API {
 	public static void b4d() {
 		JSONObject obj = new JSONObject().put("server_count", Main.api.getGuilds().size());
 		try {
-			Unirest.post("https://botsfordiscord.com/api/v1/bots/" + Main.api.getSelfUser().getId())
+			Unirest.post("https://botsfordiscord.com/api/bot/" + Main.api.getSelfUser().getId())
 					.header("Authorization", Constants.B4D_TOKEN).header("Content-Type", "application/json")
 					.body(obj.toString()).asJson();
 		} catch (UnirestException e) {
