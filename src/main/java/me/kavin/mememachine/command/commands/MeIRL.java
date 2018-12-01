@@ -5,6 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.mashape.unirest.http.Unirest;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.kavin.mememachine.Main;
@@ -16,8 +17,6 @@ import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class MeIRL extends Command {
-
-	WebClient wc = new WebClient();
 
 	ObjectArrayList<ImagePostData> lastData = new ObjectArrayList<>();
 	long lastUpdate = 0;
@@ -36,9 +35,8 @@ public class MeIRL extends Command {
 			EmbedBuilder meb = new EmbedBuilder();
 			if (System.currentTimeMillis() - lastUpdate > 300000) {
 
-				JSONObject root = new JSONObject(
-						wc.getPage("https://www.reddit.com/r/meirl/top/.json?sort=top&t=day&limit=250").getWebResponse()
-								.getContentAsString());
+				JSONObject root = new JSONObject(Unirest
+						.get("https://www.reddit.com/r/meirl/top/.json?sort=top&t=day&limit=250").asString().getBody());
 
 				JSONArray posts = root.getJSONObject("data").getJSONArray("children");
 
