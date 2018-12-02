@@ -1,5 +1,7 @@
 package me.kavin.mememachine.command.commands;
 
+import java.net.URLEncoder;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -19,7 +21,6 @@ public class Gif extends Command {
 
 	ObjectArrayList<Message> sent = new ObjectArrayList<>();
 	ObjectArrayList<String> queries = new ObjectArrayList<>();
-	private static final String API_KEY = "JJHDC7UK73EH";
 
 	public Gif() {
 		super(">gif", "`Allows you to search for gifs!`");
@@ -41,15 +42,11 @@ public class Gif extends Command {
 			meb.setTitle("Gif Search: " + q);
 			meb.setColor(ColorUtils.getRainbowColor(2000));
 
-			JSONArray jArray = new JSONObject(Unirest
-					.get("https://api.tenor.com/v1/autocomplete?key=" + API_KEY + "&tag=" + q).asString().getBody())
-							.getJSONArray("results");
+			JSONArray results = new JSONObject(
+					Unirest.get("https://api.tenor.com/v1/search?limit=50&tag=" + URLEncoder.encode(q, "UTF-8"))
+							.asString().getBody()).getJSONArray("results");
 
-			if (jArray.length() > 0) {
-
-				JSONArray results = new JSONObject(
-						Unirest.get("https://api.tenor.com/v1/search?limit=50&tag=" + jArray.getString(0)).asString()
-								.getBody()).getJSONArray("results");
+			if (results.length() > 0) {
 
 				meb.setImage(results.getJSONObject(0).getJSONArray("media").getJSONObject(0).getJSONObject("gif")
 						.getString("url"));
@@ -59,7 +56,7 @@ public class Gif extends Command {
 				sent.addReaction("◀").complete();
 				sent.addReaction("▶").complete();
 
-				this.queries.add(jArray.getString(0));
+				this.queries.add(q);
 				this.sent.add(sent);
 			} else {
 				meb.setDescription("No search results found");
