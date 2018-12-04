@@ -98,6 +98,8 @@ Bot Commands:
 
 >4chan `Allows you to browse r9k (aka ROBOT9001) on 4chan through discord!`
 
+>spotify `Allows you to search spotify for songs!`
+
 You can invite me [here](https://discordapp.com/oauth2/authorize?client_id=445800505315426315&permissions=8&scope=bot)
 
 And more to come!
