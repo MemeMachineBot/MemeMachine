@@ -100,6 +100,8 @@ Bot Commands:
 
 >spotify `Allows you to search spotify for songs!`
 
+>ebay `Allows you to search products on ebay! (Mainly for the PCMR)`
+
 You can invite me [here](https://discordapp.com/oauth2/authorize?client_id=445800505315426315&permissions=8&scope=bot)
 
 And more to come!

@@ -21,4 +21,8 @@ public class Constants {
 	public static final String SPOTIFY_CLIENT_ID = System.getenv().get("SPOTIFY_CLIENT_ID");
 
 	public static final String SPOTIFY_CLIENT_SECRET = System.getenv().get("SPOTIFY_CLIENT_SECRET");
+
+	public static final String EBAY_CLIENT_ID = "eBayInc52-907e-4b8a-ba0c-707469bb4d5";
+
+	public static final String EBAY_CLIENT_SECRET = "fc021707-16ad-4be1-a87c-c5c03c8b2aa2";
 }
