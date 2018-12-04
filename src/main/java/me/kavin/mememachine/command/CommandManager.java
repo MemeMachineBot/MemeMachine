@@ -16,6 +16,7 @@ import me.kavin.mememachine.command.commands.Dab;
 import me.kavin.mememachine.command.commands.DadJoke;
 import me.kavin.mememachine.command.commands.Define;
 import me.kavin.mememachine.command.commands.Dog;
+import me.kavin.mememachine.command.commands.Ebay;
 import me.kavin.mememachine.command.commands.Gif;
 import me.kavin.mememachine.command.commands.Google;
 import me.kavin.mememachine.command.commands.Greentext;
@@ -96,5 +97,6 @@ public class CommandManager {
 		commands.add(new Gif());
 		commands.add(new r9k_4Chan());
 		commands.add(new Spotify());
+		commands.add(new Ebay());
 	}
 }
