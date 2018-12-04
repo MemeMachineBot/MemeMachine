@@ -34,6 +34,7 @@ import me.kavin.mememachine.command.commands.Profile;
 import me.kavin.mememachine.command.commands.RPS;
 import me.kavin.mememachine.command.commands.Roll;
 import me.kavin.mememachine.command.commands.Shorten;
+import me.kavin.mememachine.command.commands.Spotify;
 import me.kavin.mememachine.command.commands.ServerStats;
 import me.kavin.mememachine.command.commands.Subs;
 import me.kavin.mememachine.command.commands.Tifu;
@@ -94,5 +95,6 @@ public class CommandManager {
 		commands.add(new UselessWeb());
 		commands.add(new Gif());
 		commands.add(new r9k_4Chan());
+		commands.add(new Spotify());
 	}
 }
