@@ -18,6 +18,14 @@ public class Help extends Command {
 			EmbedBuilder meb = new EmbedBuilder();
 			meb.setColor(ColorUtils.getRainbowColor(2000));
 			meb.setTitle("Meme Machine's Commands:");
+			meb.setDescription(
+					"Help sent! Check DMs! ✅\n If you have dm's disabled, click [here](https://mememachinebot.ml/commands.php)");
+			event.getChannel().sendMessage(meb.build()).complete();
+		}
+		{
+			EmbedBuilder meb = new EmbedBuilder();
+			meb.setColor(ColorUtils.getRainbowColor(2000));
+			meb.setTitle("Meme Machine's Commands:");
 			PrivateChannel pc = event.getAuthor().openPrivateChannel().complete();
 			for (Command cmd : CommandManager.commands) {
 				if (meb.getFields().size() >= 25) {
@@ -32,14 +40,6 @@ public class Help extends Command {
 			}
 			if (meb.getFields().size() > 0)
 				pc.sendMessage(meb.build()).queue();
-		}
-		{
-			EmbedBuilder meb = new EmbedBuilder();
-			meb.setColor(ColorUtils.getRainbowColor(2000));
-			meb.setTitle("Meme Machine's Commands:");
-			meb.setDescription(
-					"Help sent! Check DMs! ✅\n If you have dm's disabled, click [here](https://mememachinebot.ml/commands.php)");
-			event.getChannel().sendMessage(meb.build()).complete();
 		}
 	}
 }
