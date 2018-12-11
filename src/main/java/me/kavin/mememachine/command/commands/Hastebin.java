@@ -26,10 +26,31 @@ public class Hastebin extends Command {
 				q += message.charAt(i);
 			}
 
-			JSONObject jObject = new JSONObject(
-					Unirest.post("https://hastebin.com/documents").body(q).asString().getBody());
+			if (q == null) {
+				EmbedBuilder meb = new EmbedBuilder();
+				meb.setColor(ColorUtils.getRainbowColor(2000));
 
-			String url = "https://hastebin.com/" + jObject.getString("key");
+				meb.setTitle("Error: No Arguments provided!");
+				meb.setDescription("Please add an argument like " + this.getPrefix() + " `<args>`");
+				event.getChannel().sendMessage(meb.build()).complete();
+				return;
+			}
+
+			String url;
+
+			try {
+				JSONObject jObject = new JSONObject(
+						Unirest.post("https://hastebin.com/documents").body(q).asString().getBody());
+				url = "https://hastebin.com/" + jObject.getString("key");
+			} catch (Exception e) {
+				EmbedBuilder meb = new EmbedBuilder();
+				meb.setColor(ColorUtils.getRainbowColor(2000));
+
+				meb.setTitle("Hastebin: Hastebin is down!");
+				meb.setDescription("If this is an error, report it on the github.");
+				event.getChannel().sendMessage(meb.build()).complete();
+				return;
+			}
 
 			EmbedBuilder meb = new EmbedBuilder();
 

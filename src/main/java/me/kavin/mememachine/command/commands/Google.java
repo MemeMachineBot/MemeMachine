@@ -31,6 +31,16 @@ public class Google extends Command {
 			q += message.charAt(i);
 		}
 
+		if (q == null) {
+			EmbedBuilder meb = new EmbedBuilder();
+			meb.setColor(ColorUtils.getRainbowColor(2000));
+
+			meb.setTitle("Error: No Arguments provided!");
+			meb.setDescription("Please add an argument like " + this.getPrefix() + " `<args>`");
+			event.getChannel().sendMessage(meb.build()).complete();
+			return;
+		}
+
 		event.getChannel().sendMessage(getSearch(q)).complete();
 	}
 

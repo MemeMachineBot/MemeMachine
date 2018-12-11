@@ -9,7 +9,7 @@ Bot Commands:
 
 >dab `Shows a person dabbing`
 
->Profile `Shows the person you tag's profile picture`
+>avatar `Shows the person you tag's profile picture`
 
 >yt `Allows you to search youtube`
 
