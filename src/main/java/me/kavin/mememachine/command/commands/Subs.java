@@ -31,6 +31,16 @@ public class Subs extends Command {
 				for (int i = getPrefix().length() + 1; i < message.length(); i++)
 					q += message.charAt(i);
 			}
+			
+			if (q == null) {
+				EmbedBuilder meb = new EmbedBuilder();
+				meb.setColor(ColorUtils.getRainbowColor(2000));
+
+				meb.setTitle("Error: No Arguments provided!");
+				meb.setDescription("Please add an argument like " + this.getPrefix() + " `<args>`");
+				event.getChannel().sendMessage(meb.build()).complete();
+				return;
+			}
 
 			String url = "https://www.googleapis.com/youtube/v3/search/?" + "safeSearch=moderate" + "&regionCode=US"
 					+ "&q=" + URLEncoder.encode(q, "UTF-8") + "&type=channel&part=snippet&key="

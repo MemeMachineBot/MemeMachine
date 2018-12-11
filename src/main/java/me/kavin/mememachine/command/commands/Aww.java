@@ -35,7 +35,7 @@ public class Aww extends Command {
 			if (System.currentTimeMillis() - lastUpdate > 300000) {
 
 				JSONObject root = new JSONObject(
-						Unirest.get("https://www.reddit.com/r/aww/top/.json?sort=top&t=day&limit=250").asString());
+						Unirest.get("https://www.reddit.com/r/aww/top/.json?sort=top&t=day&limit=250").asString().getBody());
 
 				JSONArray posts = root.getJSONObject("data").getJSONArray("children");
 

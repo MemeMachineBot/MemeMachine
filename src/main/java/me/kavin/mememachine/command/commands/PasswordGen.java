@@ -1,15 +1,16 @@
 package me.kavin.mememachine.command.commands;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import me.kavin.mememachine.command.Command;
+import me.kavin.mememachine.utils.ColorUtils;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class PasswordGen extends Command {
 
-	List<Integer> l = new ArrayList<>();
+	IntArrayList l = new IntArrayList();
 
 	public PasswordGen() {
 		super(">password", "`Gives you a random secure password to use!`");
@@ -18,9 +19,9 @@ public class PasswordGen extends Command {
 			l.add(i);
 		}
 
-		l.remove(new Integer(34));
-		l.remove(new Integer(47));
-		l.remove(new Integer(92));
+		l.removeInt(34);
+		l.removeInt(47);
+		l.removeInt(92);
 
 	}
 
@@ -29,10 +30,22 @@ public class PasswordGen extends Command {
 		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < 10; i++) {
-			sb.append((char) l.get(ThreadLocalRandom.current().nextInt(l.size())).intValue());
+			sb.append((char) l.getInt(ThreadLocalRandom.current().nextInt(l.size())));
 		}
 
-		event.getAuthor().openPrivateChannel().complete()
-				.sendMessage("Heres a random password:\n`" + sb.toString() + "`").complete();
+		{
+			EmbedBuilder meb = new EmbedBuilder();
+			meb.setTitle("Password: ");
+			meb.setColor(ColorUtils.getRainbowColor(2000));
+			meb.setDescription("Heres a random password:\n`" + sb.toString() + "`");
+			event.getAuthor().openPrivateChannel().complete().sendMessage(meb.build()).queue();
+		}
+		{
+			EmbedBuilder meb = new EmbedBuilder();
+			meb.setTitle("Password: ");
+			meb.setColor(ColorUtils.getRainbowColor(2000));
+			meb.setDescription("Check your DM's, if you have them disabled, you can't use this command!");
+			event.getChannel().sendMessage(meb.build()).queue();
+		}
 	}
 }
