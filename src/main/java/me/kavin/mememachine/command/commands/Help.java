@@ -29,7 +29,7 @@ public class Help extends Command {
 			PrivateChannel pc = event.getAuthor().openPrivateChannel().complete();
 			for (Command cmd : CommandManager.commands) {
 				if (meb.getFields().size() >= 25) {
-					pc.sendMessage(meb.build()).queue();
+					pc.sendMessage(meb.build()).complete();
 					meb.clearFields();
 					meb.setTitle(" ");
 					meb.addField(cmd.getPrefix(), cmd.getHelp() + '\n', false);
@@ -39,7 +39,7 @@ public class Help extends Command {
 
 			}
 			if (meb.getFields().size() > 0)
-				pc.sendMessage(meb.build()).queue();
+				pc.sendMessage(meb.build()).complete();
 		}
 	}
 }
