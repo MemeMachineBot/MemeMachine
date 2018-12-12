@@ -19,9 +19,9 @@ public class PasswordGen extends Command {
 			l.add(i);
 		}
 
-		l.removeInt(34);
-		l.removeInt(47);
-		l.removeInt(92);
+		l.rem(34);
+		l.rem(47);
+		l.rem(92);
 
 	}
 
