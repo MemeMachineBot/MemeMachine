@@ -32,6 +32,16 @@ public class Lyrics extends Command {
 				q += message.charAt(i);
 			}
 
+			if (q == null) {
+				EmbedBuilder meb = new EmbedBuilder();
+				meb.setColor(ColorUtils.getRainbowColor(2000));
+
+				meb.setTitle("Error: No Arguments provided!");
+				meb.setDescription("Please add an argument like " + this.getPrefix() + " `<args>`");
+				event.getChannel().sendMessage(meb.build()).complete();
+				return;
+			}
+
 			EmbedBuilder meb = new EmbedBuilder();
 
 			meb.setTitle("Genius Lyrics Search: " + q);
@@ -63,14 +73,16 @@ public class Lyrics extends Command {
 					meb.setTitle(" ");
 					if (line.length() > 0)
 						if (i + 1 == lines.length)
-							meb.addField(StringUtils.abbreviate(StringEscapeUtils.unescapeHtml4(line), 255) + "\n", "", false);
+							meb.addField(StringUtils.abbreviate(StringEscapeUtils.unescapeHtml4(line), 255) + "\n", "",
+									false);
 						else
 							meb.addField(StringUtils.abbreviate(StringEscapeUtils.unescapeHtml4(line), 255) + "\n",
 									StringUtils.abbreviate(StringEscapeUtils.unescapeHtml4(lines[++i]), 1024), false);
 				} else {
 					if (line.length() > 0)
 						if (i + 1 == lines.length)
-							meb.addField(StringUtils.abbreviate(StringEscapeUtils.unescapeHtml4(line), 255) + "\n", "", false);
+							meb.addField(StringUtils.abbreviate(StringEscapeUtils.unescapeHtml4(line), 255) + "\n", "",
+									false);
 						else
 							meb.addField(StringUtils.abbreviate(StringEscapeUtils.unescapeHtml4(line), 255) + "\n",
 									StringUtils.abbreviate(StringEscapeUtils.unescapeHtml4(lines[++i]), 1024), false);

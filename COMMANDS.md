@@ -69,8 +69,6 @@ Bot Commands:
 
 >topsongs `Lists the top songs!`
 
->robot `Shows a robot avatar of you or the person you tag!`
-
 >mcserver `Searches for a minecraft server`
 
 >joke `Shows a dad joke`
