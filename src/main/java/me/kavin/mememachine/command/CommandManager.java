@@ -30,6 +30,7 @@ import me.kavin.mememachine.command.commands.McServer;
 import me.kavin.mememachine.command.commands.MeIRL;
 import me.kavin.mememachine.command.commands.Meme;
 import me.kavin.mememachine.command.commands.PasswordGen;
+import me.kavin.mememachine.command.commands.Paste;
 import me.kavin.mememachine.command.commands.Ping;
 import me.kavin.mememachine.command.commands.Profile;
 import me.kavin.mememachine.command.commands.RPS;
@@ -98,5 +99,6 @@ public class CommandManager {
 		commands.add(new r9k_4Chan());
 		commands.add(new Spotify());
 		commands.add(new Ebay());
+		commands.add(new Paste());
 	}
 }

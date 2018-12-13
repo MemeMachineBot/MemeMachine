@@ -90,3 +90,5 @@ Bot Commands:
 >spotify `Allows you to search spotify for songs!`
 
 >ebay `Allows you to search products on ebay! (Mainly for the PCMR)`
+
+>paste `Uploads the given text to Bisoga`
