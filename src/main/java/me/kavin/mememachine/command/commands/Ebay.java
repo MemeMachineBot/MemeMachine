@@ -65,21 +65,25 @@ public class Ebay extends Command {
 
 			meb.setTitle("eBay Search: " + q, item.get("viewItemURL").as(String.class));
 			meb.addField("Title: ", item.get("title").as(String.class), false);
-			meb.addField("Brand: ", item.get("brand").as(String.class), false);
+			if (item.keys().contains("brand"))
+				meb.addField("Brand: ", item.get("brand").as(String.class), false);
 			meb.addField("Condition: ", item.get("normalizedCondition").get("name").as(String.class), false);
 			meb.addField("Category: ", item.get("category").asList().get(0).get("name").as(String.class), false);
 			meb.addField("Watching: ", String.valueOf(item.get("watchCount").as(Integer.class)), false);
 			meb.addField("Price: ",
 					String.valueOf(item.get("sellingStatus").get("currentPrice").get("value").as(Double.class)), false);
-			meb.addField("Payment Methods: ", String.valueOf(item.get("paymentMethod").asList()), false);
+			if (item.keys().contains("paymentMethod"))
+				meb.addField("Payment Methods: ", String.valueOf(item.get("paymentMethod").asList()), false);
 
-			if (item.get("itemFeature").get("gallery").as(Boolean.class)) {
-				meb.setImage(item.get("itemImageInfo").asList().get(0).get("primaryImageURL").as(String.class)
-						.replaceFirst("s-l225", "s-l" + item.get("itemImageInfo").asList().get(0).get("extended")
-								.get("masterImageSize").get("width")));
-			}
+			if (item.keys().contains("brand") && item.get("itemFeature").keys().contains("gallery"))
+				if (item.get("itemFeature").get("gallery").as(Boolean.class)) {
+					meb.setImage(item.get("itemImageInfo").asList().get(0).get("primaryImageURL").as(String.class)
+							.replaceFirst("s-l225", "s-l" + item.get("itemImageInfo").asList().get(0).get("extended")
+									.get("masterImageSize").get("width")));
+				}
 
 			event.getChannel().sendMessage(meb.build()).complete();
+
 		} catch (Exception e) {
 		}
 	}
