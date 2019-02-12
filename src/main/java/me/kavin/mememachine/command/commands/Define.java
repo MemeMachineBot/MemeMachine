@@ -81,11 +81,10 @@ public class Define extends Command {
 		JSONArray jArray = jObject.getJSONArray("list");
 		for (int i = 0; i < jArray.length(); i++) {
 			JSONObject obj = jArray.getJSONObject(i);
-			String s = obj.getString("definition");
+			String s = obj.getString("definition").replaceAll("\\[(.*?)\\]", "$1");
 			if (s.startsWith(find) || s.equals(find))
 				return s;
 		}
 		return find;
 	}
-
 }
