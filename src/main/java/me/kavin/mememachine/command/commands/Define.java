@@ -63,8 +63,8 @@ public class Define extends Command {
 			}
 			JSONObject body = jArray.getJSONObject(0);
 			String term = body.getString("term");
-			meb.addField('`' + term + '`', "", false);
-			meb.setDescription(StringUtils.abbreviate(getDescription(term, body.getString("preview")), 2048));
+			meb.setDescription(StringUtils
+					.abbreviate('`' + term + '`' + '\n' + getDescription(term, body.getString("preview")), 2048));
 			return meb.build();
 		} catch (Exception e) {
 			e.printStackTrace();
