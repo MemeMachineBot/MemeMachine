@@ -1,5 +1,7 @@
 package me.kavin.mememachine.command.commands;
 
+import java.net.URLEncoder;
+
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,7 +51,7 @@ public class Define extends Command {
 	private MessageEmbed getSearch(String q) {
 		try {
 			EmbedBuilder meb = new EmbedBuilder();
-			String url = "http://api.urbandictionary.com/v0/autocomplete-extra?&term=" + q.replace(" ", "%20");
+			String url = "http://api.urbandictionary.com/v0/autocomplete-extra?&term=" + URLEncoder.encode(q, "UTF-8");
 			JSONTokener tokener = new JSONTokener(Unirest.get(url).asString().getBody());
 			JSONObject root = new JSONObject(tokener);
 			meb.setTitle("Urban Dictionary Search: " + q);
@@ -61,8 +63,8 @@ public class Define extends Command {
 			}
 			JSONObject body = jArray.getJSONObject(0);
 			String term = body.getString("term");
-			meb.addField('`' + term + '`',
-					StringUtils.abbreviate(getDescription(term, body.getString("preview")), 1024) + '\n', false);
+			meb.addField('`' + term + '`', "", false);
+			meb.setDescription(StringUtils.abbreviate(getDescription(term, body.getString("preview")), 2048));
 			return meb.build();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -85,6 +87,6 @@ public class Define extends Command {
 			if (s.startsWith(find) || s.equals(find))
 				return s;
 		}
-		return find;
+		return jArray.getJSONObject(0).getString("definition").replaceAll("\\[(.*?)\\]", "$1");
 	}
 }
