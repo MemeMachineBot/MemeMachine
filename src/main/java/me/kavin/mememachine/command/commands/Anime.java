@@ -2,7 +2,6 @@ package me.kavin.mememachine.command.commands;
 
 import java.net.URLEncoder;
 
-import org.apache.commons.text.StringEscapeUtils;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -49,9 +48,9 @@ public class Anime extends Command {
 			meb.setTitle("9Anime Search: " + q);
 			meb.setColor(ColorUtils.getRainbowColor(2000));
 
-			Document doc = Jsoup.parse(StringEscapeUtils.unescapeHtml4(new JSONObject(
+			Document doc = Jsoup.parse(new JSONObject(
 					Unirest.get("https://www1.9anime.to/ajax/film/search?keyword=" + URLEncoder.encode(q, "UTF-8"))
-							.asString().getBody()).getString("html")));
+							.asString().getBody()).getString("html"));
 
 			Elements data = doc.select("body > div:nth-child(n) > div > a");
 
