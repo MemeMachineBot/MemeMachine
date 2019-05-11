@@ -96,3 +96,7 @@ Bot Commands:
 >leetspeak `Converts your text to l337 5p33k!`
 
 >bubbletext `Converts your text to Bubble Text!`
+
+>aesthetictext `Converts your text to Aesthetic Text!`
+
+>upsidedowntext `Converts your text to UpsideDown Text!`
