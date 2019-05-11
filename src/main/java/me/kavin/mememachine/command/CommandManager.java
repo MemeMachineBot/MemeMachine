@@ -2,6 +2,7 @@ package me.kavin.mememachine.command;
 
 import java.util.ArrayList;
 
+import me.kavin.mememachine.command.commands.AestheticText;
 import me.kavin.mememachine.command.commands.Anime;
 import me.kavin.mememachine.command.commands.Avatar;
 import me.kavin.mememachine.command.commands.Aww;
@@ -45,6 +46,7 @@ import me.kavin.mememachine.command.commands.Tifu;
 import me.kavin.mememachine.command.commands.Today;
 import me.kavin.mememachine.command.commands.TopSongs;
 import me.kavin.mememachine.command.commands.UpTime;
+import me.kavin.mememachine.command.commands.UpsideDownText;
 import me.kavin.mememachine.command.commands.UselessWeb;
 import me.kavin.mememachine.command.commands.Vote;
 import me.kavin.mememachine.command.commands.WYR;
@@ -104,5 +106,7 @@ public class CommandManager {
 		commands.add(new Paste());
 		commands.add(new LeetSpeak());
 		commands.add(new BubbleText());
+		commands.add(new AestheticText());
+		commands.add(new UpsideDownText());
 	}
 }
