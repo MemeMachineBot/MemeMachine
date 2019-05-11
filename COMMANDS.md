@@ -92,3 +92,7 @@ Bot Commands:
 >ebay `Allows you to search products on ebay! (Mainly for the PCMR)`
 
 >paste `Uploads the given text to Bisoga`
+
+>leetspeak `Converts your text to l337 5p33k!`
+
+>bubbletext `Converts your text to Bubble Text!`
