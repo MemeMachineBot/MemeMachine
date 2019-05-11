@@ -7,6 +7,7 @@ import me.kavin.mememachine.command.commands.Avatar;
 import me.kavin.mememachine.command.commands.Aww;
 import me.kavin.mememachine.command.commands.Bitcoin;
 import me.kavin.mememachine.command.commands.BotStats;
+import me.kavin.mememachine.command.commands.BubbleText;
 import me.kavin.mememachine.command.commands.Cat;
 import me.kavin.mememachine.command.commands.CatFact;
 import me.kavin.mememachine.command.commands.CoinFlip;
@@ -25,6 +26,7 @@ import me.kavin.mememachine.command.commands.Hastebin;
 import me.kavin.mememachine.command.commands.Help;
 import me.kavin.mememachine.command.commands.Image;
 import me.kavin.mememachine.command.commands.Invite;
+import me.kavin.mememachine.command.commands.LeetSpeak;
 import me.kavin.mememachine.command.commands.Lyrics;
 import me.kavin.mememachine.command.commands.McServer;
 import me.kavin.mememachine.command.commands.MeIRL;
@@ -35,9 +37,9 @@ import me.kavin.mememachine.command.commands.Ping;
 import me.kavin.mememachine.command.commands.Profile;
 import me.kavin.mememachine.command.commands.RPS;
 import me.kavin.mememachine.command.commands.Roll;
+import me.kavin.mememachine.command.commands.ServerStats;
 import me.kavin.mememachine.command.commands.Shorten;
 import me.kavin.mememachine.command.commands.Spotify;
-import me.kavin.mememachine.command.commands.ServerStats;
 import me.kavin.mememachine.command.commands.Subs;
 import me.kavin.mememachine.command.commands.Tifu;
 import me.kavin.mememachine.command.commands.Today;
@@ -100,5 +102,7 @@ public class CommandManager {
 		commands.add(new Spotify());
 		commands.add(new Ebay());
 		commands.add(new Paste());
+		commands.add(new LeetSpeak());
+		commands.add(new BubbleText());
 	}
 }
