@@ -1,5 +1,7 @@
 package me.kavin.mememachine.command.commands;
 
+import org.apache.commons.lang3.StringUtils;
+
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -40,19 +42,19 @@ public class UpsideDownText extends Command {
 
 			String converted = q;
 
-			converted = converted.replace('0', '0').replace('1', 'Ɩ').replace('2', 'ᄅ').replace('3', 'Ɛ')
-					.replace('4', 'ㄣ').replace('5', 'ϛ').replace('6', '9').replace('7', 'ㄥ').replace('8', '8')
-					.replace('9', '6').replace('a', 'ɐ').replace('b', 'q').replace('c', 'ɔ').replace('d', 'p')
-					.replace('e', 'ǝ').replace('f', 'ɟ').replace('g', 'ƃ').replace('h', 'ɥ').replace('i', 'ᴉ')
-					.replace('j', 'ɾ').replace('k', 'ʞ').replace('l', 'l').replace('m', 'ɯ').replace('n', 'u')
-					.replace('o', 'o').replace('p', 'd').replace('q', 'b').replace('r', 'ɹ').replace('s', 's')
-					.replace('t', 'ʇ').replace('u', 'n').replace('v', 'ʌ').replace('w', 'ʍ').replace('x', 'x')
-					.replace('y', 'ʎ').replace('z', 'z').replace('A', '∀').replace('B', 'q').replace('C', 'Ɔ')
-					.replace('D', 'p').replace('E', 'Ǝ').replace('F', 'Ⅎ').replace('G', 'פ').replace('H', 'H')
-					.replace('I', 'I').replace('J', 'ſ').replace('K', 'ʞ').replace('L', '˥').replace('M', 'W')
-					.replace('N', 'N').replace('O', 'O').replace('P', 'Ԁ').replace('Q', 'Q').replace('R', 'ɹ')
-					.replace('S', 'S').replace('T', '┴').replace('U', '∩').replace('V', 'Λ').replace('W', 'M')
-					.replace('X', 'X').replace('Y', '⅄').replace('Z', 'Z');
+			converted = StringUtils.reverse(converted.replace('0', '0').replace('1', 'Ɩ').replace('2', 'ᄅ')
+					.replace('3', 'Ɛ').replace('4', 'ㄣ').replace('5', 'ϛ').replace('6', '9').replace('7', 'ㄥ')
+					.replace('8', '8').replace('9', '6').replace('a', 'ɐ').replace('b', 'B').replace('c', 'ɔ')
+					.replace('d', 'p').replace('e', 'ǝ').replace('f', 'ɟ').replace('g', 'ƃ').replace('h', 'ɥ')
+					.replace('i', 'ı').replace('j', 'ɾ').replace('k', 'ʞ').replace('l', 'ן').replace('m', 'ɯ')
+					.replace('n', 'u').replace('o', 'o').replace('p', 'd').replace('q', 'b').replace('r', 'ɹ')
+					.replace('s', 's').replace('t', 'ʇ').replace('u', 'n').replace('v', 'ʌ').replace('w', 'ʍ')
+					.replace('x', 'x').replace('y', 'ʎ').replace('z', 'z').replace('A', '∀').replace('B', 'q')
+					.replace('C', 'Ͻ').replace('D', 'ᗡ').replace('E', 'Ǝ').replace('F', 'Ⅎ').replace('G', 'ƃ')
+					.replace('H', 'H').replace('I', 'I').replace('J', 'ſ').replace('K', 'ʞ').replace('L', '˥')
+					.replace('M', 'W').replace('N', 'N').replace('O', 'O').replace('P', 'Ԁ').replace('Q', 'Ὁ')
+					.replace('R', 'ᴚ').replace('S', 'S').replace('T', '⊥').replace('U', '∩').replace('V', 'Λ')
+					.replace('W', 'M').replace('X', 'X').replace('Y', 'ʎ').replace('Z', 'Z'));
 
 			meb.setDescription(converted);
 
