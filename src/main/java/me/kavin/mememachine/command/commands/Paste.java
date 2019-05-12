@@ -1,6 +1,6 @@
 package me.kavin.mememachine.command.commands;
 
-import org.jsoup.Jsoup;
+import org.json.JSONObject;
 
 import com.mashape.unirest.http.Unirest;
 
@@ -39,8 +39,8 @@ public class Paste extends Command {
 			String url;
 
 			try {
-				url = Jsoup.parse(Unirest.post("https://bisoga.glitch.me/paste").field("paste", q).asString().getBody())
-						.select("#text > a").text();
+				url = Unirest.post("https://bisoga.xyz/api/paste").header("Content-Type", "application/json")
+						.body(new JSONObject().put("text", q)).asString().getBody();
 			} catch (Exception e) {
 				EmbedBuilder meb = new EmbedBuilder();
 				meb.setColor(ColorUtils.getRainbowColor(2000));
