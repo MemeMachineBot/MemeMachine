@@ -1,21 +1,17 @@
 package me.kavin.mememachine.listener;
 
-import org.json.JSONObject;
-
-import com.mashape.unirest.http.Unirest;
-
 import it.unimi.dsi.fastutil.longs.Long2IntOpenHashMap;
 import it.unimi.dsi.fastutil.longs.Long2LongOpenHashMap;
 import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.command.CommandManager;
-import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.event.EventManager;
 import me.kavin.mememachine.event.events.EventGuildReaction;
 import me.kavin.mememachine.event.events.EventGuildReactionAdd;
 import me.kavin.mememachine.event.events.EventGuildReactionRemove;
 import me.kavin.mememachine.lists.API;
 import me.kavin.mememachine.utils.Multithreading;
+import me.kavin.mememachine.utils.XpHelper;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Game;
@@ -90,32 +86,21 @@ public class DiscordListener extends ListenerAdapter {
 		addXp(event.getAuthor().getIdLong());
 	}
 
+	private XpHelper xpHelper = new XpHelper();
+
 	private void addXp(long id) {
 		try {
 			if (!lastMsg.containsKey(id))
 				lastMsg.put(id, 0L);
 
 			if (lastMsg.containsKey(id) && System.currentTimeMillis() - lastMsg.get(id) > 60000) {
-				if (cachedXp.containsKey(id)) {
-					Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/xp/" + id + ".json" + "?auth="
-							+ Constants.FB_SECRET).header("content-type", "application/json")
-							.body(new JSONObject().put("xp", cachedXp.get(id) + 25)).asString();
-				} else {
-					String resp = Unirest.get("https://" + Constants.FB_URL + ".firebaseio.com/users/xp/" + id + ".json"
-							+ "?auth=" + Constants.FB_SECRET).asString().getBody();
-					if (resp.equals("null")) {
-						cachedXp.put(id, 25);
-						Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/xp/" + id + ".json"
-								+ "?auth=" + Constants.FB_SECRET).header("content-type", "application/json")
-								.body(new JSONObject().put("xp", 25)).asString();
-					} else {
-						JSONObject xp = new JSONObject(resp);
-						cachedXp.put(id, xp.getInt("xp") + 25);
-						Unirest.put("https://" + Constants.FB_URL + ".firebaseio.com/users/xp/" + id + ".json"
-								+ "?auth=" + Constants.FB_SECRET).header("content-type", "application/json")
-								.body(new JSONObject(resp).put("xp", cachedXp.get(id))).asString();
-					}
-				}
+
+				if (cachedXp.containsKey(id))
+					cachedXp.put(id, cachedXp.get(id) + 25);
+				else
+					cachedXp.put(id, xpHelper.getXp(id) + 25);
+
+				xpHelper.setXp(id, cachedXp.get(id));
 
 				lastMsg.put(id, System.currentTimeMillis());
 			}
