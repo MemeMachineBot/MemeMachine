@@ -17,8 +17,8 @@ public class Main extends ListenerAdapter {
 		try {
 			DefaultShardManagerBuilder builder = new DefaultShardManagerBuilder(Constants.BOT_TOKEN);
 			builder.setAutoReconnect(true);
+			builder.addEventListeners(new DiscordListener());
 			api = builder.build();
-			DiscordListener.init();
 			new CommandManager();
 		} catch (Exception e) {
 			e.printStackTrace();

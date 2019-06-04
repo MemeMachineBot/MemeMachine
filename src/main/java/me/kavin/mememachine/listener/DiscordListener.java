@@ -33,10 +33,6 @@ public class DiscordListener extends ListenerAdapter {
 	Long2LongOpenHashMap lastMsg = new Long2LongOpenHashMap();
 	Long2IntOpenHashMap cachedXp = new Long2IntOpenHashMap();
 
-	public static void init() {
-		Main.api.addEventListener(new DiscordListener());
-	}
-
 	private void setPresence() {
 		for (JDA jda : Main.api.getShards())
 			jda.getPresence().setActivity(
