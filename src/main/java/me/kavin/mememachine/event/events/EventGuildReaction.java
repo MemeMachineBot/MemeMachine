@@ -1,7 +1,7 @@
 package me.kavin.mememachine.event.events;
 
 import me.kavin.mememachine.event.AbstractEvent;
-import net.dv8tion.jda.core.events.message.guild.react.GenericGuildMessageReactionEvent;
+import net.dv8tion.jda.api.events.message.guild.react.GenericGuildMessageReactionEvent;
 
 public class EventGuildReaction extends AbstractEvent {
 

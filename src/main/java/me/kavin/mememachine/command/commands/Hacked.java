@@ -9,8 +9,8 @@ import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Hacked extends Command {
 
@@ -43,10 +43,10 @@ public class Hacked extends Command {
 					meb.addField("Good Job", "You have done a great job in securing your passwords!", true);
 				}
 
-				event.getChannel().sendMessage(meb.build()).complete();
+				event.getChannel().sendMessage(meb.build()).queue();
 			} else {
 				event.getChannel().sendMessage("`Please provide an email as your argument like` \n>hacked <email>")
-						.complete();
+						.queue();
 			}
 		} catch (Exception e) {
 		}

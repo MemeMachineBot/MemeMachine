@@ -3,9 +3,8 @@ package me.kavin.mememachine.command.commands;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
 
-import kong.unirest.Unirest;
-
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
+import kong.unirest.Unirest;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.event.EventHandler;
 import me.kavin.mememachine.event.events.EventGuildReactionAdd;
@@ -13,11 +12,11 @@ import me.kavin.mememachine.event.events.EventGuildReactionRemove;
 import me.kavin.mememachine.utils.ColorUtils;
 import me.kavin.mememachine.utils.Multithreading;
 import me.kavin.mememachine.utils.WYRGame;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.events.message.guild.react.GuildMessageReactionAddEvent;
-import net.dv8tion.jda.core.events.message.guild.react.GuildMessageReactionRemoveEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionRemoveEvent;
 
 public class WYR extends Command {
 
@@ -47,7 +46,7 @@ public class WYR extends Command {
 			meb.addField(emoji1, choice1 + "\n", false);
 			meb.addField(emoji2, choice2 + "\n", false);
 
-			Message msg = event.getChannel().sendMessage(meb.build()).complete();
+			Message msg = event.getChannel().sendMessage(meb.build()).submit().get();
 
 			msg.addReaction(emoji1).queue();
 			msg.addReaction(emoji2).queue();
@@ -82,7 +81,7 @@ public class WYR extends Command {
 						meb.addField("", "It was a `draw`", false);
 					}
 
-					event.getChannel().sendMessage(meb.build()).complete();
+					event.getChannel().sendMessage(meb.build()).queue();
 
 					sent.remove(msgId);
 				}

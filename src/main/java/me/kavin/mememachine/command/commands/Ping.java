@@ -1,8 +1,7 @@
 package me.kavin.mememachine.command.commands;
 
-import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Ping extends Command {
 	public Ping() {
@@ -11,6 +10,6 @@ public class Ping extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		event.getChannel().sendMessage("The ping took `" + Main.api.getPing() / 2 + "` ms!").complete();
+		event.getChannel().sendMessage("The ping took `" + event.getJDA().getGatewayPing() + "` ms!").queue();
 	}
 }

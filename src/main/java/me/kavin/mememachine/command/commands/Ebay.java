@@ -10,8 +10,8 @@ import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.utils.ColorUtils;
 import me.kavin.mememachine.utils.EbayClient;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Ebay extends Command {
 
@@ -38,7 +38,7 @@ public class Ebay extends Command {
 
 				meb.setTitle("Error: No Arguments provided!");
 				meb.setDescription("Please add an argument like " + this.getPrefix() + " `<args>`");
-				event.getChannel().sendMessage(meb.build()).complete();
+				event.getChannel().sendMessage(meb.build()).queue();
 				return;
 			}
 
@@ -57,7 +57,7 @@ public class Ebay extends Command {
 			if (items.size() <= 0) {
 				meb.setTitle("eBay Search: " + q);
 				meb.setDescription("No search results found!");
-				event.getChannel().sendMessage(meb.build()).complete();
+				event.getChannel().sendMessage(meb.build()).queue();
 				return;
 			}
 
@@ -82,7 +82,7 @@ public class Ebay extends Command {
 									.get("masterImageSize").get("width")));
 				}
 
-			event.getChannel().sendMessage(meb.build()).complete();
+			event.getChannel().sendMessage(meb.build()).queue();
 
 		} catch (Exception e) {
 		}

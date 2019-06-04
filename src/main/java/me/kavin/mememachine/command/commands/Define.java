@@ -10,9 +10,9 @@ import org.json.JSONTokener;
 import kong.unirest.Unirest;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Define extends Command {
 
@@ -31,7 +31,7 @@ public class Define extends Command {
 		}
 
 		if (event.getTextChannel().isNSFW())
-			event.getChannel().sendMessage(getSearch(q)).complete();
+			event.getChannel().sendMessage(getSearch(q)).queue();
 		else {
 			EmbedBuilder meb = new EmbedBuilder();
 
@@ -40,7 +40,7 @@ public class Define extends Command {
 
 			meb.setImage("https://i.gyazo.com/9ac5c5a6ddf46b5c446853a7778b0cae.gif");
 
-			event.getChannel().sendMessage(meb.build()).complete();
+			event.getChannel().sendMessage(meb.build()).queue();
 
 		}
 	}

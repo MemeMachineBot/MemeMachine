@@ -10,8 +10,8 @@ import javax.management.ObjectName;
 import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class BotStats extends Command {
 
@@ -45,7 +45,7 @@ public class BotStats extends Command {
 		meb.addField("Free Memory: ", String.valueOf(freeMemory) + "\n", false);
 		meb.addField("Used Memory: ", String.valueOf(usedMemory) + "\n", false);
 
-		event.getChannel().sendMessage(meb.build()).complete();
+		event.getChannel().sendMessage(meb.build()).queue();
 	}
 
 	private double getProcessCpuLoad() {

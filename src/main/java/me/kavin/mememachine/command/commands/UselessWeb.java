@@ -5,8 +5,8 @@ import java.util.Random;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class UselessWeb extends Command {
 
@@ -102,7 +102,7 @@ public class UselessWeb extends Command {
 
 		meb.setDescription("Click [here](" + urls.get(RANDOM.nextInt(urls.size())) + ")");
 
-		event.getChannel().sendMessage(meb.build()).complete();
+		event.getChannel().sendMessage(meb.build()).queue();
 	}
 
 }

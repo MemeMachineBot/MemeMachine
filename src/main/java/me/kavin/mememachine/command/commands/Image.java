@@ -4,19 +4,18 @@ import java.net.URLEncoder;
 
 import org.json.JSONObject;
 
-import kong.unirest.Unirest;
-
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import kong.unirest.Unirest;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.event.EventHandler;
 import me.kavin.mememachine.event.events.EventGuildReactionAdd;
 import me.kavin.mememachine.utils.ColorUtils;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.events.message.guild.react.GenericGuildMessageReactionEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.react.GenericGuildMessageReactionEvent;
 
 public class Image extends Command {
 
@@ -29,19 +28,22 @@ public class Image extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		String q = null;
+		try {
+			String q = null;
 
-		if (message.length() > getPrefix().length()) {
-			q = "";
-			for (int i = getPrefix().length() + 1; i < message.length(); i++)
-				q += message.charAt(i);
+			if (message.length() > getPrefix().length()) {
+				q = "";
+				for (int i = getPrefix().length() + 1; i < message.length(); i++)
+					q += message.charAt(i);
+			}
+
+			Message sent = event.getChannel().sendMessage(getSearch(q)).submit().get();
+			sent.addReaction("◀").queue();
+			sent.addReaction("▶").queue();
+			this.queries.add(q);
+			this.sent.add(sent);
+		} catch (Exception e) {
 		}
-
-		Message sent = event.getChannel().sendMessage(getSearch(q)).complete();
-		sent.addReaction("◀").complete();
-		sent.addReaction("▶").complete();
-		this.queries.add(q);
-		this.sent.add(sent);
 	}
 
 	private MessageEmbed getSearch(String q) {
@@ -96,7 +98,7 @@ public class Image extends Command {
 								.getJSONObject(page < 10 ? (page % 10) - 1 : page % 10).getString("link"), "UTF-8"));
 						meb.setDescription("Page " + page + " / 100");
 
-						sent.set(i, msg.editMessage(meb.build()).complete());
+						sent.set(i, msg.editMessage(meb.build()).submit().get());
 
 						break;
 
@@ -126,7 +128,7 @@ public class Image extends Command {
 								.getJSONObject(page < 10 ? (page % 10) - 1 : page % 10).getString("link"), "UTF-8"));
 						meb.setDescription("Page " + page + " / 100");
 
-						sent.set(i, msg.editMessage(meb.build()).complete());
+						sent.set(i, msg.editMessage(meb.build()).submit().get());
 
 						break;
 
@@ -134,7 +136,7 @@ public class Image extends Command {
 					}
 					break;
 				}
-				reactionEvent.getReaction().removeReaction(reactionEvent.getUser()).complete();
+				reactionEvent.getReaction().removeReaction(reactionEvent.getUser()).queue();
 			}
 		}
 	}

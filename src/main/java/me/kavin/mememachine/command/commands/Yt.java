@@ -9,9 +9,9 @@ import kong.unirest.Unirest;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.utils.ColorUtils;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Yt extends Command {
 
@@ -36,11 +36,11 @@ public class Yt extends Command {
 
 			meb.setTitle("Error: No Arguments provided!");
 			meb.setDescription("Please add an argument like " + this.getPrefix() + " `<args>`");
-			event.getChannel().sendMessage(meb.build()).complete();
+			event.getChannel().sendMessage(meb.build()).queue();
 			return;
 		}
 
-		event.getChannel().sendMessage(getSearch(q)).complete();
+		event.getChannel().sendMessage(getSearch(q)).queue();
 	}
 
 	private MessageEmbed getSearch(String q) {

@@ -12,8 +12,8 @@ import kong.unirest.Unirest;
 import it.unimi.dsi.fastutil.longs.LongArrayList;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class r9k_4Chan extends Command {
 
@@ -63,7 +63,7 @@ public class r9k_4Chan extends Command {
 					for (int i = 0; i < lines.length; i++) {
 						String line = lines[i];
 						if (meb.getFields().size() >= 25) {
-							event.getChannel().sendMessage(meb.build()).complete();
+							event.getChannel().sendMessage(meb.build()).queue();
 							meb.clearFields();
 							meb.setTitle(" ");
 							if (line.length() > 0)
@@ -89,7 +89,7 @@ public class r9k_4Chan extends Command {
 					}
 
 					if (meb.getFields().size() > 0)
-						event.getChannel().sendMessage(meb.build()).complete();
+						event.getChannel().sendMessage(meb.build()).queue();
 				} catch (Exception e) {
 				}
 			else {
@@ -100,7 +100,7 @@ public class r9k_4Chan extends Command {
 
 				meb.setImage("https://i.gyazo.com/9ac5c5a6ddf46b5c446853a7778b0cae.gif");
 
-				event.getChannel().sendMessage(meb.build()).complete();
+				event.getChannel().sendMessage(meb.build()).queue();
 
 			}
 		} catch (Exception e) {

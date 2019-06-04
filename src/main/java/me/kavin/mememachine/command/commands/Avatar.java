@@ -1,8 +1,7 @@
 package me.kavin.mememachine.command.commands;
 
-import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Avatar extends Command {
 	public Avatar() {
@@ -15,9 +14,8 @@ public class Avatar extends Command {
 		String[] split = message.split(" ");
 
 		if (split.length < 2) {
-			event.getChannel().sendMessage(
-					"`Please tag a person as your argument like` \n>avatar " + Main.api.getSelfUser().getAsMention())
-					.complete();
+			event.getChannel().sendMessage("`Please tag a person as your argument like` \n>avatar "
+					+ event.getJDA().getSelfUser().getAsMention()).queue();
 			return;
 		}
 
@@ -26,19 +24,17 @@ public class Avatar extends Command {
 		try {
 			memberId = getLong(split[1]);
 		} catch (NumberFormatException e) {
-			event.getChannel().sendMessage(
-					"`Please tag a person as your argument like` \n>avatar " + Main.api.getSelfUser().getAsMention())
-					.complete();
+			event.getChannel().sendMessage("`Please tag a person as your argument like` \n>avatar "
+					+ event.getJDA().getSelfUser().getAsMention()).queue();
 			return;
 		}
 
 		if (event.getGuild().getMemberById(memberId) != null)
 			event.getChannel().sendMessage(event.getGuild().getMemberById(memberId).getUser().getAvatarUrl())
-					.complete();
+					.queue();
 		else
-			event.getChannel().sendMessage(
-					"`Please tag a person as your argument like` \n>avatar " + Main.api.getSelfUser().getAsMention())
-					.complete();
+			event.getChannel().sendMessage("`Please tag a person as your argument like` \n>avatar "
+					+ event.getJDA().getSelfUser().getAsMention()).queue();
 	}
 
 	private long getLong(String s) throws NumberFormatException {

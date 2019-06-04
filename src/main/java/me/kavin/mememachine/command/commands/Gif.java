@@ -5,17 +5,16 @@ import java.net.URLEncoder;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import kong.unirest.Unirest;
-
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import kong.unirest.Unirest;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.event.EventHandler;
 import me.kavin.mememachine.event.events.EventGuildReactionAdd;
 import me.kavin.mememachine.utils.ColorUtils;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.events.message.guild.react.GenericGuildMessageReactionEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.react.GenericGuildMessageReactionEvent;
 
 public class Gif extends Command {
 
@@ -43,7 +42,7 @@ public class Gif extends Command {
 
 				meb.setTitle("Error: No Arguments provided!");
 				meb.setDescription("Please add an argument like " + this.getPrefix() + " `<args>`");
-				event.getChannel().sendMessage(meb.build()).complete();
+				event.getChannel().sendMessage(meb.build()).queue();
 				return;
 			}
 
@@ -62,9 +61,9 @@ public class Gif extends Command {
 						.getString("url"));
 				meb.setDescription("Page 1 / 50");
 
-				Message sent = event.getChannel().sendMessage(meb.build()).complete();
-				sent.addReaction("◀").complete();
-				sent.addReaction("▶").complete();
+				Message sent = event.getChannel().sendMessage(meb.build()).submit().get();
+				sent.addReaction("◀").queue();
+				sent.addReaction("▶").queue();
 
 				this.queries.add(q);
 				this.sent.add(sent);
@@ -102,7 +101,7 @@ public class Gif extends Command {
 								.getJSONObject("gif").getString("url"));
 						meb.setDescription("Page " + page + " / 50");
 
-						sent.set(i, msg.editMessage(meb.build()).complete());
+						sent.set(i, msg.editMessage(meb.build()).submit().get());
 
 						break;
 
@@ -128,7 +127,7 @@ public class Gif extends Command {
 								.getJSONObject("gif").getString("url"));
 						meb.setDescription("Page " + page + " / 50");
 
-						sent.set(i, msg.editMessage(meb.build()).complete());
+						sent.set(i, msg.editMessage(meb.build()).submit().get());
 
 						break;
 
@@ -136,7 +135,7 @@ public class Gif extends Command {
 					}
 					break;
 				}
-				reactionEvent.getReaction().removeReaction(reactionEvent.getUser()).complete();
+				reactionEvent.getReaction().removeReaction(reactionEvent.getUser()).queue();
 			}
 		}
 	}

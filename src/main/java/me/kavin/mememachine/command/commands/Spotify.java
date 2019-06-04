@@ -11,8 +11,8 @@ import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.utils.ColorUtils;
 import me.kavin.mememachine.utils.SpotifyClient;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Spotify extends Command {
 
@@ -39,7 +39,7 @@ public class Spotify extends Command {
 
 				meb.setTitle("Error: No Arguments provided!");
 				meb.setDescription("Please add an argument like " + this.getPrefix() + " `<args>`");
-				event.getChannel().sendMessage(meb.build()).complete();
+				event.getChannel().sendMessage(meb.build()).queue();
 				return;
 			}
 
@@ -55,7 +55,7 @@ public class Spotify extends Command {
 			if (items.length() <= 0) {
 				meb.setTitle("Spotify Search: " + q);
 				meb.setDescription("No search results found!");
-				event.getChannel().sendMessage(meb.build()).complete();
+				event.getChannel().sendMessage(meb.build()).queue();
 				return;
 			}
 
@@ -75,7 +75,7 @@ public class Spotify extends Command {
 			meb.addField("Artist: ", jObject.getJSONArray("artists").getJSONObject(0).getString("name"), false);
 			meb.addField("Time: ", time, false);
 
-			event.getChannel().sendMessage(meb.build()).complete();
+			event.getChannel().sendMessage(meb.build()).queue();
 		} catch (Exception e) {
 		}
 	}

@@ -10,8 +10,8 @@ import kong.unirest.Unirest;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.utils.ColorUtils;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Subs extends Command {
 
@@ -38,7 +38,7 @@ public class Subs extends Command {
 
 				meb.setTitle("Error: No Arguments provided!");
 				meb.setDescription("Please add an argument like " + this.getPrefix() + " `<args>`");
-				event.getChannel().sendMessage(meb.build()).complete();
+				event.getChannel().sendMessage(meb.build()).queue();
 				return;
 			}
 
@@ -55,7 +55,7 @@ public class Subs extends Command {
 
 			if (!root.has("items")) {
 				meb.addField("No Results", "Unfortunately I couldn't find any results for `" + q + "`", true);
-				event.getChannel().sendMessage(meb.build()).complete();
+				event.getChannel().sendMessage(meb.build()).queue();
 				return;
 			}
 
@@ -73,7 +73,7 @@ public class Subs extends Command {
 					subs.getJSONArray("items").getJSONObject(0).getJSONObject("statistics").getInt("subscriberCount"))
 					+ "\n", false);
 
-			event.getChannel().sendMessage(meb.build()).complete();
+			event.getChannel().sendMessage(meb.build()).queue();
 		} catch (Exception e) {
 		}
 	}

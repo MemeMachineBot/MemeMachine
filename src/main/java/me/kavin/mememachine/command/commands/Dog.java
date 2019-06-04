@@ -6,9 +6,9 @@ import kong.unirest.Unirest;
 
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Dog extends Command {
 
@@ -18,7 +18,7 @@ public class Dog extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		event.getChannel().sendMessage(getDog()).complete();
+		event.getChannel().sendMessage(getDog()).queue();
 
 	}
 
