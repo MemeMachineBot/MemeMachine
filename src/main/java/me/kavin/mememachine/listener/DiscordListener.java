@@ -102,7 +102,12 @@ public class DiscordListener extends ListenerAdapter {
 				else
 					cachedXp.put(id, xpHelper.getXp(id) + 25);
 
-				xpHelper.setXp(id, cachedXp.get(id));
+				Multithreading.runAsync(new Runnable() {
+					@Override
+					public void run() {
+						xpHelper.setXp(id, cachedXp.get(id));
+					}
+				});
 
 				lastMsg.put(id, System.currentTimeMillis());
 			}
