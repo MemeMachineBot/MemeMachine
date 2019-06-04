@@ -12,20 +12,21 @@ import me.kavin.mememachine.event.events.EventGuildReactionRemove;
 import me.kavin.mememachine.lists.API;
 import me.kavin.mememachine.utils.Multithreading;
 import me.kavin.mememachine.utils.XpHelper;
-import net.dv8tion.jda.core.OnlineStatus;
-import net.dv8tion.jda.core.entities.ChannelType;
-import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.entities.Game.GameType;
-import net.dv8tion.jda.core.events.ReadyEvent;
-import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
-import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
-import net.dv8tion.jda.core.events.guild.update.GuildUpdateOwnerEvent;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.events.message.guild.react.GenericGuildMessageReactionEvent;
-import net.dv8tion.jda.core.events.message.guild.react.GuildMessageReactionAddEvent;
-import net.dv8tion.jda.core.events.message.guild.react.GuildMessageReactionRemoveEvent;
-import net.dv8tion.jda.core.events.message.priv.PrivateMessageReceivedEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Activity.ActivityType;
+import net.dv8tion.jda.api.entities.ChannelType;
+import net.dv8tion.jda.api.events.ReadyEvent;
+import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
+import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
+import net.dv8tion.jda.api.events.guild.update.GuildUpdateOwnerEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.react.GenericGuildMessageReactionEvent;
+import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionRemoveEvent;
+import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class DiscordListener extends ListenerAdapter {
 
@@ -37,14 +38,15 @@ public class DiscordListener extends ListenerAdapter {
 	}
 
 	private void setPresence() {
-		Main.api.getPresence().setGame(
-				Game.of(GameType.DEFAULT, "Meminq | >help | " + Main.api.getGuilds().size() + " Servers!", "Hax.kill"));
+		for (JDA jda : Main.api.getShards())
+			jda.getPresence().setActivity(
+					Activity.of(ActivityType.DEFAULT, "Meminq | >help | " + Main.api.getGuilds().size() + " Servers!"));
 	}
 
 	@Override
 	public void onReady(ReadyEvent event) {
 		API.loop();
-		Main.api.getPresence().setStatus(OnlineStatus.IDLE);
+		event.getJDA().getPresence().setStatus(OnlineStatus.IDLE);
 		setPresence();
 		System.gc();
 	}
@@ -56,8 +58,12 @@ public class DiscordListener extends ListenerAdapter {
 
 	@Override
 	public void onGuildUpdateOwner(GuildUpdateOwnerEvent event) {
-		event.getGuild().getOwner().getUser().openPrivateChannel().complete()
-				.sendMessage("Congrats on becoming the new owner of `" + event.getGuild().getName() + "`!").complete();
+		try {
+			event.getGuild().getOwner().getUser().openPrivateChannel().submit().get()
+					.sendMessage("Congrats on becoming the new owner of `" + event.getGuild().getName() + "`!").queue();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -67,7 +73,7 @@ public class DiscordListener extends ListenerAdapter {
 
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
-		if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor() == Main.api.getSelfUser()
+		if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor() == Main.api.getShards().get(0).getSelfUser()
 				|| event.getAuthor().isBot())
 			return;
 
@@ -110,8 +116,9 @@ public class DiscordListener extends ListenerAdapter {
 
 	@Override
 	public void onPrivateMessageReceived(PrivateMessageReceivedEvent event) {
-		if (event.getAuthor() != Main.api.getSelfUser() && event.getMessage().getContentRaw().startsWith(">"))
-			event.getMessage().getChannel().sendMessage("Error: I don't reply to PM's!").complete();
+		if (event.getAuthor() != Main.api.getShards().get(0).getSelfUser()
+				&& event.getMessage().getContentRaw().startsWith(">"))
+			event.getMessage().getChannel().sendMessage("Error: I don't reply to PM's!").queue();
 	}
 
 	@Override

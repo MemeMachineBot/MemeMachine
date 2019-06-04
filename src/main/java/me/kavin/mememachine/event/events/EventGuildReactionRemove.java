@@ -1,7 +1,7 @@
 package me.kavin.mememachine.event.events;
 
 import me.kavin.mememachine.event.AbstractEvent;
-import net.dv8tion.jda.core.events.message.guild.react.GuildMessageReactionRemoveEvent;
+import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionRemoveEvent;
 
 public class EventGuildReactionRemove extends AbstractEvent {
 

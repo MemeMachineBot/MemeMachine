@@ -12,8 +12,8 @@ import kong.unirest.Unirest;
 
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Anime extends Command {
 
@@ -39,7 +39,7 @@ public class Anime extends Command {
 
 				meb.setTitle("Error: No Arguments provided!");
 				meb.setDescription("Please add an argument like " + this.getPrefix() + " `<args>`");
-				event.getChannel().sendMessage(meb.build()).complete();
+				event.getChannel().sendMessage(meb.build()).queue();
 				return;
 			}
 
@@ -63,7 +63,7 @@ public class Anime extends Command {
 				meb.addField("No Results", "Unfortunately I couldn't find any results for `" + q + "`", true);
 			}
 
-			event.getChannel().sendMessage(meb.build()).complete();
+			event.getChannel().sendMessage(meb.build()).queue();
 		} catch (Exception e) {
 		}
 	}

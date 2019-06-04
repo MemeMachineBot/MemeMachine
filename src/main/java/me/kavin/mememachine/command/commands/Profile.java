@@ -3,8 +3,8 @@ package me.kavin.mememachine.command.commands;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
 import me.kavin.mememachine.utils.XpHelper;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Profile extends Command {
 
@@ -28,7 +28,7 @@ public class Profile extends Command {
 			meb.addField("XP required:", 500 - (xp % 500) + "\n", false);
 			meb.addField("Your Level:", xp / 500 + "\n", false);
 
-			event.getChannel().sendMessage(meb.build()).complete();
+			event.getChannel().sendMessage(meb.build()).queue();
 		} catch (Exception e) {
 		}
 	}

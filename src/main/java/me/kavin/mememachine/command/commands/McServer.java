@@ -8,8 +8,8 @@ import kong.unirest.Unirest;
 
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class McServer extends Command {
 
@@ -61,11 +61,11 @@ public class McServer extends Command {
 					meb.setDescription("No servers found!");
 				}
 
-				event.getChannel().sendMessage(meb.build()).complete();
+				event.getChannel().sendMessage(meb.build()).queue();
 			} else {
 				event.getChannel()
 						.sendMessage("`Please provide an server name as your argument like` \n>mcserver <name>")
-						.complete();
+						.queue();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

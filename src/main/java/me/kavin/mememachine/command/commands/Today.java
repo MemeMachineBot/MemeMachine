@@ -7,8 +7,8 @@ import kong.unirest.Unirest;
 
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Today extends Command {
 
@@ -32,7 +32,7 @@ public class Today extends Command {
 			meb.addField(jObject.getString("title"), "", false);
 			meb.addField("More information can be found", "[here](" + jObject.getString("link") + ")", false);
 
-			event.getChannel().sendMessage(meb.build()).complete();
+			event.getChannel().sendMessage(meb.build()).queue();
 
 		} catch (Exception e) {
 		}

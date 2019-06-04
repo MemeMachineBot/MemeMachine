@@ -3,8 +3,8 @@ package me.kavin.mememachine.command.commands;
 import me.kavin.mememachine.Main;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class UpTime extends Command {
 	public UpTime() {
@@ -29,6 +29,6 @@ public class UpTime extends Command {
 		meb.addField("Minute", String.valueOf(minute) + "\n", false);
 		meb.addField("Second", String.valueOf(second) + "\n", false);
 
-		event.getChannel().sendMessage(meb.build()).complete();
+		event.getChannel().sendMessage(meb.build()).queue();
 	}
 }

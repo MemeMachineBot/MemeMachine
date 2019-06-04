@@ -5,8 +5,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class PasswordGen extends Command {
 
@@ -27,25 +27,28 @@ public class PasswordGen extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		StringBuilder sb = new StringBuilder();
+		try {
+			StringBuilder sb = new StringBuilder();
 
-		for (int i = 0; i < 10; i++) {
-			sb.append((char) l.getInt(ThreadLocalRandom.current().nextInt(l.size())));
-		}
+			for (int i = 0; i < 10; i++) {
+				sb.append((char) l.getInt(ThreadLocalRandom.current().nextInt(l.size())));
+			}
 
-		{
-			EmbedBuilder meb = new EmbedBuilder();
-			meb.setTitle("Password: ");
-			meb.setColor(ColorUtils.getRainbowColor(2000));
-			meb.setDescription("Heres a random password:\n`" + sb.toString() + "`");
-			event.getAuthor().openPrivateChannel().complete().sendMessage(meb.build()).queue();
-		}
-		{
-			EmbedBuilder meb = new EmbedBuilder();
-			meb.setTitle("Password: ");
-			meb.setColor(ColorUtils.getRainbowColor(2000));
-			meb.setDescription("Check your DM's, if you have them disabled, you can't use this command!");
-			event.getChannel().sendMessage(meb.build()).queue();
+			{
+				EmbedBuilder meb = new EmbedBuilder();
+				meb.setTitle("Password: ");
+				meb.setColor(ColorUtils.getRainbowColor(2000));
+				meb.setDescription("Heres a random password:\n`" + sb.toString() + "`");
+				event.getAuthor().openPrivateChannel().submit().get().sendMessage(meb.build()).queue();
+			}
+			{
+				EmbedBuilder meb = new EmbedBuilder();
+				meb.setTitle("Password: ");
+				meb.setColor(ColorUtils.getRainbowColor(2000));
+				meb.setDescription("Check your DM's, if you have them disabled, you can't use this command!");
+				event.getChannel().sendMessage(meb.build()).queue();
+			}
+		} catch (Exception e) {
 		}
 	}
 }

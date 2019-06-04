@@ -6,8 +6,8 @@ import kong.unirest.Unirest;
 
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Hastebin extends Command {
 	public Hastebin() {
@@ -32,7 +32,7 @@ public class Hastebin extends Command {
 
 				meb.setTitle("Error: No Arguments provided!");
 				meb.setDescription("Please add an argument like " + this.getPrefix() + " `<args>`");
-				event.getChannel().sendMessage(meb.build()).complete();
+				event.getChannel().sendMessage(meb.build()).queue();
 				return;
 			}
 
@@ -48,7 +48,7 @@ public class Hastebin extends Command {
 
 				meb.setTitle("Hastebin: Hastebin is down!");
 				meb.setDescription("If this is an error, report it on the github.");
-				event.getChannel().sendMessage(meb.build()).complete();
+				event.getChannel().sendMessage(meb.build()).queue();
 				return;
 			}
 
@@ -59,7 +59,7 @@ public class Hastebin extends Command {
 
 			meb.addField("`Heres your hastebin link: `", url, true);
 
-			event.getChannel().sendMessage(meb.build()).complete();
+			event.getChannel().sendMessage(meb.build()).queue();
 		} catch (Exception e) {
 		}
 	}

@@ -6,8 +6,8 @@ import kong.unirest.Unirest;
 
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class DadJoke extends Command {
 
@@ -28,7 +28,7 @@ public class DadJoke extends Command {
 
 			meb.setDescription(jObject.getString("joke"));
 
-			event.getChannel().sendMessage(meb.build()).complete();
+			event.getChannel().sendMessage(meb.build()).queue();
 		} catch (Exception e) {
 		}
 	}

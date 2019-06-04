@@ -5,8 +5,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
 import me.kavin.mememachine.utils.RPSChoice;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class RPS extends Command {
 	public RPS() {
@@ -20,7 +20,7 @@ public class RPS extends Command {
 
 		if (split.length < 2) {
 			event.getChannel().sendMessage("`Please choose a choice your argument like` \n>rps <rock/paper/scissors>")
-					.complete();
+					.queue();
 			return;
 		}
 
@@ -85,13 +85,13 @@ public class RPS extends Command {
 		} else {
 			event.getChannel()
 					.sendMessage("`Please choose a valid choice your argument like` \n>rps <rock/paper/scissors>")
-					.complete();
+					.queue();
 			return;
 		}
 
 		meb.addField("I choose `" + computer.name().toLowerCase() + "`!", "It was a `" + RESULT + "` for you!", true);
 
-		event.getChannel().sendMessage(meb.build()).complete();
+		event.getChannel().sendMessage(meb.build()).queue();
 
 	}
 }

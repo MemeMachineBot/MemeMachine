@@ -2,9 +2,9 @@ package me.kavin.mememachine.command.commands;
 
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Cat extends Command {
 
@@ -14,7 +14,7 @@ public class Cat extends Command {
 
 	@Override
 	public void onCommand(String message, MessageReceivedEvent event) {
-		event.getChannel().sendMessage(getCat()).complete();
+		event.getChannel().sendMessage(getCat()).queue();
 	}
 
 	private MessageEmbed getCat() {

@@ -5,15 +5,14 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import kong.unirest.Unirest;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import me.kavin.mememachine.Main;
+import kong.unirest.Unirest;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
 import me.kavin.mememachine.utils.reddit.TextPostData;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class CopyPasta extends Command {
 
@@ -59,10 +58,10 @@ public class CopyPasta extends Command {
 			meb.setAuthor(author, "https://www.reddit.com/user/" + author);
 			meb.setFooter(
 					"\uD83D\uDC4D" + textPostData.num_upvotes + " | " + "\uD83D\uDCAC" + textPostData.num_comments,
-					Main.api.getSelfUser().getAvatarUrl());
+					event.getJDA().getSelfUser().getAvatarUrl());
 			meb.setDescription(StringUtils.abbreviate(textPostData.data, 2048));
 
-			event.getChannel().sendMessage(meb.build()).complete();
+			event.getChannel().sendMessage(meb.build()).queue();
 
 		} catch (Exception e) {
 		}

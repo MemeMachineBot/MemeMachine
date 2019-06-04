@@ -30,7 +30,8 @@ public class API {
 	public static void dcbotspw() {
 		JSONObject obj = new JSONObject().put("server_count", Main.api.getGuilds().size());
 		try {
-			Unirest.post("https://bots.discord.pw/api/bots/" + Main.api.getSelfUser().getId() + "/stats")
+			Unirest.post(
+					"https://bots.discord.pw/api/bots/" + Main.api.getShards().get(0).getSelfUser().getId() + "/stats")
 					.header("Authorization", Constants.DISCORD_BOTS_PW_TOKEN).header("Content-Type", "application/json")
 					.body(obj.toString()).asJson();
 		} catch (UnirestException e) {
@@ -41,7 +42,7 @@ public class API {
 	public static void b4d() {
 		JSONObject obj = new JSONObject().put("server_count", Main.api.getGuilds().size());
 		try {
-			Unirest.post("https://botsfordiscord.com/api/bot/" + Main.api.getSelfUser().getId())
+			Unirest.post("https://botsfordiscord.com/api/bot/" + Main.api.getShards().get(0).getSelfUser().getId())
 					.header("Authorization", Constants.B4D_TOKEN).header("Content-Type", "application/json")
 					.body(obj.toString()).asJson();
 		} catch (UnirestException e) {
@@ -52,7 +53,8 @@ public class API {
 	public static void dbl() {
 		JSONObject obj = new JSONObject().put("server_count", Main.api.getGuilds().size());
 		try {
-			Unirest.post("https://discordbots.org/api/bots/" + Main.api.getSelfUser().getId() + "/stats")
+			Unirest.post(
+					"https://discordbots.org/api/bots/" + Main.api.getShards().get(0).getSelfUser().getId() + "/stats")
 					.header("Authorization", Constants.DBL_TOKEN).header("Content-Type", "application/json")
 					.body(obj.toString()).asJson();
 		} catch (UnirestException e) {

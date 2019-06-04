@@ -1,7 +1,7 @@
 package me.kavin.mememachine.command;
 
 import me.kavin.mememachine.event.EventManager;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Command {
 
