@@ -3,7 +3,7 @@ package me.kavin.mememachine.command.commands;
 import org.json.JSONObject;
 import org.json.XML;
 
-import com.mashape.unirest.http.Unirest;
+import kong.unirest.Unirest;
 
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;

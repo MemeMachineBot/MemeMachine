@@ -4,7 +4,7 @@ import java.net.URLEncoder;
 
 import org.json.JSONObject;
 
-import com.mashape.unirest.http.Unirest;
+import kong.unirest.Unirest;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.kavin.mememachine.command.Command;

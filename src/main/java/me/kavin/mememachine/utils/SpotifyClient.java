@@ -3,7 +3,7 @@ package me.kavin.mememachine.utils;
 import org.apache.commons.codec.binary.Base64;
 import org.json.JSONObject;
 
-import com.mashape.unirest.http.Unirest;
+import kong.unirest.Unirest;
 
 public class SpotifyClient {
 

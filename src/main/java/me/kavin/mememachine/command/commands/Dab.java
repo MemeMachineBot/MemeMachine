@@ -5,7 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import org.jsoup.Jsoup;
 
-import com.mashape.unirest.http.Unirest;
+import kong.unirest.Unirest;
 
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;

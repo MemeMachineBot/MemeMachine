@@ -2,9 +2,8 @@ package me.kavin.mememachine.lists;
 
 import org.json.JSONObject;
 
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
-
+import kong.unirest.Unirest;
+import kong.unirest.UnirestException;
 import me.kavin.mememachine.Main;
 import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.utils.Multithreading;

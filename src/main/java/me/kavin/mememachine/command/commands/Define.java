@@ -4,13 +4,10 @@ import java.net.URLEncoder;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
-
+import kong.unirest.Unirest;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -78,7 +75,7 @@ public class Define extends Command {
 			jObject = new JSONObject(
 					Unirest.get("http://api.urbandictionary.com/v0/define?term=" + q.replace(" ", "%20")).asString()
 							.getBody());
-		} catch (JSONException | UnirestException e) {
+		} catch (Exception e) {
 		}
 		JSONArray jArray = jObject.getJSONArray("list");
 		for (int i = 0; i < jArray.length(); i++) {

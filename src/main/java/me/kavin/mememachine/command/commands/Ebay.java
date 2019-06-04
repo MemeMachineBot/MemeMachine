@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.jsoniter.JsonIterator;
 import com.jsoniter.any.Any;
-import com.mashape.unirest.http.Unirest;
+import kong.unirest.Unirest;
 
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.consts.Constants;

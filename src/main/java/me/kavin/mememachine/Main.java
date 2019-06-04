@@ -1,7 +1,5 @@
 package me.kavin.mememachine;
 
-import com.mashape.unirest.http.Unirest;
-
 import me.kavin.mememachine.command.CommandManager;
 import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.listener.DiscordListener;
@@ -21,7 +19,6 @@ public class Main extends ListenerAdapter {
 			JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(Constants.BOT_TOKEN);
 			api = builder.build();
 			api.setAutoReconnect(true);
-			Unirest.setDefaultHeader("User-Agent", "Meme Machine: uptime-" + uptime.getTime());
 			DiscordListener.init();
 			new CommandManager();
 		} catch (Exception e) {
