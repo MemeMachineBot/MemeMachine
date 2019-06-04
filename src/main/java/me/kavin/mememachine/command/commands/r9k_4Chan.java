@@ -7,7 +7,7 @@ import org.apache.commons.text.StringEscapeUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.mashape.unirest.http.Unirest;
+import kong.unirest.Unirest;
 
 import it.unimi.dsi.fastutil.longs.LongArrayList;
 import me.kavin.mememachine.command.Command;

@@ -3,7 +3,7 @@ package me.kavin.mememachine.command.commands;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
 
-import com.mashape.unirest.http.Unirest;
+import kong.unirest.Unirest;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import me.kavin.mememachine.command.Command;

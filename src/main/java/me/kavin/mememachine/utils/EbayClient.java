@@ -2,7 +2,7 @@ package me.kavin.mememachine.utils;
 
 import org.json.JSONObject;
 
-import com.mashape.unirest.http.Unirest;
+import kong.unirest.Unirest;
 
 public class EbayClient {
 

@@ -8,7 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 
-import com.mashape.unirest.http.Unirest;
+import kong.unirest.Unirest;
 
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;

@@ -8,7 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.mashape.unirest.http.Unirest;
+import kong.unirest.Unirest;
 
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
