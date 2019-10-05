@@ -2,8 +2,8 @@ package me.kavin.mememachine.command.commands;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import kong.unirest.json.JSONArray;
+import kong.unirest.json.JSONObject;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import kong.unirest.Unirest;

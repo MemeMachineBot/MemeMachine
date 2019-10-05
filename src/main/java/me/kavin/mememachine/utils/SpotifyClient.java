@@ -1,7 +1,7 @@
 package me.kavin.mememachine.utils;
 
 import org.apache.commons.codec.binary.Base64;
-import org.json.JSONObject;
+import kong.unirest.json.JSONObject;
 
 import kong.unirest.Unirest;
 
