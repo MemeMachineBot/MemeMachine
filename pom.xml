@@ -100,5 +100,10 @@
 			<artifactId>fastutil</artifactId>
 			<version>8.3.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.rometools</groupId>
+			<artifactId>rome</artifactId>
+			<version>1.12.2</version>
+		</dependency>
 	</dependencies>
 </project>

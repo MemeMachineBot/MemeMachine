@@ -1,6 +1,6 @@
 package me.kavin.mememachine.lists;
 
-import org.json.JSONObject;
+import kong.unirest.json.JSONObject;
 
 import kong.unirest.Unirest;
 import kong.unirest.UnirestException;

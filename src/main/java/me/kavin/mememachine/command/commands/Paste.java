@@ -1,6 +1,6 @@
 package me.kavin.mememachine.command.commands;
 
-import org.json.JSONObject;
+import kong.unirest.json.JSONObject;
 
 import kong.unirest.Unirest;
 

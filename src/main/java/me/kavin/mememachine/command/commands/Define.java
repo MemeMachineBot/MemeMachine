@@ -3,11 +3,10 @@ package me.kavin.mememachine.command.commands;
 import java.net.URLEncoder;
 
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import kong.unirest.Unirest;
+import kong.unirest.json.JSONArray;
+import kong.unirest.json.JSONObject;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -49,8 +48,7 @@ public class Define extends Command {
 		try {
 			EmbedBuilder meb = new EmbedBuilder();
 			String url = "http://api.urbandictionary.com/v0/autocomplete-extra?&term=" + URLEncoder.encode(q, "UTF-8");
-			JSONTokener tokener = new JSONTokener(Unirest.get(url).asString().getBody());
-			JSONObject root = new JSONObject(tokener);
+			JSONObject root = new JSONObject(Unirest.get(url).asString().getBody());
 			meb.setTitle("Urban Dictionary Search: " + q);
 			meb.setColor(ColorUtils.getRainbowColor(2000));
 			JSONArray jArray = root.getJSONArray("results");

@@ -2,7 +2,7 @@ package me.kavin.mememachine.command.commands;
 
 import java.net.URLEncoder;
 
-import org.json.JSONObject;
+import kong.unirest.json.JSONObject;
 
 import kong.unirest.Unirest;
 
