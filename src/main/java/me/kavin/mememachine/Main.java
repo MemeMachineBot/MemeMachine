@@ -19,7 +19,7 @@ public class Main extends ListenerAdapter {
 
 	public static void main(String[] args) {
 		try {
-			DefaultShardManagerBuilder builder = new DefaultShardManagerBuilder(Constants.BOT_TOKEN);
+			DefaultShardManagerBuilder builder = DefaultShardManagerBuilder.createDefault(Constants.BOT_TOKEN);
 			builder.disableCache(CacheFlag.ACTIVITY, CacheFlag.CLIENT_STATUS);
 			builder.setMemberCachePolicy(MemberCachePolicy.VOICE.or(MemberCachePolicy.OWNER));
 			builder.setChunkingFilter(ChunkingFilter.NONE);
