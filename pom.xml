@@ -52,7 +52,7 @@
 		<dependency>
 			<groupId>com.konghq</groupId>
 			<artifactId>unirest-java</artifactId>
-			<version>3.7.04</version>
+			<version>3.8.00</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jsoniter</groupId>
