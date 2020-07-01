@@ -1,9 +1,7 @@
 package me.kavin.mememachine.command.commands;
 
-import kong.unirest.json.JSONObject;
-
 import kong.unirest.Unirest;
-
+import kong.unirest.json.JSONObject;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -11,7 +9,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Paste extends Command {
 	public Paste() {
-		super(">paste", "`Uploads the given text to Bisoga`");
+		super(">paste", "`Uploads the given text to Dogbin`");
 	}
 
 	@Override
@@ -39,13 +37,14 @@ public class Paste extends Command {
 			String url;
 
 			try {
-				url = Unirest.post("https://bisoga.xyz/api/paste").header("Content-Type", "application/json")
-						.body(new JSONObject().put("text", q)).asString().getBody();
+				JSONObject jObject = new JSONObject(
+						Unirest.post("https://del.dog/documents").body(q).asString().getBody());
+				url = "https://del.dog/" + jObject.getString("key");
 			} catch (Exception e) {
 				EmbedBuilder meb = new EmbedBuilder();
 				meb.setColor(ColorUtils.getRainbowColor(2000));
 
-				meb.setTitle("Bisoga: Bisoga is down!");
+				meb.setTitle("Paste: Dogbin is down!");
 				meb.setDescription("If this is an error, report it on the github.");
 				event.getChannel().sendMessage(meb.build()).queue();
 				return;
@@ -53,10 +52,10 @@ public class Paste extends Command {
 
 			EmbedBuilder meb = new EmbedBuilder();
 
-			meb.setTitle("Bisoga");
+			meb.setTitle("Paste");
 			meb.setColor(ColorUtils.getRainbowColor(2000));
 
-			meb.addField("`Heres your Bisoga Paste link: `", url, true);
+			meb.addField("`Heres your Dogbin link: `", url, true);
 
 			event.getChannel().sendMessage(meb.build()).queue();
 		} catch (Exception e) {

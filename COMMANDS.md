@@ -47,8 +47,6 @@ Bot Commands:
 
 >img `Allows you to search google for images`
 
->hastebin `Uploads the given text to hastebin`
-
 >subs `Checks the number of subscribers the given youtuber has`
 
 >serverstats `Shows you the server stastics`
@@ -91,7 +89,7 @@ Bot Commands:
 
 >ebay `Allows you to search products on ebay! (Mainly for the PCMR)`
 
->paste `Uploads the given text to Bisoga`
+>paste `Uploads the given text to Dogbin`
 
 >leetspeak `Converts your text to l337 5p33k!`
 
