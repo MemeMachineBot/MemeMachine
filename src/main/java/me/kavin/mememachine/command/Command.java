@@ -22,7 +22,7 @@ public class Command {
 		return prefix;
 	}
 
-	public void onCommand(String string, MessageReceivedEvent event) {
+	public void onCommand(String string, MessageReceivedEvent event) throws Exception {
 
 	}
 }

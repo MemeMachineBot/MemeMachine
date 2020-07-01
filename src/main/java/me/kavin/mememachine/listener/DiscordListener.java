@@ -9,8 +9,10 @@ import me.kavin.mememachine.event.EventManager;
 import me.kavin.mememachine.event.events.EventGuildReaction;
 import me.kavin.mememachine.event.events.EventGuildReactionAdd;
 import me.kavin.mememachine.event.events.EventGuildReactionRemove;
+import me.kavin.mememachine.utils.ColorUtils;
 import me.kavin.mememachine.utils.Multithreading;
 import me.kavin.mememachine.utils.XpHelper;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
@@ -77,7 +79,15 @@ public class DiscordListener extends ListenerAdapter {
 						Multithreading.runAsync(new Runnable() {
 							@Override
 							public void run() {
-								cmd.onCommand(event.getMessage().getContentRaw(), event);
+								try {
+									cmd.onCommand(event.getMessage().getContentRaw(), event);
+								} catch (Exception e) {
+									EmbedBuilder meb = new EmbedBuilder();
+									meb.setColor(ColorUtils.getRainbowColor(2000));
+									meb.setTitle("Error when running command!");
+									meb.setDescription(
+											"An exception occoured when processing your command, please open a GitHub issue if this continues.");
+								}
 							}
 						});
 		}
