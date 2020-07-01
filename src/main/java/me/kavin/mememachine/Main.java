@@ -3,6 +3,7 @@ package me.kavin.mememachine;
 import me.kavin.mememachine.command.CommandManager;
 import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.listener.DiscordListener;
+import me.kavin.mememachine.lists.API;
 import me.kavin.mememachine.utils.Timer;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -19,6 +20,7 @@ public class Main extends ListenerAdapter {
 
 	public static void main(String[] args) {
 		try {
+			new CommandManager();
 			DefaultShardManagerBuilder builder = DefaultShardManagerBuilder.createDefault(Constants.BOT_TOKEN);
 			builder.disableCache(CacheFlag.ACTIVITY, CacheFlag.CLIENT_STATUS);
 			builder.setMemberCachePolicy(MemberCachePolicy.VOICE.or(MemberCachePolicy.OWNER));
@@ -28,7 +30,7 @@ public class Main extends ListenerAdapter {
 			builder.setAutoReconnect(true);
 			builder.addEventListeners(new DiscordListener());
 			api = builder.build();
-			new CommandManager();
+			API.loop();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -9,7 +9,6 @@ import me.kavin.mememachine.event.EventManager;
 import me.kavin.mememachine.event.events.EventGuildReaction;
 import me.kavin.mememachine.event.events.EventGuildReactionAdd;
 import me.kavin.mememachine.event.events.EventGuildReactionRemove;
-import me.kavin.mememachine.lists.API;
 import me.kavin.mememachine.utils.Multithreading;
 import me.kavin.mememachine.utils.XpHelper;
 import net.dv8tion.jda.api.JDA;
@@ -41,10 +40,8 @@ public class DiscordListener extends ListenerAdapter {
 
 	@Override
 	public void onReady(ReadyEvent event) {
-		API.loop();
 		event.getJDA().getPresence().setStatus(OnlineStatus.IDLE);
 		setPresence();
-		System.gc();
 	}
 
 	@Override

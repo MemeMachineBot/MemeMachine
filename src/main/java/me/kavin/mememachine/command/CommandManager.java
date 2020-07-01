@@ -23,7 +23,6 @@ import me.kavin.mememachine.command.commands.Gif;
 import me.kavin.mememachine.command.commands.Google;
 import me.kavin.mememachine.command.commands.Greentext;
 import me.kavin.mememachine.command.commands.Hacked;
-import me.kavin.mememachine.command.commands.Hastebin;
 import me.kavin.mememachine.command.commands.Help;
 import me.kavin.mememachine.command.commands.Image;
 import me.kavin.mememachine.command.commands.Invite;
@@ -81,7 +80,7 @@ public class CommandManager {
 		commands.add(new Bitcoin());
 		commands.add(new Hacked());
 		commands.add(new Image());
-		commands.add(new Hastebin());
+		commands.add(new Paste());
 		commands.add(new Subs());
 		commands.add(new ServerStats());
 		commands.add(new BotStats());
@@ -103,7 +102,6 @@ public class CommandManager {
 		commands.add(new r9k_4Chan());
 		commands.add(new Spotify());
 		commands.add(new Ebay());
-		commands.add(new Paste());
 		commands.add(new LeetSpeak());
 		commands.add(new BubbleText());
 		commands.add(new AestheticText());
