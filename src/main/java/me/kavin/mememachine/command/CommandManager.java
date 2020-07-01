@@ -22,7 +22,6 @@ import me.kavin.mememachine.command.commands.Ebay;
 import me.kavin.mememachine.command.commands.Gif;
 import me.kavin.mememachine.command.commands.Google;
 import me.kavin.mememachine.command.commands.Greentext;
-import me.kavin.mememachine.command.commands.Hacked;
 import me.kavin.mememachine.command.commands.Help;
 import me.kavin.mememachine.command.commands.Image;
 import me.kavin.mememachine.command.commands.Invite;
@@ -78,7 +77,6 @@ public class CommandManager {
 		commands.add(new RPS());
 		commands.add(new PasswordGen());
 		commands.add(new Bitcoin());
-		commands.add(new Hacked());
 		commands.add(new Image());
 		commands.add(new Paste());
 		commands.add(new Subs());

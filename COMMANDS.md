@@ -43,8 +43,6 @@ Bot Commands:
 
 >bitcoin `Shows the current bitcoin prices`
 
->hacked `Searches haveibeenpwned.com to shows whether the given email has been hacked`
-
 >img `Allows you to search google for images`
 
 >subs `Checks the number of subscribers the given youtuber has`
