@@ -14,6 +14,7 @@ import me.kavin.mememachine.utils.Multithreading;
 import me.kavin.mememachine.utils.WYRGame;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionRemoveEvent;
@@ -91,10 +92,12 @@ public class WYR extends Command {
 	}
 
 	@EventHandler
-	private void onReactionAdd(EventGuildReactionAdd event) {
+	private void onReactionAdd(EventGuildReactionAdd event) throws Exception {
 		GuildMessageReactionAddEvent reactionEvent = event.getEvent();
 
-		if (reactionEvent.getUser().isBot())
+		User user = reactionEvent.getJDA().retrieveUserById(reactionEvent.getUserIdLong()).submit().get();
+
+		if (user.isBot())
 			return;
 
 		long msgId = reactionEvent.getMessageIdLong();
@@ -108,10 +111,12 @@ public class WYR extends Command {
 	}
 
 	@EventHandler
-	private void onReactionRemove(EventGuildReactionRemove event) {
+	private void onReactionRemove(EventGuildReactionRemove event) throws Exception {
 		GuildMessageReactionRemoveEvent reactionEvent = event.getEvent();
 
-		if (reactionEvent.getUser().isBot())
+		User user = reactionEvent.getJDA().retrieveUserById(reactionEvent.getUserIdLong()).submit().get();
+
+		if (user.isBot())
 			return;
 
 		long msgId = reactionEvent.getMessageIdLong();

@@ -1,30 +1,26 @@
 package me.kavin.mememachine.lists;
 
-import kong.unirest.json.JSONObject;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import kong.unirest.Unirest;
 import kong.unirest.UnirestException;
+import kong.unirest.json.JSONObject;
 import me.kavin.mememachine.Main;
 import me.kavin.mememachine.consts.Constants;
-import me.kavin.mememachine.utils.Multithreading;
 
 public class API {
 
 	public static void loop() {
-		Multithreading.runAsync(new Runnable() {
+		new Timer().scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
-				while (true) {
-					dbl();
-					b4d();
-					dcbotspw();
-					try {
-						Thread.sleep(300000);
-					} catch (InterruptedException e) {
-					}
-				}
+				dbl();
+				b4d();
+				dcbotspw();
 			}
-		});
+		}, 0, TimeUnit.MINUTES.toMillis(5));
 	}
 
 	public static void dcbotspw() {

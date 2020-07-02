@@ -1,5 +1,7 @@
 package me.kavin.mememachine.listener;
 
+import java.util.concurrent.TimeUnit;
+
 import it.unimi.dsi.fastutil.longs.Long2IntOpenHashMap;
 import it.unimi.dsi.fastutil.longs.Long2LongOpenHashMap;
 import me.kavin.mememachine.Main;
@@ -21,18 +23,16 @@ import net.dv8tion.jda.api.entities.ChannelType;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
-import net.dv8tion.jda.api.events.guild.update.GuildUpdateOwnerEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GenericGuildMessageReactionEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionRemoveEvent;
-import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class DiscordListener extends ListenerAdapter {
 
-	Long2LongOpenHashMap lastMsg = new Long2LongOpenHashMap();
-	Long2IntOpenHashMap cachedXp = new Long2IntOpenHashMap();
+	private static final Long2LongOpenHashMap lastMsg = new Long2LongOpenHashMap();
+	private static final Long2IntOpenHashMap cachedXp = new Long2IntOpenHashMap();
 
 	private void setPresence() {
 		for (JDA jda : Main.api.getShards())
@@ -52,24 +52,14 @@ public class DiscordListener extends ListenerAdapter {
 	}
 
 	@Override
-	public void onGuildUpdateOwner(GuildUpdateOwnerEvent event) {
-		try {
-			event.getGuild().getOwner().getUser().openPrivateChannel().submit().get()
-					.sendMessage("Congrats on becoming the new owner of `" + event.getGuild().getName() + "`!").queue();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
 	public void onGuildLeave(GuildLeaveEvent event) {
 		setPresence();
 	}
 
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
-		if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor() == Main.api.getShards().get(0).getSelfUser()
-				|| event.getAuthor().isBot())
+
+		if (event.isFromType(ChannelType.PRIVATE) || event.getAuthor().isBot())
 			return;
 
 		{
@@ -87,6 +77,7 @@ public class DiscordListener extends ListenerAdapter {
 									meb.setTitle("Error when running command!");
 									meb.setDescription(
 											"An exception occoured when processing your command, please open a GitHub issue if this continues.");
+									event.getChannel().sendMessage(meb.build()).queue();
 								}
 							}
 						});
@@ -98,35 +89,21 @@ public class DiscordListener extends ListenerAdapter {
 	private XpHelper xpHelper = new XpHelper();
 
 	private void addXp(long id) {
-		try {
-			if (!lastMsg.containsKey(id))
-				lastMsg.put(id, 0L);
+		if (!lastMsg.containsKey(id))
+			lastMsg.put(id, 0L);
 
-			if (lastMsg.containsKey(id) && System.currentTimeMillis() - lastMsg.get(id) > 60000) {
+		if (lastMsg.containsKey(id) && System.currentTimeMillis() - lastMsg.get(id) > TimeUnit.SECONDS.toMillis(25)) {
 
-				if (cachedXp.containsKey(id))
-					cachedXp.put(id, cachedXp.get(id) + 25);
-				else
-					cachedXp.put(id, xpHelper.getXp(id) + 25);
+			Multithreading.runAsync(new Runnable() {
+				@Override
+				public void run() {
+					cachedXp.put(id, (cachedXp.containsKey(id) ? cachedXp.get(id) : xpHelper.getXp(id)) + 25);
+					xpHelper.setXp(id, cachedXp.get(id));
+				}
+			});
 
-				Multithreading.runAsync(new Runnable() {
-					@Override
-					public void run() {
-						xpHelper.setXp(id, cachedXp.get(id));
-					}
-				});
-
-				lastMsg.put(id, System.currentTimeMillis());
-			}
-		} catch (Exception e) {
+			lastMsg.put(id, System.currentTimeMillis());
 		}
-	}
-
-	@Override
-	public void onPrivateMessageReceived(PrivateMessageReceivedEvent event) {
-		if (event.getAuthor() != Main.api.getShards().get(0).getSelfUser()
-				&& event.getMessage().getContentRaw().startsWith(">"))
-			event.getMessage().getChannel().sendMessage("Error: I don't reply to PM's!").queue();
 	}
 
 	@Override
