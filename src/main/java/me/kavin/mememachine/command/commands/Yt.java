@@ -59,8 +59,11 @@ public class Yt extends Command {
 				} else if (body.getString("type").equals("channel")) {
 					meb.addField('`' + body.getString("author") + '`',
 							"https://www.youtube.com" + body.getString("authorUrl") + "\n", false);
-					if (i == 0)
-						meb.setImage(body.getJSONArray("authorThumbnails").getJSONObject(0).getString("url"));
+					if (i == 0) {
+						String imgUrl = body.getJSONArray("authorThumbnails").getJSONObject(0).getString("url");
+						url = url.substring(0, url.indexOf('=')) + "=s512";
+						meb.setImage(imgUrl);
+					}
 				}
 			}
 
