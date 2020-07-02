@@ -2,13 +2,12 @@ package me.kavin.mememachine.command.commands;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import kong.unirest.json.JSONArray;
-import kong.unirest.json.JSONObject;
-
 import com.gargoylesoftware.htmlunit.WebClient;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import kong.unirest.Unirest;
+import kong.unirest.json.JSONArray;
+import kong.unirest.json.JSONObject;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
 import me.kavin.mememachine.utils.reddit.ImagePostData;
@@ -41,7 +40,7 @@ public class Meme extends Command {
 			for (int i = 0; i < posts.length(); i++) {
 				JSONObject post = posts.getJSONObject(i).getJSONObject("data");
 				String img_url = post.getString("url");
-				if (!post.getBoolean("over_18"))
+				if (!post.getBoolean("over_18") || event.getTextChannel().isNSFW())
 					if (img_url.contains("i.redd.it"))
 						lastData.add(new ImagePostData(post.getString("title"), post.getString("author"), img_url,
 								post.getInt("num_comments"), post.getInt("ups")));
