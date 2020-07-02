@@ -43,8 +43,6 @@ public class Image extends Command {
 		meb.setTitle("Google Image Search: " + q);
 		meb.setColor(ColorUtils.getRainbowColor(2000));
 
-		System.out.println(root);
-
 		if (!root.has("items")) {
 			meb.addField("No Results", "Unfortunately I couldn't find any results for `" + q + "`", true);
 		} else {
