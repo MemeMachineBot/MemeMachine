@@ -2,15 +2,12 @@ package me.kavin.mememachine.command.commands;
 
 import java.net.URLEncoder;
 
-import kong.unirest.json.JSONObject;
-
 import kong.unirest.Unirest;
-
+import kong.unirest.json.JSONArray;
+import kong.unirest.json.JSONObject;
 import me.kavin.mememachine.command.Command;
-import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Yt extends Command {
@@ -20,7 +17,7 @@ public class Yt extends Command {
 	}
 
 	@Override
-	public void onCommand(String message, MessageReceivedEvent event) {
+	public void onCommand(String message, MessageReceivedEvent event) throws Exception {
 
 		String q = null;
 
@@ -40,39 +37,33 @@ public class Yt extends Command {
 			return;
 		}
 
-		event.getChannel().sendMessage(getSearch(q)).queue();
-	}
+		EmbedBuilder meb = new EmbedBuilder();
 
-	private MessageEmbed getSearch(String q) {
-		try {
-			EmbedBuilder meb = new EmbedBuilder();
-			String url = "https://www.googleapis.com/youtube/v3/search/?" + "safeSearch=moderate" + "&regionCode=US"
-					+ "&q=" + URLEncoder.encode(q, "UTF-8") + "&type=video,channel&part=snippet&key="
-					+ Constants.GOOGLE_API_KEY;
-			JSONObject root = new JSONObject(Unirest.get(url).asString().getBody());
-			meb.setTitle("Youtube Search: " + q);
-			meb.setColor(ColorUtils.getRainbowColor(2000));
-			if (!root.has("items")) {
-				meb.addField("No Results", "Unfortunately I couldn't find any results for `" + q + "`" + "\n", false);
-				return meb.build();
-			}
-			root.getJSONArray("items").forEach(item -> {
-				JSONObject body = new JSONObject(item.toString());
-				boolean video = body.getJSONObject("id").getString("kind").equals("youtube#video");
-				if (video) {
-					meb.addField('`' + body.getJSONObject("snippet").getString("title") + '`',
-							"https://www.youtube.com/watch?v=" + body.getJSONObject("id").getString("videoId") + "\n",
-							false);
-				} else {
-					meb.addField('`' + body.getJSONObject("snippet").getString("title") + '`',
-							"https://www.youtube.com/channel/" + body.getJSONObject("id").getString("channelId") + "\n",
-							false);
+		String url = "https://invidious.snopyta.org/api/v1/search?type=all&fields=authorUrl,authorThumbnails,author,videoThumbnails,videoId,title,type&q="
+				+ URLEncoder.encode(q, "UTF-8");
+		JSONArray jArray = Unirest.get(url).asJson().getBody().getArray();
+
+		meb.setTitle("Youtube Search: " + q);
+		meb.setColor(ColorUtils.getRainbowColor(2000));
+
+		if (jArray.length() == 0)
+			meb.addField("No Results", "Unfortunately I couldn't find any results for `" + q + "`" + "\n", false);
+		else
+			for (int i = 0; i < 10 && i < jArray.length(); i++) {
+				JSONObject body = jArray.getJSONObject(i);
+				if (body.getString("type").equals("video")) {
+					meb.addField('`' + body.getString("title") + '`',
+							"https://www.youtube.com/watch?v=" + body.getString("videoId") + "\n", false);
+					if (i == 0)
+						meb.setImage(body.getJSONArray("videoThumbnails").getJSONObject(0).getString("url"));
+				} else if (body.getString("type").equals("channel")) {
+					meb.addField('`' + body.getString("author") + '`',
+							"https://www.youtube.com" + body.getString("authorUrl") + "\n", false);
+					if (i == 0)
+						meb.setImage(body.getJSONArray("authorThumbnails").getJSONObject(0).getString("url"));
 				}
-			});
-			return meb.build();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+			}
+
+		event.getChannel().sendMessage(meb.build()).queue();
 	}
 }
