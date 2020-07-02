@@ -12,7 +12,7 @@ public class Constants {
 
 	public static final String DISCORD_BOTS_PW_TOKEN = System.getenv().get("DISCORD_BOTS_PW_KEY");
 
-	public static final String GOOGLE_PROXY_IMAGE = "https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&url=";
+	public static final String IMAGE_PROXY_URL = "https://images.weserv.nl/?url=";
 
 	public static final String SPOTIFY_CLIENT_ID = System.getenv().get("SPOTIFY_CLIENT_ID");
 

@@ -2,17 +2,17 @@ package me.kavin.mememachine.command.commands;
 
 import java.net.URLEncoder;
 
-import kong.unirest.json.JSONArray;
-import kong.unirest.json.JSONObject;
-
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import kong.unirest.Unirest;
+import kong.unirest.json.JSONArray;
+import kong.unirest.json.JSONObject;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.event.EventHandler;
 import me.kavin.mememachine.event.events.EventGuildReactionAdd;
 import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GenericGuildMessageReactionEvent;
 
@@ -26,114 +26,107 @@ public class Gif extends Command {
 	}
 
 	@Override
-	public void onCommand(String message, MessageReceivedEvent event) {
-		try {
-			String q = null;
+	public void onCommand(String message, MessageReceivedEvent event) throws Exception {
+		String q = null;
 
-			if (message.length() > getPrefix().length()) {
-				q = "";
-				for (int i = getPrefix().length() + 1; i < message.length(); i++)
-					q += message.charAt(i);
-			}
+		if (message.length() > getPrefix().length()) {
+			q = "";
+			for (int i = getPrefix().length() + 1; i < message.length(); i++)
+				q += message.charAt(i);
+		}
 
-			if (q == null) {
-				EmbedBuilder meb = new EmbedBuilder();
-				meb.setColor(ColorUtils.getRainbowColor(2000));
-
-				meb.setTitle("Error: No Arguments provided!");
-				meb.setDescription("Please add an argument like " + this.getPrefix() + " `<args>`");
-				event.getChannel().sendMessage(meb.build()).queue();
-				return;
-			}
-
+		if (q == null) {
 			EmbedBuilder meb = new EmbedBuilder();
-
-			meb.setTitle("Gif Search: " + q);
 			meb.setColor(ColorUtils.getRainbowColor(2000));
 
-			JSONArray results = new JSONObject(
-					Unirest.get("https://api.tenor.com/v1/search?limit=50&tag=" + URLEncoder.encode(q, "UTF-8"))
-							.asString().getBody()).getJSONArray("results");
-
-			if (results.length() > 0) {
-
-				meb.setImage(results.getJSONObject(0).getJSONArray("media").getJSONObject(0).getJSONObject("gif")
-						.getString("url"));
-				meb.setDescription("Page 1 / 50");
-
-				Message sent = event.getChannel().sendMessage(meb.build()).submit().get();
-				sent.addReaction("◀").queue();
-				sent.addReaction("▶").queue();
-
-				this.queries.add(q);
-				this.sent.add(sent);
-			} else {
-				meb.setDescription("No search results found");
-				event.getChannel().sendMessage(meb.build()).queue();
-			}
-
-		} catch (Exception e) {
+			meb.setTitle("Error: No Arguments provided!");
+			meb.setDescription("Please add an argument like " + this.getPrefix() + " `<args>`");
+			event.getChannel().sendMessage(meb.build()).queue();
+			return;
 		}
+
+		EmbedBuilder meb = new EmbedBuilder();
+
+		meb.setTitle("Gif Search: " + q);
+		meb.setColor(ColorUtils.getRainbowColor(2000));
+
+		JSONArray results = new JSONObject(
+				Unirest.get("https://api.tenor.com/v1/search?limit=50&tag=" + URLEncoder.encode(q, "UTF-8")).asString()
+						.getBody()).getJSONArray("results");
+
+		if (results.length() > 0) {
+
+			meb.setImage(results.getJSONObject(0).getJSONArray("media").getJSONObject(0).getJSONObject("gif")
+					.getString("url"));
+			meb.setDescription("Page 1 / 50");
+
+			Message sent = event.getChannel().sendMessage(meb.build()).submit().get();
+			sent.addReaction("◀").queue();
+			sent.addReaction("▶").queue();
+
+			this.queries.add(q);
+			this.sent.add(sent);
+		} else {
+			meb.setDescription("No search results found");
+			event.getChannel().sendMessage(meb.build()).queue();
+		}
+
 	}
 
 	@EventHandler
-	private void onReactionAdd(EventGuildReactionAdd event) {
+	private void onReactionAdd(EventGuildReactionAdd event) throws Exception {
 		GenericGuildMessageReactionEvent reactionEvent = event.getEvent();
 		for (int i = 0; i < sent.size(); i++) {
+
 			Message msg = sent.get(i);
-			if (msg.getIdLong() == reactionEvent.getMessageIdLong() && !reactionEvent.getUser().isBot()) {
+			User user = reactionEvent.getJDA().retrieveUserById(reactionEvent.getUserIdLong()).submit().get();
+
+			if (msg.getIdLong() == reactionEvent.getMessageIdLong() && !user.isBot()) {
 				switch (reactionEvent.getReactionEmote().getName()) {
-				case "◀":
-					try {
-						EmbedBuilder meb = new EmbedBuilder(msg.getEmbeds().get(0));
+				case "◀": {
+					EmbedBuilder meb = new EmbedBuilder(msg.getEmbeds().get(0));
 
-						int page = Integer.parseInt(meb.getDescriptionBuilder().toString().split(" ")[1]);
-						page--;
+					int page = Integer.parseInt(meb.getDescriptionBuilder().toString().split(" ")[1]);
+					page--;
 
-						if (page < 1)
-							break;
-
-						JSONArray results = new JSONObject(
-								Unirest.get("https://api.tenor.com/v1/search?limit=50&tag=" + queries.get(i)).asString()
-										.getBody()).getJSONArray("results");
-
-						meb.setImage(results.getJSONObject(page - 1).getJSONArray("media").getJSONObject(0)
-								.getJSONObject("gif").getString("url"));
-						meb.setDescription("Page " + page + " / 50");
-
-						sent.set(i, msg.editMessage(meb.build()).submit().get());
-
+					if (page < 1)
 						break;
 
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+					JSONArray results = new JSONObject(Unirest
+							.get("https://api.tenor.com/v1/search?limit=50&tag=" + queries.get(i)).asString().getBody())
+									.getJSONArray("results");
+
+					meb.setImage(results.getJSONObject(page - 1).getJSONArray("media").getJSONObject(0)
+							.getJSONObject("gif").getString("url"));
+					meb.setDescription("Page " + page + " / 50");
+
+					sent.set(i, msg.editMessage(meb.build()).submit().get());
+
 					break;
-				case "▶":
-					try {
-						EmbedBuilder meb = new EmbedBuilder(msg.getEmbeds().get(0));
 
-						int page = Integer.parseInt(meb.getDescriptionBuilder().toString().split(" ")[1]);
-						page++;
+				}
+				case "▶": {
+					EmbedBuilder meb = new EmbedBuilder(msg.getEmbeds().get(0));
 
-						if (page > 50)
-							break;
+					int page = Integer.parseInt(meb.getDescriptionBuilder().toString().split(" ")[1]);
+					page++;
 
-						JSONArray results = new JSONObject(
-								Unirest.get("https://api.tenor.com/v1/search?limit=50&tag=" + queries.get(i)).asString()
-										.getBody()).getJSONArray("results");
-
-						meb.setImage(results.getJSONObject(page - 1).getJSONArray("media").getJSONObject(0)
-								.getJSONObject("gif").getString("url"));
-						meb.setDescription("Page " + page + " / 50");
-
-						sent.set(i, msg.editMessage(meb.build()).submit().get());
-
+					if (page > 50)
 						break;
 
-					} catch (Exception e) {
-					}
+					JSONArray results = new JSONObject(Unirest
+							.get("https://api.tenor.com/v1/search?limit=50&tag=" + queries.get(i)).asString().getBody())
+									.getJSONArray("results");
+
+					meb.setImage(results.getJSONObject(page - 1).getJSONArray("media").getJSONObject(0)
+							.getJSONObject("gif").getString("url"));
+					meb.setDescription("Page " + page + " / 50");
+
+					sent.set(i, msg.editMessage(meb.build()).submit().get());
+
 					break;
+
+				}
 				}
 				reactionEvent.getReaction().removeReaction(reactionEvent.getUser()).queue();
 			}
