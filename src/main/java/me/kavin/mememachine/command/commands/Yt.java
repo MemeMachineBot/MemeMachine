@@ -61,7 +61,7 @@ public class Yt extends Command {
 							"https://www.youtube.com" + body.getString("authorUrl") + "\n", false);
 					if (i == 0) {
 						String imgUrl = body.getJSONArray("authorThumbnails").getJSONObject(0).getString("url");
-						url = url.substring(0, url.indexOf('=')) + "=s512";
+						imgUrl = imgUrl.substring(0, url.indexOf('=')) + "=s512";
 						meb.setImage(imgUrl);
 					}
 				}
