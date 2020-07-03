@@ -27,7 +27,9 @@ dependencies {
 }
 
 shadowJar {
-    minimize()
+    minimize {
+        exclude(dependency('com.konghq:.*:.*'))
+    }
 }
 
 jar {
