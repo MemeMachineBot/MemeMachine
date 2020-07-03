@@ -1,9 +1,7 @@
 package me.kavin.mememachine.command.commands;
 
-import kong.unirest.json.JSONObject;
-
 import kong.unirest.Unirest;
-
+import kong.unirest.json.JSONObject;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -37,10 +35,10 @@ public class Bitcoin extends Command {
 					symbol = '$';
 					break;
 				case "GBP":
-					symbol = '£';
+					symbol = '\u00a3';
 					break;
 				case "EUR":
-					symbol = '€';
+					symbol = '\u20ac';
 					break;
 				}
 				meb.addField(key, removeDecimal(currency.getString("rate")) + " " + symbol + "\n", false);

@@ -3,13 +3,11 @@ package me.kavin.mememachine.command.commands;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.apache.commons.lang3.StringUtils;
-import kong.unirest.json.JSONArray;
-import kong.unirest.json.JSONObject;
-
-import com.gargoylesoftware.htmlunit.WebClient;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import kong.unirest.Unirest;
+import kong.unirest.json.JSONArray;
+import kong.unirest.json.JSONObject;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.utils.ColorUtils;
 import me.kavin.mememachine.utils.reddit.TextPostData;
@@ -17,8 +15,6 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Tifu extends Command {
-
-	WebClient wc = new WebClient();
 
 	ObjectArrayList<TextPostData> lastData = new ObjectArrayList<>();
 	long lastUpdate = 0;
