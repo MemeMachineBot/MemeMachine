@@ -6,6 +6,7 @@ import kong.unirest.Unirest;
 import kong.unirest.json.JSONArray;
 import kong.unirest.json.JSONObject;
 import me.kavin.mememachine.command.Command;
+import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.utils.ColorUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -55,14 +56,16 @@ public class Yt extends Command {
 					meb.addField('`' + body.getString("title") + '`',
 							"https://www.youtube.com/watch?v=" + body.getString("videoId") + "\n", false);
 					if (i == 0)
-						meb.setImage(body.getJSONArray("videoThumbnails").getJSONObject(0).getString("url"));
+						meb.setImage(Constants.IMAGE_PROXY_URL
+								+ URLEncoder.encode(body.getJSONArray("videoThumbnails").getJSONObject(1)
+										.getString("url").replace("invidious.snopyta.org", "i.ytimg.com"), "UTF-8"));
 				} else if (body.getString("type").equals("channel")) {
 					meb.addField('`' + body.getString("author") + '`',
 							"https://www.youtube.com" + body.getString("authorUrl") + "\n", false);
 					if (i == 0) {
-						String imgUrl = body.getJSONArray("authorThumbnails").getJSONObject(0).getString("url");
-						imgUrl = imgUrl.substring(0, url.indexOf('=')) + "=s512";
-						meb.setImage(imgUrl);
+						JSONArray thumbnails = body.getJSONArray("authorThumbnails");
+						meb.setImage(Constants.IMAGE_PROXY_URL + URLEncoder
+								.encode(thumbnails.getJSONObject(thumbnails.length() - 1).getString("url"), "UTF-8"));
 					}
 				}
 			}
