@@ -2,8 +2,6 @@ package me.kavin.mememachine.command.commands;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import com.gargoylesoftware.htmlunit.WebClient;
-
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import kong.unirest.Unirest;
 import kong.unirest.json.JSONArray;
@@ -15,8 +13,6 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Meme extends Command {
-
-	WebClient wc = new WebClient();
 
 	ObjectArrayList<ImagePostData> lastData = new ObjectArrayList<>();
 	long lastUpdate = 0;
