@@ -78,6 +78,7 @@ public class DiscordListener extends ListenerAdapter {
 									meb.setDescription(
 											"An exception occoured when processing your command, please open a GitHub issue if this continues.");
 									event.getChannel().sendMessage(meb.build()).queue();
+									e.printStackTrace();
 								}
 							}
 						});
