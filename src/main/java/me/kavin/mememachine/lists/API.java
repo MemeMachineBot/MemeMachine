@@ -9,6 +9,7 @@ import kong.unirest.UnirestException;
 import kong.unirest.json.JSONObject;
 import me.kavin.mememachine.Main;
 import me.kavin.mememachine.consts.Constants;
+import me.kavin.mememachine.utils.Multithreading;
 
 public class API {
 
@@ -16,11 +17,16 @@ public class API {
 		new Timer().scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
-				dbl();
-				b4d();
-				dcbotspw();
+				Multithreading.runAsync(new Runnable() {
+					@Override
+					public void run() {
+						dbl();
+						b4d();
+						dcbotspw();
+					}
+				});
 			}
-		}, 0, TimeUnit.MINUTES.toMillis(5));
+		}, TimeUnit.MINUTES.toMillis(5), TimeUnit.MINUTES.toMillis(5));
 	}
 
 	public static void dcbotspw() {

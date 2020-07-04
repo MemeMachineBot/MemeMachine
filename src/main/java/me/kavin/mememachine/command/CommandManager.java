@@ -33,12 +33,17 @@ import me.kavin.mememachine.command.commands.Meme;
 import me.kavin.mememachine.command.commands.PasswordGen;
 import me.kavin.mememachine.command.commands.Paste;
 import me.kavin.mememachine.command.commands.Ping;
+import me.kavin.mememachine.command.commands.Play;
 import me.kavin.mememachine.command.commands.Profile;
+import me.kavin.mememachine.command.commands.Queue;
 import me.kavin.mememachine.command.commands.RPS;
+import me.kavin.mememachine.command.commands.Repeat;
 import me.kavin.mememachine.command.commands.Roll;
 import me.kavin.mememachine.command.commands.ServerStats;
 import me.kavin.mememachine.command.commands.Shorten;
+import me.kavin.mememachine.command.commands.Skip;
 import me.kavin.mememachine.command.commands.Spotify;
+import me.kavin.mememachine.command.commands.Stop;
 import me.kavin.mememachine.command.commands.Subs;
 import me.kavin.mememachine.command.commands.Tifu;
 import me.kavin.mememachine.command.commands.Today;
@@ -104,5 +109,10 @@ public class CommandManager {
 		commands.add(new BubbleText());
 		commands.add(new AestheticText());
 		commands.add(new UpsideDownText());
+		commands.add(new Play());
+		commands.add(new Skip());
+		commands.add(new Queue());
+		commands.add(new Repeat());
+		commands.add(new Stop());
 	}
 }

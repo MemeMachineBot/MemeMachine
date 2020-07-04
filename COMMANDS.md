@@ -96,3 +96,13 @@ Bot Commands:
 >aesthetictext `Converts your text to Aesthetic Text!`
 
 >upsidedowntext `Converts your text to UpsideDown Text!`
+
+>play `Allows you to play music from youtube.`
+
+>skip `Allows you to skip the current song.`
+
+>queue `Shows the queue of music to be played`
+
+>repeat `Allows you to repeat the current queue of songs.`
+
+>stop `Allows you to stop playing music.`
