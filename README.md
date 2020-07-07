@@ -1,6 +1,6 @@
 # Meme Machine
 
-[![Build Status](https://travis-ci.org/MemeMachineBot/MemeMachine.svg?branch=master)](https://travis-ci.org/MemeMachineBot/MemeMachine)
+[![CI Status](https://circleci.com/gh/MemeMachineBot/MemeMachine.svg?style=svg)](https://circleci.com/gh/MemeMachineBot/MemeMachine)
 
 Meme Machine is an open source Discord bot which uses [JDA](https://github.com/DV8FromTheWorld/JDA)
 
