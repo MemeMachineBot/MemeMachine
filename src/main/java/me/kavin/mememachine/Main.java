@@ -25,9 +25,10 @@ public class Main extends ListenerAdapter {
 			DefaultShardManagerBuilder builder = DefaultShardManagerBuilder.createDefault(Constants.BOT_TOKEN);
 			builder.addEventListeners(new DiscordListener());
 			builder.disableCache(CacheFlag.ACTIVITY, CacheFlag.CLIENT_STATUS);
-			builder.setMemberCachePolicy(MemberCachePolicy.VOICE.or(MemberCachePolicy.OWNER));
+			builder.setMemberCachePolicy(MemberCachePolicy.VOICE);
 			builder.setChunkingFilter(ChunkingFilter.NONE);
-			builder.disableIntents(GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MESSAGE_TYPING);
+			builder.disableIntents(GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MESSAGE_TYPING,
+					GatewayIntent.DIRECT_MESSAGES, GatewayIntent.DIRECT_MESSAGE_TYPING);
 			builder.setLargeThreshold(50);
 			builder.setCompression(Compression.ZLIB);
 			builder.setAutoReconnect(true);
