@@ -7,6 +7,7 @@ import kong.unirest.json.JSONArray;
 import kong.unirest.json.JSONObject;
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.consts.Constants;
+import me.kavin.mememachine.utils.AudioConnectionListener;
 import me.kavin.mememachine.utils.ColorUtils;
 import me.kavin.mememachine.utils.PlayerManager;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -39,8 +40,11 @@ public class Play extends Command {
 							vs.getChannel().getName()));
 					event.getChannel().sendMessage(meb.build()).queue();
 					return;
-				} else
+				} else {
 					event.getGuild().getAudioManager().openAudioConnection(vs.getChannel());
+					event.getGuild().getAudioManager()
+							.setConnectionListener(new AudioConnectionListener(event.getGuild()));
+				}
 			} else {
 				EmbedBuilder meb = new EmbedBuilder();
 				meb.setTitle("Play: Join VC");
