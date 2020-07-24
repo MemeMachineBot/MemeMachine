@@ -65,23 +65,24 @@ public class DiscordListener extends ListenerAdapter {
 		{
 			if (event.getMessage().getContentRaw().length() > 0 && event.getMessage().getContentRaw().charAt(0) == '>')
 				for (Command cmd : CommandManager.commands)
-					if (event.getMessage().getContentRaw().split(" ")[0].equalsIgnoreCase(cmd.getPrefix()))
-						Multithreading.runAsync(new Runnable() {
-							@Override
-							public void run() {
-								try {
-									cmd.onCommand(event.getMessage().getContentRaw(), event);
-								} catch (Exception e) {
-									EmbedBuilder meb = new EmbedBuilder();
-									meb.setColor(ColorUtils.getRainbowColor(2000));
-									meb.setTitle("Error when running command!");
-									meb.setDescription(
-											"An exception occoured when processing your command, please open a GitHub issue if this continues.");
-									event.getChannel().sendMessage(meb.build()).queue();
-									e.printStackTrace();
+					for (String prefix : cmd.getPossiblePrefixes())
+						if (event.getMessage().getContentRaw().split(" ")[0].equalsIgnoreCase(prefix))
+							Multithreading.runAsync(new Runnable() {
+								@Override
+								public void run() {
+									try {
+										cmd.onCommand(event.getMessage().getContentRaw(), event);
+									} catch (Exception e) {
+										EmbedBuilder meb = new EmbedBuilder();
+										meb.setColor(ColorUtils.getRainbowColor(2000));
+										meb.setTitle("Error when running command!");
+										meb.setDescription(
+												"An exception occoured when processing your command, please open a GitHub issue if this continues.");
+										event.getChannel().sendMessage(meb.build()).queue();
+										e.printStackTrace();
+									}
 								}
-							}
-						});
+							});
 		}
 
 		addXp(event.getAuthor().getIdLong());
