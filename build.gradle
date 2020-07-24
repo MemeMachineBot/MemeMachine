@@ -33,6 +33,7 @@ shadowJar {
         exclude(dependency('com.konghq:.*:.*'))
         exclude(dependency('net.dv8tion:.*:.*'))
         exclude(dependency('org.apache.commons:.*:.*'))
+        exclude(dependency('com.github.TeamNewPipe:.*:.*'))
     }
 }
 
