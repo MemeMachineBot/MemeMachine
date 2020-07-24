@@ -7,15 +7,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import javax.annotation.Nullable;
-
 import org.apache.commons.lang3.StringUtils;
 import org.schabi.newpipe.extractor.downloader.Downloader;
 import org.schabi.newpipe.extractor.downloader.Request;
 import org.schabi.newpipe.extractor.downloader.Response;
 import org.schabi.newpipe.extractor.exceptions.ReCaptchaException;
 
-import edu.umd.cs.findbugs.annotations.NonNull;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
@@ -39,7 +36,7 @@ public class DownloaderImpl extends Downloader {
 	 *
 	 * @param builder if null, default builder will be used
 	 */
-	public static DownloaderImpl init(@Nullable OkHttpClient.Builder builder) {
+	public static DownloaderImpl init(OkHttpClient.Builder builder) {
 		return instance = new DownloaderImpl(builder != null ? builder : new OkHttpClient.Builder());
 	}
 
@@ -102,7 +99,7 @@ public class DownloaderImpl extends Downloader {
 	}
 
 	@Override
-	public Response execute(@NonNull Request request) throws IOException, ReCaptchaException {
+	public Response execute(Request request) throws IOException, ReCaptchaException {
 		final String httpMethod = request.httpMethod();
 		final String url = request.url();
 		final Map<String, List<String>> headers = request.headers();
