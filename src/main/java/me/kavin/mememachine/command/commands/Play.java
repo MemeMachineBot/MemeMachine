@@ -1,10 +1,18 @@
 package me.kavin.mememachine.command.commands;
 
+import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.Collections;
+import java.util.List;
 
-import kong.unirest.Unirest;
-import kong.unirest.json.JSONArray;
-import kong.unirest.json.JSONObject;
+import org.schabi.newpipe.extractor.InfoItem;
+import org.schabi.newpipe.extractor.InfoItem.InfoType;
+import org.schabi.newpipe.extractor.NewPipe;
+import org.schabi.newpipe.extractor.StreamingService;
+import org.schabi.newpipe.extractor.exceptions.ExtractionException;
+import org.schabi.newpipe.extractor.exceptions.ParsingException;
+import org.schabi.newpipe.extractor.search.SearchInfo;
+
 import me.kavin.mememachine.command.Command;
 import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.utils.AudioConnectionListener;
@@ -73,12 +81,11 @@ public class Play extends Command {
 			return;
 		}
 
-		String url = "https://invidious.snopyta.org/api/v1/search?type=all&fields=type,title,videoId,videoThumbnails,playlistId,playlistThumbnail&q="
-				+ URLEncoder.encode(q, "UTF-8");
+		SearchInfo si = getSearchInfo(0, q, Collections.emptyList(), null);
 
-		JSONArray jArray = Unirest.get(url).asJson().getBody().getArray();
+		List<InfoItem> items = si.getRelatedItems();
 
-		JSONObject selected = null;
+		InfoItem selected = null;
 
 		{
 			EmbedBuilder meb = new EmbedBuilder();
@@ -86,13 +93,10 @@ public class Play extends Command {
 			meb.setTitle("YouTube Search");
 			meb.setColor(ColorUtils.getRainbowColor(2000));
 
-			String type = null;
-
-			for (int i = 0; i < jArray.length(); i++) {
-				JSONObject jObject = jArray.getJSONObject(i);
-				type = jObject.getString("type");
-				if (type.equals("playlist") || type.equals("video")) {
-					selected = jObject;
+			for (int i = 0; i < items.size(); i++) {
+				InfoItem item = items.get(i);
+				if (item.getInfoType() == InfoType.STREAM || item.getInfoType() == InfoType.PLAYLIST) {
+					selected = item;
 					break;
 				}
 			}
@@ -103,37 +107,28 @@ public class Play extends Command {
 				return;
 			}
 
-			meb.setDescription("`Added to the queue:` [" + selected.getString("title") + "]" + "("
-					+ "https://www.youtube.com/watch?v="
-					+ (selected.getString("type").equals("video") ? selected.getString("videoId")
-							: selected.getString("playlistId"))
-					+ ")");
+			meb.setDescription("`Added to the queue:` [" + selected.getName() + "]" + "(" + selected.getUrl() + ")");
 
-			if (type.equals("video")) {
-				JSONArray thumbnails = selected.getJSONArray("videoThumbnails");
+			String thumbnail = selected.getThumbnailUrl();
 
-				for (int i = 0; i < thumbnails.length(); i++) {
-					JSONObject thumbnail = thumbnails.getJSONObject(i);
-					String thumbnail_url = thumbnail.getString("url").replace("invidious.snopyta.org", "i.ytimg.com");
-					if (Unirest.get(thumbnail_url).asEmpty().isSuccess()) {
-						meb.setImage(Constants.IMAGE_PROXY_URL + URLEncoder.encode(thumbnail_url, "UTF-8"));
-						break;
-					}
-				}
-			} else
-				meb.setImage(Constants.IMAGE_PROXY_URL
-						+ URLEncoder.encode(selected.getString("playlistThumbnail"), "UTF-8"));
+			if (thumbnail.contains("?"))
+				thumbnail = thumbnail.substring(0, thumbnail.indexOf('?'));
+
+			meb.setImage(Constants.IMAGE_PROXY_URL + URLEncoder.encode(thumbnail, "UTF-8"));
 
 			event.getChannel().sendMessage(meb.build()).queue();
 		}
 
-		String streaming_url = null;
-
-		if (selected.getString("type").equals("video"))
-			streaming_url = "https://www.youtube.com/watch?v=" + selected.getString("videoId");
-		else
-			streaming_url = "https://www.youtube.com/playlist?list=" + selected.getString("playlistId");
+		String streaming_url = selected.getUrl();
 
 		PlayerManager.getInstance().loadAndPlay(event.getTextChannel(), streaming_url);
+	}
+
+	public SearchInfo getSearchInfo(int serviceId, String searchString, List<String> contentFilters, String sortFilter)
+			throws ParsingException, ExtractionException, IOException {
+		StreamingService service = NewPipe.getService(serviceId);
+		SearchInfo info = SearchInfo.getInfo(service,
+				service.getSearchQHFactory().fromQuery(searchString, contentFilters, sortFilter));
+		return info;
 	}
 }
