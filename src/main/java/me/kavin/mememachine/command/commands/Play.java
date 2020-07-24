@@ -83,6 +83,10 @@ public class Play extends Command {
 
 		SearchInfo si = getSearchInfo(0, q, Collections.emptyList(), null);
 
+		if (!si.getErrors().isEmpty()) {
+			throw new ParsingException("Could not parse the search.", si.getErrors().get(0));
+		}
+
 		List<InfoItem> items = si.getRelatedItems();
 
 		InfoItem selected = null;
