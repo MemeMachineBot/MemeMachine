@@ -38,7 +38,7 @@ public class Main extends ListenerAdapter {
 			builder.setAutoReconnect(true);
 			api = builder.build();
 			DownloaderImpl d = DownloaderImpl.init(null);
-			NewPipe.init(d, new Localization("en", "US"));
+			NewPipe.init(d, Localization.DEFAULT);
 			API.loop();
 		} catch (Exception e) {
 			e.printStackTrace();
