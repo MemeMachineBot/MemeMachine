@@ -27,7 +27,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 public class Play extends Command {
 
 	public Play() {
-		super(">play", "`Allows you to play music from youtube.`");
+		super(">play", "`Allows you to play music from youtube.`", new String[] { ">p" });
 	}
 
 	@Override
@@ -63,13 +63,7 @@ public class Play extends Command {
 			}
 		}
 
-		String q = null;
-
-		if (message.length() > getPrefix().length()) {
-			q = "";
-			for (int i = getPrefix().length() + 1; i < message.length(); i++)
-				q += message.charAt(i);
-		}
+		String q = getQuery(message);
 
 		if (q == null) {
 			EmbedBuilder meb = new EmbedBuilder();
