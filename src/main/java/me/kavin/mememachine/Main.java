@@ -1,9 +1,13 @@
 package me.kavin.mememachine;
 
+import org.schabi.newpipe.extractor.NewPipe;
+import org.schabi.newpipe.extractor.localization.Localization;
+
 import me.kavin.mememachine.command.CommandManager;
 import me.kavin.mememachine.consts.Constants;
 import me.kavin.mememachine.listener.DiscordListener;
 import me.kavin.mememachine.lists.API;
+import me.kavin.mememachine.utils.DownloaderImpl;
 import me.kavin.mememachine.utils.Timer;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -33,6 +37,8 @@ public class Main extends ListenerAdapter {
 			builder.setCompression(Compression.ZLIB);
 			builder.setAutoReconnect(true);
 			api = builder.build();
+			DownloaderImpl d = DownloaderImpl.init(null);
+			NewPipe.init(d, new Localization("en", "US"));
 			API.loop();
 		} catch (Exception e) {
 			e.printStackTrace();
