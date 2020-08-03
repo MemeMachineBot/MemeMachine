@@ -20,9 +20,12 @@ public class API {
 				Multithreading.runAsync(new Runnable() {
 					@Override
 					public void run() {
-						dbl();
-						b4d();
-						dcbotspw();
+						if (Constants.DBL_TOKEN != null)
+							dbl();
+						if (Constants.B4D_TOKEN != null)
+							b4d();
+						if (Constants.DISCORD_BOTS_PW_TOKEN != null)
+							dcbotspw();
 					}
 				});
 			}
@@ -55,8 +58,7 @@ public class API {
 	public static void dbl() {
 		JSONObject obj = new JSONObject().put("server_count", Main.api.getGuilds().size());
 		try {
-			Unirest.post(
-					"https://discordbots.org/api/bots/" + Main.api.getShards().get(0).getSelfUser().getId() + "/stats")
+			Unirest.post("https://top.gg/api/bots/" + Main.api.getShards().get(0).getSelfUser().getId() + "/stats")
 					.header("Authorization", Constants.DBL_TOKEN).header("Content-Type", "application/json")
 					.body(obj.toString()).asJson();
 		} catch (UnirestException e) {
