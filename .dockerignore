@@ -1,0 +1,7 @@
+.git
+_config.yml
+circle.yml
+*.md
+docker.env
+Procfile
+system.properties
