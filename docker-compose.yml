@@ -1,0 +1,7 @@
+# MemeMachine
+version: '3'
+
+services:
+    bot:
+        image: 1337kavin/meme-machine:latest
+        restart: unless-stopped
