@@ -18,4 +18,4 @@ Click [here](https://github.com/MemeMachineBot/MemeMachine/blob/master/COMMANDS.
 
 # Docker
 - Modify docker.env to add all your required secrets
-- Run `docker run --env-file docker.env --restart=unless-stopped -d 1337kavin/meme-machine`
+- Run `docker run --env-file docker.env --restart=unless-stopped -d 1337kavin/meme-machine` or `docker-compose up -d`
