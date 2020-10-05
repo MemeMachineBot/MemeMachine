@@ -21,7 +21,7 @@ public class EbayClient {
 						+ client_id + "&client_secret=" + client_secret
 						+ "&grant_type=client_credentials&scope=https%3A%2F%2Fapi.ebay.com%2Foauth%2Fscope%2F%40public%20https%3A%2F%2Fapi.ebay.com%2Foauth%2Fscope%2Fbase%40public%20https%3A%2F%2Fapi.ebay.com%2Foauth%2Fscope%2Fexperience%40public")
 						.asString().getBody());
-				expires_at = System.currentTimeMillis() + jObject.getInt("expires_in") * 1000;
+				expires_at = System.currentTimeMillis() + jObject.getLong("expires_in") * 1000L;
 				return access_token = jObject.getString("access_token");
 			} catch (Exception e) {
 			}

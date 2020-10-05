@@ -23,7 +23,7 @@ public class SpotifyClient {
 								"Basic " + Base64.encodeBase64String((client_id + ":" + client_secret).getBytes()))
 						.header("Content-Type", "application/x-www-form-urlencoded")
 						.field("grant_type", "client_credentials").asString().getBody());
-				expires_at = System.currentTimeMillis() + jObject.getInt("expires_in") * 1000;
+				expires_at = System.currentTimeMillis() + jObject.getLong("expires_in") * 1000L;
 				return access_token = jObject.getString("access_token");
 			} catch (Exception e) {
 			}
