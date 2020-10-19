@@ -25,7 +25,7 @@ dependencies {
     implementation 'org.mongodb:mongo-java-driver:3.12.7'
     implementation 'it.unimi.dsi:fastutil:8.4.2'
     implementation 'com.rometools:rome:1.15.0'
-    implementation 'com.github.TeamNewPipe:NewPipeExtractor:v0.19.8'
+    implementation 'com.github.TeamNewPipe:NewPipeExtractor:v0.20.1'
 }
 
 shadowJar {
