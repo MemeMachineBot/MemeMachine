@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.konghq:unirest-java:3.11.06'
+    implementation 'com.konghq:unirest-java:3.11.07'
     implementation 'com.jsoniter:jsoniter:0.9.23'
     implementation 'net.dv8tion:JDA:4.2.0_223'
     implementation 'com.sedmelluq:lavaplayer:1.3.65'
