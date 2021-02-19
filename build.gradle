@@ -22,7 +22,7 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.11'
     implementation 'org.apache.commons:commons-text:1.9'
     implementation 'org.jsoup:jsoup:1.13.1'
-    implementation 'org.mongodb:mongo-java-driver:3.12.7'
+    implementation 'org.mongodb:mongo-java-driver:3.12.8'
     implementation 'it.unimi.dsi:fastutil:8.5.2'
     implementation 'com.rometools:rome:1.15.0'
     implementation 'com.github.TeamNewPipe:NewPipeExtractor:v0.20.1'
