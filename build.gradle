@@ -24,7 +24,7 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.13.1'
     implementation 'org.mongodb:mongo-java-driver:3.12.8'
     implementation 'it.unimi.dsi:fastutil:8.5.3'
-    implementation 'com.rometools:rome:1.15.0'
+    implementation 'com.rometools:rome:1.16.0'
     implementation 'com.github.TeamNewPipe:NewPipeExtractor:v0.21.4'
 }
 
